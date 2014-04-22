@@ -39,11 +39,12 @@ vim <file>                                      # make changes
 git checkout -- <file>                          # to discard changes to <file>
 
 # Branching
+git branch --all                                # list all branches (incl remote)
 git branch      <branch>                        # create a branch from current location
 git checkout -b <branch>                        # create a branch from current location, then move to it 
-
 git checkout -b <branch> <remote/branch>        # create <branch> from <remote/branch>, then move to it
 git checkout --track     <remote/branch>        # short syntax for above
+git checkout -d <branch>                        # delete a branch
 
 # Working with remote repos
 git remote -v                                   # list all remotes (verbose)

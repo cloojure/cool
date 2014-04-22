@@ -10,3 +10,6 @@ lein uberjar                    - package the project and dependencies as standa
 lein do clean, test foo.test-core, jar  - can chain commands with "do xxx, yyy, zzz"
                                           ("do" and comma separators)
 
+
+TODO:
+  ~/.m2 directory?  local lib repo?
