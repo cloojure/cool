@@ -5,6 +5,6 @@
 set -o vi  
 
 # Get common bash/zsh aliases
-source .bash.alias
+source ~/.bash.alias
 
 ### echo ".bashrc - exit"

@@ -5,6 +5,6 @@
 bindkey -v
 
 # Get common bash/zsh aliases
-source .bash.alias
+source ~/.bash.alias
 
 ### echo ".zshrc - exit"
