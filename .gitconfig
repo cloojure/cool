@@ -1,0 +1,21 @@
+[user]
+	name  = Joe User
+	email = joe.user@gmail.com
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[alias]
+        s       = status --short
+	co      = checkout
+	go      = checkout   # checkout is like "going" to a past state of the code
+	ci      = commit --allow-empty-message       -m ''    # commit = "checkin"
+	ca      = commit --allow-empty-message --all -m ''    # commit all
+	cam     = commit --all -m'misc'                       # commit all 'misc'
+        dg      = difftool --no-prompt                        # diff graphical
+        #
+        # old stuff:
+        #   dg      = git difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+40'
+
+[push]
+	default = simple

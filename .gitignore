@@ -1,0 +1,12 @@
+full
+src
+tst
+tstabc
+newWords*
+spellWords*
+src*.pl1
+log.txt
+dictWords.txt
+enwiktionary-20121219-all-titles-in-ns0
+*.swp
+.*.swp

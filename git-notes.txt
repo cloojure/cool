@@ -1,0 +1,72 @@
+# Global configuration
+git config --global user.name           "Joe User"              # set user name
+git config --global user.email          joe@gmail.com           # set user name
+git config --global core.editor         vim                     # set user editor preference
+git config --global merge.tool          vimdiff                 # set user merge tool
+git config --list                                               # view git settings
+
+# Global git aliases
+git config --global alias.co    checkout                # allow "git co"
+git config --global alias.go    checkout                # allow "git go"
+git config --global alias.s     status                  # allow "git s"
+git config --global alias.ci    commit                  # allow "git ci" (check-in)
+git config --global alias.unstage "reset HEAD --"       # allow "git unstage <file>"
+
+# Create a repo in a dir
+git init                        # Create the repo
+git add .                       # Stage all current files for commit
+git commit -m"<message>"        # Save the files with <message>
+
+# Basic usage
+git checkout    <branch>                        # move to a branch
+git commit -am"<message>"                       # stage & commit in 1-step with <message>
+git rm <file>                                   # delete <file>
+git mv <name1> <name2>                          # rename from <name1> to <name2>
+
+# Viewing logs
+git log --oneline                               # view 1-line commit messages
+git log --pretty=short                          # short format
+git log -5                                      # view only last 5 commits
+git log -p -2                                   # print diffs for last 2 commits
+git log --since=2.weeks                         # limit time duration of listing
+git log --after=2014-04-15                      # limit start time of listing
+git log --before=2014-04-15                     # linit end time of listing
+gitk                                            # GUI history viewer
+
+# Discarding changes to a file
+git checkout <branch>                           # move to <branch>
+vim <file>                                      # make changes
+git checkout -- <file>                          # to discard changes to <file>
+
+# Branching
+git branch      <branch>                        # create a branch from current location
+git checkout -b <branch>                        # create a branch from current location, then move to it 
+
+git checkout -b <branch> <remote/branch>        # create <branch> from <remote/branch>, then move to it
+git checkout --track     <remote/branch>        # short syntax for above
+
+# Working with remote repos
+git remote -v                                   # list all remotes (verbose)
+git remote add    <short-name> <repo-URL>       # add remote <repo-URL> as <short-name>
+git remote show   <short-name>                  # show info about remote <short-name> and branches
+git remote rm     <short-name>                  # remove <short-name> reference to remote
+
+git clone user@company.com:project.git          # checkout project from "origin" remote
+git fetch origin                                # copy everything from origin (no merging)
+
+git remote add <short-name> <URL>               # add remote <short-name> from <URL>
+
+git push <remote> <branch>                              # push <branch> to <remote>
+git push <remote> <local-branch>:<remote-branch>        # push <local-branch> to <remote>/<remote-branch>
+
+git push <remote> :<remote-branch>              # delete <remote-branch> on server <remote>
+
+# Fetching/Merging on a branch
+1. git checkout <branch>                        # move to <branch>
+
+Then either:
+  A1. git fetch <remote>                        # copy everything from <remote>
+  A2. git merge <remote/branch>                 # do a local merge from <remote/branch>
+Or:
+  B1. git pull  <origin>                        # copy <remote/branch> AND merge in 1 step
+

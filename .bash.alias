@@ -1,0 +1,41 @@
+#!/bin/bash 
+### echo "alias.bash - enter"
+
+# Always use egrep
+alias grep="\grep -E"  # same as deprecated 'egrep'
+
+alias pdirs='find * -maxdepth 0 -type d '
+alias pfiles='find * -maxdepth 0 -type f '
+alias d="ls -ldF"
+alias dd='d `pdirs` '
+alias hh="history 99"
+
+alias du='du -m '
+alias df='df -m '
+alias hh="history 200"
+alias wcl="wc -l"
+
+alias gvim="\gvim  -geom '+900+20' "
+alias gvt="~/work/settings/gvt.csh "
+alias gvd="echo gvim -c 'winpos 5 5' -c 'winsize 170 50' "
+
+alias gvt="~/work/settings/gvt.csh "
+alias gvd="echo gvim -c 'winpos 5 5' -c 'winsize 170 50' "
+
+alias up="cd .."
+alias up2="cd ../.."
+alias up3="cd ../../.."
+alias up4="cd ../../../.."
+alias up5="cd ../../../../.."
+alias up6="cd ../../../../../.."
+
+alias gits="git status --short"
+alias gitc="git commit --allow-empty-message -m '' "
+alias gitca="git commit --allow-empty-message --all -m '' "
+alias gitdg="git difftool --no-prompt "
+
+alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
+alias kk="kill -9"
+alias pk="pkill -9"
+
+### echo "alias.bash - exit"
