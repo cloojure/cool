@@ -1,7 +1,7 @@
 #!/bin/bash
 echo ".bashrc - enter"
 
-PATH=/usr/local/bin:/local/bin:/bin:/usr/local/sbin:/local/sbin:/sbin:/usr/local/opt
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/opt
 
 # set up vi command line editing mode
 set -o vi  
