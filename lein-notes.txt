@@ -1,0 +1,11 @@
+lein help                       - complete list
+lein help <task>                - usage for <task>
+lein new [template] <proj>      - generate a new project skeleton [using template]
+lein test [TESTS]               - run all tests [or just in TESTS namespaces]
+lein repl                       - launch REPL 
+lein run -m my.namespace        - run the -main function of <my.namespace>
+lein uberjar                    - package the project and dependencies as standalone jar
+
+lein do clean, test foo.test-core, jar  - can chain commands with "do xxx, yyy, zzz"
+                                          ("do" and comma separators)
+

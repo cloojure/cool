@@ -34,7 +34,7 @@
 " au Syntax   * RainbowParenthesesLoadSquare
 " au Syntax   * RainbowParenthesesLoadBraces
 " 
-set guifont=Liberation\ Mono\ 10
+set guifont=Liberation\ Mono\ 12
 set lines=60
 set columns=100
 colorscheme slate
