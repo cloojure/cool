@@ -1,6 +1,7 @@
 lein help                       - complete list
 lein help <task>                - usage for <task>
 lein new [template] <proj>      - generate a new project skeleton [using template]
+lein new app        <proj>      - generate a new application project
 lein test [TESTS]               - run all tests [or just in TESTS namespaces]
 lein repl                       - launch REPL 
 lein run -m my.namespace        - run the -main function of <my.namespace>
