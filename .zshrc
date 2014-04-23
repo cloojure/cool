@@ -1,14 +1,19 @@
-#!/bin/bash
+#!/bin/zsh
 echo ".zshrc - enter"
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/opt
+# baseline path
+PATH=${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/opt
 
-# set up vi command line editing mode
-bindkey -v
-
-# Get common bash/zsh aliases
+# common bash/zsh aliases
 source ~/.bash.alias
 
+# vi command-line editing mode
+bindkey -v
+
+# use sensible globbing (like csh nonomatch)
+setopt csh_null_glob
+
+# set prompt string
 PS1='%30<..<%~ > '
 
 echo ".zshrc - exit"
