@@ -7,6 +7,7 @@ alias grep="\grep -E"  # same as deprecated 'egrep'
 alias pdirs='find * -maxdepth 0 -type d '
 alias pfiles='find * -maxdepth 0 -type f '
 alias d="ls -ldF"
+alias lal="ls -alF"
 alias dd='d `pdirs` '
 
 alias du='du -m '
