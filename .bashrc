@@ -17,4 +17,8 @@ shopt -s nullglob
 PS1='\w > '
 PROMPT_DIRTRIM=4
 
+# bash-specific aliases
+alias hh="history 99"
+alias dosrc="source ~/.bashrc"
+
 echo ".bashrc - exit"

@@ -8,11 +8,9 @@ alias pdirs='find * -maxdepth 0 -type d '
 alias pfiles='find * -maxdepth 0 -type f '
 alias d="ls -ldF"
 alias dd='d `pdirs` '
-alias hh="history 99"
 
 alias du='du -m '
 alias df='df -m '
-alias hh="history 200"
 alias wcl="wc -l"
 
 alias gvim="\gvim  -geom '+900+20' "
