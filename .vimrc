@@ -23,11 +23,12 @@ set selectmode="mouse,key,cmd"
 set fileformat=unix
 set fileformats=unix,dos
 set ruler
-set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
 set textwidth=90
 set scrolloff=5
 set guioptions-=r  guioptions-=L  guioptions+=l
 set equalalways
+set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
+set path=**
 
 " colorscheme desert
 colorscheme slate
