@@ -44,7 +44,8 @@ git branch      <branch>                        # create a branch from current l
 git checkout -b <branch>                        # create a branch from current location, then move to it 
 git checkout -b <branch> <remote/branch>        # create <branch> from <remote/branch>, then move to it
 git checkout --track     <remote/branch>        # short syntax for above
-git checkout -d <branch>                        # delete a branch
+git branch -d      <branch>                     # delete a branch
+git push <remote> --delete <branch>             # delete <branch> on server <remote>
 
 # Working with remote repos
 git remote -v                                   # list all remotes (verbose)
@@ -57,10 +58,13 @@ git fetch origin                                # copy everything from origin (n
 
 git remote add <short-name> <URL>               # add remote <short-name> from <URL>
 
-git push <remote> <branch>                              # push <branch> to <remote>
-git push <remote> <local-branch>:<remote-branch>        # push <local-branch> to <remote>/<remote-branch>
+git push --set-upstream origin <branch>         # 1st time pushing new <branch>
 
-git push <remote> :<remote-branch>              # delete <remote-branch> on server <remote>
+old:
+  git push <remote> <branch-name>               # push <branch-name> to <remote>
+  git push <remote> <local-name>:<remote-name>  # push <local-name> to <remote>/<remote-name>
+  git branch --set-upstream-to=origin/<branch> <branch>   # old way 
+
 
 # Fetching/Merging on a branch
 1. git checkout <branch>                        # move to <branch>
