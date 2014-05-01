@@ -36,7 +36,8 @@ gitk                                            # GUI history viewer
 # Discarding changes to a file
 git checkout <branch>                           # move to <branch>
 vim <file>                                      # make changes
-git checkout -- <file>                          # to discard changes to <file>
+git checkout -- <file>                          # discard changes to <file>
+git reset --hard                                # discard changes to ALL files
 
 # Branching
 git branch --all                                # list all branches (incl remote)
