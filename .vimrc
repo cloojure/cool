@@ -28,7 +28,7 @@ set scrolloff=5
 set guioptions-=r  guioptions-=L  guioptions+=l
 set equalalways
 set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
-set path=**
+set path=.,*,src/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh,**/*txt
 
 " colorscheme desert
 colorscheme slate
