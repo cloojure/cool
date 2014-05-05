@@ -1,0 +1,31 @@
+psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
+  \l[+]                         - list databases
+  \du                           - list users/roles
+  \h                            - help
+  \q                            - quit (or CRTL-D)
+  CREATE ROLE <name>;
+  CREATE ROLE <name> LOGIN;
+  CREATE ROLE <name> SUPERUSER LOGIN;
+  CREATE USER <name>;
+  DROP   ROLE <name>;
+
+  CREATE DATABASE name;
+  CREATE DATABASE name OWNER rolename;
+  DROP   DATABASE name;
+
+shell:
+  createuser <name>       - from command line
+  dropeuser  <name>       - from command line
+  createdb   <name>
+  createdb   -O <rolename> <dbname>
+  dropedb    <name>
+
+Files:
+  /var/lib/pgsql
+  /var/lib/pgsql/9.2/data/pg_hba.conf
+
+
+Notes:
+  Since typeing "psql" at the command defaults to "psql <unix-username>", it will fail if
+  a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
+  to make an empty, default db for each user even if it is never used.
