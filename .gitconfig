@@ -1,6 +1,6 @@
 [user]
-	name  = Joe User
-	email = joe.user@gmail.com
+	name  = Alan Thompson
+	email = thompson2526@gmail.com
 [core]
 	editor = vim
 [merge]
@@ -19,3 +19,9 @@
 
 [push]
 	default = simple
+[diff]
+	tool = gvim
+[difftool "gvim"]
+	cmd = "\\gvim -d -f  $MERGED $LOCAL "
+[color]
+	ui = true
