@@ -31,7 +31,8 @@ set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
 set path=.,*,src/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh,**/*txt
 
 " colorscheme desert
-colorscheme slate
+" colorscheme slate
+colorscheme default
 
 " Fix the difficult-to-read default setting for diff text
 " highlighting.  The bang (!) is required since we are overwriting the
