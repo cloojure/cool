@@ -29,3 +29,53 @@ Notes:
   Since typeing "psql" at the command defaults to "psql <unix-username>", it will fail if
   a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
   to make an empty, default db for each user even if it is never used.
+
+
+Tables:
+--------------------------------------------------------------------------------
+  CREATE TABLE weather (
+      city            varchar(80),
+      temp_lo         int,           -- low temperature
+      temp_hi         int,           -- high temperature
+      prcp            real,          -- precipitation
+      date            date
+  );
+
+  CREATE TABLE cities (
+      name            varchar(80),
+      location        point
+  );
+
+  DROP TABLE tablename;   ***** permanent deletion! *****
+
+  INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
+      VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
+
+  SELECT * FROM weather;                - star "*" means all columns
+  SELECT city, temp_lo, temp_hi, prcp, date FROM weather;       - list col's wanted
+
+  SELECT * FROM weather
+    WHERE city = 'San Francisco' AND prcp > 0.0;
+
+  SELECT * FROM weather
+    ORDER BY city;
+  SELECT * FROM weather
+    ORDER BY city, temp_lo;
+
+  SELECT DISTINCT city
+    FROM weather;
+
+  SELECT city, temp_lo, temp_hi, prcp, date, location
+    FROM weather, cities
+    WHERE weather.city = city.name;
+
+  SELECT W1.city, W1.temp_lo AS low, W1.temp_hi AS high,
+    W2.city, W2.temp_lo AS low, W2.temp_hi AS high
+    FROM weather W1, weather W2
+    WHERE W1.temp_lo < W2.temp_lo
+    AND W1.temp_hi > W2.temp_hi;
+
+         city      | low | high |     city      | low | high
+    ---------------+-----+------+---------------+-----+------
+     San Francisco |  43 |   57 | San Francisco |  46 |   50
+     Hayward       |  37 |   54 | San Francisco |  46 |   50
