@@ -23,6 +23,7 @@
 [diff]
 	tool = gvim
 [difftool "gvim"]
-	cmd = "\\gvim -d -f -geom \"240x80+0+0\"   $MERGED $LOCAL "
+	cmd = "gvim -df $MERGED $LOCAL "
+	# cmd = "gvim -df $MERGED $LOCAL "   # for Mac OSX (-geom is broken?)
 [color]
 	ui = true

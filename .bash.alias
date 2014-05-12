@@ -14,9 +14,12 @@ alias du='du -m '
 alias df='df -m '
 alias wcl="wc -l"
 
-alias gvim="\gvim  -geom '+900+20' "
-alias gvt="~/work/settings/gvt.csh "
-alias gvd="echo gvim -c 'winpos 5 5' -c 'winsize 170 50' "
+if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
+  # echo "Found Linux"
+  alias gvim="\gvim  -geom '+900+20' "
+else
+  # echo "Missing Linux"
+fi
 
 alias gvt="~/work/settings/gvt.csh "
 alias gvd="echo gvim -c 'winpos 5 5' -c 'winsize 170 50' "

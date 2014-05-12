@@ -1,6 +1,8 @@
 psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
   \l[+]                         - list databases
   \du                           - list users/roles
+  \d                            - list tables, views, sequences
+  \d  [<name>]                  - describe tables, views, sequences
   \h                            - help
   \q                            - quit (or CRTL-D)
   CREATE ROLE <name>;
@@ -8,6 +10,13 @@ psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
   CREATE ROLE <name> SUPERUSER LOGIN;
   CREATE USER <name>;
   DROP   ROLE <name>;
+
+******************************************************************************************
+Notes:
+  Although SQL is case insensitive, the commands "CREATE USER..." & "CREATE ROLE..."
+  appear to be *postgres* commands (i.e. NOT SQL), and therefore DO SEEM to be case
+  sensitive.
+******************************************************************************************
 
   CREATE DATABASE name;
   CREATE DATABASE name OWNER rolename;
@@ -20,13 +29,16 @@ shell:
   createdb   -O <rolename> <dbname>
   dropedb    <name>
 
-Files:
+Files (Fedora):
   /var/lib/pgsql
   /var/lib/pgsql/9.2/data/pg_hba.conf
-
+Files (Mac OSX):
+  /usr/local/bin/psql
+  /usr/local/Cellar/postgresql/9.3.3/bin/psql
+  /usr/local/var/postgres/pg_hba.conf
 
 Notes:
-  Since typeing "psql" at the command defaults to "psql <unix-username>", it will fail if
+  Since typing "psql" at the command defaults to "psql <unix-username>", it will fail if
   a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
   to make an empty, default db for each user even if it is never used.
 
