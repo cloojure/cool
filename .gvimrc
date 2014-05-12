@@ -34,13 +34,13 @@
 " au Syntax   * RainbowParenthesesLoadSquare
 " au Syntax   * RainbowParenthesesLoadBraces
 " 
-" set guifont=Liberation\ Mono\ 16
-"
-set guifont=Monospace\ 12
+set guifont=Monospace\ 12  " default => Linux 
+" match index is 0-based (C-style);  no match = -1
 if match( system("uname -a"), "Darwin" ) > -1
   " echo "Found Darwin, setting guifont for mac... \n"
   " sleep 3
   set guifont=Courier\ New:h18
+" set guifont=Liberation\ Mono\ 16
 endif
 
 set lines=60
