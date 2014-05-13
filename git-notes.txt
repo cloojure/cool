@@ -39,6 +39,16 @@ vim <file>                                      # make changes
 git checkout -- <file>                          # discard changes to <file>
 git reset --hard                                # discard changes to ALL files
 
+# Viewing diffs
+git diff --name-status <commit>                 # output like 'git status --brief'
+git diff -w            <commit>                 # diff ignore all whitespace
+git difftool --no-prompt                        # best way to invoke for 'vimdiff' 
+
+# Tagging
+git tag -a f-23-root -m"branch f-23 root"       # create annotated tag
+git push origin <tag>                           # push <tag> to server origin
+git push origin --tags                          # push ALL tags to server origin
+
 # Branching
 git branch --all                                # list all branches (incl remote)
 git branch      <branch>                        # create a branch from current location
