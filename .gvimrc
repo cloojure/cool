@@ -45,6 +45,9 @@ endif
 
 set lines=60
 set columns=100
+set equalalways
+set guioptions-=r  guioptions-=L  guioptions+=l
+
 " colorscheme slate
 colorscheme desert
 syntax on

@@ -19,6 +19,7 @@ if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
   alias gvim="\gvim  -geom '+900+20' "
 else
   # echo "Missing Linux"
+  set dummy="Bash is dumb!"
 fi
 
 alias gvt="~/work/settings/gvt.csh "

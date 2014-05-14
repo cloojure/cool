@@ -2,10 +2,10 @@
 echo ".zshrc - enter"
 
 # baseline path
-path=( . ${HOME}/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin )
+path=( . ${HOME}/bin /usr/local/opt /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin )
 
 # common bash/zsh aliases
-source ~/.bash.alias
+source ~/.alias.bash
 
 # vi command-line editing mode
 bindkey -v
@@ -21,3 +21,7 @@ alias hh="history -99"
 alias dosrc="source ~/.zshrc"
 
 echo ".zshrc - exit"
+JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
+export JAVA_HOME
+JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
+export JAVA_HOME
