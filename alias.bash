@@ -34,7 +34,7 @@ alias up6="cd ../../../../../.."
 
 alias gits="git status --short"
 alias gitc="git commit --allow-empty-message -m '' "
-alias gitca="git commit --allow-empty-message --all -m '' "
+alias gitca="git commit --all "
 alias gitdg="git difftool --no-prompt "
 
 alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
