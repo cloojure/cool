@@ -1,11 +1,19 @@
-lein help                       - complete list
-lein help <task>                - usage for <task>
-lein new [template] <proj>      - generate a new project skeleton [using template]
-lein new app        <proj>      - generate a new application project
-lein test [TESTS]               - run all tests [or just in TESTS namespaces]
-lein repl                       - launch REPL 
-lein run -m my.namespace        - run the -main function of <my.namespace>
-lein uberjar                    - package the project and dependencies as standalone jar
+lein help                               - complete list
+lein help <task>                        - usage for <task>
+lein new [template] <proj>              - generate a new project skeleton [using template]
+lein new app        <proj>              - generate a new application project
+
+lein repl                               - launch REPL 
+
+lein run -m proj.core                   - run the -main function of <my.namespace>
+lein run -m proj.core-test              - works with test fn's too
+
+lein test [TESTS]                       - run all tests [or just in TESTS namespaces]
+lein test :only proj.core-test          - run all tests for proj.core (proj.core-test namespace)
+lein test :only proj.core-test/test1    - run only 1 test fn from proj.core-test
+lein test -m proj.core-test/any-fn      - run any (non-test) fn from proj.core-test
+
+lein uberjar                            - package the project and dependencies as standalone jar
 
 lein do clean, test foo.test-core, jar  - can chain commands with "do xxx, yyy, zzz"
                                           ("do" and comma separators)

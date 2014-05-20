@@ -1,0 +1,19 @@
+
+; (seq <map>) => a seq of pairs
+user=> (def mm {:a 1 :b 2 :c 3})
+#'user/mm
+user=> mm
+{:a 1, :c 3, :b 2}
+user=> (seq mm)
+([:a 1] [:c 3] [:b 2])
+
+; The seq of pairs can be destructured and transformed into another seq of pairs
+user=> (for [ [kk vv] mm ]
+         [kk (inc vv)] )
+([:a 2] [:c 4] [:b 3])
+
+; A seq of pairs can be composed into a new map
+user=> (into (sorted-map) [ [:c 3] [:b 2] [:a 1] ] )
+{:a 1, :b 2, :c 3}
+user=>
+
