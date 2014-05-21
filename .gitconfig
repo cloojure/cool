@@ -8,10 +8,9 @@
 	tool = vimdiff
 [alias]
         s       = status --short
+        ss      = status 
 	co      = checkout
-	go      = checkout   # checkout is like "going" to a past state of the code
-	ci      = commit --allow-empty-message       -m ''    # commit = "checkin"
-	ca      = commit --allow-empty-message --all -m ''    # commit all
+	ca      = commit --all                                # commit all
 	cam     = commit --all -m'misc'                       # commit all 'misc'
         dg      = difftool --no-prompt                        # diff graphical
         #
