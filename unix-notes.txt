@@ -1,0 +1,2 @@
+crtl-alt-L                      # lock screen
+crtl-shift-alt-PgDwn            # shutdown

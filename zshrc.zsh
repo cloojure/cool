@@ -25,3 +25,6 @@ JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
 export JAVA_HOME
 JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
 export JAVA_HOME
+
+bb=~/slab/trillian
+cc=~/slab2/trillian
