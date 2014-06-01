@@ -5,19 +5,21 @@ lein new app        <proj>              - generate a new application project
 
 lein repl                               - launch REPL 
 
-lein run -m proj.core                   - run the -main function of <my.namespace>
+lein run -m proj.core                   - run the -main function of proj.core
+lein run -m proj.core/any-fn            - run the 'any-fn' function of proj.core
 lein run -m proj.core-test              - works with test fn's too
 
 lein test [TESTS]                       - run all tests [or just in TESTS namespaces]
 lein test :only proj.core-test          - run all tests for proj.core (proj.core-test namespace)
 lein test :only proj.core-test/test1    - run only 1 test fn from proj.core-test
-lein test -m proj.core-test/any-fn      - run any (non-test) fn from proj.core-test
+lein test -m proj.core-test/any-fn      - run (non-test) any-fn from proj.core-test
 
 lein uberjar                            - package the project and dependencies as standalone jar
 
 lein do clean, test foo.test-core, jar  - can chain commands with "do xxx, yyy, zzz"
                                           ("do" and comma separators)
 
+lein deploy clojars                     - package & deploy project to clojars.org
 
 TODO:
   ~/.m2 directory?  local lib repo?
