@@ -39,7 +39,7 @@ set guifont=Monospace\ 12  " default => Linux
 if match( system("uname -a"), "Darwin" ) > -1
   " echo "Found Darwin, setting guifont for mac... \n"
   " sleep 3
-  set guifont=Courier\ New:h18
+  set guifont=Courier\ New:h17
 " set guifont=Liberation\ Mono\ 16
 endif
 
