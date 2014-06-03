@@ -10,8 +10,7 @@ lein run -m proj.core-test              - works with test fn's too
 
 lein test [TESTS]                       - run all tests [or just in TESTS namespaces]
 lein test :only proj.core-test          - run all tests for proj.core (proj.core-test namespace)
-lein test :only proj.core-test/test1    - run only 1 test fn from proj.core-test
-lein test -m proj.core-test/any-fn      - run any (non-test) fn from proj.core-test
+lein test :only proj.core-test/my-test  - run only my-test in proj.core-test
 
 lein uberjar                            - package the project and dependencies as standalone jar
 
