@@ -32,11 +32,15 @@ alias up4="cd ../../../.."
 alias up5="cd ../../../../.."
 alias up6="cd ../../../../../.."
 
-alias gits="git s"
-alias gitss="git ss"
-alias gitca="git ca"
-alias gitcam="git cam"
-alias gitdg="git dg"
+alias gits="git status --short"
+alias gitss="git status"
+alias gitb="git branch"
+alias gitco="git checkout"
+alias gitca="git commit --all"
+alias gitcam="git commit --all -m'misc' "
+alias gitdg="git difftool --noprompt"
+        # old version (doesn't work on mac):
+        #   dg      = git difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+40'
 
 alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
 alias kk="kill -9"
