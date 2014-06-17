@@ -2,7 +2,7 @@
 # echo "~/.cshrc - enter"   
 
 set path = ( /usr/local/bin  /usr/bin  /bin   \
-             /usr/local/sbin /usr/sbin /sbin )
+             /usr/local/sbin /usr/sbin /sbin /bin/texbin )
 
 # This value of umask is CRUCIAL!  If not set properly (e.g. 007) Episys debug
 # output files CANNOT BE CREATED!

@@ -71,6 +71,13 @@ git remote add <short-name> <URL>               # add remote <short-name> from <
 
 git push --set-upstream origin <branch>         # 1st time pushing new <branch>
 
+# Create a new branch & set remote tracking
+git checkout existing-branch                    # new branch is based here
+git pull                                        # ensure we are at newest commit
+git checkout -b new-branch                      # create new-branch & move there
+git push --set-upstream origin new-branch       # push new-branch to server & setup tracking
+
+
 old:
   git push <remote> <branch-name>               # push <branch-name> to <remote>
   git push <remote> <local-name>:<remote-name>  # push <local-name> to <remote>/<remote-name>
