@@ -10,7 +10,7 @@ set shell=/bin/tcsh
 " Basic settings
 set diffopt=filler,iwhite
 set shiftwidth=2
-set tabstop=8
+set tabstop=4
 set expandtab
 set autoindent
 set smartindent

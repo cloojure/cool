@@ -2,7 +2,7 @@
 echo ".bashrc - enter"
 
 # baseline path
-PATH=.:${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/bin/texbin
+PATH=.:${HOME}/bin:/opt/gsutil:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/bin/texbin
 
 # common bash/zsh aliases
 source ~/.alias.bash
