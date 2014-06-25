@@ -58,6 +58,16 @@ git checkout --track     <remote/branch>        # short syntax for above
 git branch -d      <branch>                     # delete a branch
 git push <remote> --delete <branch>             # delete <branch> on server <remote>
 
+********************************************************************************
+# Normal branch creation:
+git checkout existing-branch                # new branch is based here
+git pull                                    # ensure we are at newest commit
+  <edit files, decide want a new branch>
+git checkout -b feat-23                     # create new branch "feat-23" & move to it
+git commit -m"My awesome feature"           # save edits to branch feat-23
+git push --set-upstream origin feat-23      # create & push to remote branch origin/feat-23
+********************************************************************************
+
 # Working with remote repos
 git remote -v                                   # list all remotes (verbose)
 git remote add    <short-name> <repo-URL>       # add remote <repo-URL> as <short-name>
@@ -66,17 +76,7 @@ git remote rm     <short-name>                  # remove <short-name> reference 
 
 git clone user@company.com:project.git          # checkout project from "origin" remote
 git fetch origin                                # copy everything from origin (no merging)
-
-git remote add <short-name> <URL>               # add remote <short-name> from <URL>
-
 git push --set-upstream origin <branch>         # 1st time pushing new <branch>
-
-# Create a new branch & set remote tracking
-git checkout existing-branch                    # new branch is based here
-git pull                                        # ensure we are at newest commit
-git checkout -b new-branch                      # create new-branch & move there
-git push --set-upstream origin new-branch       # push new-branch to server & setup tracking
-
 
 old:
   git push <remote> <branch-name>               # push <branch-name> to <remote>
