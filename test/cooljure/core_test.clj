@@ -1,5 +1,7 @@
 (ns cooljure.core-test
-  (:require [cooljure.core :refer :all] )
+  (:require [cooljure.core :refer :all]
+            [clojure.contrib.seq :as seq]
+  )
   (:use [clojure.test] )
 )
 
@@ -17,6 +19,7 @@
         (is (and  (= 2 num-true)
                   (= 1 num-false) )))
     ))
+
   (testing "improved usage"
     (let [flgs        [true true false]
           count-if    (comp count filter) ]
@@ -31,5 +34,19 @@
         (is (and  (= 2 num-true)
                   (= 1 num-false) )))
     ))
+
+  (testing "fancier"
+    (let [flgs        [true true false] ]
+      (prn (seq/separate odd? (range 5)))
+      (println "core: fancy")
+      (let [ [num-true num-false] (map count (seq/separate boolean flgs)) ]
+        (is (and  (= 2 num-true) 
+                  (= 1 num-false) )))
+      (println "cool: fancy")
+      (let [ [num-true num-false] (map count (seq/separate truthy? flgs)) ]
+        (is (and  (= 2 num-true)
+                  (= 1 num-false) )))
+    ))
+
   (println "  done.")
 )
