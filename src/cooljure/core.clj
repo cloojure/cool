@@ -14,13 +14,13 @@
   "Returns true if arg is logical true (neither nil nor false);
   otherwise returns false."
   [arg]
-  (if arg true false) )  ; Functionally equivalent to clojure.core/boolean
+  (if arg true false) )
 
 (defn falsey?
   "Returns true if arg is logical false (either nil or false);
   otherwise returns false. Equivalent to (not (truthy? arg))."
   [arg]
-  (if arg false true) )  ; Functionally equivalent to clojure.core/not.
+  (if arg false true) )
 
 (defn any?
   "Returns true if (pred x) is logical true for any x in coll; otherwise returns false.
