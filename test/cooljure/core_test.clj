@@ -6,47 +6,33 @@
 )
 
 (deftest basic
-  (testing "basic usage"
-    (let [flgs    [true true false] ]
-      (println "core: basic way")
-      (let [num-true    (count (filter boolean flgs))
-            num-false   (count (filter not     flgs)) ]
-        (is (and  (= 2 num-true) 
-                  (= 1 num-false) )))
-      (println "cool: basic way")
-      (let [num-true    (count (filter truthy? flgs))
-            num-false   (count (filter falsey? flgs)) ]
-        (is (and  (= 2 num-true)
-                  (= 1 num-false) )))
-    ))
+  (let [data [true :a 1 false nil] ]
+    (testing "basic usage"
+      (let [truthies    (filter boolean data)       ; coerce to primitive type
+            falsies     (filter not     data) ]     ; unnatural syntax
+        (is (and  (= truthies [true :a 1] )
+                  (= falsies  [false nil] ) )))
+      (let [truthies    (filter truthy? data)
+            falsies     (filter falsey? data) ]
+        (is (and  (= truthies [true :a 1] )
+                  (= falsies  [false nil] ) ))))
 
-  (testing "improved usage"
-    (let [flgs        [true true false]
-          count-if    (comp count filter) ]
-      (println "core: improved")
-      (let [num-true    (count-if boolean flgs)   ; awkward phrasing
-            num-false   (count-if not     flgs) ] ; doesn't feel natural
-        (is (and  (= 2 num-true) 
-                  (= 1 num-false) )))
-      (println "cool: improved")
-      (let [num-true    (count-if truthy? flgs)   ; matches intent much better
-            num-false   (count-if falsey? flgs) ]
-        (is (and  (= 2 num-true)
-                  (= 1 num-false) )))
-    ))
+    (testing "improved usage"
+      (let [count-if (comp count filter) ]
+        (let [num-true    (count-if boolean data)   ; awkward phrasing
+              num-false   (count-if not     data) ] ; doesn't feel natural
+          (is (and  (= 3 num-true) 
+                    (= 2 num-false) )))
+        (let [num-true    (count-if truthy? data)   ; matches intent much better
+              num-false   (count-if falsey? data) ]
+          (is (and  (= 3 num-true)
+                    (= 2 num-false) )))))
 
-  (testing "fancier"
-    (let [flgs        [true true false] ]
-      (prn (seq/separate odd? (range 5)))
-      (println "core: fancy")
-      (let [ [num-true num-false] (map count (seq/separate boolean flgs)) ]
-        (is (and  (= 2 num-true) 
-                  (= 1 num-false) )))
-      (println "cool: fancy")
-      (let [ [num-true num-false] (map count (seq/separate truthy? flgs)) ]
-        (is (and  (= 2 num-true)
-                  (= 1 num-false) )))
-    ))
-
-  (println "  done.")
-)
+    (testing "contrib"
+      (let [ result (seq/separate boolean data) ]
+        (is (= [ [true :a 1] [false nil] ]
+               result )))
+      (let [ result (seq/separate truthy? data) ]
+        (is (= [ [true :a 1] [false nil] ]
+               result ))))
+  ))
