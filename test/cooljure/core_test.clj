@@ -1,6 +1,6 @@
 (ns cooljure.core-test
-  (:require [cooljure.core :refer :all]
-            [clojure.contrib.seq :as seq] )
+  (:require [cooljure.core          :refer :all]
+            [clojure.contrib.seq    :as seq] )
   (:use [clojure.test] ))
 
 (deftest basic
