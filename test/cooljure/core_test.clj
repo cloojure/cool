@@ -46,4 +46,9 @@
 (deftest not-empty-tst
   (testing "basic usage"
     (is (every?     not-empty? ["1" [1] '(1) {:1 1} #{1} ] ))
-    (is (not-any?   not-empty? ["" [] () '() {} #{} nil] )) ))
+    (is (not-any?   not-empty? ["" [] () '() {} #{} nil] ))
+
+    (is (= [true true true true true] 
+            (map not-empty? ["1" [1] '(1) {:1 1} #{1} ] ) ))
+    (is (= [false false false false false false false ]
+            (map not-empty? ["" [] () '() {} #{} nil] ) ))))
