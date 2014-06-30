@@ -1,9 +1,7 @@
 (ns cooljure.core-test
   (:require [cooljure.core :refer :all]
-            [clojure.contrib.seq :as seq]
-  )
-  (:use [clojure.test] )
-)
+            [clojure.contrib.seq :as seq] )
+  (:use [clojure.test] ))
 
 (deftest basic
   (let [data [true :a 1 false nil] ]
