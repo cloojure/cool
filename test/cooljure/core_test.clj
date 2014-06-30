@@ -43,6 +43,12 @@
                result ))))
   ))
 
+(deftest any-tst
+  (testing "basic usage"
+    (is (= true   (any? odd? [1 2 3] ) ))
+    (is (= false  (any? odd? [2 4 6] ) ))
+    (is (= false  (any? odd? []      ) )) ))
+
 (deftest not-empty-tst
   (testing "basic usage"
     (is (every?     not-empty? ["1" [1] '(1) {:1 1} #{1} ] ))
