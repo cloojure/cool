@@ -59,8 +59,11 @@
 
 (deftest conjv-tst
   (testing "basic usage"
+    (is (= [  2  ]  (conjv  []  2   )))
+    (is (= [  2  ]  (conjv '()  2   )))
     (is (= [  2 3]  (conjv  []  2  3)))
     (is (= [  2 3]  (conjv '()  2  3)))
+
     (is (= [1 2 3]  (conjv  [1] 2  3)))
     (is (= [1 2 3]  (conjv '(1) 2  3)))
     (is (= [1 2 3]  (conjv  [1  2] 3)))
