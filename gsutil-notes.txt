@@ -1,0 +1,16 @@
+Docs:   https://developers.google.com/storage/docs/gsutil
+
+; List contents of cloud dir "cloojure"
+gsutil ls       gs://cloojure           ; normal listing
+gsutil ls -l    gs://cloojure           ; long listing
+gsutil ls -lr   gs://cloojure           ; long, recursive listing
+
+; Copy a normal file to cloud
+gsutil cp test.txt gs://cloojure
+
+; Copy a *.txt file using gzip compresssion
+gsutil cp -z txt -a public-read  test.txt  gs://cloojure
+
+; Copy (with version print) local files using gzip compression for all files 
+; matching *.csv, *.html, *.js, *.txt, *.xml
+gsutil cp -v -z csv,html,js,txt,xml -a public-read  ./*  gs://cloojure
