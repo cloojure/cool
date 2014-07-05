@@ -49,8 +49,8 @@ alias pk="pkill -9"
 # Google Cloud tools
 #
 # Copy local files to Google Cloud Storage using gzip compression for all files 
-# matching *.{csv,html,js,txt,xml}, and set permission to public-read.
-alias gscpz="gsutil cp -z csv,html,js,txt,xml -a public-read "
+# matching *.{txt,xml,csv,tsv,psv,html,js}, and set permission to public-read.
+alias gscpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
 
 
 ### echo "alias.bash - exit"
