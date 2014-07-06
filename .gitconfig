@@ -1,28 +1,28 @@
 [user]
-	name  = Alan Thompson
-	email = thompson2526@gmail.com
+	name = Alan Thompson
+	email = cloojure@gmail.com
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
 [merge]
 	tool = vimdiff
 [alias]
-    s       = status --short
-    ss      = status 
+        s       = status --short
+        ss      = status 
 	co      = checkout
 	ca      = commit --all                                # commit all
 	cam     = commit --all -m'misc'                       # commit all 'misc'
-    dg      = difftool --no-prompt                        # diff graphical
-    #
-    # old stuff:
-    #   dg      = git difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+40'
+        dg      = difftool --no-prompt                        # diff graphical
+        #
+        # old stuff:
+        #   dg      = git difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+40'
 
 [push]
 	default = simple
 [diff]
 	tool = gvim
 [difftool "gvim"]
-    # for Mac OSX (-geom is broken?)
+        # for Mac OSX (-geom is broken?)
 	cmd = "gvim -df -c'set columns=200 lines=60 noea ea' $MERGED $LOCAL "   
 [color]
 	ui = true
