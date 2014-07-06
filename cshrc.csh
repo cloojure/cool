@@ -2,10 +2,10 @@
 # echo "~/.cshrc - enter"   
 
 set path =( . ${HOME}/bin )
-set path =( $path /usr/local/opt  /opt/bin )
-set path =( $path /usr/java/latest/bin /usr/java/default/bin )
+set path =( $path /usr/local/git/bin )
 set path =( $path /usr/local/bin  /usr/bin  /bin )
 set path =( $path /usr/local/sbin /usr/sbin /sbin )
+set path =( $path /usr/local/opt  /opt/bin )
 set path =( $path /opt/gsutil )
 set path =( $path /bin/texbin )
 

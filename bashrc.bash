@@ -3,11 +3,10 @@ echo ".bashrc - enter"
 
 # baseline path
 PATH=.:${HOME}/bin
-PATH=$PATH:/usr/local/opt:/opt/bin
-PATH=$PATH:/usr/java/latest/bin
-PATH=$PATH:/usr/java/default/bin
+PATH=$PATH:/usr/local/git/bin
 PATH=$PATH:/usr/local/bin:/usr/bin:/bin
 PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+PATH=$PATH:/usr/local/opt:/opt/bin
 PATH=$PATH:/opt/gsutil
 PATH=$PATH:/bin/texbin
 

@@ -3,10 +3,10 @@ echo ".zshrc - enter"
 
 # baseline path
 path=( . ${HOME}/bin )
-path=( $path /usr/local/opt  /opt/bin )
-path=( $path /usr/java/latest/bin /usr/java/default/bin )
+path=( $path /usr/local/git/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
+path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )
 path=( $path /bin/texbin )
 
