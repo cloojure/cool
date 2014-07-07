@@ -12,6 +12,41 @@ psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
   DROP   ROLE <name>;
 
 ******************************************************************************************
+; Online resources:
+  http://www.postgresql.org/docs/9.3/static/index.html
+  http://www.postgresqltutorial.com/
+  http://www.pgadmin.org/
+
+******************************************************************************************
+; Trillian staging
+> psql  --host trillian-sandbox.ce2yqgtookax.us-east-1.rds.amazonaws.com \
+        --port 10003 --username trillian  trillian_staging
+
+  => \d                 - describe all tables
+  => \d sync_jobs       - describe table sync_jobs
+  => select id,job_id,latest_file,hostname from sync_jobs;  
+                        - print 4 cols from sync_jobs
+
+  - print rows for the 5 largest ids
+  => select id,job_id,latest_file,hostname 
+        from sync_jobs order by id desc limit 5;
+
+  => select max(id) from sync_jobs;     - print largest value in id column
+  => select id,job_id,latest_file,hostname 
+        from sync_jobs where  id=1132;
+                        - print just the row specified
+
+  - Using a sub-query in the where clause instead of the 2-step method above
+  => select id,job_id,latest_file,hostname from sync_jobs 
+        where id=(select max(id) from sync_jobs);
+
+  => begin;             - begin transaction block
+  => update sync_jobs set hostname='dummy-host' where id=1132;  - make change to db
+  => { commit;          - either commit the change to the db
+  => or
+  =>   rollback; }      - or rollback (discard) the change
+
+******************************************************************************************
 Notes:
   Although SQL is case insensitive, the commands "CREATE USER..." & "CREATE ROLE..."
   appear to be *postgres* commands (i.e. NOT SQL), and therefore DO SEEM to be case
