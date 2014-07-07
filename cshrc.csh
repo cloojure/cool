@@ -1,8 +1,13 @@
 #!/bin/tcsh
 # echo "~/.cshrc - enter"   
 
-set path = ( /usr/local/bin  /usr/bin  /bin   \
-             /usr/local/sbin /usr/sbin /sbin /bin/texbin )
+set path =( . ${HOME}/bin )
+set path =( $path /usr/local/git/bin )
+set path =( $path /usr/local/bin  /usr/bin  /bin )
+set path =( $path /usr/local/sbin /usr/sbin /sbin )
+set path =( $path /usr/local/opt  /opt/bin )
+set path =( $path /opt/gsutil )
+set path =( $path /bin/texbin )
 
 # This value of umask is CRUCIAL!  If not set properly (e.g. 007) Episys debug
 # output files CANNOT BE CREATED!
@@ -19,15 +24,11 @@ setenv DATOMIC_HOME    "/opt/datomic"
 # doesn't preempt the normal Cygwin diff in /usr/bin.
 ### set path = ( $path    "$VIM_HOME" )
 
-set path = ( $path    /home/alan/.local/bin /home/alan/bin )
+set path = ( $path    /home/alan/.local/bin )
 set path = ( "$GROOVY_HOME/bin"         $path )
 set path = ( "$JAVA_HOME/bin"  "$JAVA_HOME/jre/bin"       $path )
 set path = ( "$DATOMIC_HOME/bin"        $path )
 set path = ( "$CLOJURE_HOME/bin"        $path )
-set path = ( "/usr/local/heroku/bin"    $path )
-set path = ( ~/bin ~/.local/bin         $path )
-set path = ( ~/me/bin ~/me/settings     $path )
-set path = ( .                          $path )
 
 setenv CLASSPATH "~/classes"
 

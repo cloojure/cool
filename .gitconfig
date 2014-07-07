@@ -1,6 +1,6 @@
 [user]
-	name  = Alan Thompson
-	email = thompson2526@gmail.com
+	name = Alan Thompson
+	email = cloojure@gmail.com
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore

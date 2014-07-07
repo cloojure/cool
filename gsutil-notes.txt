@@ -14,3 +14,19 @@ gsutil cp -z txt -a public-read  test.txt  gs://cloojure
 ; Copy (with version print) local files using gzip compression for all files 
 ; matching *.csv, *.html, *.js, *.txt, *.xml
 gsutil cp -v -z csv,html,js,txt,xml -a public-read  ./*  gs://cloojure
+
+
+********************************************************************************
+; gsutil installation steps:
+
+  - Download gsutil.tar.gz from Google
+  - Install to /opt/gsutil:
+        sudo tar xvfz gsutil.tar.gz -C /opt         ; extract & install
+        ls -l /opt/gsutil                           ; verify install
+  - Add /opt/gsutil to PATH variable in shell
+        PATH=${PATH}:/opt/gsutil                    ; /bin/bash
+        path=( $path /opt/gsutil )                  ; /bin/zsh
+        set path = ( $path /opt/gsutil )            ; /bin/tcsh
+
+  - To configure Google Cloud on computer, run
+        gsutil config       ; then follow instructions
