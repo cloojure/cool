@@ -11,8 +11,9 @@ gsutil cp test.txt gs://cloojure
 ; Copy a *.txt file using gzip compresssion
 gsutil cp -z txt -a public-read  test.txt  gs://cloojure
 
+; ***** use gsutil-cpz alias *****
 ; Copy (with version print) local files using gzip compression for all files 
-; matching *.csv, *.html, *.js, *.txt, *.xml
+; matching *{.csv,.html,.js,.txt,.xml}
 gsutil cp -v -z csv,html,js,txt,xml -a public-read  ./*  gs://cloojure
 
 
