@@ -6,6 +6,9 @@
 ******************************************************************************************
 
 shell:
+  pg_ctl    initdb  -D /var/postgresql      ; create a database
+  postgres          -D /var/postgresql      ; start the postgres server (blocking)
+
   createuser <user-name>    ; user-name aka "rolename" in docs
   dropeuser  <user-name>
   createdb   <db-name>
