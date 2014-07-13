@@ -1,21 +1,47 @@
-psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
-  \l[+]                         - list databases
-  \du                           - list users/roles
-  \d                            - list tables, views, sequences
-  \d  [<name>]                  - describe tables, views, sequences
-  \h                            - help
-  \q                            - quit (or CRTL-D)
-  CREATE ROLE <name>;
-  CREATE ROLE <name> LOGIN;
-  CREATE ROLE <name> SUPERUSER LOGIN;
-  CREATE USER <name>;
-  DROP   ROLE <name>;
-
 ******************************************************************************************
 ; Online resources:
   http://www.postgresql.org/docs/9.3/static/index.html
   http://www.postgresqltutorial.com/
   http://www.pgadmin.org/
+******************************************************************************************
+
+shell:
+  pg_ctl    initdb  -D /var/postgresql      ; create a database
+  postgres          -D /var/postgresql      ; start the postgres server (blocking)
+
+  createuser <user-name>    ; user-name aka "rolename" in docs
+  dropeuser  <user-name>
+  createdb   <db-name>
+  createdb   -O <owner-name> <db-name>
+  dropedb    <db-name>
+
+psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
+  \l[+]                         - list databases (\l+ => extra info)
+  \du                           - list users/roles
+  \d                            - list tables, views, sequences
+  \d  [<name>]                  - describe tables, views, sequences
+  \h                            - help
+  \q                            - quit (or CRTL-D)
+  CREATE USER <name>;       - synonym for "CREATE ROLE <name> LOGIN;"
+  CREATE USER <name> SUPERUSER LOGIN;
+  DROP   USER <name>;
+
+  CREATE DATABASE <db-name>;
+  CREATE DATABASE <db-name> OWNER <user-name>;    - user-name aka "rolename" in docs
+  DROP   DATABASE <db-name>;
+
+Files (Fedora):
+  /var/lib/pgsql
+  /var/lib/pgsql/9.2/data/pg_hba.conf
+Files (Mac OSX):
+  /usr/local/bin/psql
+  /usr/local/Cellar/postgresql/9.3.3/bin/psql
+  /usr/local/var/postgres/pg_hba.conf
+
+Notes:
+  Since typing "psql" at the command defaults to "psql <unix-username>", it will fail if
+  a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
+  to make an empty, default db for each user even if it is never used.
 
 ******************************************************************************************
 ; Trillian staging
@@ -52,30 +78,6 @@ Notes:
   appear to be *postgres* commands (i.e. NOT SQL), and therefore DO SEEM to be case
   sensitive.
 ******************************************************************************************
-
-  CREATE DATABASE name;
-  CREATE DATABASE name OWNER rolename;
-  DROP   DATABASE name;
-
-shell:
-  createuser <name>       - from command line
-  dropeuser  <name>       - from command line
-  createdb   <name>
-  createdb   -O <rolename> <dbname>
-  dropedb    <name>
-
-Files (Fedora):
-  /var/lib/pgsql
-  /var/lib/pgsql/9.2/data/pg_hba.conf
-Files (Mac OSX):
-  /usr/local/bin/psql
-  /usr/local/Cellar/postgresql/9.3.3/bin/psql
-  /usr/local/var/postgres/pg_hba.conf
-
-Notes:
-  Since typing "psql" at the command defaults to "psql <unix-username>", it will fail if
-  a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
-  to make an empty, default db for each user even if it is never used.
 
 
 Tables:
