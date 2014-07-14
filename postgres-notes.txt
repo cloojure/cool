@@ -6,8 +6,9 @@
 ******************************************************************************************
 
 shell:
-  pg_ctl    initdb  -D /var/postgresql      ; create a database
-  postgres          -D /var/postgresql      ; start the postgres server (blocking)
+  pg_ctl    initdb  -D /var/postgresql    ; init postgres global storage area
+  postgres          -D /var/postgresql    ; start the postgres server (blocking)
+    ^-Use this for Clojure Cookbook testing
 
   createuser <user-name>    ; user-name aka "rolename" in docs
   dropeuser  <user-name>
