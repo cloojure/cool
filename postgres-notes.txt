@@ -1,33 +1,35 @@
+******************************************************************************************
+; Online resources:
+  http://www.postgresql.org/docs/9.3/static/index.html
+  http://www.postgresqltutorial.com/
+  http://www.pgadmin.org/
+******************************************************************************************
+
+shell:
+  pg_ctl    initdb  -D /var/postgresql    ; init postgres global storage area
+  postgres          -D /var/postgresql    ; start the postgres server (blocking)
+    ^-Use this for Clojure Cookbook testing
+
+  createuser <user-name>    ; user-name aka "rolename" in docs
+  dropeuser  <user-name>
+  createdb   <db-name>
+  createdb   -O <owner-name> <db-name>
+  dropedb    <db-name>
+
 psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
-  \l[+]                         - list databases
+  \l[+]                         - list databases (\l+ => extra info)
   \du                           - list users/roles
   \d                            - list tables, views, sequences
   \d  [<name>]                  - describe tables, views, sequences
   \h                            - help
   \q                            - quit (or CRTL-D)
-  CREATE ROLE <name>;
-  CREATE ROLE <name> LOGIN;
-  CREATE ROLE <name> SUPERUSER LOGIN;
-  CREATE USER <name>;
-  DROP   ROLE <name>;
+  CREATE USER <name>;       - synonym for "CREATE ROLE <name> LOGIN;"
+  CREATE USER <name> SUPERUSER LOGIN;
+  DROP   USER <name>;
 
-******************************************************************************************
-Notes:
-  Although SQL is case insensitive, the commands "CREATE USER..." & "CREATE ROLE..."
-  appear to be *postgres* commands (i.e. NOT SQL), and therefore DO SEEM to be case
-  sensitive.
-******************************************************************************************
-
-  CREATE DATABASE name;
-  CREATE DATABASE name OWNER rolename;
-  DROP   DATABASE name;
-
-shell:
-  createuser <name>       - from command line
-  dropeuser  <name>       - from command line
-  createdb   <name>
-  createdb   -O <rolename> <dbname>
-  dropedb    <name>
+  CREATE DATABASE <db-name>;
+  CREATE DATABASE <db-name> OWNER <user-name>;    - user-name aka "rolename" in docs
+  DROP   DATABASE <db-name>;
 
 Files (Fedora):
   /var/lib/pgsql
@@ -41,6 +43,42 @@ Notes:
   Since typing "psql" at the command defaults to "psql <unix-username>", it will fail if
   a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
   to make an empty, default db for each user even if it is never used.
+
+******************************************************************************************
+; Trillian staging
+> psql  --host trillian-sandbox.ce2yqgtookax.us-east-1.rds.amazonaws.com \
+        --port 10003 --username trillian  trillian_staging
+
+  => \d                 - describe all tables
+  => \d sync_jobs       - describe table sync_jobs
+  => select id,job_id,latest_file,hostname from sync_jobs;  
+                        - print 4 cols from sync_jobs
+
+  - print rows for the 5 largest ids
+  => select id,job_id,latest_file,hostname 
+        from sync_jobs order by id desc limit 5;
+
+  => select max(id) from sync_jobs;     - print largest value in id column
+  => select id,job_id,latest_file,hostname 
+        from sync_jobs where  id=1132;
+                        - print just the row specified
+
+  - Using a sub-query in the where clause instead of the 2-step method above
+  => select id,job_id,latest_file,hostname from sync_jobs 
+        where id=(select max(id) from sync_jobs);
+
+  => begin;             - begin transaction block
+  => update sync_jobs set hostname='dummy-host' where id=1132;  - make change to db
+  => { commit;          - either commit the change to the db
+  => or
+  =>   rollback; }      - or rollback (discard) the change
+
+******************************************************************************************
+Notes:
+  Although SQL is case insensitive, the commands "CREATE USER..." & "CREATE ROLE..."
+  appear to be *postgres* commands (i.e. NOT SQL), and therefore DO SEEM to be case
+  sensitive.
+******************************************************************************************
 
 
 Tables:

@@ -50,31 +50,44 @@ git push origin <tag>                           # push <tag> to server origin
 git push origin --tags                          # push ALL tags to server origin
 
 # Branching
-git branch --all                                # list all branches (incl remote)
-git branch      <branch>                        # create a branch from current location
-git checkout -b <branch>                        # create a branch from current location, then move to it 
-git checkout -b <branch> <remote/branch>        # create <branch> from <remote/branch>, then move to it
-git checkout --track     <remote/branch>        # short syntax for above
-git branch -d      <branch>                     # delete a branch
-git push <remote> --delete <branch>             # delete <branch> on server <remote>
+git branch                              # list local branches
+git branch -r (or --remotes)            # list remote branches
+git branch --all                        # list all branches (incl remote)
+git branch      <branch>                # create branch from current location
+git checkout -b <branch>                # create branch from current location & move there
+git branch -d   <branch>                # delete branch
+git push <remote> --delete <branch>     # delete <branch> on server <remote>
+
+********************************************************************************
+# Checkout a remote branch for the first time, creating a local tracking branch
+git checkout --track <remote/branch>
+********************************************************************************
+# Normal branch creation:
+git checkout existing-branch                # new branch is based here
+git pull                                    # ensure we are at newest commit
+  <edit files, decide want a new branch>
+git checkout -b feat-23                     # create new branch "feat-23" & move to it
+git commit -m"My awesome feature"           # save edits to branch feat-23
+git push --set-upstream origin feat-23      # create & push to remote branch origin/feat-23
+********************************************************************************
 
 # Working with remote repos
-git remote -v                                   # list all remotes (verbose)
-git remote add    <short-name> <repo-URL>       # add remote <repo-URL> as <short-name>
-git remote show   <short-name>                  # show info about remote <short-name> and branches
-git remote rm     <short-name>                  # remove <short-name> reference to remote
+git remote -v                               # list all remotes (verbose)
+git remote add    <remote> <remote-URL>     # add remote <repo-URL> as <short-name>
+git remote rm     <remote>                  # remove <short-name> reference to remote
+git remote show   <remote>                  # show info about remote <short-name> and branches
 
 git clone user@company.com:project.git          # checkout project from "origin" remote
 git fetch origin                                # copy everything from origin (no merging)
-
-git remote add <short-name> <URL>               # add remote <short-name> from <URL>
-
 git push --set-upstream origin <branch>         # 1st time pushing new <branch>
 
 old:
   git push <remote> <branch-name>               # push <branch-name> to <remote>
   git push <remote> <local-name>:<remote-name>  # push <local-name> to <remote>/<remote-name>
   git branch --set-upstream-to=origin/<branch> <branch>   # old way 
+old:
+  git checkout -b <branch> <remote/branch>      # create <branch> from <remote/branch>, 
+                                                    then move to it
 
 
 # Fetching/Merging on a branch

@@ -2,7 +2,13 @@
 echo ".zshrc - enter"
 
 # baseline path
-path=( . ${HOME}/bin /usr/local/opt /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin )
+path=( . ${HOME}/bin )
+path=( $path /usr/local/git/bin )
+path=( $path /usr/local/bin  /usr/bin  /bin )
+path=( $path /usr/local/sbin /usr/sbin /sbin )
+path=( $path /usr/local/opt  /opt/bin )
+path=( $path /opt/gsutil )
+path=( $path /bin/texbin )
 
 # common bash/zsh aliases
 source ~/.alias.bash

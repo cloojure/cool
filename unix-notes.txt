@@ -1,2 +1,3 @@
 crtl-alt-L                      # lock screen
 crtl-shift-alt-PgDwn            # shutdown
+for konqueror, URL=sysinfo:/    # linux system info
