@@ -22,6 +22,8 @@ else
   set dummy="Bash is dumb!"
 fi
 
+alias hh="history -99"
+
 alias gvt="~/work/settings/gvt.csh "
 alias gvd="echo gvim -c 'winpos 5 5' -c 'winsize 170 50' "
 

@@ -32,6 +32,8 @@ git log --since=2.weeks                         # limit time duration of listing
 git log --after=2014-04-15                      # limit start time of listing
 git log --before=2014-04-15                     # linit end time of listing
 gitk                                            # GUI history viewer
+git log --oneline master...myBranch             # view only commits since myBranch
+git log --oneline master...                     #   was created from master
 
 # Discarding changes to a file
 git checkout <branch>                           # move to <branch>
