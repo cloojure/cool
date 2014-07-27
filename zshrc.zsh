@@ -1,9 +1,15 @@
 #!/bin/zsh
 echo ".zshrc - enter"
 
+if [[ $(uname -a) == *Darwin* ]]; then
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home"
+fi
+
 # baseline path
 path=( . ${HOME}/bin )
 path=( $path /usr/local/git/bin )
+path=( $path ${JAVA_HOME}/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
@@ -22,8 +28,8 @@ setopt csh_null_glob
 # set prompt string
 PS1='%30<..<%~ > '
 
+
 # zsh-specific aliases
-alias hh="history -99"
 alias dosrc="source ~/.zshrc"
 
 echo ".zshrc - exit"
