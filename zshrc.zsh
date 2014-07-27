@@ -27,10 +27,3 @@ alias hh="history -99"
 alias dosrc="source ~/.zshrc"
 
 echo ".zshrc - exit"
-JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
-export JAVA_HOME
-JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
-export JAVA_HOME
-
-bb=~/slab/trillian
-cc=~/slab2/trillian

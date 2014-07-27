@@ -1,3 +1,7 @@
-crtl-alt-L                      # lock screen
-crtl-shift-alt-PgDwn            # shutdown
-for konqueror, URL=sysinfo:/    # linux system info
+Fedora KDE:
+  crtl-alt-L                      # lock screen
+  crtl-shift-alt-PgDwn            # shutdown
+  crtl-shift-alt-PgUp             # reboot
+
+konqueror:
+  URL=sysinfo:/    # linux system info

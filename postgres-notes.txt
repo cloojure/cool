@@ -17,8 +17,8 @@ shell:
   dropedb    <db-name>
 
 psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
-  \l[+]                         - list databases (\l+ => extra info)
-  \du                           - list users/roles
+  \l[+]                         - list databases (+ => extra info)
+  \du[+]                        - list users/roles (+ => extra info)
   \d                            - list tables, views, sequences
   \d  [<name>]                  - describe tables, views, sequences
   \h                            - help
@@ -43,6 +43,29 @@ Notes:
   Since typing "psql" at the command defaults to "psql <unix-username>", it will fail if
   a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
   to make an empty, default db for each user even if it is never used.
+
+Fedora notes:  
+  See:  https://wiki.postgresql.org/wiki/YUM_Installation
+        https://wiki.postgresql.org/wiki/First_steps
+
+  Change auth method from "ident" to "trust" in pg_hba.conf (/var/lib/psql/...)
+    -- I had 2 of them!
+    -- looks like /var/lib/pgsql/9.3 is the correct one (fedora 20, postgres 9.3, 2014/7)
+    -- log file:  /var/lib/pgsql/9.3/data/pg_log/postgresql-Fri.log   (etc)
+
+  After creation/init:
+  > sudo su - postgres
+  > psql                                        -- implicitly uses DB=postgres
+  postgres=# CREATE USER alan SUPERUSER LOGIN;
+  postgres=# \q                                 -- exit
+  > exit                                        -- logout from user postgres
+  > psql -d postgres                            -- must specify an existing DB
+  postgres=# \l                                 -- list databases
+  postgres=# \da                                -- list schema info
+  postgres=# \d                                 -- list tables
+  postgres=# postgres=# CREATE DATABASE alan;            -- easiest to create dummy DB for all users.
+  postgres=# \l                                 -- DB alan now exists
+  postgres=# \q                                 -- quit
 
 ******************************************************************************************
 ; Trillian staging
