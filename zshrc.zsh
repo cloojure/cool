@@ -5,6 +5,9 @@ if [[ $(uname -a) == *Darwin* ]]; then
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home"
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home"
 fi
+if [[ $(uname -a) == *Linux*.fc20.* ]]; then
+  export JAVA_HOME="/usr/java/jdk1.8.0_11"
+fi
 
 # baseline path
 path=( . ${HOME}/bin )
