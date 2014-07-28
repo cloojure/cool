@@ -1,5 +1,5 @@
 #!/bin/bash
-echo ".bashrc - enter"
+# echo ".bashrc - enter"
 
 if [[ $(uname -a) == *Darwin* ]]; then
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home"
@@ -35,4 +35,4 @@ PROMPT_DIRTRIM=4
 # bash-specific aliases
 alias dosrc="source ~/.bashrc"
 
-echo ".bashrc - exit"
+# echo ".bashrc - exit"

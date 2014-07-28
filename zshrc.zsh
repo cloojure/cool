@@ -1,5 +1,5 @@
 #!/bin/zsh
-echo ".zshrc - enter"
+# echo ".zshrc - enter"
 
 if [[ $(uname -a) == *Darwin* ]]; then
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home"
@@ -35,4 +35,4 @@ PS1='%30<..<%~ > '
 # zsh-specific aliases
 alias dosrc="source ~/.zshrc"
 
-echo ".zshrc - exit"
+# echo ".zshrc - exit"
