@@ -3,4 +3,16 @@
 (load-file "src/alan/core.clj"          ; (re-)load & eval a source file
 (dir user)                              ; display all vars in "user" namespace
 (doc dir)                               ; display documantation for "dir" command
-(find-doc #"dir")                       ; display docs for all cmds matching R.E.
+(find-doc #"dir")                       ; display docs for all cmds matching a RE
+
+; repl testing for my.proj/my.proj-test
+(use 'cooljure.core)
+(test-all 'my.proj)  ; will do :reload-all & then run tests
+
+;**************************************************
+; OLD WAY:
+  ; repl testing for my.proj & my.proj-test
+  (use 'clojure.test)
+  (require   'my.proj-test :reload-all)
+  (run-tests 'my.proj-test)
+
