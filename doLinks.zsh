@@ -22,10 +22,12 @@ if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]] ; then
   usageAndExit
 fi
 
-forceFlg=""
-if (( $# >=1 )) ; then
+# Since OSX doesn't allow "ln -sv --force ...", we must use binary flags and
+# remove any pre-existing files manually
+forceFlg=false
+if (( $# >= 1 )) ; then
   if [[ "$1" == "--force" ]] ; then
-    forceFlg="--force"
+    forceFlg=true
   else
     usageAndExit
   fi
@@ -36,7 +38,13 @@ for ff in    .tmux.conf .ctags .vimrc .gvimrc \
              .cshrc .bashrc .bash_profile .alias.bash .zshrc \
              .gitconfig .gitignore 
 do
-  ln -sv ${forceFlg}    ${coolDir}/${ff}            ~/${ff}
+  if ${forceFlg} ; then
+    rm -f ~/${ff}
+  fi
+  ln -sv ${coolDir}/${ff}  ~/${ff}
 done
-ln -sv ${forceFlg}      ${coolDir}/profiles.clj     ~/.lein/profiles.clj    
+  if ${forceFlg} ; then
+    rm -f ~/.lein/profiles.clj    
+  fi
+ln -sv ${coolDir}/profiles.clj  ~/.lein/profiles.clj    
 
