@@ -40,6 +40,7 @@ alias gitb="git branch"
 alias gitco="git checkout"
 alias gitca="git commit --all"
 alias gitcam="git commit --all -m'misc' "
+alias gitdns="git diff --name-status"
 alias gitdg="git difftool --noprompt"
         # old version (doesn't work on mac):
         #   dg      = git difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+40'

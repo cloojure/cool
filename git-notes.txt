@@ -93,11 +93,17 @@ old:
 
 
 # Fetching/Merging on a branch
-1. git checkout <branch>                        # move to <branch>
+  1. git checkout <branch>              # move to <branch>
+  either:
+    A1. git fetch <remote>              # copy everything from <remote>
+    A2. git merge <remote/branch>       # do a local merge from <remote/branch>
+  lr:
+    B1. git pull  <origin>              # copy <remote/branch> AND merge in 1 step
 
-Then either:
-  A1. git fetch <remote>                        # copy everything from <remote>
-  A2. git merge <remote/branch>                 # do a local merge from <remote/branch>
-Or:
-  B1. git pull  <origin>                        # copy <remote/branch> AND merge in 1 step
+# Merge with --squash:  All commits on a feature branch can be compressed into a single
+# commit on master, discarding all history on the feature branch.  
+  git checkout master                   # destination of merge
+  git pull                              # ensure up-to-date with origin
+  git merge --squash myFeat             # merge all myFeat commits into 1 commit on master
+  git branch -d myFeat                  # deleted now-useless feature branch
 
