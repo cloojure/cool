@@ -16,11 +16,12 @@ shell:
   createdb   -O <owner-name> <db-name>
   dropedb    <db-name>
 
-psql <dbname>   - start psql, attach to <dbname> (defaults to unix username)
+psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
   \l[+]                         - list databases (+ => extra info)
   \du[+]                        - list users/roles (+ => extra info)
   \d                            - list tables, views, sequences
   \d  [<name>]                  - describe tables, views, sequences
+  \c   <dbname>                 - connect to <dbname>
   \h                            - help
   \q                            - quit (or CRTL-D)
   CREATE USER <name>;       - synonym for "CREATE ROLE <name> LOGIN;"
