@@ -1,26 +1,29 @@
 #!/bin/bash 
 ### echo "alias.bash - enter"
 
+if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
+  # echo "Found Linux"
+  alias gvim="\gvim  -geom '+900+20' "
+  alias d="ls -ldF --color=auto"
+  alias lal="ls -alF --color=auto"
+else
+  # echo "Missing Linux"
+  set dummy="OSX is dumb!"
+
+  alias d="ls -ldF"
+  alias lal="ls -alF"
+fi
+
 # Always use egrep
 alias grep="\grep -E --color=auto"  # same as deprecated 'egrep'
 
 alias pdirs='find * -maxdepth 0 -type d '
 alias pfiles='find * -maxdepth 0 -type f '
-alias d="ls -ldF --color=auto"
-alias lal="ls -alF --color=auto"
 alias dd='d `pdirs` '
 
 alias du='du -m '
 alias df='df -m '
 alias wcl="wc -l"
-
-if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
-  # echo "Found Linux"
-  alias gvim="\gvim  -geom '+900+20' "
-else
-  # echo "Missing Linux"
-  set dummy="Bash is dumb!"
-fi
 
 alias hh="history -99"
 
@@ -54,6 +57,5 @@ alias pk="pkill -9"
 # Copy local files to Google Cloud Storage using gzip compression for all files 
 # matching *.{txt,xml,csv,tsv,psv,html,js}, and set permission to public-read.
 alias gsutil-cpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
-
 
 ### echo "alias.bash - exit"
