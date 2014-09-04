@@ -2,12 +2,12 @@
 ### echo "alias.bash - enter"
 
 # Always use egrep
-alias grep="\grep -E"  # same as deprecated 'egrep'
+alias grep="\grep -E --color=auto"  # same as deprecated 'egrep'
 
 alias pdirs='find * -maxdepth 0 -type d '
 alias pfiles='find * -maxdepth 0 -type f '
-alias d="ls -ldF"
-alias lal="ls -alF"
+alias d="ls -ldF --color=auto"
+alias lal="ls -alF --color=auto"
 alias dd='d `pdirs` '
 
 alias du='du -m '
