@@ -60,18 +60,34 @@ git checkout -b <branch>                # create branch from current location & 
 git branch -d   <branch>                # delete branch
 git push <remote> --delete <branch>     # delete <branch> on server <remote>
 
-********************************************************************************
+--------------------------------------------------------------------------------
 # Checkout a remote branch for the first time, creating a local tracking branch
 git checkout --track <remote/branch>
-********************************************************************************
-# Normal branch creation:
-git checkout existing-branch                # new branch is based here
+--------------------------------------------------------------------------------
+# Normal branch creation:  starting on "feat-23"
+git checkout master                         # new branch is based here
 git pull                                    # ensure we are at newest commit
   <edit files, decide want a new branch>
-git checkout -b feat-23                     # create new branch "feat-23" & move to it
-git commit -m"My awesome feature"           # save edits to branch feat-23
-git push --set-upstream origin feat-23      # create & push to remote branch origin/feat-23
-********************************************************************************
+git tag -a feat-23a-root -m'feat-23a-root'  # Mark root of feature branch
+git checkout -b feat-23a                    # create new branch "feat-23" & move to it
+git commit -m"Starting feat-23a"            # save edits to branch feat-23
+git push --set-upstream origin feat-23a     # push new branch to origin
+# if want tags on origin:
+    git push origin feat-23a-root           # push tag to server origin
+      git push origin --tags                #   alternate: push ALL tags to server origin
+# if feat-23a doesn't work out, repeat from beginning with feat-23b
+--------------------------------------------------------------------------------
+# Ready to commit? Create a squashed pull request from new HEAD on master
+git checkout master                         # move to master
+git pull                                    # ensure at latest version
+git checkout -b feat-23a-rc1                # create Release Candidate #1 branch and go there
+git merge --squash feat-23a                 # squash all of feat-23a into 1 delta
+git commit --all -m'feat-23a-rc1'           # save squashed commits on rc1 branch
+git push --set-upstream origin feat-23a-rc1 # save new branch to origin 
+
+# When finished:
+  git branch -d myFeat                  # deleted now-useless feature branch
+--------------------------------------------------------------------------------
 
 # Working with remote repos
 git remote -v                               # list all remotes (verbose)
@@ -93,11 +109,17 @@ old:
 
 
 # Fetching/Merging on a branch
-1. git checkout <branch>                        # move to <branch>
+  1. git checkout <branch>              # move to <branch>
+  either:
+    A1. git fetch <remote>              # copy everything from <remote>
+    A2. git merge <remote/branch>       # do a local merge from <remote/branch>
+  lr:
+    B1. git pull  <origin>              # copy <remote/branch> AND merge in 1 step
 
-Then either:
-  A1. git fetch <remote>                        # copy everything from <remote>
-  A2. git merge <remote/branch>                 # do a local merge from <remote/branch>
-Or:
-  B1. git pull  <origin>                        # copy <remote/branch> AND merge in 1 step
+# Merge with --squash:  All commits on a feature branch can be compressed into a single
+# commit on master, discarding all history on the feature branch.  
+  git checkout master                   # destination of merge
+  git pull                              # ensure up-to-date with origin
+  git merge --squash myFeat             # merge all myFeat commits into 1 commit on master
+  git branch -d myFeat                  # deleted now-useless feature branch
 
