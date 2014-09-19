@@ -1,6 +1,10 @@
 #!/bin/zsh
 # echo ".zshrc - enter"
 
+export HISTSIZE=1000
+export SAVEHIST=1000
+export HISTFILE=~/.history
+
 if [[ $(uname -a) == *Darwin* ]]; then
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home"
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home"

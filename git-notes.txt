@@ -1,9 +1,10 @@
-# Global configuration
-git config --global user.name           "Joe User"              # set user name
-git config --global user.email          joe@gmail.com           # set user name
-git config --global core.editor         vim                     # set user editor preference
-git config --global merge.tool          vimdiff                 # set user merge tool
-git config --list                                               # view git settings
+# Global configuration (updates ~/.gitconfig)
+git config --global user.name           "Joe User"          # set user name
+git config --global user.email          joe@gmail.com       # set user name
+git config --global core.editor         vim                 # set user editor preference
+git config --global merge.tool          vimdiff             # set user merge tool
+git config --global fetch.prune         1                   # auto prune deleted remote branches
+git config --list                                           # view git settings
 
 # Global git aliases
 git config --global alias.co    checkout                # allow "git co"
