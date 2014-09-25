@@ -41,7 +41,7 @@ set guifont=Monospace\ 10  " default => Linux
 if match( system("uname -a"), "Ubuntu" ) > -1
   " echo "Found Ubuntu, setting guifont for XPS13... \n"
   " sleep 3
-  set guifont=Monospace\ 13  " better for small screen
+  set guifont=Monospace\ 12  " better for small screen
 endif
 if match( system("uname -a"), "Darwin" ) > -1
   " echo "Found Darwin, setting guifont for mac... \n"
