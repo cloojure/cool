@@ -3,7 +3,7 @@
 
 if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
   # echo "Found Linux"
-  alias gvim="\gvim  -geom '+900+20' "
+  alias gvim="\gvim  -geom '+2600+20' "
   alias d="ls -ldF --color=auto"
   alias lal="ls -alF --color=auto"
 else
