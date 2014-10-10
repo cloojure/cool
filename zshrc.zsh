@@ -24,6 +24,9 @@ path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )
 path=( $path /bin/texbin )
 
+# #awt todo generalize this
+path=( $path /usr/lib/postgresql/9.3/bin)
+
 # common bash/zsh aliases
 source ~/.alias.bash
 
