@@ -124,3 +124,19 @@ old:
   git merge --squash myFeat             # merge all myFeat commits into 1 commit on master
   git branch -d myFeat                  # deleted now-useless feature branch
 
+--------------------------------------------------------------------------------
+Install GIT - most recent version
+
+Git Core PPA repository is maintain by team on launchpad. Execute following commands one
+by one in a sequence to add ppa in our system and install Latest git version.
+
+$ sudo add-apt-repository ppa:git-core/ppa
+$ sudo apt-get update
+$ sudo apt-get install git  
+
+Check GIT Version
+
+To check current version installed of Git use following command.
+
+$ git --version
+git version 2.1.1

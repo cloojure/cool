@@ -4,8 +4,8 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
-[merge]
-	tool = gvimdiff
+### [merge]
+### 	tool = gvimdiff
 [alias]
     s       = status --short
     ss      = status 
@@ -19,13 +19,13 @@
 
 [push]
 	default = tracking
-[diff]
-	tool = gvimdiff
-[difftool "gvimdiff"]
-    # linux
-	cmd = "gvimdiff -f -geom 200x60+1300+20 $MERGED $LOCAL "   
-    # for Mac OSX (-geom is broken?)
-	# cmd = "gvim -df -c'set columns=200 lines=60 noea ea' $MERGED $LOCAL "   
+### [diff]
+### 	tool = gvd
+### [difftool "gvd"]
+###     # linux
+### 	cmd = "gvimdiff -f -geom 200x60+1300+20 $MERGED $LOCAL "   
+###     # for Mac OSX (-geom is broken?)
+### 	# cmd = "gvim -df -c'set columns=200 lines=60 noea ea' $MERGED $LOCAL "   
 [color]
 	ui = true
 [fetch]
