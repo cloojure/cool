@@ -44,3 +44,6 @@ PS1='%30<..<%~ > '
 alias dosrc="source ~/.zshrc"
 
 # echo ".zshrc - exit"
+
+aa=/home/alan/sone/endpoints/prototype/pedestal-service
+bb=/home/alan/sone2/endpoints/prototype/pedestal-service
