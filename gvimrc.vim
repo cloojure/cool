@@ -49,14 +49,48 @@ if match( system("uname -a"), "Darwin" ) > -1
   set guifont=Courier\ New:h16
 endif
 
-set lines=60
-set columns=110
+" This function is used to swap
+" the orientation of 2 windows (eg left/right), while keeping the cursor in the same pane
+" where it started (eg left pane).
+function! SwapWindows()
+  " User-defined functions must begin with a capital letter 
+  wincmd r      " rotate windows
+  wincmd w      " move cursor to next window
+endfunction
+:command! SS call SwapWindows()
+  " User-defined commands must begin with a capital letter 
+
+" Window shape commands/functions
+function! LinesSingle()
+  set lines=60
+endfunction
+function! LinesDouble()
+  set lines=120
+endfunction
+function! WidthSingle()
+  set columns=110
+endfunction
+function! WidthDouble()
+  set columns=220
+endfunction
+:command! C6 set columns=60         " Columns 60
+:command! Ws call WidthSingle()     " Width single
+:command! Wd call WidthDouble()     " Width double
+:command! L2 set lines=20           " Lines 20
+:command! L4 set lines=40           " Lines 40
+:command! Ls call LinesSingle()     " Lines single
+:command! Ld call LinesDouble()     " Lines double
+
+" Default size/shape
+call LinesSingle()
+call WidthSingle()
 set equalalways
+
 set guioptions-=r  guioptions-=L  guioptions+=l
 
 " Set columns wide if in "diff" mode
 if &diff
-  set columns=220
+  call WidthDouble()
 endif
 
 " colorscheme slate
