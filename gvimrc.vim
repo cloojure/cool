@@ -50,9 +50,14 @@ if match( system("uname -a"), "Darwin" ) > -1
 endif
 
 set lines=60
-set columns=100
+set columns=110
 set equalalways
 set guioptions-=r  guioptions-=L  guioptions+=l
+
+" Set columns wide if in "diff" mode
+if &diff
+  set columns=220
+endif
 
 " colorscheme slate
 colorscheme desert
