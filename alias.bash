@@ -46,10 +46,11 @@ alias gitcam="git commit --all -m'misc' "
 alias gitcamp="git commit --all -m'misc' ; git push"
 alias gitsync="git pull ; git push"
 alias gitdns="git diff --name-status"
-alias gitdg="git difftool --noprompt"
+
+alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
+# alias gitdg="git difftool --noprompt"
         # old version (doesn't work on mac):
-        #   dg      = git difftool --no-prompt --extcmd='gvimdiff -geometry 180x50+20+40'
-alias gitdg='git difftool --noprompt --extcmd="gvim -d -f -geometry 200x50+1200+40" '
+        #   dg      = git difftool --no-prompt --extcmd='gvimdiff --nofork -geometry 180x50+20+40'
 
 alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
 alias kk="kill -9"

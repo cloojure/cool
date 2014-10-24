@@ -17,14 +17,13 @@
         # old stuff:
         #   dg      = git difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+40'
 
-[push]
-	default = tracking
 [diff]
-    tool = gvimdiff
-
+	tool = gvimdiff
 ###     # for Mac OSX (-geom is broken?)
 ### 	# cmd = "gvim -df -c'set columns=200 lines=60 noea ea' $MERGED $LOCAL "   
 
+[push]
+	default = tracking
 [color]
 	ui = true
 [fetch]
