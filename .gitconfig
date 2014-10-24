@@ -13,19 +13,18 @@
 	ca      = commit --all                                # commit all
 	cam     = commit --all -m'misc'                       # commit all 'misc'
     dg      = difftool --no-prompt                        # diff graphical
-        #
+  # dg      = difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+1200 $MERGED'
         # old stuff:
         #   dg      = git difftool --no-prompt --extcmd 'gvimdiff -geometry 180x50+20+40'
 
 [push]
 	default = tracking
-### [diff]
-### 	tool = gvd
-### [difftool "gvd"]
-###     # linux
-### 	cmd = "gvimdiff -f -geom 200x60+1300+20 $MERGED $LOCAL "   
+[diff]
+    tool = gvimdiff
+
 ###     # for Mac OSX (-geom is broken?)
 ### 	# cmd = "gvim -df -c'set columns=200 lines=60 noea ea' $MERGED $LOCAL "   
+
 [color]
 	ui = true
 [fetch]

@@ -37,7 +37,7 @@ bindkey -v
 setopt csh_null_glob
 
 # set prompt string
-PS1='%30<..<%~ > '
+PS1='%50<>> ..<%~ > '
 
 
 # zsh-specific aliases
