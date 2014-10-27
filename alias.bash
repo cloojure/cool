@@ -59,6 +59,9 @@ alias pk="pkill -9"
 # Scanner alias
 alias scanner=scangearmp
 
+# Docker stuff
+alias dk="sudo docker"
+
 # Google Cloud tools
 #
 # Copy local files to Google Cloud Storage using gzip compression for all files 
