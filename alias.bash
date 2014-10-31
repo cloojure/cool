@@ -1,15 +1,17 @@
 #!/bin/bash 
 ### echo "alias.bash - enter"
 
+alias gvim="\gvim  -geom '+2600+20' "
+alias d="ls -ldF --color=auto"
+alias lal="ls -alF --color=auto"
+alias dt="ls -ldtF --color=auto"
+alias dt9="ls -ldtF --color=auto * | head -9"
+
 if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
   # echo "Found Linux"
-  alias gvim="\gvim  -geom '+2600+20' "
-  alias d="ls -ldF --color=auto"
-  alias lal="ls -alF --color=auto"
 else
   # echo "Missing Linux"
   set dummy="OSX is dumb!"
-
   alias d="ls -ldF"
   alias lal="ls -alF"
 fi

@@ -1,5 +1,6 @@
 *.swp
 .*.swp
+.*.swo
 .lein-repl-history
 /target
 /classes
