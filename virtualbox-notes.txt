@@ -1,0 +1,5 @@
+
+Ubuntu 14.04 LTS:
+  sudo apt-get install -y VirtualBox
+  sudo apt-get install -y dkms
+  sudo apt-get install -y vagrant
