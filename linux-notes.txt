@@ -8,3 +8,5 @@ Fedora KDE:
 
 konqueror:
   URL=sysinfo:/    # linux system info
+
+Systemd Cheatsheet: https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet

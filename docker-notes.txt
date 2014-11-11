@@ -1,0 +1,12 @@
+Docker Notes - Fedora 20 (2014-10-21)
+  sudo yum -y install docker-io
+  sudo systemctl start docker       # start docker
+  sudo systemctl enable docker      # enable docker to start at boot
+  sudo docker run -i -t fedora /bin/bash        # test if working
+
+  Commands
+    docker run [-d]         # -d -> daemon (background)
+    docker ps [-1]
+    docker logs
+    docker stop
+    docker version

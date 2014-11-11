@@ -68,10 +68,10 @@ function! LinesDouble()
   set lines=120
 endfunction
 function! WidthSingle()
-  set columns=110
+  set columns=120
 endfunction
 function! WidthDouble()
-  set columns=220
+  set columns=200
 endfunction
 :command! C6 set columns=60         " Columns 60
 :command! Ws call WidthSingle()     " Width single

@@ -14,8 +14,9 @@ Sample command:
     "encTracks":"B637DCFF34A1CA824C0B7C3B16EFF60AC72D329FC6D1EEE59A846CE27DC3F01E0E2243E8226176C0BC369F5EB2AB0F220B292963C7AFBF0B6DA294F86A4B37F30FB03126FEC7B53BAB70C30772FC33534304642C241E97877665633CEA8B93F17572B336B6B133990F46851C26E64210C9F4783B40353475", \
     "expiryDate":"1312", "formatID":"38", "ksn":"77770140525006E00363", "maskedPAN":"950601XXXXXX3768", 
     "track1length":"79", \ "track2length":"40", \ "track3length":null}' \
-  --header content-type:application/json \
-  --header ignore-auth:true  \
   http://localhost:8080/api/v1/customer/:customer_id/users/2/cards 
 
-curl -iv http://54.186.150.55:8080/api/v1/customer/default/users/tos
+curl -iv \
+  --header content-type:application/json \
+  --header ignore-auth:true  \
+  http://54.186.150.55:8080/api/v1/customer/default/users/tos
