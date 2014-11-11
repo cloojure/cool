@@ -55,7 +55,7 @@ endif
 function! SwapWindows()
   " User-defined functions must begin with a capital letter 
   wincmd r      " rotate windows
-  wincmd w      " move cursor to next window
+  wincmd w      " move cursor to 
 endfunction
 :command! SS call SwapWindows()
   " User-defined commands must begin with a capital letter 
@@ -80,6 +80,10 @@ endfunction
 :command! L4 set lines=40           " Lines 40
 :command! Ls call LinesSingle()     " Lines single
 :command! Ld call LinesDouble()     " Lines double
+
+" Font options
+:command! FF set guifont=Monospace\ 12
+:command! Ff set guifont=Monospace\ 9
 
 " Default size/shape
 call LinesSingle()
