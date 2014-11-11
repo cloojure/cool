@@ -1,3 +1,6 @@
+RPM:
+  rpm -Uvh xxxxx.rpm  # U=update v=verbose h=hashes
+
 Fedora KDE:
   crtl-alt-L                      # lock screen
   crtl-shift-alt-PgDwn            # shutdown
