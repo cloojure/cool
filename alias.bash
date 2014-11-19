@@ -1,7 +1,7 @@
 #!/bin/bash 
 ### echo "alias.bash - enter"
 
-alias gvim="\gvim  -geom '+2600+20' "
+alias gvim="\gvim  -geom '+3300+20' "
 alias d="ls -ldF --color=auto"
 alias lal="ls -alF --color=auto"
 alias dt="ls -ldtF --color=auto"

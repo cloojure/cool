@@ -9,4 +9,18 @@ Fedora KDE:
 konqueror:
   URL=sysinfo:/    # linux system info
 
-Systemd Cheatsheet: https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
+Systemd 
+  Tutorial:     http://www.linux.com/learn/tutorials/788613-understanding-and-using-systemd
+  Cheatsheet:   https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
+
+  systemctl start       [name.service]
+  systemctl stop        [name.service]
+  systemctl restart     [name.service]
+  systemctl reload      [name.service]
+  systemctl status      [name.service]
+  systemctl is-active   [name.service]
+
+  systemctl list-units --type service --all
+
+  Ex:  systemctl status postgresql-9.3
+
