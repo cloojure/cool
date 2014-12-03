@@ -1,7 +1,11 @@
 Fedora online:      yum     install -y <name>
 Ubuntu online:      apt-get install -y <name>
 
-Fedora RPM:         rpm -Uvh xxxxx.rpm      # U=update v=verbose h=hashes
+Fedora *.rpm:       rpm -Uvh xxxxx.rpm      # U=update v=verbose h=hashes
+
+Ubuntu *.deb:       dpkg -i xxxxx.dob               # install
+                    dpkg -r fdb-document-layer      # remove
+                    dpkg -l fdb-document-layer      # list
 
 Fedora KDE:
   crtl-alt-L                      # lock screen
