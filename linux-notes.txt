@@ -1,5 +1,7 @@
-RPM:
-  rpm -Uvh xxxxx.rpm  # U=update v=verbose h=hashes
+Fedora online:      yum     install -y <name>
+Ubuntu online:      apt-get install -y <name>
+
+Fedora RPM:         rpm -Uvh xxxxx.rpm      # U=update v=verbose h=hashes
 
 Fedora KDE:
   crtl-alt-L                      # lock screen
