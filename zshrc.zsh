@@ -45,5 +45,6 @@ alias dosrc="source ~/.zshrc"
 
 # echo ".zshrc - exit"
 
-aa=/home/alan/sone/endpoints/prototype/pedestal-service
+# aa=/home/alan/sone/endpoints/prototype/pedestal-service
 bb=/home/alan/sone2/endpoints/prototype/pedestal-service
+aa=/home/alan/vagrant/vagrant_devbox/endpoints/prototype/pedestal-service
