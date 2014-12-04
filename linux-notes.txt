@@ -1,11 +1,16 @@
-Fedora online:      yum     install -y <name>
-Ubuntu online:      apt-get install -y <name>
+CentOS/Fedora:
+  online:   yum     install -y <name>
 
-Fedora *.rpm:       rpm -Uvh xxxxx.rpm      # U=update v=verbose h=hashes
+  *.rpm:    rpm -Uvh xxxxx.rpm              # U=update v=verbose h=hashes
+            rpm --erase  fdb-document-layer
+            rpm --query  fdb-document-layer
 
-Ubuntu *.deb:       dpkg -i xxxxx.dob               # install
-                    dpkg -r fdb-document-layer      # remove
-                    dpkg -l fdb-document-layer      # list
+Ubuntu:
+  online:   apt-get install -y <name>
+
+  *.deb:    dpkg -i xxxxx.dob               # install
+            dpkg -r fdb-document-layer      # remove
+            dpkg -l fdb-document-layer      # list
 
 Fedora KDE:
   crtl-alt-L                      # lock screen
