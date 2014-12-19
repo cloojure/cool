@@ -64,3 +64,6 @@ function! MyDiff()
   " if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
 endfunction
 
+" Write a protected file using sudo
+:command! W w !sudo tee % > /dev/null
+

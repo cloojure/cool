@@ -47,4 +47,4 @@ alias dosrc="source ~/.zshrc"
 
 # aa=/home/alan/sone/endpoints/prototype/pedestal-service
 bb=/home/alan/sone2/endpoints/prototype/pedestal-service
-aa=/home/alan/vagrant/vagrant_devbox/endpoints/prototype/pedestal-service
+aa=/home/alan/vagrant/endpoints/prototype/pedestal-service

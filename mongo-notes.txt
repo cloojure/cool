@@ -1,0 +1,65 @@
+
+Mongo - user shell client
+  27017     - default port
+  27016     - FoundationDB default port (new)
+  27018     - FoundationDB default port (old - used by S1)
+
+  logstream                         - name of s1 FDB document database
+
+  mongo localhost:27018             - invoke for S1 logs (can also use --host and --port)
+  mongo localhost/logstream:27018   - attach to S1 "logstream" database on S1 (old) FDB port
+
+  show collections
+    -> documents                    - contains S1 log stuff
+
+  db.documents.count()              - show count of log entries
+
+mongo commands:
+  db                - show current database
+  show dbs          - list dbs (also "show databases")
+  use logstream     - switch db to 'logstream'
+  help              - monto help
+
+create data in mongo client
+  use mydb          - switch to testing db: mydb
+  db                - verify switched db
+
+create dummy data
+  j={name:"mongo"}
+  => { "name" : "mongo" }
+  k={x:}
+  => { "x" : 3 }
+
+add to collection: testData
+  db.testData.insert(j)
+  db.testData.insert(k)
+  show collections                - list collections in current db
+  db.testData.find()              - list docs in collection: testData
+  db.testData.find( {} )          - same as above: empty query document
+ 
+Add test data to the collection: testData
+  > for (var i = 1; i <= 25; i++) {
+     db.testData.insert( { x : i } )
+    }
+  > db.testData.find()              - list docs in collection: testData
+  > it                              - "iterate" & print the next 20 docs using implicit cursor
+
+Assign the cursor to a variable (collection="testData")
+  var c = db.testData.find()
+  while ( c.hasNext() ) printjson( c.next() )
+  printjson( c[4] )                 - array access (loads all into mem first)
+
+  db.testData.find( {x:18} )        - search for matching value
+  db.testData.find( {x:3} )         - return just one value
+  db.testData.findOne()             - return just one value
+  db.testData.findOne( {x:3} )      - return just one value
+  db.testData.find().limit( 3 )
+
+Query samples (collection="inventory")
+  db.inventory.find( { type: "snacks" } )                       - where type="snacks"
+  db.inventory.find( { type: { $in:['food','snacks'] }} )       - either "food" or "snacks"
+  db.inventory.find( { type: 'food', price: { $lt: 9.95 } } )   - (and (= type "food") (< price 9.95))
+
+  db.inventory.find( { $or: [ { qty:   { $gt: 100  } },
+                              { price: { $lt: 9.95 } } ] } )
+

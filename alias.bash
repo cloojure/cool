@@ -70,4 +70,9 @@ alias dk="sudo docker"
 # matching *.{txt,xml,csv,tsv,psv,html,js}, and set permission to public-read.
 alias gsutil-cpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
 
+# lein abbreviations
+alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
+alias ltst=" time lein test :bvt :regression"
+alias litst="linit ; ltst"
+
 ### echo "alias.bash - exit"
