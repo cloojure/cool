@@ -1,0 +1,22 @@
+
+- Click "Install to Hard Drive"
+- Select your language, then click Continue.
+- Set up Timezone, Install Disks, Keyboard, and Networking/Hostname
+- Click "Begin Installation"
+- While the installer is copying software, configure the root password and add the initial
+  user by clicking on the corresponding icons.
+- When installation is complete, you must click the "Quit" button to exit the installer.
+  You must then reboot the machine by going to the top-right corner, clicking on
+  Desktop->Leave, then selecting Reboot.  Be sure to remove the USB stick with the Live CD
+  first!
+
+- Reboot, and login with your username/password.
+- I don't like the "Desktop Folder" in KDE, so I use the X to delete it from the desktop
+- Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
+  Updates->Check for New Updates.  Install any detected.
+- From now on, sequences like Fedora -> Favorites -> System Settings will be truncated to
+  just "System Settings"
+- System Settings -> Window Behavior -> Window Behavior -> Focus
+    Select "Focus Follows Mouse - Mouse Precedence" (about 60% position)
+    Set "Delay Focus" to 100 ms or less (I don't like delays!)
+
