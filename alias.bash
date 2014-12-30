@@ -8,6 +8,7 @@ alias dt="ls -ldtF --color=auto"
 alias dt9="ls -ldtF --color=auto * | head -9"
 
 if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
+  echo "dummy" > /dev/null  # stupid bash can't handle an empty "then" part
   # echo "Found Linux"
 else
   # echo "Missing Linux"
