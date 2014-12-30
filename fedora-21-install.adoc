@@ -35,8 +35,12 @@
   make the default browser.
 
 - Install basic software using yum:
-    1. sudo yum install -y vim gvim             # install 'vim' and 'gvim', answering 'Yes' to all prompts
+    1. sudo yum install -y vim gvim                 # install 'vim' and 'gvim', answering 'Yes' to all prompts
     2. sudo yum install -y git
+    3. sudo yum install -y zsh tcsh fish            # various shells
+    4. sudo yum install -y java gcc octave tmux     # etc...
+
+- Use 'chsh' to change shell from /bin/bash -> /bin/zsh
 
 To Do:
   Configure cool dir (dotfiles)
