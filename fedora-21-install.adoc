@@ -1,4 +1,6 @@
 
+- Create LiveCD on a USB drive using either dd (from linux) or liveusb-creator
+
 - Click "Install to Hard Drive"
 - Select your language, then click Continue.
 - Set up Timezone, Install Disks, Keyboard, and Networking/Hostname
@@ -20,3 +22,26 @@
     Select "Focus Follows Mouse - Mouse Precedence" (about 60% position)
     Set "Delay Focus" to 100 ms or less (I don't like delays!)
 
+- Add yourself to the sudoers file:
+    1. Become root
+    2. visudo   # edits the /etc/sudoers using vim
+    3. Add a line like "alan ALL=(ALL) ALL"         # e.g. for user 'alan'
+    4. You can now act like root via the 'sudo' command
+    5. Test using a command like "sudo date".  Enter your normal password (e.g. the 'alan'
+    password), and it should work.
+
+- Start the native browser Konqueror. Do a Google search for "Google Chrome", download the
+  64-bit *.rpm file and install it using the native installer "apper".  Fire it up and
+  make the default browser.
+
+- Install basic software using yum:
+    1. sudo yum install -y vim gvim             # install 'vim' and 'gvim', answering 'Yes' to all prompts
+    2. sudo yum install -y git
+
+To Do:
+  Configure cool dir (dotfiles)
+  Install software from list
+  Configure 2nd disk (not showing up yet)
+
+Favorites - Added to tab under Fedora symbol
+  Konsole
