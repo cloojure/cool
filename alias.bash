@@ -76,4 +76,6 @@ alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
 alias ltst=" time lein test :bvt :regression"
 alias litst="linit ; ltst"
 
+alias fdb-start-doc="sudo service fdb-document-layer restart"
+
 ### echo "alias.bash - exit"
