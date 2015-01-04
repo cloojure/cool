@@ -19,13 +19,15 @@ viewing in editors).
 
 - Press MENU button (left-most button)
   - Press DOWN button until NEXT-MENU is highlighted. Press RIGHT button.
-    - Press DOWN button to select SHARPNESS. 
-      - Press RIGHT button until it is at 10 (max)
-      - BLACK LEVEL should already be at HIGH
+    - The first sub-menu is PICTURE (already selected)
+      - Leave SHARPNESS at the default 5.  Lower values blur text, while higher values
+        just wash it out by adding white to colors.
+      - BLACK LEVEL should already be at HIGH - leave alone.
       - Always leave OVERSCAN at OFF
       - Press the "return" button (left-then-up arrow) to return to "top" menu.
   - Press RIGHT button to select COLOR. Press DOWN to select COLOR RESET on 2nd page.
-    Press RIGHT to perform color reset.
+    Press RIGHT to perform color reset.  Since you just did a "master" reset this should
+    really be unnecessary.
       - Press the "return" button (left-then-up arrow) to return to "top" menu.
   - The remaining 3 top-level items can be ignored. Select the EXIT option.
 
@@ -43,12 +45,12 @@ viewing in editors).
       - Press RIGHT until it says PC
     - Press DOWN again to the rows of modes
       - Press RIGHT to select a mode.  I have found that either TEXT or CINEMA looks best
-        for GVim and GMail. Your milage may vary.... 
+        for GVim and GMail. Since CINEMA gives slightly better colors for
+          syntax-highlighted text, that is my favorite. Your milage may vary.... 
       - Press the "return" button (left-then-up arrow) to return to "top" menu.
   - Press RIGHT to select SUPER RESOLUTION
-    - Press DOWN to the row of modes
-      - Press RIGHT to select HIGH
-      - Press the "return" button (left-then-up arrow) to return to "top" menu.
+    - Leave it at OFF.  Increasing this value seems to add white to all colors, simply
+      making them brighter
   - The remaining 2 modes have no effect
 
 - If you are using the DSUB (analog VGA cable) input connection, press the AUTO button
