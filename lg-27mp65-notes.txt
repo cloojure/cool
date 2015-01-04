@@ -1,0 +1,64 @@
+
+Configuration of the LG 27MP65 (aka 27MP65HQ or 27MP65HQ-P) monitor
+
+I just purchased an LG 27MP65 monitor and noticed the text quality in the editor didn't
+seem to match up against a previous, similar LG monitor. As the new monitor was a bit
+higher grade, this was most surprising.
+
+There are many menu settings that allow customization of the display.  After reading the
+LG manual (http://www.lg.com/us/support-product/lg-27MP65HQ-P) & playing around with them
+these are the best settings I've found for software development (e.g. lots of text
+viewing in editors).
+
+- Turn on the monitor to start.
+
+- Press MENU button.
+  - Press DOWN button (i.e. button under downward triangle) until RESET is highlighted.
+    - Press RIGHT button (i.e. button under rightward triangle) once.  This will reset all
+      settings to factory default (good starting point).
+
+- Press MENU button (left-most button)
+  - Press DOWN button until NEXT-MENU is highlighted. Press RIGHT button.
+    - Press DOWN button to select SHARPNESS. 
+      - Press right button until it is at 10 (max)
+      - "Black Level" should already be at HIGH
+      - Always leave OVERSCAN at OFF
+      - Press the "return" button (left-then-up arrow) to return to "top" menu.
+  - Press right button to select Color. Press DOWN to select "Color Reset" on 2nd page.
+    Press RIGHT to perform color reset.
+      - Press the "return" button (left-then-up arrow) to return to "top" menu.
+  - The remaining 3 top-level items can be ignored. Select the EXIT option.
+
+- Just for fun, press the READER button (2nd from left).  There are 3 levels: 1, 2, OFF.
+  Make sure OFF is selected it should be already).
+  - Reader mode is used for e-books, etc and is not good for editing software.
+  - The READER menu will disappear after a few seconds
+
+- Press FUNCTION button (3rd from left).
+  - The first sub-menu is "Super Energy Saving" (already selected)
+    - Press DOWN, then RIGHT to set "Super Energy Saving" to OFF.
+    - Press the "return" button (left-then-up arrow) to return to "top" menu.
+  - Press RIGHT to select "Picture Mode"
+    - Press DOWN to select PC/AV Mode.  
+      - Press RIGHT until it says PC
+    - Press DOWN again to the rows of modes
+      - Press RIGHT to select PHOTO.  The motivation for this (besides looking good) is
+        that we want the monitor to let the computer control all details. We don't want
+        the monitor doing what it "thinks" is best for some arbitrary type of content.
+      - Press the "return" button (left-then-up arrow) to return to "top" menu.
+  - Press RIGHT to select "Super Resolution"
+    - Press DOWN to the row of modes
+      - Press RIGHT to select HIGH
+      - Press the "return" button (left-then-up arrow) to return to "top" menu.
+  - The remaining 2 modes have no effect
+
+- If you are using the DSUB (VGA cable) input connection, press the AUTO button (4th from
+  left).  This will perform auto-tuning for the analog VGA input signal.
+  - You may be happiest using an HDMI input source since it is digital
+  - NOTE: Since HDMI is digital, ANY cable is just as good as any other.  It will
+    either work perfectly or you will get no signal at all.  So PLEASE, don't spend $100+
+    on HDMI cables.  The $5 cables on sale are just as good.
+
+- Just for fun, press the INPUT button (right-most button).  The display will blink
+  momentarily, then verify the input source (e.g. HDMI).
+

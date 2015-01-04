@@ -34,14 +34,15 @@
 " au Syntax   * RainbowParenthesesLoadSquare
 " au Syntax   * RainbowParenthesesLoadBraces
 
-" set guifont=Monospace\ 10  " default => Linux 
-set guifont=Monospace\ 9  " default => Linux 
+" set guifont=Liberation\ Mono\ 10  " alternative for Fedora 21
+" set guifont=Monospace\ 9  " default => Linux  (too small on Fedora 21???)
+set guifont=Monospace\ 10  " default => Linux 
 
 " match index is 0-based (C-style);  no match = -1
 if match( system("uname -a"), "Ubuntu" ) > -1
   " echo "Found Ubuntu, setting guifont for XPS13... \n"
   " sleep 3
-  set guifont=Monospace\ 9  " better for small screen
+  set guifont=Monospace\ 10  " better for small screen
 endif
 if match( system("uname -a"), "Darwin" ) > -1
   echo "Found Darwin, setting guifont for mac... \n"
