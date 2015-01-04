@@ -14,17 +14,17 @@ viewing in editors).
 
 - Press MENU button.
   - Press DOWN button (i.e. button under downward triangle) until RESET is highlighted.
-    - Press RIGHT button (i.e. button under rightward triangle) once.  This will reset all
+    - Press RIGHT button (i.e. button under rightward triangle) once. This will reset all
       settings to factory default (good starting point).
 
 - Press MENU button (left-most button)
   - Press DOWN button until NEXT-MENU is highlighted. Press RIGHT button.
     - Press DOWN button to select SHARPNESS. 
-      - Press right button until it is at 10 (max)
-      - "Black Level" should already be at HIGH
+      - Press RIGHT button until it is at 10 (max)
+      - BLACK LEVEL should already be at HIGH
       - Always leave OVERSCAN at OFF
       - Press the "return" button (left-then-up arrow) to return to "top" menu.
-  - Press right button to select Color. Press DOWN to select "Color Reset" on 2nd page.
+  - Press RIGHT button to select COLOR. Press DOWN to select COLOR RESET on 2nd page.
     Press RIGHT to perform color reset.
       - Press the "return" button (left-then-up arrow) to return to "top" menu.
   - The remaining 3 top-level items can be ignored. Select the EXIT option.
@@ -35,25 +35,24 @@ viewing in editors).
   - The READER menu will disappear after a few seconds
 
 - Press FUNCTION button (3rd from left).
-  - The first sub-menu is "Super Energy Saving" (already selected)
-    - Press DOWN, then RIGHT to set "Super Energy Saving" to OFF.
+  - The first sub-menu is SUPER ENERGY SAVING (already selected)
+    - Press DOWN, then RIGHT to set SUPER ENERGY SAVING to OFF.
     - Press the "return" button (left-then-up arrow) to return to "top" menu.
-  - Press RIGHT to select "Picture Mode"
+  - Press RIGHT to select PICTURE MODE
     - Press DOWN to select PC/AV Mode.  
       - Press RIGHT until it says PC
     - Press DOWN again to the rows of modes
-      - Press RIGHT to select PHOTO.  The motivation for this (besides looking good) is
-        that we want the monitor to let the computer control all details. We don't want
-        the monitor doing what it "thinks" is best for some arbitrary type of content.
+      - Press RIGHT to select a mode.  I have found that either TEXT or CINEMA looks best
+        for GVim and GMail. Your milage may vary.... 
       - Press the "return" button (left-then-up arrow) to return to "top" menu.
-  - Press RIGHT to select "Super Resolution"
+  - Press RIGHT to select SUPER RESOLUTION
     - Press DOWN to the row of modes
       - Press RIGHT to select HIGH
       - Press the "return" button (left-then-up arrow) to return to "top" menu.
   - The remaining 2 modes have no effect
 
-- If you are using the DSUB (VGA cable) input connection, press the AUTO button (4th from
-  left).  This will perform auto-tuning for the analog VGA input signal.
+- If you are using the DSUB (analog VGA cable) input connection, press the AUTO button
+  (4th from left).  This will perform auto-tuning for the analog VGA input signal.
   - You may be happiest using an HDMI input source since it is digital
   - NOTE: Since HDMI is digital, ANY cable is just as good as any other.  It will
     either work perfectly or you will get no signal at all.  So PLEASE, don't spend $100+
@@ -62,3 +61,8 @@ viewing in editors).
 - Just for fun, press the INPUT button (right-most button).  The display will blink
   momentarily, then verify the input source (e.g. HDMI).
 
+- Note that the first item under the MENU button is the brightness.  If you read a lot of
+  text that is black on a white background (e.g. GMail & similar), you may wish to reduce
+  the brightness to 70% or some other comfortable value.
+  - Don't forget that this control is still available if you need to reset the BRIGHTNESS
+    to 100% for do more intense work (photo editing, watching videos, etc).
