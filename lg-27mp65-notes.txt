@@ -1,14 +1,9 @@
 
 Configuration of the LG 27MP65 (aka 27MP65HQ or 27MP65HQ-P) monitor
 
-I just purchased an LG 27MP65 monitor and noticed the text quality in the editor didn't
-seem to match up against a previous, similar LG monitor. As the new monitor was a bit
-higher grade, this was most surprising.
+I just purchased an LG 27MP65 monitor and noticed the text quality in the editor didn't seem to match up against a previous, similar LG monitor. As the new monitor was a bit higher grade, this was most surprising.
 
-There are many menu settings that allow customization of the display.  After reading the
-LG manual (http://www.lg.com/us/support-product/lg-27MP65HQ-P) & playing around with them
-these are the best settings I've found for software development (e.g. lots of text
-viewing in editors).
+There are many menu settings that allow customization of the display.  After reading the LG manual (http://www.lg.com/us/support-product/lg-27MP65HQ-P) & playing around with them these are the best settings I've found for software development (e.g. lots of text viewing in editors).
 
 - Turn on the monitor to start.
 
@@ -56,9 +51,9 @@ viewing in editors).
 - If you are using the DSUB (analog VGA cable) input connection, press the AUTO button
   (4th from left).  This will perform auto-tuning for the analog VGA input signal.
   - You may be happiest using an HDMI input source since it is digital
-  - NOTE: Since HDMI is digital, ANY cable is just as good as any other.  It will
-    either work perfectly or you will get no signal at all.  So PLEASE, don't spend $100+
-    on HDMI cables.  The $5 cables on sale are just as good.
+  - NOTE: Since HDMI is digital, ANY cable is just as good as any other.  It will either
+    work perfectly or you will get no signal at all.  So PLEASE, don't spend $100+ on HDMI
+    cables.  The $5 cables on sale are just as good.
 
 - Just for fun, press the INPUT button (right-most button).  The display will blink
   momentarily, then verify the input source (e.g. HDMI).
