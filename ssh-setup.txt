@@ -1,0 +1,18 @@
+
+> cd		# go to home dir
+> ssh-keygen
+	<ret>		# accept default location
+	<ret>		# accept empty passphrase
+	<ret>		# repeat empty passphrase
+
+# Make sure your file permissions look like the following:
+
+> ls -ldF .ssh
+drwx------. 2 alan alan 4096 Dec 29 22:42 .ssh/                                                                           
+> ls -lF .ssh                                                                                             
+total 12                                                                                                                  
+-rw-------. 1 alan alan 1675 Dec 29 22:42 id_rsa                                                                          
+-rw-r--r--. 1 alan alan  393 Dec 29 22:42 id_rsa.pub                                                                      
+-rw-r--r--. 1 alan alan  407 Dec 29 22:41 known_hosts  
+
+# Copy the file ~/.ssh/id_rsa.pub to GitHub (Gear symbol -> SSH Keys -> Add SSH Key)

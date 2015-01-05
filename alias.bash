@@ -24,8 +24,8 @@ alias pdirs='find * -maxdepth 0 -type d '
 alias pfiles='find * -maxdepth 0 -type f '
 alias dd='d `pdirs` '
 
-alias du='du -m '
-alias df='df -m '
+alias du='du -BG'
+alias df='df -BG'
 alias wcl="wc -l"
 
 alias hh="history -99"

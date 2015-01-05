@@ -96,7 +96,10 @@
 To Do:
   Configure cool dir (dotfiles)
   Install software from list
-  Configure 2nd disk (not showing up yet)
 
 Favorites - Added to tab under Fedora symbol
   Konsole
+
+Software to install
+  hipchat                   - website
+  cannon pixma mx922        - website + see notes file
