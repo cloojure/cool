@@ -41,11 +41,12 @@
     1. sudo yum install -y vim gvim                 # install 'vim' and 'gvim', answering 'Yes' to all prompts
     2. sudo yum install -y git
     3. sudo yum install -y zsh tcsh fish            # various shells
-    4. sudo yum install -y java gcc octave tmux     # etc...
+    4. sudo yum install -y java gcc octave tmux python ruby
 
 - Other software
     Dropbox
     HipChat
+    LibreOffice
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
@@ -90,16 +91,19 @@
     5. Test using a command like "sudo date".  Enter your normal password (e.g. the 'alan'
     password), and it should work.
 
-
 - Use 'chsh' to change shell from /bin/bash -> /bin/zsh
 
+- Run ssh-keygen to regenerate ~/.ssh files (3 <ret> to accept default values)
+  - Copy ~/.ssh/id_rsa.pub key to GitHub and BitBucket
+
+- Clone repo's for ~/alan & ~/cool
+  - cd ~/cool ; ./doLinks.zsh --force
+
 To Do:
-  Configure cool dir (dotfiles)
   Install software from list
 
 Favorites - Added to tab under Fedora symbol
-  Konsole
+  Chrome, Konsole, GVim, KCalc, LibreOffice
 
 Software to install
-  hipchat                   - website
   cannon pixma mx922        - website + see notes file
