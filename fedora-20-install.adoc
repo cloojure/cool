@@ -26,22 +26,30 @@
   make the default browser.
   - When it asks about KDE Wallet System, select "blowfish". Enter a simple password.
 
+- Update all software (~ 30 min)
+  - Console:  sudo yum update
+    (or GUI:  Software Management -> Updates -> Check for Updates:  Install all found)
+
+- Install basic software using yum:
+    sudo yum install -y  \
+      vim gvim git zsh tcsh fish tmux
+      java gcc python ruby
+      octave libreoffice
+
 - Install NVidia Drivers
   - NVidia drivers require the package "kernel-devel" from Fedora.  Install it using
     Software Management -> Installed Software.  Search for "kernel", select
     kernel-devel & kernel-debug.  Install.  
   - Also install gcc:  sudo yum install -y gcc (or graphical)
+  - You must reboot at this point so the kernel-devel stuff is visible.
   - Download latest from NVidia Linux site (google it). I prefer the "short lived" branch
     as it has all of the newest stuff.
   - You must install from the console, runlevel 3 (single-user mode):  "sudo init 3"
   - Go to the download dir, and type "sudo /bin/bash NVIDIA-Linux-X86_64-XXX.YY.run" where
     setting XXX.YY to match your download.
 
-- Install basic software using yum:
-    1. sudo yum install -y vim gvim                 # install 'vim' and 'gvim', answering 'Yes' to all prompts
-    2. sudo yum install -y git
-    3. sudo yum install -y zsh tcsh fish            # various shells
-    4. sudo yum install -y java gcc octave tmux python ruby
+- Skype no longer seems to work on Fedora 20/21.  It will fail (seg fault) due to 32-bit
+  vs 64-bit conflicts. It used to work on F20, so I don't know why it won't anymore.
 
 - Other software
     Dropbox
