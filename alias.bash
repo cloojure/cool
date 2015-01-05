@@ -2,6 +2,10 @@
 ### echo "alias.bash - enter"
 
 alias gvim="\gvim  -geom '+3300+20' "
+if [[ $(uname -a) == *Ubuntu* ]]; then
+  alias gvim="\gvim  -geom '+2000-1200' "
+fi
+
 alias d="ls -ldF --color=auto"
 alias lal="ls -alF --color=auto"
 alias dt="ls -ldtF --color=auto"
