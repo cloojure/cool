@@ -1,28 +1,88 @@
 
 - Create LiveCD on a USB drive using either dd (from linux) or liveusb-creator
+  - Nothing appears.  Power cycle & start over
+  - Select "Troubleshooting"
+    -> Select "Begin in Basic Graphics Mode"
 
 - Click "Install to Hard Drive"
 - Select your language, then click Continue.
 - Set up Timezone, Install Disks, Keyboard, and Networking/Hostname
 - Click "Begin Installation"
 - While the installer is copying software, configure the root password and add the initial
-  user by clicking on the corresponding icons.
+  user by clicking on the corresponding icons.  Be sure to check "Make Administrator".
+  This allows you to install software, etc using your local password instead of the root
+  password.
 - When installation is complete, you must click the "Quit" button to exit the installer.
   You must then reboot the machine by going to the top-right corner, clicking on
   Desktop->Leave, then selecting Reboot.  Be sure to remove the USB stick with the Live CD
   first!
 
 - Reboot, and login with your username/password.
-- I don't like the "Desktop Folder" in KDE, so I use the X to delete it from the desktop
+  X I don't like the "Desktop Folder" in KDE, so I use the X to delete it from the desktop
+- Go to the wireless selector (lower-right corner).  Enable your network.
+
+- Start the native browser Konqueror. Do a Google search for "Google Chrome", download the
+  64-bit *.rpm file and install it using the native installer "apper".  Fire it up and
+  make the default browser.
+  - When it asks about KDE Wallet System, select "blowfish". Enter a simple password.
+
+- Install NVidia Drivers
+  - NVidia drivers require the package "kernel-devel" from Fedora.  Install it using
+    Software Management -> Installed Software.  Search for "kernel", select
+    kernel-devel & kernel-debug.  Install.  
+  - Also install gcc:  sudo yum install -y gcc (or graphical)
+  - Download latest from NVidia Linux site (google it). I prefer the "short lived" branch
+    as it has all of the newest stuff.
+  - You must install from the console, runlevel 3 (single-user mode):  "sudo init 3"
+  - Go to the download dir, and type "sudo /bin/bash NVIDIA-Linux-X86_64-XXX.YY.run" where
+    setting XXX.YY to match your download.
+
+- Install basic software using yum:
+    1. sudo yum install -y vim gvim                 # install 'vim' and 'gvim', answering 'Yes' to all prompts
+    2. sudo yum install -y git
+    3. sudo yum install -y zsh tcsh fish            # various shells
+    4. sudo yum install -y java gcc octave tmux     # etc...
+
+- Other software
+    Dropbox
+    HipChat
+
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
 - From now on, sequences like Fedora -> Favorites -> System Settings will be truncated to
   just "System Settings"
 - System Settings -> Window Behavior -> Window Behavior -> Focus
-    Select "Focus Follows Mouse - Mouse Precedence" (about 60% position)
-    Set "Delay Focus" to 100 ms or less (I don't like delays!)
+    - Select "Focus Follows Mouse - Mouse Precedence" (about 60% position)
+    - Set "Delay Focus" to 100 ms or less (I don't like delays!)
+    - Display Configuration 
+      - Screen Locker
+    - Input Devices 
+      - Mouse -> Advanced -> Pointer Acceleration: reduce from 2.0 to 1.5
+      - Keyboard -> Hardware -> NumLock on KDE Startup: set ON
+    - Multimedia -> Audio & Video Settings -> Device Preference -> Audio Playback
+      - Ensure "Built-in Audio Analog Stereo" is first preference for all
+    - Multimedia -> Audio & Video Settings -> Device Preference -> Audio Recording
+      - Ensure "HD Pro Webcam C920 Analog Stereo" is first preference for all
+    - Multimedia -> Audio & Video Settings -> Audio Hardware Setup
+      - Sound Card: select "Built-in Audio" & "Analog Stereo Output"
+      - Device Configuration: select "Playback (Built-in Audio Analog Stereo)" & "Line Out"
 
-- Add yourself to the sudoers file:
+- Set Konsole defaults
+  - Edit Current Profile
+    - Shell: /bin/zsh
+    - Scrolling: 99999 lines
+    - Scrollbar: left
+  - Configure Konsole
+    - Tab Bar: Always Show, Tabs Above Terminal Area
+
+- Set wallpaper
+  - Right-click on background Default Desktop Settings -> View -> "Get New Wallpapers"
+    - Selecting INSTALL for each wallpaper copies it to your computer
+  - Right-click on background Default Desktop Settings -> View 
+    - Select the desired image for that screen, then click OK.  Repeat on other screens.
+
+- If you fail to check "Make Administrator", you won't be able to use sudo. You will have
+  to add yourself to the sudoers file:
     1. Become root
     2. visudo   # edits the /etc/sudoers using vim
     3. Add a line like "alan ALL=(ALL) ALL"         # e.g. for user 'alan'
@@ -30,15 +90,6 @@
     5. Test using a command like "sudo date".  Enter your normal password (e.g. the 'alan'
     password), and it should work.
 
-- Start the native browser Konqueror. Do a Google search for "Google Chrome", download the
-  64-bit *.rpm file and install it using the native installer "apper".  Fire it up and
-  make the default browser.
-
-- Install basic software using yum:
-    1. sudo yum install -y vim gvim                 # install 'vim' and 'gvim', answering 'Yes' to all prompts
-    2. sudo yum install -y git
-    3. sudo yum install -y zsh tcsh fish            # various shells
-    4. sudo yum install -y java gcc octave tmux     # etc...
 
 - Use 'chsh' to change shell from /bin/bash -> /bin/zsh
 
