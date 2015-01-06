@@ -1,10 +1,13 @@
 #!/bin/bash 
 ### echo "alias.bash - enter"
 
-alias gvim="\gvim  -geom '+3300+20' "
-if [[ $(uname -a) == *Ubuntu* ]]; then
-  alias gvim="\gvim  -geom '+2000-1200' "
+# We need to add the '2>&/dev/null' part to squelch error messages on Kubuntu 14.04.
+# Remove if you need to see any error messages.
+alias gvim="\gvim  -geom '+3300+20' 2>&/dev/null"
+if [[ $(hostname) == amy ]]; then        
+  alias gvim="\gvim  -geom '+2000-1200' 2>&/dev/null"
 fi
+# old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
 alias d="ls -ldF --color=auto"
 alias lal="ls -alF --color=auto"
