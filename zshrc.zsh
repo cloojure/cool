@@ -15,6 +15,7 @@ fi
 
 # baseline path
 path=( . ${HOME}/bin )
+path=( $path /opt/bin )
 path=( $path /usr/local/git/bin )
 path=( $path /opt/java/bin )
 path=( $path ${JAVA_HOME}/bin )
