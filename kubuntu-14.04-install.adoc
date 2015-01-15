@@ -19,7 +19,19 @@
 - Reboot, and login with your username/password.
   - I don't like the "Desktop Folder" in KDE, so I use the X to delete it from the desktop
 
-- Go to the wireless selector (lower-right corner).  Enable your network.
+To boot into console (text) mode (no GUI), wait until the boot screen comes up.  The word
+"Ubuntu" will be highlight during a 10 sec countdown.  
+  - Use the up/down arrow keys to stop the countdown. Hightlight "Ubuntu"
+  - Type "e" to Edit the command
+  - Find the words "quiet splash" in a command near the end
+  - Using the arrow keys and backspace, change "quiet splash" -> "text"
+  - Continue boot using either Crtl-X or F10
+
+This doesn't seem to work (blank screen):
+  In Ubuntu, single-user console is "runlevel" 1:  sudo telinit 1
+
+
+--------------------------------------------------------------------------------
 
 - Start the native browser Konqueror. Do a Google search for "Google Chrome", download the
   64-bit *.rpm file and install it using the native installer "apper".  Fire it up and
@@ -30,14 +42,15 @@
     probably work (give the *.rpm file)
 
 - Update all software (~ 30 min)
-  - Console:  sudo yum update
-    (or GUI:  Software Management -> Updates -> Check for Updates:  Install all found)
+  - Software Management -> Updates -> Check for Updates:  Install all found)
 
 - Install basic software using yum:
-    sudo yum install -y  \
-      vim gvim git zsh tcsh fish tmux
-      java gcc python ruby
+    sudo apt-get install -y  \
+      vim git zsh tcsh fish tmux
+      gcc python ruby
       octave libreoffice
+
+- rebuild current git 2.2.1 or later (from source)
 
 - Install NVidia Drivers
   - NVidia drivers require the package "kernel-devel" from Fedora.  Install it using
@@ -54,10 +67,13 @@
 - Skype no longer seems to work on Fedora 20/21.  It will fail (seg fault) due to 32-bit
   vs 64-bit conflicts. It used to work on F20, so I don't know why it won't anymore.
 
-- Other software
+- Ubuntu Software Center install
+    GVim
+    LibreOffice
+
+- Other software: go to website to install
     Dropbox
     HipChat
-    LibreOffice
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
