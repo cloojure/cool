@@ -49,6 +49,7 @@ This doesn't seem to work (blank screen):
       vim git zsh tcsh fish tmux
       gcc python ruby
       octave libreoffice
+      tree
 
 - rebuild current git 2.2.1 or later (from source)
 
@@ -74,6 +75,7 @@ This doesn't seem to work (blank screen):
 - Other software: go to website to install
     Dropbox
     HipChat
+    lein        -> /opt/bin
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
