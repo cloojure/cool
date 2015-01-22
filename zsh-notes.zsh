@@ -62,3 +62,16 @@ for ((ii=0; i<5; i++)); do
   echo "i: " $i
 done
 
+testFn () {
+  echo "number of args=$#"
+  echo "arg 1='$1'"
+  echo "arg 2='$2'"
+  echo "arg 3='$3'"
+  echo "arg 4='$4'"
+  echo "arg 5='$5'"
+}
+echo""
+echo "-----------------------------------------------------------------------------"
+echo "calling testFn() as: 'tstFn a b c' "
+testFn a b c
+
