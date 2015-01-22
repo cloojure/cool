@@ -15,21 +15,6 @@ EOF
 exit 1
 }
 
-makeLinks() {
-  destDir=$1        # destination dir for symlinks
-  fileList=$2       # wordlist of filenames needing symlinks
-
-  toolsDir=${coolDir}/tools
-  mkdir -p $destDir
-  for ff in    $fileList
-  do
-    if ${forceFlg} ; then
-      echo "rm -f ~/bin/${ff}"
-    fi
-    echo "ln -sv ${toolsDir}/${ff}  ~/bin/${ff}"
-  done
-}
-
 #************************************************************
 # main program
 
