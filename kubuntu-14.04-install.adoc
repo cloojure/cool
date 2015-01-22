@@ -49,7 +49,7 @@ This doesn't seem to work (blank screen):
       vim git zsh tcsh fish tmux
       gcc python ruby
       octave libreoffice
-      tree htop 
+      tree htop iotop collectl
 
 - rebuild current git 2.2.1 or later (from source)
 

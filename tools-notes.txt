@@ -1,0 +1,7 @@
+
+Chrome extensions:
+  Window Resizer
+  Page Ruler
+  CSS Viewer
+  Scraper
+  JsonView
