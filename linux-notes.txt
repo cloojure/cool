@@ -1,3 +1,10 @@
+Ubuntu:
+  online:   apt-get install -y <name>
+
+  *.deb:    dpkg -i xxxxx.deb               # install
+            dpkg -r fdb-document-layer      # remove
+            dpkg -l fdb-document-layer      # list
+
 CentOS/Fedora:
   online:   yum     install -y <name>
 
@@ -5,14 +12,8 @@ CentOS/Fedora:
             rpm --erase  fdb-document-layer
             rpm --query  fdb-document-layer
 
-Ubuntu:
-  online:   apt-get install -y <name>
-
-  *.deb:    dpkg -i xxxxx.dob               # install
-            dpkg -r fdb-document-layer      # remove
-            dpkg -l fdb-document-layer      # list
-
-Fedora KDE:
+---------------------------------------------------------------------------------------------------
+KDE shortcuts:
   crtl-alt-L                      # lock screen
   crtl-shift-alt-PgDwn            # shutdown
   crtl-shift-alt-PgUp             # reboot
@@ -20,7 +21,13 @@ Fedora KDE:
 konqueror:
   URL=sysinfo:/    # linux system info
 
-Systemd 
+---------------------------------------------------------------------------------------------------
+Ubuntu (Upstart) - https://help.ubuntu.com/community/UbuntuBootupHowto
+  service   fdb-document-layer  start/stop/restart      # control a service (old way)
+  service   fdb-sql-layer       start/stop/restart      # control a service (old way)
+  service   --status-all
+
+Systemd:
   Tutorial:     http://www.linux.com/learn/tutorials/788613-understanding-and-using-systemd
   Cheatsheet:   https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
 
@@ -35,3 +42,11 @@ Systemd
 
   Ex:  systemctl status postgresql-9.3
 
+---------------------------------------------------------------------------------------------------
+Resource monitoring
+  htop      (a better 'top')
+  iotop     (an I/O 'top')
+  collectl  --top
+  collectl  -sm (or -sM)  ; memory
+  collectl  -sd (or -sD)  ; disk
+  collectl  --vmstat

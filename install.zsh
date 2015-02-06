@@ -33,6 +33,7 @@ if (( $# >= 1 )) ; then
   fi
 fi
 
+# Create links to dot-files in home directory "~"
 coolDir=$(pwd)
 for ff in    .tmux.conf .ctags .vimrc .gvimrc \
              .cshrc .bashrc .bash_profile .alias.bash .zshrc \
@@ -43,8 +44,22 @@ do
   fi
   ln -sv ${coolDir}/${ff}  ~/${ff}
 done
-  if ${forceFlg} ; then
-    rm -f ~/.lein/profiles.clj    
-  fi
+
+# Create links to lein profiles.clj
+mkdir -p ~/.lein
+if ${forceFlg} ; then
+  rm -f ~/.lein/profiles.clj    
+fi
 ln -sv ${coolDir}/profiles.clj  ~/.lein/profiles.clj    
+
+# Create links to tools & utils in ~/bin
+toolsDir=${coolDir}/tools
+mkdir -p ~/bin
+for ff in    lein lein-exec lein-exec-p gitdgn.csh
+do
+  if ${forceFlg} ; then
+    rm -f ~/bin/${ff}
+  fi
+  ln -sv ${toolsDir}/${ff}  ~/bin/${ff}
+done
 
