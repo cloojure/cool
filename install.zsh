@@ -51,7 +51,7 @@ if ${forceFlg} ; then
   rm -f ~/.lein/profiles.clj \
         ~/.lein/user.clj
 fi
-sed --expression="s%==user.home==%$(pwd)%" profiles-tmpl.clj > profiles.clj
+sed --expression="s%==user.home==%${coolDir}%" profiles-tmpl.clj > profiles.clj
 ln -sv ${coolDir}/profiles.clj      ~/.lein/profiles.clj
 ln -sv ${coolDir}/user.clj          ~/.lein/user.clj
 
