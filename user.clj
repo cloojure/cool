@@ -15,8 +15,24 @@
 
 (def system nil)
 
-(defn dotest []  
+(defn dotest 
+  "Runs all tests found in the specified (quoted) namespaces. Defaults to the current namespace if none specified."
+  [& ns-names]
   (time
     (do
       (refresh)
-      (run-all-tests #"tst.*" ))))
+      (apply run-tests ns-names))))
+
+(defn dotests
+  "[] [ns-regex]
+  Runs all tests in namespaces that match the ns-regex regular expression. Defaults to
+  namespaces matching the patterns 'tst.*', '*-tst', or '*.tst.*', and the equivalent
+  'test' patterns.  "
+  ( []
+    (dotests #"te?st..*|te?st\..*|.*-te?st" ))
+  ( [ns-regex]
+    (time
+      (do
+        (refresh)
+        (run-all-tests ns-regex )))))
+
