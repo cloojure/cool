@@ -8,9 +8,15 @@
     [clojure.pprint                 :refer (pprint) ]
     [clojure.repl                   :refer :all]
     [clojure.tools.namespace.repl   :refer (refresh refresh-all) ] )
-  (:use [
+  (:use 
     cooljure.core 
-    clojure.test ] )
+    clojure.test )
 )
 
 (def system nil)
+
+(defn dotest []  
+  (time
+    (do
+      (refresh)
+      (run-all-tests #"tst.*" ))))
