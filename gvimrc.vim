@@ -34,9 +34,8 @@
 " au Syntax   * RainbowParenthesesLoadSquare
 " au Syntax   * RainbowParenthesesLoadBraces
 
+set guifont=Monospace\ 10  " default => Linux (27 in. LG monitor)
 " set guifont=Liberation\ Mono\ 10  " alternative for Fedora
-" set guifont=Monospace\ 10  " default => Linux 
-set guifont=Monospace\ 9  " default => Linux (27" LG monitor)
 
 " match index is 0-based (C-style);  no match = -1
 " if match( system("uname -a"), "Ubuntu" ) > -1
@@ -45,11 +44,11 @@ set guifont=Monospace\ 9  " default => Linux (27" LG monitor)
 "   set guifont=Monospace\ 10  " better for small screen
 " endif
 "
-if match( system("uname -a"), "Darwin" ) > -1
-  echo "Found Darwin, setting guifont for mac... \n"
-  sleep 3
-  set guifont=Courier\ New:h16
-endif
+" if match( system("uname -a"), "Darwin" ) > -1
+"   echo "Found Darwin, setting guifont for mac... \n"
+"   sleep 3
+"   set guifont=Courier\ New:h16
+" endif
 
 " This function is used to swap
 " the orientation of 2 windows (eg left/right), while keeping the cursor in the same pane
