@@ -35,8 +35,8 @@
 " au Syntax   * RainbowParenthesesLoadBraces
 
 " set guifont=Liberation\ Mono\ 10  " alternative for Fedora
-set guifont=Monospace\ 10  " default => Linux 
-" set guifont=Monospace\ 9  " default => Linux (27" LG monitor)
+" set guifont=Monospace\ 10  " default => Linux 
+set guifont=Monospace\ 9  " default => Linux (27" LG monitor)
 
 " match index is 0-based (C-style);  no match = -1
 " if match( system("uname -a"), "Ubuntu" ) > -1
@@ -84,10 +84,10 @@ endfunction
 :command! Ld call LinesDouble()     " Lines double
 
 " Font options
-:command! F14 set guifont=Monospace\ 14
-:command! F12 set guifont=Monospace\ 12
-:command! F10 set guifont=Monospace\ 10
-:command! F9  set guifont=Monospace\  9
+:command! Fll set guifont=Monospace\ 14
+:command! Fl  set guifont=Monospace\ 12
+:command! Fm  set guifont=Monospace\ 10
+:command! Fs  set guifont=Monospace\ 9
 :command! FF  set guifont=Monospace\ 12
 
 " Default size/shape

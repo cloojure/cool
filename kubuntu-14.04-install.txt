@@ -19,15 +19,27 @@
 - Reboot, and login with your username/password.
   - I don't like the "Desktop Folder" in KDE, so I use the X to delete it from the desktop
 
+My computer has an NVidea card (EVGA brand).  At install or upgrade, Linux sometimes
+doesn't work correctly with the card and instead reverts to using the built-in graphics.  
+  - You should keep a VGA cable plugged into the computer and connected to the VGA input
+    port of a monitor.  If the computer boots to a blank screen, switch the monitor to the
+    VGA input until you (re-)install the latest linux driver from the NVidia website.
+
 To boot into console (text) mode (no GUI), wait until the boot screen comes up.  The word
 "Ubuntu" will be highlight during a 10 sec countdown.  
   - Use the up/down arrow keys to stop the countdown. Hightlight "Ubuntu"
   - Type "e" to Edit the command
-  - Find the words "quiet splash" in a command near the end
+  - Find the words "quiet splash" in a command near the bottom
   - Using the arrow keys and backspace, change "quiet splash" -> "text"
   - Continue boot using either Crtl-X or F10
 
-This doesn't seem to work (blank screen):
+When performing an OS install or other significant OS upgrade, the video card may quit
+working altogether. Since the video card is typically connected to the monitor using HDMI,
+DisplayPort, or DVI ports/cables, this will leave you puzzled & staring at a blank screen.
+In that case, you must connect the built-in video out (e.g. VGA/DSub) to the monitor so
+that you can (re-)install the video driver.
+
+The following doesn't seem to work (blank screen):
   In Ubuntu, single-user console is "runlevel" 1:  sudo telinit 1
 
 
@@ -44,7 +56,7 @@ This doesn't seem to work (blank screen):
 - Update all software (~ 30 min)
   - Software Management -> Updates -> Check for Updates:  Install all found)
 
-- Install basic software:
+- Install basic software using yum:
     sudo apt-get install -y  \
       vim git zsh tcsh fish tmux curl
       gcc python ruby
@@ -76,7 +88,6 @@ This doesn't seem to work (blank screen):
 - Other software: go to website to install
     Dropbox
     HipChat
-    lein        -> /opt/bin
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
