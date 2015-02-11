@@ -58,9 +58,11 @@ The following doesn't seem to work (blank screen):
 
 - Install basic software using yum:
     sudo apt-get install -y  \
-      vim git zsh tcsh fish tmux
+      vim git zsh tcsh fish tmux curl
       gcc python ruby
       octave libreoffice
+      tree htop iotop collectl
+      youtube-dl
 
 - rebuild current git 2.2.1 or later (from source)
 
