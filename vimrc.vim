@@ -1,3 +1,14 @@
+execute pathogen#infect()
+filetype plugin indent on     " plugins are enabled
+" filetype plugin on            " plugins are enabled
+
+" Vim Fireplace shortcuts
+nnoremap  <C-e>     :%Eval<CR>
+nnoremap  <C-e>     :Eval<CR>
+
+let g:clojure_align_multiline_strings = 1
+
+
 " Turn on source code syntax coloring
 syntax on
   " syntax enable

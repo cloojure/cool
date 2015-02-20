@@ -1,15 +1,4 @@
 
-execute pathogen#infect()
-filetype plugin indent on     " plugins are enabled
-" filetype plugin on            " plugins are enabled
-
-" Vim Fireplace shortcuts
-nnoremap    :%Eval
-nnoremap    :Eval
-
-let g:clojure_align_multiline_strings = 1
-
-
 syntax on
 colorscheme desert
   " colorscheme slate
