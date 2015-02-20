@@ -1,4 +1,6 @@
 
+youtube-dl              YouTube Downloads
+
 Chrome extensions:
   Window Resizer
   Page Ruler

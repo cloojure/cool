@@ -85,4 +85,10 @@ alias litst="linit ; ltst"
 
 alias fdb-start-doc="sudo service fdb-document-layer restart"
 
+#-----------------------------------------------------------------------------
+mcd() { mkdir -p "$1"; cd "$1";} 
+alias histg="history | grep" 
+alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla" 
+alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
+
 ### echo "alias.bash - exit"
