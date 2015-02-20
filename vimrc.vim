@@ -5,6 +5,7 @@ filetype plugin indent on     " plugins are enabled
 " Vim Fireplace shortcuts
 nnoremap  <C-e>     :%Eval<CR>
 nnoremap  <C-e>     :Eval<CR>
+:command! EE        %Eval
 
 let g:clojure_align_multiline_strings = 1
 
@@ -13,9 +14,9 @@ let g:clojure_align_multiline_strings = 1
 syntax on
   " syntax enable
 
-colorscheme default
+colorscheme slate
   " colorscheme desert
-  " colorscheme slate
+  " colorscheme default
 
 " The minimal shell /bin/ash is faster than /bin/bash or /bin/tcsh on startup
 set shell=/bin/zsh
