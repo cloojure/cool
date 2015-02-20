@@ -35,7 +35,7 @@ fi
 
 # Create links to dot-files in home directory "~"
 coolDir=$(pwd)
-for ff in    .tmux.conf .ctags .vimrc .gvimrc \
+for ff in    .tmux.conf .ctags .vim .vimrc .gvimrc \
              .cshrc .bashrc .bash_profile .alias.bash .zshrc \
              .gitconfig .gitignore 
 do

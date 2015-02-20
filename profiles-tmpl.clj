@@ -2,10 +2,14 @@
     :plugins [ 
       [lein-ancient     "0.5.5"] 
       [lein-exec        "0.3.4"] 
-      [lein-pprint      "1.1.1"] ] 
+      [lein-pprint      "1.1.1"] 
+      [cider/cider-nrepl "0.8.2"]
+    ] 
     :dependencies [ 
-      [criterium        "0.4.3"] 
-      [org.clojure/tools.namespace "0.2.9"]
+      [cooljure                     "0.1.22"] 
+      [criterium                    "0.4.3"] 
+      [org.clojure/tools.namespace  "0.2.9"]
+      [org.clojure/tools.nrepl      "0.2.7"]
     ]
     :source-paths [ "==user.home==/.lein" ]
     :repl-options { :init-ns user }
