@@ -19,6 +19,7 @@ web download & install:
   skype
   java
   IntelliJ Idea (JetBrains.com)
+  libreoffice (or brew?)
 
 git clone:
   cool.git
