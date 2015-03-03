@@ -1,0 +1,26 @@
+
+software to load:
+  brew      <== do this first!!!
+
+brew install:
+  bash      (newest version)
+  zsh
+  tcsh
+  iterm2
+  macvim
+  git
+  postgresql
+  h2
+
+web download & install:
+  chrome
+  squirrel (sql client)
+  hipchat
+  skype
+  java
+  IntelliJ Idea (JetBrains.com)
+
+git clone:
+  cool.git
+    cd ~/cool  <- install dir
+    ./install.zsh

@@ -6,8 +6,8 @@ export SAVEHIST=1000
 export HISTFILE=~/.history
 
 if [[ $(uname -a) == *Darwin* ]]; then
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home"
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
+  export GROOVY_HOME="GROOVY_HOME=/usr/local/opt/groovy/libexec"
 fi
 if [[ $(uname -a) == *Linux*.fc20.* ]]; then
   export JAVA_HOME="/usr/java/jdk1.8.0_11"
@@ -50,3 +50,6 @@ alias dosrc="source ~/.zshrc"
 bb=/home/alan/sone2/endpoints/prototype/pedestal-service
 aa=/home/alan/vagrant/endpoints/prototype/pedestal-service
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"

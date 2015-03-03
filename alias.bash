@@ -7,6 +7,9 @@ alias gvim="\gvim  -geom '+3300+20' 2>&/dev/null"
 if [[ $(hostname) == amy ]]; then        
   alias gvim="\gvim  -geom '+2000-1200' 2>&/dev/null"
 fi
+if [[ $(uname -a) == *Darwin* ]]; then
+  alias gvim=mvim
+fi
 # old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
 alias d="ls -ldF --color=auto"

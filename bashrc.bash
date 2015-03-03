@@ -36,3 +36,6 @@ PROMPT_DIRTRIM=4
 alias dosrc="source ~/.bashrc"
 
 # echo ".bashrc - exit"
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"
