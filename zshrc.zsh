@@ -28,6 +28,8 @@ path=( $path /bin/texbin )
 # #awt todo generalize this
 path=( $path /usr/lib/postgresql/9.3/bin)
 
+alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
+
 # common bash/zsh aliases
 source ~/.alias.bash
 
