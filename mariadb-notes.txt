@@ -1,0 +1,279 @@
+
+Install using brew
+  > brew install  mariadb
+
+To have launchd start mariadb at login:
+  > ln -sfv /usr/local/opt/mariadb/*.plist ~/Library/LaunchAgents
+
+Then to load mariadb now:
+  > launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mariadb.plist
+
+Launch as root
+  > mysql -u root (or: mysql -u root test      # connect to db 'test')
+
+Do some work
+  > show databases;
+
+  > create database dummy;      # or: create database if now exists <db>
+  > use dummy;                  # switch to db
+  > select database();          # show current
+  > show tables;
+  > drop database dummy;        # delete
+
+  > use test;
+  > show tables;
+  >  
+  > CREATE TABLE IF NOT EXISTS equipment (
+      equip_id int(5) NOT NULL AUTO_INCREMENT,
+      type varchar(50) DEFAULT NULL,
+      install_date DATE DEFAULT NULL,
+      color varchar(20) DEFAULT NULL,
+      working bool DEFAULT NULL,
+      location varchar(250) DEFAULT NULL,
+      PRIMARY KEY(equip_id)
+      );
+
+  > show columns in equipment;
+
+  > INSERT INTO equipment (type, install_date, color, working, location)
+      VALUES ("Slide", Now(), "blue", 1, "Southwest Corner");
+  > INSERT INTO equipment (type, install_date, color, working, location)
+      VALUES ("Swing", Now(), "green", 1, "Northwest Corner");
+  > select * from equipment;
+
+  > drop table equipment;       # or: drop table equipment cascade;
+
+Use a GUI to access MariaDB:  www.sequelpro.com
+
+-----------------------------------------------------------------------------
+Sample commands:
+
+  > alter table nullz add       column zetime timestamp;
+  > alter table nullz add       column mo_money decimal(2);
+  > alter table nullz modify    column mo_money decimal(9);
+
+
+-----------------------------------------------------------------------------
+
+
+~/cool > mysql -u root test
+
+MariaDB [test]> show tables;
+Empty set (0.00 sec)
+
+MariaDB [test]> create table nullz (id int not null,
+    -> text1 varchar(50) not null,
+    -> text2 varchar(50) not null default 'alan');
+Query OK, 0 rows affected (0.01 sec)
+
+MariaDB [test]> select * from nullz;
+Empty set (0.00 sec)
+
+MariaDB [test]> insert into nullz (id) values (2);
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+MariaDB [test]> select * from nullz;
++----+-------+-------+
+| id | text1 | text2 |
++----+-------+-------+
+|  2 |       | alan  |
++----+-------+-------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> select * from nullz where (text1='');
++----+-------+-------+
+| id | text1 | text2 |
++----+-------+-------+
+|  2 |       | alan  |
++----+-------+-------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> insert into nullz (id,text1) values(3, null);
+ERROR 1048 (23000): Column 'text1' cannot be null
+
+MariaDB [test]> alter table nullz add column zetime timestamp;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [test]> select * from nullz;
++----+-------+-------+---------------------+
+| id | text1 | text2 | zetime              |
++----+-------+-------+---------------------+
+|  2 |       | alan  | 2015-03-04 17:46:14 |
++----+-------+-------+---------------------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> insert into nullz (id,text1,zetime) values (3,'not null', NULL);
+Query OK, 1 row affected (0.01 sec)
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+
+| id | text1    | text2 | zetime              |
++----+----------+-------+---------------------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |
++----+----------+-------+---------------------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]> alter table nullz add column mo_money decimal(2);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+
+| id | text1    | text2 | zetime              | mo_money |
++----+----------+-------+---------------------+----------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL |
++----+----------+-------+---------------------+----------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]> insert into nullz(id,mo_money) values(10,50);
+Query OK, 1 row affected, 1 warning (0.00 sec)
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+
+| id | text1    | text2 | zetime              | mo_money |
++----+----------+-------+---------------------+----------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL |
+| 10 |          | alan  | 2015-03-04 17:55:27 |       50 |
++----+----------+-------+---------------------+----------+
+3 rows in set (0.00 sec)
+
+MariaDB [test]> insert into nullz(id,mo_money) values(10,1000);
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+
+| id | text1    | text2 | zetime              | mo_money |
++----+----------+-------+---------------------+----------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL |
+| 10 |          | alan  | 2015-03-04 17:55:27 |       50 |
+| 10 |          | alan  | 2015-03-04 17:55:54 |       99 |
++----+----------+-------+---------------------+----------+
+4 rows in set (0.00 sec)
+
+MariaDB [test]> select * from nullz where (mo_money=99);
++----+-------+-------+---------------------+----------+
+| id | text1 | text2 | zetime              | mo_money |
++----+-------+-------+---------------------+----------+
+| 10 |       | alan  | 2015-03-04 17:55:54 |       99 |
++----+-------+-------+---------------------+----------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> alter table nullz modify column mo_money decimal(9);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+
+| id | text1    | text2 | zetime              | mo_money |
++----+----------+-------+---------------------+----------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL |
+| 10 |          | alan  | 2015-03-04 17:55:27 |       50 |
+| 10 |          | alan  | 2015-03-04 17:55:54 |       99 |
++----+----------+-------+---------------------+----------+
+4 rows in set (0.00 sec)
+
+MariaDB [test]> insert into nullz(id,mo_money) values(12,1000);
+Query OK, 1 row affected, 1 warning (0.00 sec)
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+
+| id | text1    | text2 | zetime              | mo_money |
++----+----------+-------+---------------------+----------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL |
+| 10 |          | alan  | 2015-03-04 17:55:27 |       50 |
+| 10 |          | alan  | 2015-03-04 17:55:54 |       99 |
+| 12 |          | alan  | 2015-03-04 17:59:18 |     1000 |
++----+----------+-------+---------------------+----------+
+5 rows in set (0.00 sec)
+
+MariaDB [test]> alter table nullz modify column mo_money decimal(2);
+Query OK, 5 rows affected, 1 warning (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 1
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+
+| id | text1    | text2 | zetime              | mo_money |
++----+----------+-------+---------------------+----------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL |
+| 10 |          | alan  | 2015-03-04 17:55:27 |       50 |
+| 10 |          | alan  | 2015-03-04 17:55:54 |       99 |
+| 12 |          | alan  | 2015-03-04 17:59:18 |       99 |
++----+----------+-------+---------------------+----------+
+5 rows in set (0.01 sec)
+
+
+MariaDB [test]> select 1/0;
++------+
+| 1/0  |
++------+
+| NULL |
++------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> select now() / 0;
++-----------+
+| now() / 0 |
++-----------+
+|      NULL |
++-----------+
+1 row in set (0.00 sec)
+
+MariaDB [test]> select "hello there" / 0;
++-------------------+
+| "hello there" / 0 |
++-------------------+
+|              NULL |
++-------------------+
+1 row in set, 1 warning (0.00 sec)
+
+
+MariaDB [test]> alter table nullz add column smallz varchar(5);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+MariaDB [test]> insert into nullz (id, smallz) values (22, 'hmmm, this is longer than 5');
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+--------+
+| id | text1    | text2 | zetime              | mo_money | smallz |
++----+----------+-------+---------------------+----------+--------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL | NULL   |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL | NULL   |
+| 10 |          | alan  | 2015-03-04 17:55:27 |       50 | NULL   |
+| 10 |          | alan  | 2015-03-04 17:55:54 |       99 | NULL   |
+| 12 |          | alan  | 2015-03-04 17:59:18 |       99 | NULL   |
+| 22 |          | alan  | 2015-03-04 18:02:38 |     NULL | hmmm,  |
++----+----------+-------+---------------------+----------+--------+
+6 rows in set (0.00 sec)
+
+
+MariaDB [test]> create table datez (birthday date);
+Query OK, 0 rows affected (0.01 sec)
+MariaDB [test]> insert into datez (birthday) values('1968-02-31');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+MariaDB [test]> select * from datez;
++------------+
+| birthday   |
++------------+
+| 0000-00-00 |
++------------+
+1 row in set (0.00 sec)
+
+
+MariaDB [test]> insert into nullz(id, mo_money) values (33, 'ha ha ha!!!');
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+MariaDB [test]> select * from nullz;
++----+----------+-------+---------------------+----------+--------+
+| id | text1    | text2 | zetime              | mo_money | smallz |
++----+----------+-------+---------------------+----------+--------+
+|  2 |          | alan  | 2015-03-04 17:46:14 |     NULL | NULL   |
+|  3 | not null | alan  | 2015-03-04 17:48:24 |     NULL | NULL   |
+| 10 |          | alan  | 2015-03-04 17:55:27 |       50 | NULL   |
+| 10 |          | alan  | 2015-03-04 17:55:54 |       99 | NULL   |
+| 12 |          | alan  | 2015-03-04 17:59:18 |       99 | NULL   |
+| 22 |          | alan  | 2015-03-04 18:02:38 |     NULL | hmmm,  |
+| 33 |          | alan  | 2015-03-04 18:05:24 |        0 | NULL   |
++----+----------+-------+---------------------+----------+--------+
+7 rows in set (0.00 sec)
+
