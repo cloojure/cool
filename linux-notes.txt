@@ -27,7 +27,7 @@ Ubuntu (Upstart) - https://help.ubuntu.com/community/UbuntuBootupHowto
   service   fdb-sql-layer       start/stop/restart      # control a service (old way)
   service   --status-all
 
-Systemd:
+Fedora (Systemd):
   Tutorial:     http://www.linux.com/learn/tutorials/788613-understanding-and-using-systemd
   Cheatsheet:   https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
 
