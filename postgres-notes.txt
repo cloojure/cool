@@ -156,27 +156,42 @@ Tables:
 
 -----------------------------------------------------------------------------
 Installation on Ubuntu:
+  If necessary, configure latest apt-get sources from http://www.postgresql.org/download/linux/ubuntu/
+
   sudo apt-get install postgresql
-  service postgresql status
+  sudo apt-get install pgAdmin3
+  sudo service postgresql status
     service --status-all
     service --help
-  sudo service postgresql restart       - if needed
+    sudo service postgresql restart       - if needed
+    sudo service postgresql stop          - if needed
+    sudo service postgresql start         - if needed
 
-Note - auth file on Ubuntu is: /etc/postgresql/9.3/main/pg_hba.conf
+Ubuntu files: 
+  /etc/postgresql/9.4/main/environment
+  /etc/postgresql/9.4/main/pg_ctl.conf
+  /etc/postgresql/9.4/main/pg_hba.conf
+  /etc/postgresql/9.4/main/pg_ident.conf
+  /etc/postgresql/9.4/main/postgresql.conf      - set port=5432 if needed
 
 Try to connect:
   > psql
   psql: FATAL:  role "alan" does not exist  
 
-User "alan" or DB "alan" don't exist.  Become user "postgres", then create DB "alan"
+User "alan" or DB "alan" don't exist.  Become user "postgres", then create user & DB "alan"
   sudo su postgres
-  psql --command="CREATE ROLE alan LOGIN SUPERUSER"
+    createuser alan       - old way: psql --command="CREATE ROLE alan LOGIN SUPERUSER"
+    createdb   alan
   exit      - logout of user "postgres"
 
-Now user "alan" can create a DB named "alan" (saves typing later).  Then login using psql
-  createdb alan
+Now login using psql
   psql
     \l+         - list databases (the 'plus' sign => implies full listing)
     \dnS+       - list schemas (S => system objects
     \dt+        - list tables (or \dtS+)
+
+To use pgadmin3 (aka pgAdmin3)
+  Either configure passwords for users, or add this line to "/etc/postgresql/9.4/main/pg_hba.conf"
+    "host all all 127.0.0.1/32 trust"
+  to enable all local socket users:
 
