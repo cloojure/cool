@@ -13,6 +13,7 @@ brew install:
   postgresql
   pgadmin3
   h2
+  dos2unix
 
 web download & install:
   chrome
