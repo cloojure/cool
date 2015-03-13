@@ -6,6 +6,7 @@ brew install:
   bash      (newest version)
   zsh
   tcsh
+  tree
   iterm2
   macvim
   git

@@ -21,12 +21,13 @@ echo "Alias:"
 alias sampleAlias="echo 'Any command will work, just avoid any spaces at the = sign!!!' "
 sampleAlias
 
-echo ""
+echo""
 echo "-----------------------------------------------------------------------------"
-echo "For statement:"
-for it in Hi Hello "How are you?" ; do
-  echo "${it}"
-done
+echo "local variables:"
+myStr1="Again, no spaces are allowed at the equals sign!"
+myStr2="Using curly braces is usually optional, but often clearest."
+echo "myStr1=$myStr1"
+echo "myStr1=${myStr1}"
 
 echo ""
 echo "-----------------------------------------------------------------------------"
@@ -37,13 +38,19 @@ else
   echo "Linux: not found"
 fi
 
+echo ""
+echo "-----------------------------------------------------------------------------"
+echo "For statement:"
+for it in Hi Hello "How are you?" ; do
+  echo "${it}"
+done
+
 echo""
 echo "-----------------------------------------------------------------------------"
-echo "local variables:"
-myStr1="Again, no spaces are allowed at the equals sign!"
-myStr2="Using curly braces is usually optional, but often clearest."
-echo "myStr1=$myStr1"
-echo "myStr1=${myStr1}"
+echo "loops:"
+for ((ii=0; i<5; i++)); do
+  echo "i: " $i
+done
 
 echo""
 echo "-----------------------------------------------------------------------------"
@@ -54,13 +61,6 @@ echo "((   6 * 7 )) = " ${myVal}
 myDouble=0.6
 ((myDouble = $myDouble * 7))
 echo "(( 0.6 * 7 )) = " ${myDouble}
-
-echo""
-echo "-----------------------------------------------------------------------------"
-echo "loops:"
-for ((ii=0; i<5; i++)); do
-  echo "i: " $i
-done
 
 testFn () {
   echo "number of args=$#"
