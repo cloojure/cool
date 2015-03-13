@@ -74,25 +74,25 @@ Fedora notes:
         --port 10003 --username trillian  trillian_staging
 
   => \d                 - describe all tables
-  => \d sync_jobs       - describe table sync_jobs
-  => select id,job_id,latest_file,hostname from sync_jobs;  
-                        - print 4 cols from sync_jobs
+  => \d people          - describe table people
+  => select id,job_id,latest_file,hostname from people;  
+                        - print 4 cols from people
 
   - print rows for the 5 largest ids
   => select id,job_id,latest_file,hostname 
-        from sync_jobs order by id desc limit 5;
+        from people order by id desc limit 5;
 
-  => select max(id) from sync_jobs;     - print largest value in id column
+  => select max(id) from people;     - print largest value in id column
   => select id,job_id,latest_file,hostname 
-        from sync_jobs where  id=1132;
+        from people where  id=1132;
                         - print just the row specified
 
   - Using a sub-query in the where clause instead of the 2-step method above
-  => select id,job_id,latest_file,hostname from sync_jobs 
-        where id=(select max(id) from sync_jobs);
+  => select id,job_id,latest_file,hostname from people 
+        where id=(select max(id) from people);
 
   => begin;             - begin transaction block
-  => update sync_jobs set hostname='dummy-host' where id=1132;  - make change to db
+  => update people set hostname='dummy-host' where id=1132;  - make change to db
   => { commit;          - either commit the change to the db
   => or
   =>   rollback; }      - or rollback (discard) the change
@@ -153,3 +153,45 @@ Tables:
     ---------------+-----+------+---------------+-----+------
      San Francisco |  43 |   57 | San Francisco |  46 |   50
      Hayward       |  37 |   54 | San Francisco |  46 |   50
+
+-----------------------------------------------------------------------------
+Installation on Ubuntu:
+  If necessary, configure latest apt-get sources from http://www.postgresql.org/download/linux/ubuntu/
+
+  sudo apt-get install postgresql
+  sudo apt-get install pgAdmin3
+  sudo service postgresql status
+    service --status-all
+    service --help
+    sudo service postgresql restart       - if needed
+    sudo service postgresql stop          - if needed
+    sudo service postgresql start         - if needed
+
+Ubuntu files: 
+  /etc/postgresql/9.4/main/environment
+  /etc/postgresql/9.4/main/pg_ctl.conf
+  /etc/postgresql/9.4/main/pg_hba.conf
+  /etc/postgresql/9.4/main/pg_ident.conf
+  /etc/postgresql/9.4/main/postgresql.conf      - set port=5432 if needed
+
+Try to connect:
+  > psql
+  psql: FATAL:  role "alan" does not exist  
+
+User "alan" or DB "alan" don't exist.  Become user "postgres", then create user & DB "alan"
+  sudo su postgres
+    createuser alan       - old way: psql --command="CREATE ROLE alan LOGIN SUPERUSER"
+    createdb   alan
+  exit      - logout of user "postgres"
+
+Now login using psql
+  psql
+    \l+         - list databases (the 'plus' sign => implies full listing)
+    \dnS+       - list schemas (S => system objects
+    \dt+        - list tables (or \dtS+)
+
+To use pgadmin3 (aka pgAdmin3)
+  Either configure passwords for users, or add this line to "/etc/postgresql/9.4/main/pg_hba.conf"
+    "host all all 127.0.0.1/32 trust"
+  to enable all local socket users:
+
