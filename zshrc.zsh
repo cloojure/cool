@@ -24,6 +24,7 @@ path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )
 path=( $path /bin/texbin )
+path=( $path /opt/homebrew-cask/Caskroom/pgadmin3/1.20.0/pgAdmin3.app/Contents/MacOS )
 
 # #awt todo generalize this
 path=( $path /usr/lib/postgresql/9.3/bin)

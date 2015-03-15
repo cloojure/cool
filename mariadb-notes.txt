@@ -62,8 +62,8 @@ MariaDB [test]> show tables;
 Empty set (0.00 sec)
 
 MariaDB [test]> create table nullz (id int not null,
-    -> text1 varchar(50) not null,
-    -> text2 varchar(50) not null default 'alan');
+             text1 varchar(50) not null,
+             text2 varchar(50) not null default 'alan');
 Query OK, 0 rows affected (0.01 sec)
 
 MariaDB [test]> select * from nullz;

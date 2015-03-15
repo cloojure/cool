@@ -6,12 +6,14 @@ brew install:
   bash      (newest version)
   zsh
   tcsh
+  tree
   iterm2
   macvim
   git
   postgresql
   pgadmin3
   h2
+  dos2unix
 
 web download & install:
   chrome
