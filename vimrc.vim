@@ -1,5 +1,5 @@
-execute pathogen#infect()
-filetype plugin indent on     " plugins are enabled
+" execute pathogen#infect()
+" filetype plugin indent on     " plugins are enabled
 " filetype plugin on            " plugins are enabled
 
 " Vim Fireplace shortcuts
