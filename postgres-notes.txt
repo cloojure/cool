@@ -155,6 +155,49 @@ Tables:
      Hayward       |  37 |   54 | San Francisco |  46 |   50
 
 -----------------------------------------------------------------------------
+alan=# \dt test
+       List of relations
+ Schema | Name | Type  | Owner
+--------+------+-------+-------
+ public | test | table | alan
+(1 row)
+
+alan=# select * from test;
+ a
+---
+ 1
+ 2
+ 3
+(3 rows)
+
+alan=# SELECT a,
+alan-#        CASE WHEN a=1 THEN 'one'
+alan-#             WHEN a=2 THEN 'two'
+alan-#             ELSE 'other'
+alan-#        END
+alan-#     FROM test;
+ a | case
+---+-------
+ 1 | one
+ 2 | two
+ 3 | other
+(3 rows)
+
+alan=# SELECT a,
+       (CASE WHEN a=1 THEN 'one'
+             WHEN a=2 THEN 'two'
+             ELSE 'other'
+        END) as result
+    FROM test;
+ a | result
+---+--------
+ 1 | one
+ 2 | two
+ 3 | other
+(3 rows)
+
+
+-----------------------------------------------------------------------------
 Installation on Ubuntu:
   If necessary, configure latest apt-get sources from http://www.postgresql.org/download/linux/ubuntu/
 
@@ -194,4 +237,14 @@ To use pgadmin3 (aka pgAdmin3)
   Either configure passwords for users, or add this line to "/etc/postgresql/9.4/main/pg_hba.conf"
     "host all all 127.0.0.1/32 trust"
   to enable all local socket users:
+
+-----------------------------------------------------------------------------
+Useful definitions:
+
+  create view local_extensions as 
+    select name, default_version, installed_version, left(comment,30) as comment 
+    from pg_available_extensions 
+    where installed_version is not null 
+    order by name;
+  select * from local_extensions;
 
