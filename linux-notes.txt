@@ -50,3 +50,10 @@ Resource monitoring
   collectl  -sm (or -sM)  ; memory
   collectl  -sd (or -sD)  ; disk
   collectl  --vmstat
+
+---------------------------------------------------------------------------------------------------
+General commands
+  /etc/ld.so.conf       - a better alternative to LD_LIBRARY_PATH
+---------------------------------------------------------------------------------------------------
+General commands
+  ldd libXXX.so         - display dependencies

@@ -52,7 +52,9 @@ alias dosrc="source ~/.zshrc"
 # aa=/home/alan/sone/endpoints/prototype/pedestal-service
 bb=/home/alan/sone2/endpoints/prototype/pedestal-service
 aa=/home/alan/vagrant/endpoints/prototype/pedestal-service
+
 alan1="ubuntu@alan-1.eng.rxlogix.com"
+alan_c38_1="ubuntu@ec2-54-176-120-228.us-west-1.compute.amazonaws.com"
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"
