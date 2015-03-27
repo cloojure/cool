@@ -1,0 +1,8 @@
+
+brew update     - download latest version of packages
+brew doctor     - ensure brew is installed w/o any problems
+
+-----------------------------------------------------------------------------
+Files:
+  ~/Library/LaunchAgents
+  /usr/local/opt/*

@@ -29,8 +29,6 @@ path=( $path /opt/homebrew-cask/Caskroom/pgadmin3/1.20.0/pgAdmin3.app/Contents/M
 # #awt todo generalize this
 path=( $path /usr/lib/postgresql/9.3/bin)
 
-alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
-
 # common bash/zsh aliases
 source ~/.alias.bash
 
@@ -57,4 +55,11 @@ aa=/home/alan/vagrant/endpoints/prototype/pedestal-service
 export ORACLE_HOME=/usr/lib/oracle/12.1/client64
 export LD_LIBRARY_PATH=${ORACLE_HOME}/lib:/lib:/usr/lib
 path=( ${ORACLE_HOME}/bin $path )
+
+alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
+
+alan1="ubuntu@alan-1.eng.rxlogix.com"
+alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
+
+alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com --dbname=postal"
 

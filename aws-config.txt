@@ -1,0 +1,83 @@
+# Upgrade all packages
+  sudo apt-get update
+  sudo apt-get upgrade -y
+
+# Install basic packages
+  sudo apt install -y --fix-missing   \
+      vim git zsh tcsh                \
+      curl tree htop iotop            \
+      zip dos2unix alien              
+
+# Generate public/private keys
+  ssh-keygen    # Answer <ret> to all questions
+  # Add ~/.ssh/id_rsa.pub to GitHub SSH Public Keys if want to push
+
+# Copy cloojure/cool configuration files:
+  cd
+  git clone https://github.com/cloojure/cool.git
+  cd ~/cool
+  ./install.zsh --force
+
+# Switch shell from bash -> zsh
+  sudo vim /etc/passwd      # change shell (end of line) for users: ubuntu, alan, etc
+  zsh                       # make sure it works before logging out!
+
+# Attach EBS volume
+  lsblk                             # list available block storage devices 
+    # look for one like this, the 'f' last letter is key ("/dev/" prefix omitted)
+    #   name EBS volumns only using letters f, g, h, ...
+    NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+    xvdf    202:80   0  1000G  0 disk
+  sudo file -s /dev/xvdf            # look for "data" -> unformatted
+  sudo mkfs -t ext4 /dev/xvdf       # create the filesystem (format)
+  sudo mkdir /alan                  # create mount point
+  sudo mount /dev/xvdf /alan        # mount it
+
+# Point /opt -> /alan/opt
+  sudo rmdir /opt
+  sudo ln -s /alan/opt /opt
+
+# Copy current jdk*.gz to /opt
+  #####  Need to substitute actual "jdk*" values below #####
+  mkdir -p      ~/tmp
+  cd            ~/tmp
+  tar -xzf      ~/downloads/<jdk*>.gz
+  ls -ldF *             # should see something like jdk1.8.0_40
+  mv <jdk*> /opt
+  cd /opt
+  ln -s <jdk*> java     # create symlink so  /opt/java -> /opt/jdk*
+
+# Init leiningen
+  lein --version        # should see:  Leiningen 2.5.1 on Java 1.8.0_40 ...
+
+# For Oracle client on AWS we need:
+  sudo apt install -y libaio1         # async I/O (note can use "apt search libaio")
+  sudo alien -i oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+  sudo alien -i oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+  sudo alien -i oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+    # See:  https://help.ubuntu.com/community/Oracle%20Instant%20Client
+
+# Install the current PostgreSQL:
+  sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" \
+      > /etc/apt/sources.list.d/pgdg.list'
+  sudo apt-get install -y wget ca-certificates
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  sudo apt-get update
+  sudo apt-get upgrade
+  sudo apt-get install -y postgresql-9.4 pgadmin3
+
+# Needed to build git from source
+  sudo apt install -y --fix-missing   \
+      gcc python ruby perl            \
+      libssl-dev libcurl4-openssl-dev \
+      libexpat1-dev 
+
+# Build/install current git:
+  mkdir -p    ~/gh
+  cd          ~/gh
+  git clone   https://github.com/git/git.git
+  cd          ~/gh/git
+  make      prefix=/opt all 
+  sudo make prefix=/opt install 
+
+
