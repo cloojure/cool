@@ -29,8 +29,6 @@ path=( $path /opt/homebrew-cask/Caskroom/pgadmin3/1.20.0/pgAdmin3.app/Contents/M
 # #awt todo generalize this
 path=( $path /usr/lib/postgresql/9.3/bin)
 
-alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
-
 # common bash/zsh aliases
 source ~/.alias.bash
 
@@ -53,8 +51,13 @@ alias dosrc="source ~/.zshrc"
 bb=/home/alan/sone2/endpoints/prototype/pedestal-service
 aa=/home/alan/vagrant/endpoints/prototype/pedestal-service
 
+alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
+alias sqlplus=sqlplus64
+
 alan1="ubuntu@alan-1.eng.rxlogix.com"
-alan_c38_1="ubuntu@ec2-54-176-120-228.us-west-1.compute.amazonaws.com"
+alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
+
+alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com --dbname=postal"
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"
