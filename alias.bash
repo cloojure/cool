@@ -17,25 +17,32 @@ alias lal="ls -alF --color=auto"
 alias dt="ls -ldtF --color=auto"
 alias dt9="ls -ldtF --color=auto * | head -9"
 
-if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
-  echo "dummy" > /dev/null  # stupid bash can't handle an empty "then" part
-  # echo "Found Linux"
-else
-  # echo "Missing Linux"
-  set dummy="OSX is dumb!"
-  alias d="ls -ldF"
-  alias lal="ls -alF"
-fi
+alias du='du -BG'
+alias df='df -BG'
 
 # Always use egrep
 alias grep="\grep -E --color=auto"  # same as deprecated 'egrep'
+
+if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
+  # echo "Found Linux"
+  echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
+else
+  # echo "Missing Linux"
+  echo "OSX is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
+
+  alias du='du -g'
+  alias df='df -g'
+  alias d="ls -ldF "
+  alias lal="ls -alF "
+  alias dt="ls -ldtF "
+  alias dt9="ls -ldtF  * | head -9"
+  alias grep="\grep -E "  # same as deprecated 'egrep'
+fi
 
 alias pdirs='find * -maxdepth 0 -type d '
 alias pfiles='find * -maxdepth 0 -type f '
 alias dd='d `pdirs` '
 
-alias du='du -BG'
-alias df='df -BG'
 alias wcl="wc -l"
 
 alias hh="history -99"
