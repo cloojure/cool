@@ -65,5 +65,5 @@ alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
 
 alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com --dbname=postal"
 
-alias sqlplus_ot1_rx="rxlogix/rxlogix123@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
-alias sqlplus_ot1_am="argus_mart/rxlogix@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
+alias sqlplus_ot1_rx="sqlplus rxlogix/rxlogix123@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
+alias sqlplus_ot1_am="sqlplus argus_mart/rxlogix@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
