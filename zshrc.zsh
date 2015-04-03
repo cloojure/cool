@@ -8,6 +8,7 @@ export HISTFILE=~/.history
 if [[ $(uname -a) == *Darwin* ]]; then
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
   export GROOVY_HOME="GROOVY_HOME=/usr/local/opt/groovy/libexec"
+  export DYLD_LIBRARY_PATH=/opt/oracle
 fi
 if [[ $(uname -a) == *Linux*.fc20.* ]]; then
   export JAVA_HOME="/usr/java/jdk1.8.0_11"
@@ -23,6 +24,7 @@ path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )
+path=( $path /opt/oracle )
 path=( $path /bin/texbin )
 path=( $path /opt/homebrew-cask/Caskroom/pgadmin3/1.20.0/pgAdmin3.app/Contents/MacOS )
 
@@ -62,5 +64,6 @@ alan1="ubuntu@alan-1.eng.rxlogix.com"
 alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
 
 alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com --dbname=postal"
-alias sqlplus_aws="sqlplus mart_user@//10.100.6.231:1521/pvram"
 
+alias sqlplus_ot1_rx="rxlogix/rxlogix123@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
+alias sqlplus_ot1_am="argus_mart/rxlogix@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"

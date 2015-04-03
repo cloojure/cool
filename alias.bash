@@ -7,9 +7,6 @@ alias gvim="\gvim  -geom '+3300+20' 2>&/dev/null"
 if [[ $(hostname) == amy ]]; then        
   alias gvim="\gvim  -geom '+2000-1200' 2>&/dev/null"
 fi
-if [[ $(uname -a) == *Darwin* ]]; then
-  alias gvim=mvim
-fi
 # old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
 alias d="ls -ldF --color=auto"
@@ -29,7 +26,10 @@ if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
 else
   # echo "Missing Linux"
   echo "OSX is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
+fi
 
+if [[ $(uname -a) == *Darwin* ]]; then
+  alias gvim=mvim
   alias du='du -g'
   alias df='df -g'
   alias d="ls -ldF "
