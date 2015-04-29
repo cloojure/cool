@@ -1,0 +1,25 @@
+grails --version
+
+grails create-app xxx  [--inplace]
+
+grails clean
+
+grails run-app
+
+grails create-controller        xxx
+grails create-domain-class      xxx
+
+-----------------------------------------------------------------------------
+Files:
+  
+  grails-app/controllers/qotd/QuoteController.groovy
+  grails-app/views/layouts/quote.gsp
+  grails-app/views/quote/random.gsp
+
+-----------------------------------------------------------------------------
+Controllers:
+
+  static defaultAction = "funcName"  - e.g. "index" 
+
+    render("...some-content...");   - send straight to browser
+

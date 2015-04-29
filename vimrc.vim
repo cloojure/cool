@@ -41,7 +41,7 @@ set ruler
 set textwidth=90
 set scrolloff=5
 set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
-set path=.,*,src/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh,**/*txt
+set path=.,*,src/**,grails-app/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh,**/*txt
 
 " Only works for X Windows diff on Cygwin (not Win GUI diff)
 set diffexpr=MyDiff()
