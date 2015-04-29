@@ -57,12 +57,22 @@ The following doesn't seem to work (blank screen):
   - Software Management -> Updates -> Check for Updates:  Install all found)
 
 - Install basic software using yum:
-    sudo apt-get install -y  \
-      vim git zsh tcsh fish tmux curl
-      gcc python ruby
-      octave libreoffice
-      tree htop iotop collectl
+    sudo apt install -y  \
+      vim git zsh tcsh fish tmux curl  \
+      gcc python ruby \
+      octave libreoffice \
+      tree htop iotop collectl \
+      zip unzip dos2unix \
+      postgresql (get latest from postgresql.org)
       youtube-dl
+      alien
+
+- For Oracle client on AWS we need:
+  sudo apt install -y libaio1         - async I/O (note can use "apt search libaio")
+  sudo alien -i oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+  sudo alien -i oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+  sudo alien -i oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+    See:  https://help.ubuntu.com/community/Oracle%20Instant%20Client
 
 - rebuild current git 2.2.1 or later (from source)
 
@@ -88,6 +98,7 @@ The following doesn't seem to work (blank screen):
 - Other software: go to website to install
     Dropbox
     HipChat
+    java
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.

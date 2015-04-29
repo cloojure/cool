@@ -12,6 +12,7 @@ export GRAILS_HOME="/opt/grails"
 if [[ $(uname -a) == *Darwin* ]]; then
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
   export GROOVY_HOME="/usr/local/opt/groovy/libexec"
+  export DYLD_LIBRARY_PATH=/opt/oracle
 fi
 
 # baseline path
@@ -26,13 +27,12 @@ path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )
+path=( $path /opt/oracle )
 path=( $path /bin/texbin )
 path=( $path /opt/homebrew-cask/Caskroom/pgadmin3/1.20.0/pgAdmin3.app/Contents/MacOS )
 
 # #awt todo generalize this
 path=( $path /usr/lib/postgresql/9.3/bin)
-
-alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
 
 # common bash/zsh aliases
 source ~/.alias.bash
@@ -56,6 +56,19 @@ alias dosrc="source ~/.zshrc"
 bb=/home/alan/sone2/endpoints/prototype/pedestal-service
 aa=/home/alan/vagrant/endpoints/prototype/pedestal-service
 
+# export LD_LIBRARY_PATH=/lib:/usr/lib:/home/ubuntu/instantclient_12_1
+export ORACLE_HOME=/usr/lib/oracle/12.1/client64
+export LD_LIBRARY_PATH=${ORACLE_HOME}/lib:/lib:/usr/lib
+path=( ${ORACLE_HOME}/bin $path )
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"
+alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
+
+alan1="ubuntu@alan-1.eng.rxlogix.com"
+alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
+
+alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com --dbname=postal"
+
+alias sqlplus_ot1_rx="sqlplus rxlogix/rxlogix123@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
+alias sqlplus_ot1_am="sqlplus argus_mart/rxlogix@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
+alias sqlplus_argus_mart="sqlplus mart_user/rxlogix@argus-mart-db01.eng.rxlogix.com:1521/pvram"
+

@@ -22,8 +22,8 @@ if match( system("uname -a"), "Linux" ) > -1
   " set guifont=Liberation\ Mono\ 10  " alternative for Fedora
 endif
 if match( system("uname -a"), "Darwin" ) > -1
-  echo "Found Darwin, setting guifont for mac... \n"
-  sleep 1
+  " echo "Found Darwin, setting guifont for mac... \n"
+  " sleep 1
   set guifont=Courier\ New:h16
 endif
 

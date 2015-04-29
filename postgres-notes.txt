@@ -1,9 +1,9 @@
-******************************************************************************************
-; Online resources:
-  http://www.postgresql.org/docs/9.3/static/index.html
+-----------------------------------------------------------------------------
+Online resources:
+  http://www.postgresql.org/docs/9.4/static/index.html
   http://www.postgresqltutorial.com/
   http://www.pgadmin.org/
-******************************************************************************************
+-----------------------------------------------------------------------------
 
 shell:
   pg_ctl    initdb  -D /var/postgresql    ; init postgres global storage area
@@ -12,13 +12,13 @@ shell:
 
   createuser <user-name>    ; user-name aka "rolename" in docs
   dropeuser  <user-name>
-  createdb   <db-name>
-  createdb   -O <owner-name> <db-name>
+  createdb   <db-name>      ; or "createdb -O <owner-name> <db-name> "
   dropedb    <db-name>
 
 psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
   \l[+]                         - list databases (+ => extra info)
   \du[+]                        - list users/roles (+ => extra info)
+  \dn[+]                        - list schemas (+ => extra info)
   \d                            - list tables, views, sequences
   \d  [<name>]                  - describe tables, views, sequences
   \c   <dbname>                 - connect to <dbname>
@@ -32,41 +32,18 @@ psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
   CREATE DATABASE <db-name> OWNER <user-name>;    - user-name aka "rolename" in docs
   DROP   DATABASE <db-name>;
 
-Files (Fedora):
-  /var/lib/pgsql
-  /var/lib/pgsql/9.2/data/pg_hba.conf
-Files (Mac OSX):
-  /usr/local/bin/psql
-  /usr/local/Cellar/postgresql/9.3.3/bin/psql
-  /usr/local/var/postgres/pg_hba.conf
+  -----------------------------------------------------------------------------
+  Notes:
+    Although SQL is case insensitive, the commands "CREATE USER..." & "CREATE ROLE..."
+    appear to be *postgres* commands (i.e. NOT SQL), and therefore DO SEEM to be case
+    sensitive.
+  -----------------------------------------------------------------------------
+
 
 Notes:
   Since typing "psql" at the command defaults to "psql <unix-username>", it will fail if
   a database named <unix-username> doesn't exist.  To prevent this, it may be convenient
   to make an empty, default db for each user even if it is never used.
-
-Fedora notes:  
-  See:  https://wiki.postgresql.org/wiki/YUM_Installation
-        https://wiki.postgresql.org/wiki/First_steps
-
-  Change auth method from "ident" to "trust" in pg_hba.conf (/var/lib/psql/...)
-    -- I had 2 of them!
-    -- looks like /var/lib/pgsql/9.3 is the correct one (fedora 20, postgres 9.3, 2014/7)
-    -- log file:  /var/lib/pgsql/9.3/data/pg_log/postgresql-Fri.log   (etc)
-
-  After creation/init:
-  > sudo su - postgres
-  > psql                                        -- implicitly uses DB=postgres
-  postgres=# CREATE USER alan SUPERUSER LOGIN;
-  postgres=# \q                                 -- exit
-  > exit                                        -- logout from user postgres
-  > psql -d postgres                            -- must specify an existing DB
-  postgres=# \l                                 -- list databases
-  postgres=# \da                                -- list schema info
-  postgres=# \d                                 -- list tables
-  postgres=# postgres=# CREATE DATABASE alan;            -- easiest to create dummy DB for all users.
-  postgres=# \l                                 -- DB alan now exists
-  postgres=# \q                                 -- quit
 
 ******************************************************************************************
 ; Trillian staging
@@ -96,13 +73,6 @@ Fedora notes:
   => { commit;          - either commit the change to the db
   => or
   =>   rollback; }      - or rollback (discard) the change
-
-******************************************************************************************
-Notes:
-  Although SQL is case insensitive, the commands "CREATE USER..." & "CREATE ROLE..."
-  appear to be *postgres* commands (i.e. NOT SQL), and therefore DO SEEM to be case
-  sensitive.
-******************************************************************************************
 
 
 Tables:
@@ -155,6 +125,49 @@ Tables:
      Hayward       |  37 |   54 | San Francisco |  46 |   50
 
 -----------------------------------------------------------------------------
+alan=# \dt test
+       List of relations
+ Schema | Name | Type  | Owner
+--------+------+-------+-------
+ public | test | table | alan
+(1 row)
+
+alan=# select * from test;
+ a
+---
+ 1
+ 2
+ 3
+(3 rows)
+
+alan=# SELECT a,
+alan-#        CASE WHEN a=1 THEN 'one'
+alan-#             WHEN a=2 THEN 'two'
+alan-#             ELSE 'other'
+alan-#        END
+alan-#     FROM test;
+ a | case
+---+-------
+ 1 | one
+ 2 | two
+ 3 | other
+(3 rows)
+
+alan=# SELECT a,
+       (CASE WHEN a=1 THEN 'one'
+             WHEN a=2 THEN 'two'
+             ELSE 'other'
+        END) as result
+    FROM test;
+ a | result
+---+--------
+ 1 | one
+ 2 | two
+ 3 | other
+(3 rows)
+
+
+-----------------------------------------------------------------------------
 Installation on Ubuntu:
   If necessary, configure latest apt-get sources from http://www.postgresql.org/download/linux/ubuntu/
 
@@ -167,12 +180,6 @@ Installation on Ubuntu:
     sudo service postgresql stop          - if needed
     sudo service postgresql start         - if needed
 
-Ubuntu files: 
-  /etc/postgresql/9.4/main/environment
-  /etc/postgresql/9.4/main/pg_ctl.conf
-  /etc/postgresql/9.4/main/pg_hba.conf
-  /etc/postgresql/9.4/main/pg_ident.conf
-  /etc/postgresql/9.4/main/postgresql.conf      - set port=5432 if needed
 
 Try to connect:
   > psql
@@ -194,4 +201,133 @@ To use pgadmin3 (aka pgAdmin3)
   Either configure passwords for users, or add this line to "/etc/postgresql/9.4/main/pg_hba.conf"
     "host all all 127.0.0.1/32 trust"
   to enable all local socket users:
+
+-----------------------------------------------------------------------------
+System info:
+  \x    - toggle output format
+  select * from pg_settings;
+  \timing [on|off]
+
+  select reltuples from pg_class where relname = 'my_table_name';        - fast table rows estimate
+
+  select pg_size_pretty( pg_relation_size(          'my_table_name' ));     - table only size
+  select pg_size_pretty( pg_total_relation_size(    'my_table_name' ));     - table + extras size
+  select pg_size_pretty( pg_database_size(          'my_db_name'    ));     - DB size
+
+-----------------------------------------------------------------------------
+Useful definitions:
+
+  create view local_extensions as 
+    select name, default_version, installed_version, left(comment,30) as comment 
+    from pg_available_extensions 
+    where installed_version is not null 
+    order by name;
+  select * from local_extensions;
+
+
+
+
+-----------------------------------------------------------------------------
+oracle_fdw notes:
+  sudo apt install -y libaio-dev        - maybe needed?
+
+-----------------------------------------------------------------------------
+Ubuntu files: 
+  /etc/init.d/postgresql
+
+  /etc/postgresql/9.4/main/environment
+  /etc/postgresql/9.4/main/pg_ctl.conf
+  /etc/postgresql/9.4/main/pg_hba.conf
+  /etc/postgresql/9.4/main/pg_ident.conf
+  /etc/postgresql/9.4/main/postgresql.conf      - set port=5432 if needed
+  /etc/postgresql/9.4/main/start.conf
+
+  /usr/share/postgresql/9.4/extension
+  /usr/share/postgresql/9.4/man/man1
+  /usr/share/postgresql/9.4/man/man7
+  /usr/share/postgresql/9.4/man
+  /usr/share/postgresql/9.4/tsearch_data
+  /usr/share/postgresql/9.4/timezonesets
+
+  /usr/lib/postgresql/9.4/bin/
+  /usr/lib/postgresql/9.4/lib/
+
+  /etc/postgresql-common
+  /usr/share/postgresql-common/
+
+  /var/lib/postgresql
+  /var/lib/postgresql/9.4
+  /var/lib/postgresql/9.4/main
+  /var/lib/postgresql/9.4/main/pg_dynshmem
+  /var/lib/postgresql/9.4/main/pg_notify
+  /var/lib/postgresql/9.4/main/global
+  /var/lib/postgresql/9.4/main/pg_serial
+  /var/lib/postgresql/9.4/main/base
+  /var/lib/postgresql/9.4/main/pg_snapshots
+  /var/lib/postgresql/9.4/main/pg_tblspc
+  /var/lib/postgresql/9.4/main/pg_twophase
+  /var/lib/postgresql/9.4/main/pg_stat
+  /var/lib/postgresql/9.4/main/pg_xlog/archive_status
+  /var/lib/postgresql/9.4/main/pg_xlog
+  /var/lib/postgresql/9.4/main/pg_replslot
+  /var/lib/postgresql/9.4/main/pg_clog
+  /var/lib/postgresql/9.4/main/pg_logical/mappings
+  /var/lib/postgresql/9.4/main/pg_logical/snapshots
+  /var/lib/postgresql/9.4/main/pg_logical
+  /var/lib/postgresql/9.4/main/pg_stat_tmp
+  /var/lib/postgresql/9.4/main/pg_subtrans
+  /var/lib/postgresql/9.4/main/pg_multixact/offsets
+  /var/lib/postgresql/9.4/main/pg_multixact/members
+  /var/lib/postgresql/9.4/main/pg_multixact
+
+  /var/log/postgresql
+
+-----------------------------------------------------------------------------
+Fedora Files 
+  /var/lib/pgsql
+  /var/lib/pgsql/9.2/data/pg_hba.conf
+
+-----------------------------------------------------------------------------
+Mac OSX Files 
+  /usr/local/bin/psql
+  /usr/local/Cellar/postgresql/9.3.3/bin/psql
+  /usr/local/var/postgres/pg_hba.conf
+  /usr/local/var/postgres/server.log
+
+  https://www.codefellows.org/blog/three-battle-tested-ways-to-install-postgresql
+  https://robots.thoughtbot.com/starting-and-stopping-background-services-with-homebrew
+
+  when install 1st time see:
+    mkdir -p ~/Library/LaunchAgents
+    ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+  then:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+        -> set auto-start (use 'unload' to disable auto-start)
+        unload      - disable auto-start
+        stop        - stop service
+        start       - start service ("restart" does not exist)
+
+-----------------------------------------------------------------------------
+Fedora notes:  
+  See:  https://wiki.postgresql.org/wiki/YUM_Installation
+        https://wiki.postgresql.org/wiki/First_steps
+
+  Change auth method from "ident" to "trust" in pg_hba.conf (/var/lib/psql/...)
+    -- I had 2 of them!
+    -- looks like /var/lib/pgsql/9.3 is the correct one (fedora 20, postgres 9.3, 2014/7)
+    -- log file:  /var/lib/pgsql/9.3/data/pg_log/postgresql-Fri.log   (etc)
+
+  After creation/init:
+  > sudo su - postgres
+  > psql                                        -- implicitly uses DB=postgres
+  postgres=# CREATE USER alan SUPERUSER LOGIN;
+  postgres=# \q                                 -- exit
+  > exit                                        -- logout from user postgres
+  > psql -d postgres                            -- must specify an existing DB
+  postgres=# \l                                 -- list databases
+  postgres=# \da                                -- list schema info
+  postgres=# \d                                 -- list tables
+  postgres=# postgres=# CREATE DATABASE alan;            -- easiest to create dummy DB for all users.
+  postgres=# \l                                 -- DB alan now exists
+  postgres=# \q                                 -- quit
 
