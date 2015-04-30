@@ -7,21 +7,29 @@ grails clean
 grails run-app
 grails test-app                             - run all unit tests (& integ???)
 grails test-app xxxSpec                     - run unit test xxxSpec
+grails test-app unit:                       - run all unit tests
 grails test-app integration:                - run all integration tests
 grails test-app integration:xxx             - just run integration test xxx
 
 - Always use package-name prefix (e.g. "pkg.")
-grails create-controller           pkg.xxx
-grails create-domain-class         pkg.xxx
-grails create-service              pkg.xxx
-grails create-integration-test     pkg.xxx      - creates pkg.xxxIntegrationSpec.groovy
+grails create-controller                pkg.xxx
+grails create-domain-class              pkg.xxx
+grails create-service                   pkg.xxx
+grails create-unit-test                 pkg.xxx      - creates ???
+grails create-integration-test          pkg.xxx      - creates pkg.xxxIntegrationSpec.groovy
+grails create-scaffold-controller       pkg.User
 
 -----------------------------------------------------------------------------
 Files:
   
+  grails-app/conf/BootStrap.groovy
+  grails-app/conf/Config.groovy
+  grails-app/conf/DataSource.groovy
+
   grails-app/controllers/qotd/QuoteController.groovy
   grails-app/views/layouts/quote.gsp
   grails-app/views/quote/random.gsp
+
 
 -----------------------------------------------------------------------------
 Controllers:
