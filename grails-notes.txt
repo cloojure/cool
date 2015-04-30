@@ -5,9 +5,16 @@ grails create-app xxx  [--inplace]
 grails clean
 
 grails run-app
+grails test-app                             - run all unit tests (& integ???)
+grails test-app xxxSpec                     - run unit test xxxSpec
+grails test-app integration:                - run all integration tests
+grails test-app integration:xxx             - just run integration test xxx
 
-grails create-controller        xxx
-grails create-domain-class      xxx
+- Always use package-name prefix (e.g. "pkg.")
+grails create-controller           pkg.xxx
+grails create-domain-class         pkg.xxx
+grails create-service              pkg.xxx
+grails create-integration-test     pkg.xxx      - creates pkg.xxxIntegrationSpec.groovy
 
 -----------------------------------------------------------------------------
 Files:

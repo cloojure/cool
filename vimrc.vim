@@ -38,7 +38,7 @@ set selectmode="mouse,key,cmd"
 set fileformat=unix
 set fileformats=unix,dos
 set ruler
-set textwidth=90
+set textwidth=120
 set scrolloff=5
 set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
 set path=.,*,src/**,grails-app/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh,**/*txt
