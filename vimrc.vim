@@ -9,6 +9,7 @@ nnoremap  <C-e>     :Eval<CR>
 
 let g:clojure_align_multiline_strings = 1
 
+let groovy_allow_cpp_keywords = 1  " #awt todo:  fix this at vim.org (groovy.vim)
 
 " Turn on source code syntax coloring
 syntax on
@@ -38,7 +39,7 @@ set selectmode="mouse,key,cmd"
 set fileformat=unix
 set fileformats=unix,dos
 set ruler
-set textwidth=90
+set textwidth=120
 set scrolloff=5
 set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
 set path=.,*,src/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh,**/*txt

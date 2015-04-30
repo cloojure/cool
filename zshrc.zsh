@@ -26,6 +26,7 @@ path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )
 path=( $path /opt/oracle )
 path=( $path /bin/texbin )
+path=( $path /usr/local/mysql/bin )
 path=( $path /opt/homebrew-cask/Caskroom/pgadmin3/1.20.0/pgAdmin3.app/Contents/MacOS )
 
 # #awt todo generalize this
@@ -60,6 +61,7 @@ path=( ${ORACLE_HOME}/bin $path )
 
 alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
 
+srcs='{grails-app,src,test}'    # groovy source file top dirs
 alan1="ubuntu@alan-1.eng.rxlogix.com"
 alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
 
@@ -68,4 +70,6 @@ alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.
 alias sqlplus_ot1_rx="sqlplus rxlogix/rxlogix123@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
 alias sqlplus_ot1_am="sqlplus argus_mart/rxlogix@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
 alias sqlplus_argus_mart="sqlplus mart_user/rxlogix@argus-mart-db01.eng.rxlogix.com:1521/pvram"
+
+alias sqlplus_pva_mart="sqlplus pva_app/rxlogix@argus-mart-db01.eng.rxlogix.com:1521/ARGUS_REPORTS"
 
