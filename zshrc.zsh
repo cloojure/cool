@@ -5,13 +5,14 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 export HISTFILE=~/.history
 
+export JAVA_HOME="/opt/java"
+export GROOVY_HOME="/opt/groovy"
+export GRAILS_HOME="/opt/grails"
+
 if [[ $(uname -a) == *Darwin* ]]; then
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
-  export GROOVY_HOME="GROOVY_HOME=/usr/local/opt/groovy/libexec"
+  export GROOVY_HOME="/usr/local/opt/groovy/libexec"
   export DYLD_LIBRARY_PATH=/opt/oracle
-fi
-if [[ $(uname -a) == *Linux*.fc20.* ]]; then
-  export JAVA_HOME="/usr/java/jdk1.8.0_11"
 fi
 
 # baseline path
@@ -20,6 +21,8 @@ path=( $path /opt/bin )
 path=( $path /usr/local/git/bin )
 path=( $path /opt/java/bin )
 path=( $path ${JAVA_HOME}/bin )
+path=( $path ${GROOVY_HOME}/bin )
+path=( $path ${GRAILS_HOME}/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
