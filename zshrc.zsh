@@ -12,10 +12,12 @@ export GRAILS_HOME="/opt/grails"
 if [[ $(uname -a) == *Darwin* ]]; then
   export DYLD_LIBRARY_PATH=/opt/oracle
 
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
+# export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home"
 
-  export GROOVY_HOME="/usr/local/opt/groovy/libexec"
+# export GROOVY_HOME="/usr/local/opt/groovy/libexec"
+  export GROOVY_HOME="/opt/groovy"
+
   export GRAILS_HOME="/opt/grails"
 fi
 
