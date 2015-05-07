@@ -10,15 +10,18 @@ export GROOVY_HOME="/opt/groovy"
 export GRAILS_HOME="/opt/grails"
 
 if [[ $(uname -a) == *Darwin* ]]; then
+
   export DYLD_LIBRARY_PATH=/opt/oracle
 
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home"
 
 # export GROOVY_HOME="/usr/local/opt/groovy/libexec"
-  export GROOVY_HOME="/opt/groovy"
+# export GROOVY_HOME="/opt/groovy"
+  export GROOVY_HOME=""
 
-  export GRAILS_HOME="/opt/grails"
+# export GRAILS_HOME="/opt/grails"
+  export GRAILS_HOME=""
 fi
 
 # baseline path
@@ -82,3 +85,6 @@ alias sqlplus_argus_mart="sqlplus mart_user/rxlogix@argus-mart-db01.eng.rxlogix.
 
 alias sqlplus_pva_mart="sqlplus pva_app/rxlogix@argus-mart-db01.eng.rxlogix.com:1521/ARGUS_REPORTS"
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"

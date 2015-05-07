@@ -1,0 +1,63 @@
+
+
+Sample VBScript file:  (eg "test3.vbs")
+-----------------------------------------------------------------------------
+Wscript.echo "VBScript - enter"
+
+Set objShell = CreateObject("WScript.Shell")
+
+Set objWshScriptExec = objShell.Exec("ipconfig")
+WScript.Echo objWshScriptExec.StdOut.ReadAll
+
+Set objWshScriptExec = objShell.Exec("ping -n 3 google.com")
+WScript.Echo objWshScriptExec.StdOut.ReadAll
+
+Wscript.echo "VBScript - exit"
+-----------------------------------------------------------------------------
+
+invoke from windoze prompt:
+  > cscript test3.vbs
+
+output:
+-----------------------------------------------------------------------------
+c:\merck> cscript test3.vbs
+Microsoft (R) Windows Script Host Version 5.8
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+VBScript - enter
+
+Windows IP Configuration
+
+
+Ethernet adapter Local Area Connection:
+
+   Connection-specific DNS Suffix  . : us-west-2.compute.internal
+   IPv4 Address. . . . . . . . . . . : 172.28.11.31
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 172.28.11.1
+
+Tunnel adapter isatap.us-west-2.compute.internal:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : us-west-2.compute.internal
+
+Tunnel adapter Local Area Connection* 11:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+
+Pinging google.com [173.194.33.135] with 32 bytes of data:
+Reply from 173.194.33.135: bytes=32 time=6ms TTL=53
+Reply from 173.194.33.135: bytes=32 time=6ms TTL=53
+Reply from 173.194.33.135: bytes=32 time=6ms TTL=53
+
+Ping statistics for 173.194.33.135:
+    Packets: Sent = 3, Received = 3, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 6ms, Maximum = 6ms, Average = 6ms
+
+VBScript - exit
+
+c:\merck>
+-----------------------------------------------------------------------------
