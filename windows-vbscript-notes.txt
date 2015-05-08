@@ -1,4 +1,22 @@
 
+Notes on running Windows 2008 scripts (2015/5/7)
+
+
+Sample VBScript file:  (eg "test1.vbs")
+-----------------------------------------------------------------------------
+Wscript.echo "My very first script."
+
+while x < 5
+  x = x+1
+  wscript.echo x &  " Loop"
+wend
+
+Set objShell = CreateObject("WScript.Shell")
+
+objShell.Exec " ping -n 5 google.com " > out1.txt
+
+objShell.Run "%COMSPEC% /k ipconfig"
+-----------------------------------------------------------------------------
 
 Sample VBScript file:  (eg "test3.vbs")
 -----------------------------------------------------------------------------
@@ -61,3 +79,28 @@ VBScript - exit
 
 c:\merck>
 -----------------------------------------------------------------------------
+
+Create task "alan1" running 1x/min command "test3.vbs"
+  schtasks /create -tn alan1 /tr test3.vbs /sc minute
+
+Delete task "alan1" 
+  schtasks /delete /tn alan1
+
+
+The following file works: test5.vbs
+-----------------------------------------------------------------------------
+  Wscript.echo "script - enter"
+
+  const HIDE_WINDOW = 0
+  const WAIT_FOR_COMPLETION = True
+  Set objShell = CreateObject("WScript.Shell")
+  outer = 0
+  while outer < 5
+    outer = outer + 1
+    Wscript.echo "  outer", outer
+    ' -n 11 implies a 10 sec delay
+    retVal = objShell.Run( "ping 127.0.0.1 -n 11", HIDE_WINDOW, WAIT_FOR_COMPLETION )
+  Wend
+
+  Wscript.echo "script - exit"
+
