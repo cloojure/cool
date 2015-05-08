@@ -88,19 +88,20 @@ Delete task "alan1"
 
 
 The following file works: test5.vbs
+  cscript test5.vbs    - to execute in windows cmd.exe shell
 -----------------------------------------------------------------------------
-  Wscript.echo "script - enter"
-
+  ' Demonstrate the getto hack needed to get sleep 10 sec at a time for one minute
   const HIDE_WINDOW = 0
   const WAIT_FOR_COMPLETION = True
+
+  Wscript.echo "script - enter", Date(), Time()
   Set objShell = CreateObject("WScript.Shell")
   outer = 0
-  while outer < 5
+  ' Loops=6, pause=10 sec each -> 60 sec delay
+  while outer < 6
     outer = outer + 1
-    Wscript.echo "  outer", outer
-    ' -n 11 implies a 10 sec delay
+    Wscript.echo "  outer", outer, Time()
     retVal = objShell.Run( "ping 127.0.0.1 -n 11", HIDE_WINDOW, WAIT_FOR_COMPLETION )
   Wend
-
-  Wscript.echo "script - exit"
+  Wscript.echo "script - exit", Date(), Time()
 
