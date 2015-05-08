@@ -105,3 +105,15 @@ The following file works: test5.vbs
   Wend
   Wscript.echo "script - exit", Date(), Time()
 
+Final solution (bash/Cygwin):
+-----------------------------------------------------------------------------
+#!/bin/bash -x
+while true ; do
+  echo "date: `date`"
+  ping   54.48.56.102  10 10
+  telnet 54.48.56.102 --no-login &
+    sleep 10 ; kill -9 %
+    sleep 01 ; kill -9 %
+  sleep 10
+done
+-----------------------------------------------------------------------------
