@@ -77,6 +77,9 @@ srcs='{grails-app,src,test}'    # groovy source file top dirs
 alan1="ubuntu@alan-1.eng.rxlogix.com"
 alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
 
+pvax="ubuntu@52.24.170.46"
+alias gopvax="ssh -i ~/.ssh/rxdev_merck ${pvax}"
+
 alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com --dbname=postal"
 
 alias sqlplus_ot1_rx="sqlplus rxlogix/rxlogix123@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"

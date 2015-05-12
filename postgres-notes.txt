@@ -171,8 +171,8 @@ alan=# SELECT a,
 Installation on Ubuntu:
   If necessary, configure latest apt-get sources from http://www.postgresql.org/download/linux/ubuntu/
 
-  sudo apt-get install postgresql
-  sudo apt-get install pgAdmin3
+  sudo apt-get install -y postgresql
+  sudo apt-get install -y pgAdmin3
   sudo service postgresql status
     service --status-all
     service --help
@@ -201,6 +201,11 @@ To use pgadmin3 (aka pgAdmin3)
   Either configure passwords for users, or add this line to "/etc/postgresql/9.4/main/pg_hba.conf"
     "host all all 127.0.0.1/32 trust"
   to enable all local socket users:
+
+-----------------------------------------------------------------------------
+Connecting from another host:
+
+psql --host=52.24.170.46 --username=ubuntu
 
 -----------------------------------------------------------------------------
 System info:
