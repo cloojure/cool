@@ -51,13 +51,19 @@ endfunction
 function! WidthDouble()
   set columns=200
 endfunction
+function! ConfigStd()
+  call LinesMedium()
+  call WidthSingle()
+endfunction
+
 :command! C6 set columns=60         " Columns 60
 :command! Ws call WidthSingle()     " Width single
 :command! Wd call WidthDouble()     " Width double
 :command! L2 set lines=20           " Lines 20
 :command! L4 set lines=40           " Lines 40
-:command! Ls call LinesSmall()     " Lines single
-:command! Ld call LinesMedium()     " Lines double
+:command! Ls call LinesSmall()      " Lines single
+:command! Lm call LinesMedium()     " Lines double
+:command! CC call ConfigStd()
 
 " Font options
 :command! Fll set guifont=Monospace\ 14
