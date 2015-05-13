@@ -39,11 +39,11 @@ endfunction
   " User-defined commands must begin with a capital letter 
 
 " Window shape commands/functions
-function! LinesSingle()
-  set lines=60
+function! LinesSmall()
+  set lines=40
 endfunction
-function! LinesDouble()
-  set lines=120
+function! LinesMedium()
+  set lines=60
 endfunction
 function! WidthSingle()
   set columns=120
@@ -56,8 +56,8 @@ endfunction
 :command! Wd call WidthDouble()     " Width double
 :command! L2 set lines=20           " Lines 20
 :command! L4 set lines=40           " Lines 40
-:command! Ls call LinesSingle()     " Lines single
-:command! Ld call LinesDouble()     " Lines double
+:command! Ls call LinesSmall()     " Lines single
+:command! Ld call LinesMedium()     " Lines double
 
 " Font options
 :command! Fll set guifont=Monospace\ 14
@@ -67,7 +67,7 @@ endfunction
 :command! FF  set guifont=Monospace\ 12
 
 " Default size/shape
-call LinesSingle()
+call LinesMedium()
 call WidthSingle()
 set equalalways
 
