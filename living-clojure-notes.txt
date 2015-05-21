@@ -1,0 +1,46 @@
+
+most items are not errata, but rather "language clarifications"
+-----------------------------------------------------------------------------
+
+p8, (cons 5 nil) -> (5)
+  nil is doing double-duty here, since it can be both an element in the seq and
+  signal the end of the seq.  Ambiguous.
+
+p11 commas in maps
+  commas should not be used in maps, since they will be ignored even if in the
+  wrong location:  
+    { :missing-first-value, :missing-2nd-value,
+      :has-a-value "hello" }
+  better to just use each pair on separate line. Compiler will always catch
+  off-by-one errors (one-half of a key-value pair is missing), which leaves an
+  odd number of items inside the curly braces.  And, fortunately, it seems to
+  never happen that two key-value pairs are missing an item (which would leave
+  an even number of items so that the compiler couldn't detect the error).
+
+p12 didn't cover (:missing {:a 1 :b 2})  ; still -> nil ???
+
+p16. No, the parens make it list.  The quote just escapes the "normal" meaning
+of lists:  function call.
+
+p17, end: "prefixed by a slash (/)" -> "We could also explicitly reference the
+symbol by specifying the namespace first and using a slash to separate them:
+user/developer
+
+p18, para 2: "line user/developer, " -> "expression user/developer"
+
+p21, para2: 
+  -> "Namespaces are used to organize and control access to vars."
+  -> "..def or defn, it was created in the "user" namespace, which is the default
+  namespace for the REPL."
+  -> ".. by using an "ns" expression.  Any vars created after
+  calling ns will be created in the new namespace.
+
+p22, para2: 
+  -> "libs (libraries)"  "are composed of names & symbols wrapped up in a namespace.
+  To access the contents of a lib, we typically use something named 'require' in one of
+  3 common ways."
+
+  para 3: "auto-required" -> "loaded automatically"
+  para 4: "..second way to use require is with.."
+  para 5: "..within the ns expression, using the keyword form :require and wrapping
+  the namespace and its alias in a vector:"

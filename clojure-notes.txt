@@ -1,0 +1,17 @@
+
+power is nice, but what I need most is confidence
+
+"Code is data": Most of the time, you don't care.
+  In the computer memory, both "code" (e.g. the Math.sin()
+  function) and "data" (e.g. the number 3.14) are stored as
+  bits.  The bits which we choose to execute are called "code";
+  the bits which are not executed are called "data".
+
+  Nothing stops us from executing some code which
+  manipulates data bits into another form, and then
+  executing the resulting bits.  In fact, this is exactly
+  what a compiler does:  it takes the source code bits (a
+  sequence of text characters), produces some other bits
+  (the "compiled code"), and we then execute those "compiled
+  code" bits.
+

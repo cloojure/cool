@@ -11,6 +11,7 @@ highlight! link DiffText MatchParen     " Aqua diff coloring
 
 set verbose=0   " increment to aid in debugging
 
+set guifont=Monospace\ 8  " better for small screen
 " match index is 0-based (C-style);  no match = -1
 " if match( system("uname -a"), "Ubuntu" ) > -1
 "   " echo "Found Ubuntu, setting guifont for XPS13... \n"
@@ -21,11 +22,11 @@ if match( system("uname -a"), "Linux" ) > -1
   set guifont=Monospace\ 10  " default => Linux (27 in. LG monitor)
   " set guifont=Liberation\ Mono\ 10  " alternative for Fedora
 endif
-if match( system("uname -a"), "Darwin" ) > -1
-  " echo "Found Darwin, setting guifont for mac... \n"
-  " sleep 1
-  set guifont=Courier\ New:h16
-endif
+" if match( system("uname -a"), "Darwin" ) > -1
+"   echo "Found Darwin, setting guifont for mac... \n"
+"   sleep 1
+"   set guifont=Courier\ New:h16
+" endif
 
 " This function is used to swap
 " the orientation of 2 windows (eg left/right), while keeping the cursor in the same pane
