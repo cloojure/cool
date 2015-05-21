@@ -63,7 +63,7 @@ git push <remote> --delete <branch>     # delete <branch> on server <remote>
 
 --------------------------------------------------------------------------------
 # Checkout a remote branch for the first time, creating a local tracking branch
-git checkout --track <remote/branch>
+git checkout --track <remote>/<branch>   # e.g. "origin/feat-x" -> local "feat-x" branch
 --------------------------------------------------------------------------------
 # Normal branch creation:  starting on "feat-23"
 git checkout master                         # new branch is based here
