@@ -44,8 +44,9 @@ p22, para2:
   para 4: "..second way to use require is with.."
   para 5: "..within the ns expression, using the keyword form :require and wrapping
   the namespace and its alias in a vector:"
-  (Note that, for the first 2 forms, the argument to require needs to be escaped with a single-quote. This is not
-  necessary in the third form where require is nested within the ns expression).
+  (Note that, for the first 2 forms, the argument to require needs to be escaped with a
+  single-quote. This is not necessary in the third form where require is nested within the ns
+  expression).
 
 
 p24 #2: "vector of foods1 is converted to a set and..."
@@ -61,8 +62,8 @@ p33,34: if-let, when-let: find *result* of expression, then eval
   (Since they are rarely used, I would leave them out of the early chapters)
 p36 "#  ()" spacing typo
 p38: (def surprise2 (comp oh-my toggle-grow))
-  there is little point in creating something a new function, using it once, and then throwing it away.  it is easier to
-  just use it directly
+  there is little point in creating something a new function, using it once, and then throwing it
+  away.  it is easier to just use it directly
 p39: don't understand the purpose of [[color size]]
 
 p44: (defn alice-is [cum-result word-list]
@@ -73,6 +74,15 @@ p44: (defn alice-is [cum-result word-list]
             (alice-is new-result words-remaining)))
 
 p44, #5: "..we concat the string "Alice is " to the first element of 'in', then.."
+p45, top: 
+  (features that are built-in to Clojure are called "special forms", which are different from the
+  functions, vars, symbols, & values that you can create as a user.  'def', 'if', and 'let' are
+  examples of special forms.  'loop' & 'recur' are also special forms)
+p45, alice-is: redo example & fix output
+p46, para 3, 
+  "..function itself.." -> "Note that the function itself can be used as an implicit recursion
+  target, as we have done here.  If the recursion point is not the first expression of the function,
+  the 'loop' form must be used to explicitely specify the recursion point.
 
 -----------------------------------------------------------------------------
 examples diving deeper (Clojure Confidential)
