@@ -37,10 +37,14 @@ p21, para2:
 
 p22, para2: 
   -> "libs (libraries)"  "are composed of names & symbols wrapped up in a namespace.
-  To access the contents of a lib, we typically use something named 'require' in one of
-  3 common ways."
+  To access the contents of a lib, we can use the word 'require' in one of
+  3 common ways:"
 
   para 3: "auto-required" -> "loaded automatically"
   para 4: "..second way to use require is with.."
   para 5: "..within the ns expression, using the keyword form :require and wrapping
   the namespace and its alias in a vector:"
+  (Note that, for the first 2 forms, the argument to require needs to be escaped with a single-quote. This is not
+  necessary in the third form where require is nested within the ns expression).
+
+p44, #5: "..we concat the string "Alice is " to the first element of 'in', then.."
