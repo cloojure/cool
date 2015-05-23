@@ -47,4 +47,39 @@ p22, para2:
   (Note that, for the first 2 forms, the argument to require needs to be escaped with a single-quote. This is not
   necessary in the third form where require is nested within the ns expression).
 
+
+p24 #2: "vector of foods1 is converted to a set and..."
+p24 #3: "vector of foods2 is converted to a set and..."
+p27: didn't cover (true? 1), (true? "true"), (true :true)
+  must be exactly true, false, or nil for true? false? nil? fns.
+p28, nil? tests is a value is nil
+p29, line 1: collection -> collections
+p29, para4: "not_ _seq" -> (not (seq ...))
+p30, para 2: avoid "(not (empty? x))" don't understand reason
+p31, para 7: "logical true" -> "logically true"
+p33,34: if-let, when-let: find *result* of expression, then eval
+  (Since they are rarely used, I would leave them out of the early chapters)
+p36 "#  ()" spacing typo
+p38: (def surprise2 (comp oh-my toggle-grow))
+  there is little point in creating something a new function, using it once, and then throwing it away.  it is easier to
+  just use it directly
+p39: don't understand the purpose of [[color size]]
+
+p44: (defn alice-is [cum-result word-list]
+        if (empty? word-list)
+          cum-result
+          (let [new-result          (str cum-result (first word-list))
+                words-remaining     (rest word-list) ]
+            (alice-is new-result words-remaining)))
+
 p44, #5: "..we concat the string "Alice is " to the first element of 'in', then.."
+
+-----------------------------------------------------------------------------
+examples diving deeper (Clojure Confidential)
+
+p32:
+(some #{nil} [nil nil nil]) -> nil
+(some #{false} [false false false]) -> nil
+  ->  (let [is-nil?   (mapv nil?   [nil   nil   nil])
+            is-false? (mapv false? [false false false]) ]
+        (some is-false?))
