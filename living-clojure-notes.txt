@@ -67,6 +67,8 @@ p44: (defn alice-is [cum-result word-list]
           (let [new-result          (str cum-result (first word-list))
                 words-remaining     (rest word-list) ]
           )
+p47/49:  Map/Reduce the Ultimate (both?)
+p53, para 2: -> "..Clojure expressions, now you can.."
 
 -----------------------------------------------------------------------------
 examples diving deeper (Clojure Confidential)
@@ -77,3 +79,5 @@ p32:
   ->  (let [is-nil?   (mapv nil?   [nil   nil   nil])
             is-false? (mapv false? [false false false]) ]
         (some is-false?))
+
+p50, 2nd 1/2: examples for keep-if, drop-if
