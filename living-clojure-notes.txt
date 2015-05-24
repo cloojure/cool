@@ -69,6 +69,7 @@ p44: (defn alice-is [cum-result word-list]
           )
 p47/49:  Map/Reduce the Ultimate (both?)
 p53, para 2: -> "..Clojure expressions, now you can.."
+p53, end: "code shaping" -> "data shaping"
 
 -----------------------------------------------------------------------------
 examples diving deeper (Clojure Confidential)
