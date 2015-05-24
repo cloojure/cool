@@ -7,10 +7,9 @@ export HISTFILE=~/.history
 
 export JAVA_HOME="/opt/java"
 export GROOVY_HOME="/opt/groovy"
-export GRAILS_HOME="/opt/grails"
+export DATOMIC_HOME="/opt/datomic"
 
 if [[ $(uname -a) == *Darwin* ]]; then
-
   export DYLD_LIBRARY_PATH=/opt/oracle
 
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
@@ -19,9 +18,6 @@ if [[ $(uname -a) == *Darwin* ]]; then
 # export GROOVY_HOME="/usr/local/opt/groovy/libexec"
 # export GROOVY_HOME="/opt/groovy"
   export GROOVY_HOME=""
-
-# export GRAILS_HOME="/opt/grails"
-  export GRAILS_HOME=""
 fi
 
 # baseline path
@@ -31,7 +27,7 @@ path=( $path /usr/local/git/bin )
 path=( $path /opt/java/bin )
 path=( $path ${JAVA_HOME}/bin )
 path=( $path ${GROOVY_HOME}/bin )
-path=( $path ${GRAILS_HOME}/bin )
+path=( $path ${DATOMIC_HOME}/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
@@ -56,11 +52,9 @@ setopt csh_null_glob
 # set prompt string
 PS1='%50<>> ..<%~ > '
 
-
 # zsh-specific aliases
 alias dosrc="source ~/.zshrc"
 
-# echo ".zshrc - exit"
 
 # aa=/home/alan/sone/endpoints/prototype/pedestal-service
 bb=/home/alan/sone2/endpoints/prototype/pedestal-service
@@ -70,26 +64,11 @@ aa=/home/alan/vagrant/endpoints/prototype/pedestal-service
 export ORACLE_HOME=/usr/lib/oracle/12.1/client64
 export LD_LIBRARY_PATH=${ORACLE_HOME}/lib:/lib:/usr/lib
 path=( ${ORACLE_HOME}/bin $path )
-
-alias sqldev="~/Applications/SQLDeveloper.app/Contents/MacOS/sqldeveloper.sh"
-
-srcs='{grails-app,src,test}'    # groovy source file top dirs
-alan1="ubuntu@alan-1.eng.rxlogix.com"
-alan_c38_1="ubuntu@alan-c38-1.eng.rxlogix.com"
-
-pvax="ubuntu@52.24.170.46"
-alias gopvax="ssh -i ~/.ssh/rxdev_merck ${pvax}"
-
 alias psql_aws="psql --username=rxlogix --host=pg-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com --dbname=postal"
-
 alias sqlplus_ot1_rx="sqlplus rxlogix/rxlogix123@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
 alias sqlplus_ot1_am="sqlplus argus_mart/rxlogix@ora-test-1.cksh17mdz5oo.us-west-1.rds.amazonaws.com:1521/ORCL"
 alias sqlplus_argus_mart="sqlplus mart_user/rxlogix@argus-mart-db01.eng.rxlogix.com:1521/pvram"
-
 alias sqlplus_pva_mart="sqlplus pva_app/rxlogix@argus-mart-db01.eng.rxlogix.com:1521/ARGUS_REPORTS"
 
-alias gowin="ssh administrator@54.68.239.125"
-alias wpw="cat ~/alan/wpw.txt"
+# echo ".zshrc - exit"
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"
