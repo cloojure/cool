@@ -71,7 +71,9 @@ endfunction
 :command! Fl  set guifont=Monospace\ 12
 :command! Fm  set guifont=Monospace\ 10
 :command! Fs  set guifont=Monospace\ 9
+
 :command! FF  set guifont=Monospace\ 12
+:command! FG  set guifont=Monospace\ 14
 
 " Default size/shape
 call LinesMedium()
