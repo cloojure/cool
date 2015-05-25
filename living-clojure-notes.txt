@@ -91,6 +91,14 @@ p48, both middle examples, ":mouse" missing colon
 p47/49:  Map/Reduce the Ultimate (both?)
 p53, para 2: -> "..Clojure expressions, now you can.."
 p53, end: "code shaping" -> "data shaping"
+p57, "We will then use swap! to increment our counter many times in a dotimes loop, which is
+intended solely for its side-effects (dotimes always returns nil). In our case, the side-effect is
+to increment our counter atom."
+p58, #1, "..for namming a value that is not used.."
+p65, #1, "the change-error function"
+p69, para 3, "..that currently dominant languages.."
+p70, para 1, "new and dot special forms"
+p76, para 1, "When we call the.."
 
 -----------------------------------------------------------------------------
 examples diving deeper (Clojure Confidential)
