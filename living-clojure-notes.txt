@@ -84,6 +84,7 @@ p46, para 3,
   target, as we have done here.  If the recursion point is not the first expression of the function,
   the 'loop' form must be used to explicitely specify the recursion point.
 p46, para 4, -> "..one data structure into another and reducing (or eliminating) the use of state in functions."
+p48, both middle examples, ":mouse" missing colon
 
 -----------------------------------------------------------------------------
 examples diving deeper (Clojure Confidential)
