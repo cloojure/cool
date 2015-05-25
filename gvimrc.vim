@@ -23,10 +23,10 @@ call ConfigStd()
 :command! CC call ConfigStd()
 
 " match index is 0-based (C-style);  no match = -1
-if match( system("uname -a"), "Linux" ) > -1
+if (match( system("uname -a"), "Linux" ) > -1)
   set guifont=Monospace\ 10             " default => Linux (27 in. LG monitor)
 " set guifont=Liberation\ Mono\ 10      " alternative for Fedora
-elseif match( system("uname -a"), "Darwin" ) > -1
+elseif (match( system("uname -a"), "Darwin" ) > -1)
   echo "Found Darwin, setting guifont for mac... \n"
   sleep 1
   set guifont=Courier\ New:h16
