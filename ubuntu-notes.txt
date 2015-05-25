@@ -1,0 +1,11 @@
+
+--------------------------------------------------------------------------------
+ubuntu upgrade
+  gconf-editor
+  unity-tweat-tool -> workspace -> additional -> focus mode: "Sloppy"
+  curl
+  ctags
+  jq (json formatter tool)
+  JsonView Chrome extension
+  skype
+

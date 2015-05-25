@@ -71,6 +71,8 @@ p44: (defn alice-is [cum-result word-list]
           cum-result
           (let [new-result          (str cum-result (first word-list))
                 words-remaining     (rest word-list) ]
+          )
+
             (alice-is new-result words-remaining)))
 
 p44, #5: "..we concat the string "Alice is " to the first element of 'in', then.."
@@ -86,6 +88,10 @@ p46, para 3,
 p46, para 4, -> "..one data structure into another and reducing (or eliminating) the use of state in functions."
 p48, both middle examples, ":mouse" missing colon
 
+p47/49:  Map/Reduce the Ultimate (both?)
+p53, para 2: -> "..Clojure expressions, now you can.."
+p53, end: "code shaping" -> "data shaping"
+
 -----------------------------------------------------------------------------
 examples diving deeper (Clojure Confidential)
 
@@ -95,3 +101,5 @@ p32:
   ->  (let [is-nil?   (mapv nil?   [nil   nil   nil])
             is-false? (mapv false? [false false false]) ]
         (some is-false?))
+
+p50, 2nd 1/2: examples for keep-if, drop-if
