@@ -1,9 +1,9 @@
 
 set verbose=0   " increment to aid in debugging
 
-" execute pathogen#infect()
-" filetype plugin indent on     " plugins are enabled
-" filetype plugin on            " plugins are enabled
+execute pathogen#infect()
+filetype plugin indent on     " plugins are enabled
+filetype plugin on            " plugins are enabled
 
 " Vim Fireplace shortcuts
 nnoremap  <C-e>     :%Eval<CR>
