@@ -4,14 +4,25 @@ colorscheme desert
 " colorscheme slate
 " colorscheme default
 
-" Font options
-:command! Fll set guifont=Monospace\ 14
-:command! Fl  set guifont=Monospace\ 12
-:command! Fm  set guifont=Monospace\ 10
-:command! Fs  set guifont=Monospace\ 9
+" DEMO: This syntax works
+if (has("gui_running"))
+" echo "Found gui_running... \n"
+" sleep 1
+endif
 
-:command! FF  set guifont=Monospace\ 12
-:command! FG  set guifont=Monospace\ 14
+" Window shape commands
+:command! Wl set columns=240        " Width large
+:command! Wm set columns=120        " Width medium
+:command! Ws set columns=60         " Width small
+:command! Ll set lines=99           " Lines large
+:command! Lm set lines=60           " Lines medium
+:command! Ls set lines=40           " Lines small
+
+" Font options
+:command! Fll set guifont=Monospace\ 14     " Font large-large
+:command! Fl  set guifont=Monospace\ 12     " Font large
+:command! Fm  set guifont=Monospace\ 10     " Font medium
+:command! Fs  set guifont=Monospace\ 9      " Font small
 
 " Default size/shape
 function! ConfigStd()
@@ -20,7 +31,11 @@ function! ConfigStd()
   set guifont=Monospace\ 10
 endfunction
 call ConfigStd()
-:command! CC call ConfigStd()
+
+" Define an easy way to maximize the window (Vertical bar '|' concats 2 commands on one line. It can
+" also be done with a crtl-v/vrtl-j combination)
+:command! WW set columns=300 lines=99
+:command! Ww set columns=120 lines=60
 
 " match index is 0-based (C-style);  no match = -1
 if (match( system("uname -a"), "Linux" ) > -1)
@@ -33,14 +48,6 @@ elseif (match( system("uname -a"), "Darwin" ) > -1)
 endif
 
 set guioptions-=r  guioptions-=L  guioptions+=l
-
-" Window shape commands/functions
-:command! Wl set columns=240        " Width large
-:command! Wm set columns=120        " Width medium
-:command! Ws set columns=60         " Width small
-:command! Ll set lines=99           " Lines large
-:command! Lm set lines=60           " Lines medium
-:command! Ls set lines=40           " Lines small
 
 " Set columns wide if in "diff" mode
 if &diff

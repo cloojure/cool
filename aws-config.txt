@@ -6,7 +6,8 @@
   sudo apt install -y --fix-missing   \
       vim git zsh tcsh                \
       curl tree htop iotop            \
-      zip dos2unix alien              
+      zip dos2unix alien              \
+      maven s3cmd
 
 # Generate public/private keys
   ssh-keygen    # Answer <ret> to all questions
