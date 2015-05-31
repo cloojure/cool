@@ -5,6 +5,9 @@ execute pathogen#infect()
 filetype plugin indent on     " plugins are enabled
 filetype plugin on            " plugins are enabled
 
+" Recognize *.cljx files as Clojure source. Can place in ~/.vimrc or ~/.vim/ftdetect/cljx.vim
+" autocmd BufWinEnter,BufNewFile,BufRead *.cljx set filetype=clojure
+
 " Vim Fireplace shortcuts
 nnoremap  <C-e>     :%Eval<CR>
 nnoremap  <C-e>     :Eval<CR>
