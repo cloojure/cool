@@ -86,3 +86,43 @@ Notes:
     (like the location of goods in a warehouse) or they could be highly interconnected (like the
     graph of "likes" in a social application).
 
+  An attribute that points to another entity (as opposed to a literal value like the string "abc")
+    is like an arrow with both a tail and a head.  Imagine we have Sarah, Jane, and Rose, and a social
+    graph with a :person/likes attribute so that Sarah likes Jane, and Jane likes Rose.  Draw this as:
+
+        sarah --> jane --> rose
+
+    An entity has access both to the "outbound" pointers as well as the "inbound" pointers.  The
+    outbound pointers are accessed like the entries in a regular normal map:
+
+        (:person/likes sarah)   ; => jane
+        (:person/likes jane)    ; => rose
+        (:person/likes rose)    ; => nil
+
+    However, we can traverse the inbound pointers as well:
+
+        (:person/_likes sarah)  ; => nil
+        (:person/_likes jane)   ; => sarah
+        (:person/_likes rose)   ; => jane
+
+    Thus, these entities actually behave like these Clojure maps:
+
+      ; sarah
+      { :person/likes      jane
+        :person/_likes     nil }
+
+      ; jane
+      { :person/likes      rose
+        :person/_likes     sarah }
+
+      ; rose
+      { :person/likes      nil
+        :person/_likes     jane }
+
+    where both keys :person/likes and person/_likes are present.  Note that if either for forward or
+    reverse attributes refers to more than a single entity, then a set of entities are returned
+    instead of a single entity.
+
+
+
+
