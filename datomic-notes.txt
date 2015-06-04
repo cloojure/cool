@@ -1,0 +1,88 @@
+
+Questions
+  What does the "added" field in [ Entity Attribute Value Tx Added ] tuple mean?
+
+Notes:
+  A "value" is something you can touch, like the number 5, the string "abc", or other literal data
+    types (literal lists & maps of values included). Values are immutable.
+  An "entity" is like an "object". An associative view over zero or more values, each accessed
+    through a named attribute. Entities can be mutated through transactions by adding, removing, or
+    changing attribute values.
+  An "attribute" is like a pointer from an entity to a value. Since an entity may have zero, one,
+    or many attributes, each attribute has a name (specified as a keyword).
+  The value of the :db/id attribute is the "entity id" or EID. This is like a pointer in C or Java
+    and is used to access a particular entity (just like a pointer is used to access a particular
+    instance of a class.
+  The "name" of an entity or attribute is the value of its :db/ident attribute. Please keep clear
+    the difference between the :db/id (EID) and :db/ident ('name').
+  An entity is a logical collection, like a map. It is accessed by its Entity ID or EID, which is a
+    long integer and functions just like a pointer.
+
+  Normally, each attribute in an entity will belong to the same namespace. This looks similar to
+    familiar object/field notation:
+
+        42                  ; EID (pointer) to entity a 'person' entity
+          person/name       ; attribute of type 'person.name'
+          person/address    ; attribute of type 'person.address'
+          person/phone      ; attribute
+          person/ssn        ; attribute
+
+    This is just like the clojure code:
+
+        ; a 'person' map literal
+        {
+          :person/name       "hobo"         
+          :person/address    "park"         
+          :person/phone      nil            
+          :person/ssn        123-43-6789    
+        }
+
+    Note that a 'person' type is never defined (there is nothing analgous to a Person class
+    definition). We only imagine that a 'person' type exists since it appears the data is intended
+    to describ a person's details. This intented use is emphasized since the 'person' namespace is
+    used for all the attributes of EID 42. However, this is only a convention, and is not enforced
+    by Datomic. This is also legal:
+
+        42                  ; entity
+          ork/type          ; attribute
+          weapon/type       ; attribute
+          plant/leaf-type   ; attribute
+          pantheon/source   ; attribute
+
+    and the corresponding Clojure map:
+
+        ; a map of unrelated entries
+        {                                           
+          :ork/type          :ork.type/uruk-hai
+          :weapon/type       :weapon.type/sword
+          :plant/leaf-type   plant.leaf-type/needle
+          :pantheon/source   pantheon.source/greek   
+        }
+
+    In this case, what is entity 42? Is is an ork, a weapon, a plant, or a pantheon? This question
+    cannot be answered out of context. An entity is just a mutable map, and the data it holds only
+    makes sense when coupled with the logic of your application.
+
+    The attribute values on an entity can, in turn, be other entities. The namespace of these
+    sub-types is normally constructed from the parent namespace & attribute name, as in:
+
+        ; the person.address 'type' (note the change of '/' -> '.' compared to person/address
+        person.address/number
+        person.address/street-name
+        person.address/street-type
+        person.address/unit-number
+        person.address/city
+        person.address/state
+        person.address/zipcode
+
+    Again, note that the 'person.address' type is never defined (there is nothing analogous to a
+    'PersonAddress' class). Again, it is only convention of defining a namespace derived from the
+    concatenation of the 'parent' namespace and the attribute name (its :db/ident value) that makes
+    is "look like" we have an object-oriented class hierarchy. This pattern is not enforced by
+    Datomic, which only sees a jumble of maps, where some map values point to other maps.
+
+    As the "type system" does not have to be organized hierarchically (it does not even exist!), the
+    pointers (e.g. attribute values) can be organized in any fashion. They could be hierarchical
+    (like the location of goods in a warehouse) or they could be highly interconnected (like the
+    graph of "likes" in a social application).
+
