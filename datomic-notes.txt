@@ -1,6 +1,4 @@
 
-Questions
-  What does the "added" field in [ Entity Attribute Value Tx Added ] tuple mean?
 
 Notes:
   A "datom" is a tuple of 5 values: [ Entity Attribute Value Tx Added ]. However, the word datom is
@@ -8,13 +6,33 @@ Notes:
   confustion and the reader must exercise caution to use the correct terminology and keep these
   separate concepts clear.
 
+  A "database" is a set of datoms.  The term database is sometimes used sloppily to mean the
+  software program that manages the state of the database.
+
+  The word "attribute" as used above in EAVT should really be the term "attribute-name".  In many
+  usages "attribute" is used to mean "map-entry", that is a key-value pair.  So, the proper
+  definition of "attribute" is the pair [attribute-name attribute-value]. Also, since the
+  attribute-value always has a type and a cardinality, these should be considered part of the
+  "attribute" definition as well. Imaging a person (EID 42) with many :person/phone values. The DB
+  could have the following facts (ignoring TX & Added):
+
+    [42 :person/phone "123.555.6789"]
+    [42 :person/phone "456.555.6789"]
+    [42 :person/phone "789.555.6789"]
+
+  All 3 facts exist in the DB simultaneously.  This is very different than having a single fact
+  with the value is a list:
+
+    [42 :person/phone ["123.555.6789" "456.555.6789" "789.555.6789"]]       ; NOT how Datomic works
+
   A 'added' field of a datom is often ignored and the other four items are abbrevieate as EAVT.
 
   A "fact" is the triple of [entity attribute value].  When a fact is asserted (inserted) to
   Datomic, the 'added' field has the value 'true'. When a fact is retracted (removed) from Datomic,
   the 'added' field has the value 'false'.  A change to the value of an attribute for an entity is
   modeled as a pair of facts, where the first fact retracts the old value (added=false) and the
-  second fact inserts the new value (added=true).
+  second fact inserts the new value (added=true).  Both the facts in a change will have the same Tx
+  value.
 
   A simple "value" is something you can touch, like the number 5, the string "abc", or other literal
   data types (literal lists & maps of values included). Values are immutable. However, the "value"
@@ -27,8 +45,8 @@ Notes:
   immutable map of attribute/value pairs (aka key/value pairs) that it points to.  A transaction in
   Datomic mutates the entity/atom to point to a different immutable map (the new map is usually
   derived from the old map value by adding/replacing/removing attribute/value pairs). The work
-  "entity" can also be used to mean the concrete implementation (which is lazy-loading) of the
-  logical entity object.
+  "entity" can also be used to mean an instance of the concrete Java implementation class Entity
+  (which is lazy-loading) of the logical entity object.
 
   An "attribute" is like a key in a map object (it is also analogous to a fieldname in a record or
   class definition).  Each attribute is named (using a keyword) and this name is like a pointer from
@@ -47,6 +65,10 @@ Notes:
   Datomic "root partition" :db.part/db.  The value corresponging to the :db/ident key of the
   attribute definition (e.g.  :person/name) is the "name" of the attribute that is referenced in
   queries (e.g. [?eid :person/name ?cust-name]).
+
+  Transactions in Datomic are themselves entities.  The "Tx" value in a datom is the EID for the
+  corresponding transaction entity.  This tx-eid value can be used to retrieve the UTC time of the
+  transaction or the "t" value (monotonic transaction counter representing an instant in time).
 
   An entity is a logical collection, like a map. It is accessed by its Entity ID or EID, which is a
   long integer and functions just like a pointer.
