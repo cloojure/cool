@@ -3,37 +3,50 @@ Questions
   What does the "added" field in [ Entity Attribute Value Tx Added ] tuple mean?
 
 Notes:
-  A "datom" is a tuple of 5 values: [ Entity Attribute Value Tx Added ], where 'added' is often
-  ignored and the other items are abbrevieate as EAVT.  However, the word datom is often used
-  ambiguously to mean entity, attribute, or value. Since a 'value' can, in turn, be another entity,
-  there is ample potential for confustion and the reader must exercise caution to use the correct
-  terminology and keep these separate concepts clear.
+  A "datom" is a tuple of 5 values: [ Entity Attribute Value Tx Added ]. However, the word datom is
+  often used ambiguously to mean entity, attribute, or value. There is ample potential for
+  confustion and the reader must exercise caution to use the correct terminology and keep these
+  separate concepts clear.
 
   A 'added' field of a datom is often ignored and the other four items are abbrevieate as EAVT.
 
+  A "fact" is the triple of [entity attribute value].  When a fact is asserted (inserted) to
+  Datomic, the 'added' field has the value 'true'. When a fact is retracted (removed) from Datomic,
+  the 'added' field has the value 'false'.  A change to the value of an attribute for an entity is
+  modeled as a pair of facts, where the first fact retracts the old value (added=false) and the
+  second fact inserts the new value (added=true).
+
   A simple "value" is something you can touch, like the number 5, the string "abc", or other literal
   data types (literal lists & maps of values included). Values are immutable. However, the "value"
-  of an entity can be another entity.
+  of an entity can be a pointer (EID, see below) to another entity.
 
-  An "entity" is like a Clojure atom containing a Clojure map.  At any point in time, the value of a
-  Datomic entity is an immutable map of attribute/value pairs (aka key/value pairs).  A transaction
-  in Datomic changes the entity to point to a different immutable map (the new map is usually
-  derived from the old map value by adding/replacing/removing attribute/value pairs).
+  An "entity" is a collection of zero or more values. It is much like a map in Clojure or Java, with
+  transactional semantics added on. Specifically,
+  an entity is like a Clojure atom containing a pointer to an immutable Clojure map.  The map may
+  contain zero, one, or many values.  At any point in time, the "value" of a Datomic entity is the
+  immutable map of attribute/value pairs (aka key/value pairs) that it points to.  A transaction in
+  Datomic mutates the entity/atom to point to a different immutable map (the new map is usually
+  derived from the old map value by adding/replacing/removing attribute/value pairs). The work
+  "entity" can also be used to mean the concrete implementation (which is lazy-loading) of the
+  logical entity object.
 
-  An "entity" is like an "object". An associative view over zero or more values, each accessed
-  through a named attribute. Entities can be mutated through transactions by adding, removing, or
-  changing attribute values.  An entity with no attributes is like an instance of Map class that
-  contains no entries.  
+  An "attribute" is like a key in a map object (it is also analogous to a fieldname in a record or
+  class definition).  Each attribute is named (using a keyword) and this name is like a pointer from
+  an entity to a value. The word "attribute" is a bit ambiguous in English (e.g. "He has many good
+  attributes"), and it would be more precise to interprete the term "attribute" as "attribute-name"
+  or just "key".
 
-  An "attribute" is like the key in a map.  It is like a pointer from an entity to a value. Since an
-  entity may have zero, one, or many attributes, each attribute has a name (specified as a keyword).
-
-  The value of the :db/id attribute is the "entity id" or EID. This is like a pointer in C or Java
-  and is used to access a particular entity (just like a pointer is used to access a particular
-  instance of a class.
+  The value of the :db/id attribute for an entity is the "entity id" or EID. This is like a pointer
+  in C or Java and is used to access a particular entity (just like a pointer in Java is used to
+  access a specific instance of a class).
 
   The "name" of an entity or attribute is the value of its :db/ident attribute. Please keep clear
   the difference between the :db/id (EID) and :db/ident ('name').
+
+  Note that a user defines an attribute by inserting an entity for the new attribute into the
+  Datomic "root partition" :db.part/db.  The value corresponging to the :db/ident key of the
+  attribute definition (e.g.  :person/name) is the "name" of the attribute that is referenced in
+  queries (e.g. [?eid :person/name ?cust-name]).
 
   An entity is a logical collection, like a map. It is accessed by its Entity ID or EID, which is a
   long integer and functions just like a pointer.
