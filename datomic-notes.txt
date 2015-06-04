@@ -5,18 +5,38 @@ Questions
 Notes:
   A "value" is something you can touch, like the number 5, the string "abc", or other literal data
     types (literal lists & maps of values included). Values are immutable.
+
+  An "entity" is like a Clojure atom containing a Clojure map.  At any point in time, the value of
+    a Datomic entity is an immutable map of attribute/value pairs (aka key/value pairs).  A
+    transaction in Datomic changes the entity to point to a different immutable map (the new map is
+    usually derived from the old map value by adding/replacing/removing attribute/value pairs).
+
   An "entity" is like an "object". An associative view over zero or more values, each accessed
     through a named attribute. Entities can be mutated through transactions by adding, removing, or
-    changing attribute values.
-  An "attribute" is like a pointer from an entity to a value. Since an entity may have zero, one,
-    or many attributes, each attribute has a name (specified as a keyword).
+    changing attribute values.  An entity with no attributes is like an instance of Map class that
+    contains no entries.  
+
+  An "attribute" is like the key in a map.  It is like a pointer from an entity to a value. Since an
+    entity may have zero, one, or many attributes, each attribute has a name (specified as a
+    keyword).
+
   The value of the :db/id attribute is the "entity id" or EID. This is like a pointer in C or Java
     and is used to access a particular entity (just like a pointer is used to access a particular
     instance of a class.
+
   The "name" of an entity or attribute is the value of its :db/ident attribute. Please keep clear
     the difference between the :db/id (EID) and :db/ident ('name').
+
   An entity is a logical collection, like a map. It is accessed by its Entity ID or EID, which is a
     long integer and functions just like a pointer.
+
+  In regular Clojure, one would use the terms "map, key, value" (each key-value pair is also referred
+    to as a map entry).  In Datomic, one uses the terms "entity, attribute, value".  The correspond
+    terms can nearly always be used interchangably, which can be a source of confusion.  Also, keep
+    in mind the the Datomic Entity object is actually implmented as a lazy-loading map-like
+    structure, so displaying its value using (println ...) may not display attributes that haven't
+    been loaded yet.  Use the (touch <entity>) function to force loading of all attributes (one can
+    also use "(into {} <entity>)" syntax to construct a plain Clojure map from an entity object).
 
   Normally, each attribute in an entity will belong to the same namespace. This looks similar to
     familiar object/field notation:
@@ -122,7 +142,5 @@ Notes:
     where both keys :person/likes and person/_likes are present.  Note that if either for forward or
     reverse attributes refers to more than a single entity, then a set of entities are returned
     instead of a single entity.
-
-
 
 
