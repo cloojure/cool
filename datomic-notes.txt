@@ -39,14 +39,14 @@ Notes:
   of an entity can be a pointer (EID, see below) to another entity.
 
   An "entity" is a collection of zero or more values. It is much like a map in Clojure or Java, with
-  transactional semantics added on. Specifically,
-  an entity is like a Clojure atom containing a pointer to an immutable Clojure map.  The map may
-  contain zero, one, or many values.  At any point in time, the "value" of a Datomic entity is the
-  immutable map of attribute/value pairs (aka key/value pairs) that it points to.  A transaction in
-  Datomic mutates the entity/atom to point to a different immutable map (the new map is usually
-  derived from the old map value by adding/replacing/removing attribute/value pairs). The work
-  "entity" can also be used to mean an instance of the concrete Java implementation class Entity
-  (which is lazy-loading) of the logical entity object.
+  transactional semantics added on. Specifically, an entity is like a Clojure atom containing a
+  pointer to an immutable Clojure map.  The map may contain zero, one, or many values.  At any point
+  in time, the "value" of a Datomic entity is the immutable map of attribute/value pairs (aka
+  key/value pairs) that it points to.  A transaction in Datomic mutates the entity/atom to point to
+  a different immutable map (the new map is usually derived from the old map value by
+  adding/replacing/removing attribute/value pairs). The work "entity" can also be used to mean an
+  instance of the concrete Java implementation class Entity (which is lazy-loading) of the logical
+  entity object.
 
   An "attribute" is like a key in a map object (it is also analogous to a fieldname in a record or
   class definition).  Each attribute is named (using a keyword) and this name is like a pointer from
@@ -59,7 +59,9 @@ Notes:
   access a specific instance of a class).
 
   The "name" of an entity or attribute is the value of its :db/ident attribute. Please keep clear
-  the difference between the :db/id (EID) and :db/ident ('name').
+  the difference between the :db/id (EID) and :db/ident ('name').  Note that both of these are also
+  different from the "Entity Identifier", which is a generic term for either: (1) an EID, (2) an
+  Entity Ident value, or (3) a "Lookup Ref" (defined below).
 
   Note that a user defines an attribute by inserting an entity for the new attribute into the
   Datomic "root partition" :db.part/db.  The value corresponging to the :db/ident key of the
@@ -186,7 +188,8 @@ Notes:
   reverse attributes refers to more than a single entity, then a set of entities are returned
   instead of a single entity.
 
-  A "lookup ref" is simply a tuple of [attribute-name attribute-value] (i.e. a map entry), where the
+  A "Lookup Ref" is simply a tuple of [attribute-name attribute-value] (i.e. a map entry), where the
   attribute-value must be unique (either :db.unique/identy or :db.unique/value).
 
+  An "Entity Identifier" is one of either: (1) an EID, (2) an Entity Ident value, or (3) a "Lookup Ref"
 
