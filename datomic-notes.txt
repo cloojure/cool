@@ -186,4 +186,7 @@ Notes:
   reverse attributes refers to more than a single entity, then a set of entities are returned
   instead of a single entity.
 
+  A "lookup ref" is simply a tuple of [attribute-name attribute-value] (i.e. a map entry), where the
+  attribute-value must be unique (either :db.unique/identy or :db.unique/value).
+
 
