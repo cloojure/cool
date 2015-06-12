@@ -1,215 +1,253 @@
 
+A "datom" is a tuple of 5 values: [ Entity Attribute Value Tx Added ]. However, the word datom is
+often used ambiguously to mean entity, attribute, or value. There is ample potential for
+confustion and the reader must exercise caution to use the correct terminology and keep these
+separate concepts clear.
 
-Notes:
-  A "datom" is a tuple of 5 values: [ Entity Attribute Value Tx Added ]. However, the word datom is
-  often used ambiguously to mean entity, attribute, or value. There is ample potential for
-  confustion and the reader must exercise caution to use the correct terminology and keep these
-  separate concepts clear.
+A "database" is a set of datoms.  The term database is sometimes used sloppily to mean the
+software program that manages the state of the database.
 
-  A "database" is a set of datoms.  The term database is sometimes used sloppily to mean the
-  software program that manages the state of the database.
+The word "attribute" as used above in EAVT should really be the term "attribute-name".  In many
+usages "attribute" is used to mean "map-entry", that is a key-value pair.  So, the proper
+definition of "attribute" is the pair [attribute-name attribute-value]. Also, since the
+attribute-value always has a type and a cardinality, these should be considered part of the
+"attribute" definition as well. 
 
-  The word "attribute" as used above in EAVT should really be the term "attribute-name".  In many
-  usages "attribute" is used to mean "map-entry", that is a key-value pair.  So, the proper
-  definition of "attribute" is the pair [attribute-name attribute-value]. Also, since the
-  attribute-value always has a type and a cardinality, these should be considered part of the
-  "attribute" definition as well. 
-  
-  An attribute definition must define a :db/cardinality value of either :db.cardinality/one or
-  :db.cardinality/many.  Imaging a "person" entity, with a :person/age attribute.  For the
-  :person/age attribute we would set the :db/cardinality to :db.cardinality/one, since a person can
-  have only one (true) age, such as the fact:
+An attribute definition must define a :db/cardinality value of either :db.cardinality/one or
+:db.cardinality/many.  Imaging a "person" entity, with a :person/age attribute.  For the
+:person/age attribute we would set the :db/cardinality to :db.cardinality/one, since a person can
+have only one (true) age, such as the fact:
 
-    [42 :person/age "29 years"]
+  [42 :person/age "29 years"]
 
-  for the person with EID 42.  If at some point the person 42's age changed:
+for the person with EID 42.  If at some point the person 42's age changed:
 
-    [42 :person/age "29 years & a few months..."]
+  [42 :person/age "29 years & a few months..."]
 
-  then because of :db.cardinality/one the old age "29 years" would be removed from the DB; only the
-  newest value would remain.  Next, imagine that this same person (EID 42) has many telephone
-  numbers, so that the :person/phone attribute would have :db.cardinality/many. The DB could have
-  the following facts (ignoring TX & Added):
+then because of :db.cardinality/one the old age "29 years" would be automatically retracted when the
+new value was added.  Next, imagine that this same person (EID 42) has many telephone
+numbers, so that the :person/phone attribute would have :db.cardinality/many. The DB could have
+the following facts (ignoring TX & Added):
 
-    [42 :person/phone "123.555.6789"]
-    [42 :person/phone "456.555.6789"]
-    [42 :person/phone "789.555.6789"]
+  [42 :person/phone "123.555.6789"]
+  [42 :person/phone "456.555.6789"]
+  [42 :person/phone "789.555.6789"]
 
-  All 3 facts exist in the DB simultaneously.  Note that this is very different than having a single
-  fact where the value is a List of phone numbers:
+All 3 facts exist in the DB simultaneously.  Note that this is very different than having a single
+fact where the value is a List of phone numbers:
 
-    [42 :person/phone ["123.555.6789" "456.555.6789" "789.555.6789"]]       ; NOT how Datomic works
-  
-  In fact, Datomic does not have collection types like List or Map, only attribute/value pairs for
-  each entity (which is Map-like) and attributes with :db.cardinality/many, which is List-like.  In
-  this way, Datomic transactions are able to mediate the additional & removal (assertion/retraction)
-  of facts in the Map-like and List-like structures.
+  [42 :person/phone ["123.555.6789" "456.555.6789" "789.555.6789"]]       ; NOT how Datomic works
 
-  A 'added' field of a datom is often ignored and the other four items are abbrevieate as EAVT.
+However, the display result for a :db.cardinality/many attribute will be formatted like a hash-set:
 
-  A "fact" is the triple of [entity attribute value].  When a fact is asserted (inserted) to
-  Datomic, the 'added' field has the value 'true'. When a fact is retracted (removed) from Datomic,
-  the 'added' field has the value 'false'.  A change to the value of an attribute for an entity is
-  modeled as a pair of facts, where the first fact retracts the old value (added=false) and the
-  second fact inserts the new value (added=true).  Both the facts in a change will have the same Tx
-  value.
+  (d/q '{:find [?phones]
+         :where [ [42 :person/phone ?phones] ] }
+         ... )
+  ;=> #{ "123.555.6789" "456.555.6789" "789.555.6789" }
 
-  A "value" is something you can touch, like the number 5, the string "abc", or other literal
-  data types. Values in Datomic are immutable. Datomic does not allow primitive types like lists &
-  maps.  However, the "value" of an entity can be a pointer (EID, see below) to another entity.
+In fact, Datomic does not have collection types like List or Map, only attribute/value pairs for
+each entity (which is Map-like) and attributes with :db.cardinality/many, which is List-like.  In
+this way, Datomic transactions are able to mediate the additional & removal (assertion/retraction)
+of facts in the Map-like and List-like structures.
 
-  An "entity" is a collection of zero or more values. It is much like a map in Clojure or Java, with
-  transactional semantics added on. Specifically, an entity is like a Clojure atom containing a
-  pointer to an immutable Clojure map.  The map may contain zero, one, or many values.  At any point
-  in time, the "value" of a Datomic entity is the immutable map of attribute/value pairs (aka
-  key/value pairs) that it points to.  A transaction in Datomic mutates the entity/atom to point to
-  a different immutable map (the new map is usually derived from the old map value by
-  adding/replacing/removing attribute/value pairs). The work "entity" can also be used to mean an
-  instance of the concrete Java implementation class Entity (which is lazy-loading) of the logical
-  entity object.
+A 'added' field of a datom is often ignored and the other four items are abbrevieate as EAVT. The
+'added' value is true when a fact is inserted into the DB, and it is false when a fact is retracted
+from the DB.
 
-  An "attribute" is like a key in a map object (it is also analogous to a fieldname in a record or
-  class definition).  Each attribute must be named (using a keyword for its :db/ident attribute) and
-  this name is like a pointer from an entity to a value. The word "attribute" is a bit ambiguous in
-  English (e.g. "He has many good attributes"), and it would be more precise to interprete the term
-  "attribute" as "attribute-name" or just "key".
+A "fact" is the triple of [entity attribute value].  When a fact is asserted (inserted) to
+Datomic, the 'added' field has the value 'true'. When a fact is retracted (removed) from Datomic,
+the 'added' field has the value 'false'.  A change to the value of an attribute for an entity is
+modeled as a pair of facts, where the first fact retracts the old value (added=false) and the
+second fact inserts the new value (added=true).  Both the facts in a change will have the same Tx
+value.
 
-  The value of the :db/id attribute for an entity is the "entity id" or EID. This is like a pointer
-  in C or Java and is used to access a particular entity (just like a pointer in Java is used to
-  access a specific instance of a class).
+A "value" is something you can touch, like the number 5, the string "abc", or other literal
+data types. Values in Datomic are immutable. Datomic does not allow primitive types like lists &
+maps.  However, the "value" of an entity can be a pointer (EID, see below) to another entity.
 
-  The "name" of an entity or attribute is the value of its :db/ident attribute. Please keep clear
-  the difference between the :db/id (EID) and :db/ident ('name').  Note that both of these are also
-  different from the "Entity Identifier", which is a generic term for either: (1) an EID, (2) an
-  Entity Ident value, or (3) a "Lookup Ref" (defined below).
+An "entity" is a collection of one or more attr-value (key-value) pairs. An entity with zero
+attr-value pairs cannot exist.
+It is much like a map in
+Clojure or Java, with transactional semantics added on. Specifically, an entity is like a Clojure
+atom containing a
+pointer to an immutable Clojure map.  The map may contain zero, one, or many values.  At any point
+in time, the "value" of a Datomic entity is the immutable map of attribute/value pairs (aka
+key/value pairs) that it points to.  A transaction in Datomic mutates the entity/atom to point to
+a different immutable map (the new map is usually derived from the old map value by
+adding/replacing/removing attribute/value pairs). The work "entity" can also be used to mean an
+instance of the concrete Java implementation class Entity (which is lazy-loading) of the logical
+entity object.
 
-  Note that a user defines an attribute by inserting an entity for the new attribute into the
-  Datomic "root partition" :db.part/db.  The value corresponging to the :db/ident key of the
-  attribute definition (e.g.  :person/name) is the "name" of the attribute that is referenced in
-  queries (e.g. [?eid :person/name ?cust-name]).
+An "attribute" is like a key in a map object (it is also analogous to a fieldname in a record or
+class definition).  Each attribute must be named (using a keyword for its :db/ident attribute) and
+this name is like a pointer from an entity to a value. The word "attribute" is a bit ambiguous in
+English (e.g. "He has many good attributes"), and it would be more precise to interprete the term
+"attribute" as "attribute-name" or just "key".
 
-  Transactions in Datomic are themselves entities.  The "Tx" value in a datom is the EID for the
-  corresponding transaction entity.  This tx-eid value can be used to retrieve the UTC time of the
-  transaction or the "t" value (monotonic transaction counter representing an instant in time).
+The value of the :db/id attribute for an entity is the "entity id" or EID. This is like a pointer
+in C or Java and is used to access a particular entity (just like a pointer in Java is used to
+access a specific instance of a class).
 
-  An entity is a logical collection, like a map. It is accessed by its Entity ID or EID, which is a
-  long integer and functions just like a pointer.
+The "name" of an entity or attribute is the value of its :db/ident attribute. Please keep clear
+the difference between the :db/id (EID) and :db/ident ('name').  Note that both of these are also
+different from the "Entity Identifier", which is a generic term for either: (1) an EID, (2) an
+Entity Ident value, or (3) a "Lookup Ref" (defined below).
 
-  In regular Clojure, one would use the terms "map, key, value" (each key-value pair is also
-  referred to as a map entry).  In Datomic, one uses the terms "entity, attribute, value".  The
-  correspond terms can nearly always be used interchangably, which can be a source of confusion.
-  Also, keep in mind the the Datomic Entity object is actually implmented as a lazy-loading map-like
-  structure, so displaying its value using (println ...) may not display attributes that haven't
-  been loaded yet.  Use the (touch <entity>) function to force loading of all attributes (one can
-  also use "(into {} <entity>)" syntax to construct a plain Clojure map from an entity object).
+Note that a user defines an attribute by inserting an entity for the new attribute into the
+Datomic "root partition" :db.part/db.  The value corresponging to the :db/ident key of the
+attribute definition (e.g.  :person/name) is the "name" of the attribute that is referenced in
+queries (e.g. [?eid :person/name ?cust-name]).
 
-  Normally, each attribute in an entity will belong to the same namespace. This looks similar to
-  familiar object/field notation:
+Transactions in Datomic are themselves entities.  The "Tx" value in a datom is the EID for the
+corresponding transaction entity.  This tx-eid value can be used to retrieve the UTC time of the
+transaction or the "t" value (monotonic transaction counter representing an instant in time).
 
-      42                  ; EID (pointer) to entity a 'person' entity
-        person/name       ; attribute of type 'person.name'
-        person/address    ; attribute of type 'person.address'
-        person/phone      ; attribute
-        person/ssn        ; attribute
+An entity is a logical collection, like a map. It is accessed by its Entity ID or EID, which is a
+long integer and functions just like a pointer.
 
-  This is just like the clojure code:
+In regular Clojure, one would use the terms "map, key, value" (each key-value pair is also
+referred to as a map entry).  In Datomic, one uses the terms "entity, attribute, value".  The
+correspond terms can nearly always be used interchangably, which can be a source of confusion.
+Also, keep in mind the the Datomic Entity object is actually implmented as a lazy-loading map-like
+structure, so displaying its value using (println ...) may not display attributes that haven't
+been loaded yet.  Use the (touch <entity>) function to force loading of all attributes (one can
+also use "(into {} <entity>)" syntax to construct a plain Clojure map from an entity object).
 
-      ; a 'person' map literal
-      {
-        :person/name       "hobo"         
-        :person/address    "park"         
-        :person/phone      nil            
-        :person/ssn        123-43-6789    
-      }
+Normally, each attribute in an entity will belong to the same namespace. This looks similar to
+familiar object/field notation:
 
-  Note that a 'person' type is never defined (there is nothing analgous to a Person class
-  definition). We only imagine that a 'person' type exists since it appears the data is intended
-  to describ a person's details. This intented use is emphasized since the 'person' namespace is
-  used for all the attributes of EID 42. However, this is only a convention, and is not enforced
-  by Datomic. This is also legal:
+    42                  ; EID (pointer) to entity a 'person' entity
+      person/name       ; attribute of type 'person.name'
+      person/address    ; attribute of type 'person.address'
+      person/phone      ; attribute
+      person/ssn        ; attribute
 
-      42                  ; entity
-        ork/type          ; attribute
-        weapon/type       ; attribute
-        plant/leaf-type   ; attribute
-        pantheon/source   ; attribute
+This is just like the clojure code:
 
-  and the corresponding Clojure map:
+    ; a 'person' map literal
+    {
+      :person/name       "hobo"         
+      :person/address    "park"         
+      :person/phone      nil            
+      :person/ssn        123-43-6789    
+    }
 
-      ; a map of unrelated entries
-      {                                           
-        :ork/type          :ork.type/uruk-hai
-        :weapon/type       :weapon.type/sword
-        :plant/leaf-type   plant.leaf-type/needle
-        :pantheon/source   pantheon.source/greek   
-      }
+Note that a 'person' type is never defined (there is nothing analgous to a Person class
+definition). We only imagine that a 'person' type exists since it appears the data is intended
+to describ a person's details. This intented use is emphasized since the 'person' namespace is
+used for all the attributes of EID 42. However, this is only a convention, and is not enforced
+by Datomic. This is also legal:
 
-  In this case, what is entity 42? Is is an ork, a weapon, a plant, or a pantheon? This question
-  cannot be answered out of context. An entity is just a mutable map, and the data it holds only
-  makes sense when coupled with the logic of your application.
+    42                  ; entity
+      ork/type          ; attribute
+      weapon/type       ; attribute
+      plant/leaf-type   ; attribute
+      pantheon/source   ; attribute
 
-  The attribute values on an entity can, in turn, be other entities. The namespace of these
-  sub-types is normally constructed from the parent namespace & attribute name, as in:
+and the corresponding Clojure map:
 
-      ; the person.address 'type' (note the change of '/' -> '.' compared to person/address
-      person.address/number
-      person.address/street-name
-      person.address/street-type
-      person.address/unit-number
-      person.address/city
-      person.address/state
-      person.address/zipcode
+    ; a map of unrelated entries
+    {                                           
+      :ork/type          :ork.type/uruk-hai
+      :weapon/type       :weapon.type/sword
+      :plant/leaf-type   plant.leaf-type/needle
+      :pantheon/source   pantheon.source/greek   
+    }
 
-  Again, note that the 'person.address' type is never defined (there is nothing analogous to a
-  'PersonAddress' class). Again, it is only convention of defining a namespace derived from the
-  concatenation of the 'parent' namespace and the attribute name (its :db/ident value) that makes
-  is "look like" we have an object-oriented class hierarchy. This pattern is not enforced by
-  Datomic, which only sees a jumble of maps, where some map values point to other maps.
+In this case, what is entity 42? Is is an ork, a weapon, a plant, or a pantheon? This question
+cannot be answered out of context. An entity is just a mutable map, and the data it holds only
+makes sense when coupled with the logic of your application.
 
-  As the "type system" does not have to be organized hierarchically (it does not even exist!), the
-  pointers (e.g. attribute values) can be organized in any fashion. They could be hierarchical
-  (like the location of goods in a warehouse) or they could be highly interconnected (like the
-  graph of "likes" in a social application).
+The attribute values on an entity can, in turn, be other entities. The namespace of these
+sub-types is normally constructed from the parent namespace & attribute name, as in:
 
-  An attribute that points to another entity (as opposed to a literal value like the string "abc")
-  is like an arrow with both a tail and a head.  Imagine we have Sarah, Jane, and Rose, and a social
-  graph with a :person/likes attribute so that Sarah likes Jane, and Jane likes Rose.  Draw this as:
+    ; the person.address 'type' (note the change of '/' -> '.' compared to person/address
+    person.address/number
+    person.address/street-name
+    person.address/street-type
+    person.address/unit-number
+    person.address/city
+    person.address/state
+    person.address/zipcode
 
-      sarah --> jane --> rose
+Again, note that the 'person.address' type is never defined (there is nothing analogous to a
+'PersonAddress' class). Again, it is only convention of defining a namespace derived from the
+concatenation of the 'parent' namespace and the attribute name (its :db/ident value) that makes
+is "look like" we have an object-oriented class hierarchy. This pattern is not enforced by
+Datomic, which only sees a jumble of maps, where some map values point to other maps.
 
-  An entity has access both to the "outbound" pointers as well as the "inbound" pointers.  The
-  outbound pointers are accessed like the entries in a regular normal map:
+As the "type system" does not have to be organized hierarchically (it does not even exist!), the
+pointers (e.g. attribute values) can be organized in any fashion. They could be hierarchical
+(like the location of goods in a warehouse) or they could be highly interconnected (like the
+graph of "likes" in a social application).
 
-      (:person/likes sarah)   ; => jane
-      (:person/likes jane)    ; => rose
-      (:person/likes rose)    ; => nil
+An attribute that points to another entity (as opposed to a literal value like the string "abc")
+is like an arrow with both a tail and a head.  Imagine we have Sarah, Jane, and Rose, and a social
+graph with a :person/likes attribute so that Sarah likes Jane, and Jane likes Rose.  Draw this as:
 
-  However, we can traverse the inbound pointers as well:
+    sarah --> jane --> rose
 
-      (:person/_likes sarah)  ; => nil
-      (:person/_likes jane)   ; => sarah
-      (:person/_likes rose)   ; => jane
+An entity has access both to the "outbound" pointers as well as the "inbound" pointers.  The
+outbound pointers are accessed like the entries in a regular normal map:
 
-  Thus, these entities actually behave like these Clojure maps:
+    (:person/likes sarah)   ; => jane
+    (:person/likes jane)    ; => rose
+    (:person/likes rose)    ; => nil
 
-    ; sarah
-    { :person/likes      jane
-      :person/_likes     nil }
+However, we can traverse the inbound pointers as well:
 
-    ; jane
-    { :person/likes      rose
-      :person/_likes     sarah }
+    (:person/_likes sarah)  ; => nil
+    (:person/_likes jane)   ; => sarah
+    (:person/_likes rose)   ; => jane
 
-    ; rose
-    { :person/likes      nil
-      :person/_likes     jane }
+Thus, these entities actually behave like these Clojure maps:
 
-  where both keys :person/likes and person/_likes are present.  Note that if either for forward or
-  reverse attributes refers to more than a single entity, then a set of entities are returned
-  instead of a single entity.
+  ; sarah
+  { :person/likes      jane
+    :person/_likes     nil }
 
-  A "Lookup Ref" is simply a tuple of [attribute-name attribute-value] (i.e. a map entry), where the
-  attribute-value must be unique (either :db.unique/identy or :db.unique/value).
+  ; jane
+  { :person/likes      rose
+    :person/_likes     sarah }
 
-  An "Entity Identifier" is one of either: (1) an EID, (2) an Entity Ident value, or (3) a "Lookup Ref"
+  ; rose
+  { :person/likes      nil
+    :person/_likes     jane }
 
+where both keys :person/likes and person/_likes are present.  Note that if either for forward or
+reverse attributes refers to more than a single entity, then a set of entities are returned
+instead of a single entity.
+
+A "Lookup Ref" is simply a tuple of [attribute-name attribute-value] (i.e. a map entry), where the
+attribute-value must be unique (either :db.unique/identy or :db.unique/value).
+
+Unique values:  An attribute man specify that at most one entity can possess a given [attribute-name
+attribute-value] pair.  This is done by setting :db/unique to either :db.unique/value or
+:db.unique/identy for the new attribute. Choosing :db.unique/value has the property (1) only one
+entity can have a given [attribute-name attribute-value] pair. Choosing :db.unique/identiy has both
+property (1) and enables the ability to "upsert" facts into Datomic using the [attribute-name
+attribute-value] pair in place of using the EID of the entity.
+
+An "Entity Identifier" is one of either: (1) an EID, (2) an Entity Ident value, or (3) a "Lookup Ref"
+
+Entity References -  Recall that all facts are of the EAV format.  It is possible for the value (V)
+in the fact to be a reference to another entity. Keep in mind that the reference is just a pointer;
+the value is not the entity itself.
+
+Each fact (datom) is added/removed in the DB in the context of a transaction, which is itself an
+entity in Datomic.  In the tuple [EAVT], the T (tx or transaction) part refers to the EID of the
+transaction entity (TID).
+
+Queries:
+
+In a datomic query spec, the :where key specifies a pattern-matching rule (=> :match), and the :find
+key specifies the format of the returned tuples (=> :result) Example:
+
+  (d/q '{:find [?eid ?weapons]                          ; :find  => :result
+         :where [ [?eid :person/name "James Bond"]      ; :where => :match
+                  [?eid :weapon/type ?weapons]
+                ] }
+
+I prefer the map syntax (as above) since the format of the tuples in the output relation (a set of
+tuples) is explicit.  Also, the set of pattern-matching rules is explicit as a list of EAV tuples
+that must match simultaneously.
