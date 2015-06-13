@@ -9,16 +9,28 @@ lein run -m proj.core                   - run the -main function of proj.core
 lein run -m proj.core/any-fn            - run the 'any-fn' function of proj.core
 lein run -m proj.core-test              - works with test fn's too
 
-lein test [TESTS]                       - run all tests [or just in TESTS namespaces]
-lein test :only proj.core-test          - run all tests for proj.core (proj.core-test namespace)
-lein test :only proj.core-test/my-test  - run only my-test in proj.core-test
+lein test                               ; run all (default) tests
+lein test :only tst.proj.core           - run all tests for proj.core (tst.proj.core namespace)
+lein test :only tst.proj.core/my-test   - run only my-test in tst.proj.core
+lein test :all                          ; run all tests
+lein test :slow                         ; run tests marked with ^:slow
+
+  From project.clj:
+    ; "lein test"         will not  run tests marked with the ":slow" metadata
+    ; "lein test :slow"   will only run tests marked with the ":slow" metadata
+    ; "lein test :all"    will run all  tests (built-in)
+    :test-selectors { :default    (complement :slow)
+                      :slow       :slow }
+
+  From tst.cooljure.base64:
+    (tst/defspec ^:slow round-trip-bytes 9999 ...)
+
 
 lein uberjar                            - package the project and dependencies as standalone jar
-
 lein do clean, test foo.test-core, jar  - can chain commands with "do xxx, yyy, zzz"
                                           ("do" and comma separators)
-
 lein deploy clojars                     - package & deploy project to clojars.org
+
 
 TODO:
   ~/.m2 directory?  local lib repo?
