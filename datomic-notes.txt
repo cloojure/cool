@@ -86,7 +86,8 @@ English (e.g. "He has many good attributes"), and it would be more precise to in
 
 The value of the :db/id attribute for an entity is the "entity id" or EID. This is like a pointer
 in C or Java and is used to access a particular entity (just like a pointer in Java is used to
-access a specific instance of a class).
+access a specific instance of a class).  
+[Note that the value of the :db/id attribute is synonymous with EID. Rename DBID? DID? ID?]
 
 The "name" of an entity or attribute is the value of its :db/ident attribute. Please keep clear
 the difference between the :db/id (EID) and :db/ident ('name').  Note that both of these are also
