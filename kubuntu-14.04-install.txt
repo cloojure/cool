@@ -62,10 +62,10 @@ The following doesn't seem to work (blank screen):
       gcc python ruby \
       octave libreoffice \
       tree htop iotop collectl \
-      zip unzip dos2unix \
+      zip unzip dos2unix kuser \
+      alien youtube-dl
+
       postgresql (get latest from postgresql.org)
-      youtube-dl
-      alien
 
 - For Oracle client on AWS we need:
   sudo apt install -y libaio1         - async I/O (note can use "apt search libaio")

@@ -11,8 +11,8 @@ if (has("gui_running"))
 endif
 
 " Window shape commands
-:command! Wl set columns=240        " Width large
-:command! Wm set columns=120        " Width medium
+:command! Wl set columns=250        " Width large
+:command! Wm set columns=130        " Width medium
 :command! Ws set columns=60         " Width small
 :command! Ll set lines=99           " Lines large
 :command! Lm set lines=60           " Lines medium
