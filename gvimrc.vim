@@ -26,7 +26,7 @@ endif
 
 " Default size/shape
 function! ConfigStd()
-  set columns=120
+  set columns=130
   set lines=60
   set guifont=Monospace\ 10
 endfunction
