@@ -49,6 +49,10 @@ alias dosrc="source ~/.zshrc"
 #---------------------------------------------------------------------------------------------------
 alias gojoy="ssh ubuntu@165.225.137.241"
 
+# from: https://github.com/creationix/nvm
+source ~/.nvm/nvm.sh
+# nvm install stable
+# nvm use     stable
 
 #---------------------------------------------------------------------------------------------------
 # Old Oracle Stuff (Max OSX)
@@ -62,6 +66,9 @@ alias gojoy="ssh ubuntu@165.225.137.241"
 ### alias sqlplus_pva_mart="sqlplus pva_app/rxlogix@argus-mart-db01.eng.rxlogix.com:1521/ARGUS_REPORTS"
 #---------------------------------------------------------------------------------------------------
 
+#---------------------------------------------------------------------------------------------------
+# temp vars
+aa=~/demo/pedestal/helloworld
+bb=~/gh/pedestal/samples/hello-world
 
 # echo ".zshrc - exit"
-

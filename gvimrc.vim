@@ -10,6 +10,8 @@ if (has("gui_running"))
 " sleep 1
 endif
 
+" Note: User-defined commands must begin with a capital letter 
+ 
 " Window shape commands
 :command! Wl set columns=250        " Width large
 :command! Wm set columns=130        " Width medium
@@ -36,6 +38,15 @@ call ConfigStd()
 " also be done with a crtl-v/vrtl-j combination)
 :command! WW set columns=300 lines=99
 :command! Ww set columns=120 lines=60
+
+" This function is used to swap the orientation of 2 windows (eg left/right), while keeping the
+" cursor in the same pane where it started (eg left pane).
+function! SwapWindows()
+  " User-defined functions must begin with a capital letter 
+  wincmd r      " rotate windows
+  wincmd w      " move cursor to 
+endfunction
+:command! SS call SwapWindows()
 
 " match index is 0-based (C-style);  no match = -1
 if (match( system("uname -a"), "Linux" ) > -1)
