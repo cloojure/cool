@@ -36,7 +36,7 @@ call ConfigStd()
 
 " Define an easy way to maximize the window (Vertical bar '|' concats 2 commands on one line. It can
 " also be done with a crtl-v/vrtl-j combination)
-:command! WW set columns=300 lines=99
+:command! WW set columns=250 lines=99
 :command! Ww set columns=120 lines=60
 
 " This function is used to swap the orientation of 2 windows (eg left/right), while keeping the
