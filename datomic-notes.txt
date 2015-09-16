@@ -1,3 +1,12 @@
+An "entity" is like an object. the Entity ID (EID) is like the address of an object in memory. It
+uniquely identifies an entity.  It is in some sense the "implicit" attribute that every entity has.
+An entity exists because an EID has been allocated for it.
+
+The word "attribute" as used above in EAVT should really be the term "attribute-name".  In many
+usages "attribute" is used to mean "map-entry", that is a key-value pair.  So, the proper
+definition of "attribute" is the pair [attribute-name attribute-value]. Also, since the
+attribute-value always has a type and a cardinality, these should be considered part of the
+"attribute" definition as well. 
 
 A "datom" is a tuple of 5 values: [ Entity Attribute Value Tx Added ]. However, the word datom is
 often used ambiguously to mean entity, attribute, or value. There is ample potential for
@@ -6,12 +15,6 @@ separate concepts clear.
 
 A "database" is a set of datoms.  The term database is sometimes used sloppily to mean the
 software program that manages the state of the database.
-
-The word "attribute" as used above in EAVT should really be the term "attribute-name".  In many
-usages "attribute" is used to mean "map-entry", that is a key-value pair.  So, the proper
-definition of "attribute" is the pair [attribute-name attribute-value]. Also, since the
-attribute-value always has a type and a cardinality, these should be considered part of the
-"attribute" definition as well. 
 
 An attribute definition must define a :db/cardinality value of either :db.cardinality/one or
 :db.cardinality/many.  Imaging a "person" entity, with a :person/age attribute.  For the
