@@ -1,6 +1,31 @@
 #!/bin/bash 
 ### echo "alias.bash - enter"
 
+export JAVA_HOME="/opt/java"
+export GROOVY_HOME="/opt/groovy"
+export DATOMIC_HOME="/opt/datomic"
+export IDEA_HOME="/opt/idea"
+
+if [[ $(uname -a) == *Darwin* ]]; then
+  echo "Found Darwin OS"
+  sleep 3
+  # export DYLD_LIBRARY_PATH=/opt/oracle
+  # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
+  # export GROOVY_HOME="/opt/groovy"
+fi
+
+# baseline path
+path=( . ${HOME}/bin )
+path=( $path /opt/bin )
+path=( $path ${JAVA_HOME}/bin )
+path=( $path ${GROOVY_HOME}/bin )
+path=( $path ${DATOMIC_HOME}/bin )
+path=( $path ${IDEA_HOME}/bin )
+path=( $path /usr/local/bin  /usr/bin  /bin )
+path=( $path /usr/local/sbin /usr/sbin /sbin )
+path=( $path /usr/local/opt  /opt/bin )
+path=( $path /opt/gsutil )
+
 # We need to add the '2>&/dev/null' part to squelch error messages on Kubuntu 14.04.
 # Remove if you need to see any error messages.
 alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
