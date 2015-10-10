@@ -20,7 +20,7 @@ PATH=$PATH:/opt/gsutil
 PATH=$PATH:/bin/texbin
 
 # common bash/zsh aliases
-source ~/.alias.bash
+source ~/.common.bash
 
 # vi command-line editing mode
 set -o vi  

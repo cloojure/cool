@@ -7,7 +7,8 @@
       vim git zsh tcsh                \
       curl tree htop iotop            \
       zip dos2unix alien              \
-      maven s3cmd kuser rlwrap
+      maven s3cmd kuser rlwrap \
+      inkscape
 
 # Generate public/private keys
   ssh-keygen    # Answer <ret> to all questions

@@ -31,7 +31,7 @@ path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )
 
 # common bash/zsh aliases
-source ~/.alias.bash
+source ~/.common.bash
 
 # vi command-line editing mode
 bindkey -v

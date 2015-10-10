@@ -76,6 +76,8 @@ alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
 alias kk="kill -9"
 alias pk="pkill -9"
 
+alias blk="sleep 1 ; xset dpms force off" 
+
 # Scanner alias
 alias scanner=scangearmp
 
