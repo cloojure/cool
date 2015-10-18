@@ -15,3 +15,13 @@ power is nice, but what I need most is confidence
   (the "compiled code"), and we then execute those "compiled
   code" bits.
 
+Single-arg versions of =, or, and, etc are problematical.  Writing (= true) is nearly always an
+error, etc, but is currently silently ignored by Clojure.
+
+Currently, a 2nd accidental declaration of a function (like a test!) will silently overwrite the first.
+
+Note that 'lein test' evaluates all namespaces, not just test namespaces.
+
+Note that "running" a file causes all forms in a file/namespace to be evaluated, even "bare" forms
+like: (println "hello").  It is much like executing a script to define everything, then calling
+-main.

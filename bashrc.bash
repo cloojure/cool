@@ -16,7 +16,7 @@ PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
 PATH=$PATH:/opt/bin
 
 # common bash/zsh aliases
-source ~/.alias.bash
+source ~/.common.bash
 
 # vi command-line editing mode
 set -o vi  

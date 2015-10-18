@@ -10,9 +10,11 @@ if (has("gui_running"))
 " sleep 1
 endif
 
+" Note: User-defined commands must begin with a capital letter 
+ 
 " Window shape commands
-:command! Wl set columns=240        " Width large
-:command! Wm set columns=120        " Width medium
+:command! Wl set columns=250        " Width large
+:command! Wm set columns=130        " Width medium
 :command! Ws set columns=60         " Width small
 :command! Ll set lines=99           " Lines large
 :command! Lm set lines=60           " Lines medium
@@ -26,7 +28,7 @@ endif
 
 " Default size/shape
 function! ConfigStd()
-  set columns=120
+  set columns=130
   set lines=60
   set guifont=Monospace\ 10
 endfunction
@@ -34,8 +36,17 @@ call ConfigStd()
 
 " Define an easy way to maximize the window (Vertical bar '|' concats 2 commands on one line. It can
 " also be done with a crtl-v/vrtl-j combination)
-:command! WW set columns=300 lines=99
+:command! WW set columns=250 lines=99
 :command! Ww set columns=120 lines=60
+
+" This function is used to swap the orientation of 2 windows (eg left/right), while keeping the
+" cursor in the same pane where it started (eg left pane).
+function! SwapWindows()
+  " User-defined functions must begin with a capital letter 
+  wincmd r      " rotate windows
+  wincmd w      " move cursor to 
+endfunction
+:command! SS call SwapWindows()
 
 " match index is 0-based (C-style);  no match = -1
 if (match( system("uname -a"), "Linux" ) > -1)

@@ -1,7 +1,7 @@
 
 set verbose=0   " increment to aid in debugging
 
-execute pathogen#infect()
+" execute pathogen#infect()
 filetype plugin indent on     " plugins are enabled
 filetype plugin on            " plugins are enabled
 
@@ -56,16 +56,8 @@ set path=.,*,src/**,grails-app/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh
 highlight! link DiffText MatchParen     " Aqua diff coloring
 "   highlight! link DiffText Todo           " Yellow diff coloring
 
-" This function is used to swap the orientation of 2 windows (eg left/right), while keeping the
-" cursor in the same pane where it started (eg left pane).
-function! SwapWindows()
-  " User-defined functions must begin with a capital letter 
-  wincmd r      " rotate windows
-  wincmd w      " move cursor to 
-endfunction
-:command! SS call SwapWindows()
-  " User-defined commands must begin with a capital letter 
-
+" Note: User-defined commands must begin with a capital letter 
+ 
 " Define an easy way to source files (Vertical bar '|' concats 2 commands on one line. It can also
 " be done with a crtl-v/vrtl-j combination)
 :command! SRC source ~/.vimrc  | source ~/.gvimrc

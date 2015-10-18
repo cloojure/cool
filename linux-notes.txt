@@ -5,6 +5,9 @@ Ubuntu:
             dpkg -r fdb-document-layer      # remove
             dpkg -l fdb-document-layer      # list
 
+  apt list --all-versions   "*user*"          - all packages matching pattern *user*
+  apt search                  user            - packages with any text matching 'user'
+
 CentOS/Fedora:
   online:   yum     install -y <name>
 

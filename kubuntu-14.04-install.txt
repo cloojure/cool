@@ -62,10 +62,15 @@ The following doesn't seem to work (blank screen):
       gcc python ruby \
       octave libreoffice \
       tree htop iotop collectl \
-      zip unzip dos2unix \
+      zip unzip dos2unix kuser \
+      alien youtube-dl sbackup rlwrap
+
       postgresql (get latest from postgresql.org)
-      youtube-dl
-      alien
+
+- for NVM we need 
+  git clone https://github.com/creationix/nvm.git ~/.nvm \
+        && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
+  - and add to end of .zshrc file:  "source ~/.nvm/nvm.sh"
 
 - For Oracle client on AWS we need:
   sudo apt install -y libaio1         - async I/O (note can use "apt search libaio")
