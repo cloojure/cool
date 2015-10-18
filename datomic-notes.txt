@@ -1,3 +1,11 @@
+Install:
+
+  <unzip datomic-pro-xxx.zip file>
+  sudo mv datomic-pro-xxx /opt
+  cd /opt
+  sudo ln -s datomic-pro-xxx /datomic
+  sudo apt-get install -y maven
+  sudo bin/maven-install
 
 
 Notes:

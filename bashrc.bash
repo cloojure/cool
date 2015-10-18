@@ -1,23 +1,19 @@
 #!/bin/bash
 # echo ".bashrc - enter"
 
-if [[ $(uname -a) == *Darwin* ]]; then
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home"
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home"
-fi
-if [[ $(uname -a) == *Linux*.fc20.* ]]; then
-  export JAVA_HOME="/usr/java/jdk1.8.0_11"
-fi
+# if [[ $(uname -a) == *Darwin* ]]; then
+# if [[ $(uname -a) == *Linux*.fc20.* ]]; then
+#   export JAVA_HOME="/usr/java/jdk1.8.0_11"
+# fi
+
+export JAVA_HOME=/opt/java
 
 # baseline path
 PATH=.:${HOME}/bin
-PATH=$PATH:/usr/local/git/bin
 PATH=$PATH:${JAVA_HOME}/bin
 PATH=$PATH:/usr/local/bin:/usr/bin:/bin
 PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
-PATH=$PATH:/usr/local/opt:/opt/bin
-PATH=$PATH:/opt/gsutil
-PATH=$PATH:/bin/texbin
+PATH=$PATH:/opt/bin
 
 # common bash/zsh aliases
 source ~/.alias.bash
@@ -36,6 +32,3 @@ PROMPT_DIRTRIM=4
 alias dosrc="source ~/.bashrc"
 
 # echo ".bashrc - exit"
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/alan/.gvm/bin/gvm-init.sh" ]] && source "/Users/alan/.gvm/bin/gvm-init.sh"
