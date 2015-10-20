@@ -25,7 +25,7 @@ alias dosrc="source ~/.zshrc"
 alias gojoy="ssh ubuntu@165.225.137.241"
 
 # from: https://github.com/creationix/nvm
-source ~/.nvm/nvm.sh
+# source ~/.nvm/nvm.sh
 # nvm install stable
 # nvm use     stable
 
