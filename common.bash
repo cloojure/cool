@@ -123,6 +123,11 @@ alias litst="linit ; ltst"
 alias fdb-start-doc="sudo service fdb-document-layer restart"
 
 #-----------------------------------------------------------------------------
+# misc stuff
+alias crashrm="sudo rm /var/crash/*"
+alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"
+
+#-----------------------------------------------------------------------------
 mcd() { mkdir -p "$1"; cd "$1";} 
 alias histg="history | grep" 
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla" 
