@@ -1,5 +1,5 @@
 #!/bin/bash 
-### echo "alias.bash - enter"
+### echo "common.bash - enter"
 
 export JAVA_HOME="/opt/java"
 export GROOVY_HOME="/opt/groovy"
@@ -30,7 +30,7 @@ path=( $path /opt/gsutil )
 # Remove if you need to see any error messages.
 alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 if [[ $(hostname) == amy ]]; then        
-  alias gvim="\gvim  -geom '+2000-1200' 2>&/dev/null"
+  alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
 fi
 # old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
@@ -133,4 +133,8 @@ alias histg="history | grep"
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla" 
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 
-### echo "alias.bash - exit"
+#---------------------------------------------------------------------------------------------------
+# temp vars
+aa=~/work/dw/DataWarehouseJobs 
+bb=~/wrk2/dw/DataWarehouseJobs 
+

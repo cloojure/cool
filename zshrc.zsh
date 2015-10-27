@@ -29,9 +29,4 @@ alias gojoy="ssh ubuntu@165.225.137.241"
 # nvm install stable
 # nvm use     stable
 
-#---------------------------------------------------------------------------------------------------
-# temp vars
-aa=~/demo/pedestal/helloworld
-bb=~/gh/pedestal/samples/hello-world
-
 # echo ".zshrc - exit"

@@ -65,7 +65,14 @@ The following doesn't seem to work (blank screen):
       zip unzip dos2unix kuser \
       alien youtube-dl sbackup rlwrap
 
+- Postgres
       postgresql (get latest from postgresql.org)
+
+- Media codecs
+  sudo apt-get install ubuntu-restricted-extras
+
+- Uncomplicated Firewall (UFW)
+  sudo apt-get install ufw gufw
 
 - for NVM we need 
   git clone https://github.com/creationix/nvm.git ~/.nvm \
