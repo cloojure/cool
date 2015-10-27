@@ -1,8 +1,7 @@
 #!/bin/zsh
 # echo ".zshrc - enter"
 
-# common bash/zsh aliases
-source ~/.common.bash
+# common bash/zsh aliases in  ~/.common.bash  are sourced from ~/.zshenv
 
 export HISTSIZE=1000
 export SAVEHIST=1000
@@ -19,7 +18,6 @@ PS1='%50<>> ..<%~ > '
 
 # zsh-specific aliases
 alias dosrc="source ~/.zshrc"
-
 
 #---------------------------------------------------------------------------------------------------
 alias gojoy="ssh ubuntu@165.225.137.241"
