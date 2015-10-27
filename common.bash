@@ -144,6 +144,10 @@ alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 
 #---------------------------------------------------------------------------------------------------
+# joyent
+alias gojoy="ssh ubuntu@165.225.137.241"
+
+#---------------------------------------------------------------------------------------------------
 # temp vars
 aa=~/work/dw/DataWarehouseJobs 
 bb=~/wrk2/dw/DataWarehouseJobs 

@@ -1,19 +1,8 @@
 #!/bin/bash
 # echo ".bashrc - enter"
 
-# if [[ $(uname -a) == *Darwin* ]]; then
-# if [[ $(uname -a) == *Linux*.fc20.* ]]; then
-#   export JAVA_HOME="/usr/java/jdk1.8.0_11"
-# fi
-
-export JAVA_HOME=/opt/java
-
-# baseline path
-PATH=.:${HOME}/bin
-PATH=$PATH:${JAVA_HOME}/bin
-PATH=$PATH:/usr/local/bin:/usr/bin:/bin
-PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
-PATH=$PATH:/opt/bin
+# Needed so non-interactive bash shells will source ~/.bashrc
+export BASH_ENV=~/.bashrc
 
 # common bash/zsh aliases
 source ~/.common.bash
