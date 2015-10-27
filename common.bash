@@ -6,6 +6,11 @@ export GROOVY_HOME="/opt/groovy"
 export DATOMIC_HOME="/opt/datomic"
 export IDEA_HOME="/opt/idea"
 
+export CASSANDRA_HOME="/opt/cassandra" 
+export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
+export CQLSH_PORT=9042
+
+
 if [[ $(uname -a) == *Darwin* ]]; then
   echo "Found Darwin OS"
   sleep 3
@@ -20,6 +25,7 @@ path=( $path /opt/bin )
 path=( $path ${JAVA_HOME}/bin )
 path=( $path ${GROOVY_HOME}/bin )
 path=( $path ${DATOMIC_HOME}/bin )
+path=( $path ${CASSANDRA_HOME}/bin )
 path=( $path ${IDEA_HOME}/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
