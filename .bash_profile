@@ -1,1 +1,2 @@
-.bashrc
+#!/bin/bash
+source ~/.bashrc

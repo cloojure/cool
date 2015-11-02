@@ -1,8 +1,7 @@
 #!/bin/zsh
 # echo ".zshrc - enter"
 
-# common bash/zsh aliases
-source ~/.common.bash
+# common bash/zsh aliases in  ~/.common.bash  are sourced from ~/.zshenv
 
 export HISTSIZE=1000
 export SAVEHIST=1000
@@ -21,17 +20,5 @@ PS1='%50<>> ..<%~ > '
 alias dosrc="source ~/.zshrc"
 
 
-#---------------------------------------------------------------------------------------------------
-alias gojoy="ssh ubuntu@165.225.137.241"
-
-# from: https://github.com/creationix/nvm
-# source ~/.nvm/nvm.sh
-# nvm install stable
-# nvm use     stable
-
-#---------------------------------------------------------------------------------------------------
-# temp vars
-aa=~/demo/pedestal/helloworld
-bb=~/gh/pedestal/samples/hello-world
 
 # echo ".zshrc - exit"

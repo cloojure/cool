@@ -1,10 +1,17 @@
 #!/bin/bash 
-### echo "alias.bash - enter"
+### echo "common.bash - enter"
 
 export JAVA_HOME="/opt/java"
 export GROOVY_HOME="/opt/groovy"
 export DATOMIC_HOME="/opt/datomic"
 export IDEA_HOME="/opt/idea"
+export SPARK_HOME="/opt/spark" 
+export HADOOP_HOME="/opt/hadoop" 
+
+export CASSANDRA_HOME="/opt/cassandra" 
+export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
+export CQLSH_PORT=9042
+
 
 if [[ $(uname -a) == *Darwin* ]]; then
   echo "Found Darwin OS"
@@ -19,8 +26,11 @@ path=( . ${HOME}/bin )
 path=( $path /opt/bin )
 path=( $path ${JAVA_HOME}/bin )
 path=( $path ${GROOVY_HOME}/bin )
-path=( $path ${DATOMIC_HOME}/bin )
 path=( $path ${IDEA_HOME}/bin )
+path=( $path ${DATOMIC_HOME}/bin )
+path=( $path ${CASSANDRA_HOME}/bin )
+path=( $path ${SPARK_HOME}/bin )
+path=( $path ${HADOOP_HOME}/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
@@ -30,7 +40,7 @@ path=( $path /opt/gsutil )
 # Remove if you need to see any error messages.
 alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 if [[ $(hostname) == amy ]]; then        
-  alias gvim="\gvim  -geom '+2000-1200' 2>&/dev/null"
+  alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
 fi
 # old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
@@ -133,4 +143,12 @@ alias histg="history | grep"
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla" 
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 
-### echo "alias.bash - exit"
+#---------------------------------------------------------------------------------------------------
+# joyent
+alias gojoy="ssh ubuntu@165.225.137.241"
+
+#---------------------------------------------------------------------------------------------------
+# temp vars
+aa=~/work/dw/DataWarehouseJobs 
+bb=~/wrk2/dw/DataWarehouseJobs 
+
