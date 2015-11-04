@@ -42,6 +42,8 @@ that you can (re-)install the video driver.
 The following doesn't seem to work (blank screen):
   In Ubuntu, single-user console is "runlevel" 1:  sudo telinit 1
 
+--------------------------------------------------------------------------------
+  linux ...   rw init=/bin/bash
 
 --------------------------------------------------------------------------------
 
