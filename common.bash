@@ -7,6 +7,7 @@ export DATOMIC_HOME="/opt/datomic"
 export IDEA_HOME="/opt/idea"
 export SPARK_HOME="/opt/spark" 
 export HADOOP_HOME="/opt/hadoop" 
+export SOLR_HOME="/opt/solr" 
 
 export CASSANDRA_HOME="/opt/cassandra" 
 export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -31,6 +32,7 @@ path=( $path ${DATOMIC_HOME}/bin )
 path=( $path ${CASSANDRA_HOME}/bin )
 path=( $path ${SPARK_HOME}/bin )
 path=( $path ${HADOOP_HOME}/bin )
+path=( $path ${SOLR_HOME}/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
