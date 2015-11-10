@@ -17,8 +17,6 @@ setopt csh_null_glob
 PS1='%50<>> ..<%~ > '
 
 # zsh-specific aliases
-alias dosrc="source ~/.zshrc"
-
-
+alias dosrc="source ~/.zshenv ; source ~/.zshrc"
 
 # echo ".zshrc - exit"

@@ -48,7 +48,12 @@ set ruler
 set textwidth=100
 set scrolloff=5
 set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
-set path=.,*,src/**,grails-app/**,test/**,resources/**,**/*.clj,**/*.cljs,**/*sh,**/*txt
+set path=.
+set path+=src/**
+set path+=test/**
+set path+=resources/**
+set path+=source/**
+set path+=source-test/**
 
 " Fix the difficult-to-read default setting for diff text highlighting.  The bang (!) is
 " required since we are overwriting the DiffText setting. The highlighting for "Todo" also

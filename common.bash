@@ -1,5 +1,5 @@
 #!/bin/bash 
-### echo "common.bash - enter"
+# echo "common.bash - enter"
 
 export JAVA_HOME="/opt/java"
 export GROOVY_HOME="/opt/groovy"
@@ -40,17 +40,17 @@ path=( $path /opt/gsutil )
 # Remove if you need to see any error messages.
 alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 if [[ $(hostname) == amy ]]; then        
-  alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
+  alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 fi
 # old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
-alias d="ls -ldF --color=auto"
-alias lal="ls -alF --color=auto"
-alias dt="ls -ldtF --color=auto"
-alias dt9="ls -ldtF --color=auto * | head -9"
+alias d="ls -ldF --color"
+alias lal="ls -alF --color"
+alias dt="ls -ldtF --color"
+alias dt9="ls -ldtF --color * | head -9"
 
-alias du='du -BG'
-alias df='df -BG'
+alias du="du -BG"
+alias df="df -BG"
 
 # Always use egrep
 alias grep="\grep -E --color=auto"  # same as deprecated 'egrep'
@@ -65,17 +65,17 @@ fi
 
 if [[ $(uname -a) == *Darwin* ]]; then
   alias gvim=mvim
-  alias du='du -g'
-  alias df='df -g'
-  alias d="ls -ldF "
-  alias lal="ls -alF "
-  alias dt="ls -ldtF "
-  alias dt9="ls -ldtF  * | head -9"
-  alias grep="\grep -E "  # same as deprecated 'egrep'
+  alias du="du -g"
+  alias df="df -g"
+  alias d="ls -ldF"
+  alias lal="ls -alF"
+  alias dt="ls -ldtF"
+  alias dt9="ls -ldtF * | head -9"
+  alias grep='\grep -E'  # same as deprecated 'egrep'
 fi
 
-alias pdirs='find * -maxdepth 0 -type d '
-alias pfiles='find * -maxdepth 0 -type f '
+alias pdirs="find * -maxdepth 0 -type d "
+alias pfiles="find * -maxdepth 0 -type f "
 alias dd='d `pdirs` '
 
 alias wcl="wc -l"
@@ -111,9 +111,9 @@ alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
 alias kk="kill -9"
 alias pk="pkill -9"
 
-alias blk="sleep 1 ; xset dpms force off" 
+alias blk="sleep 1 ; xset dpms force off"       # set screen to black (power off)
 
-# Scanner alias
+# Alias for home Cannon scanner driver
 alias scanner=scangearmp
 
 # Docker stuff
@@ -130,22 +130,20 @@ alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
 alias ltst=" time lein test :bvt :regression"
 alias litst="linit ; ltst"
 
-alias fdb-start-doc="sudo service fdb-document-layer restart"
-
-#-----------------------------------------------------------------------------
 # misc stuff
-alias crashrm="sudo rm /var/crash/*"
-alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"
-
-#-----------------------------------------------------------------------------
+alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
+alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wifi off/on to re-init after sleep
 mcd() { mkdir -p "$1"; cd "$1";} 
 alias histg="history | grep" 
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla" 
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 
-#---------------------------------------------------------------------------------------------------
 # joyent
 alias gojoy="ssh ubuntu@165.225.137.241"
+
+# TC dev cluster
+dev="athompson@agvdevtest26.touchcommerce.com"
+# aghcl02 
 
 #---------------------------------------------------------------------------------------------------
 # temp vars
