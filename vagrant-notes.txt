@@ -1,0 +1,55 @@
+Basic Development Environment
+
+Installed:
+
+Oracle Java 8
+Leiningen
+foundationdb-clients-2.0.9-1
+foundationdb-server-2.0.9-1
+fdb-sql-layer-2.0.0-1
+fdb-sql-layer-client-tools-2.0.0-1.el6
+
+Requirements:
+
+https://www.virtualbox.org/wiki/Downloads
+https://www.vagrantup.com/downloads.html
+
+To Run VM:
+
+vagrant up
+
+To SSH into VM:
+
+vagrant ssh
+
+To Stop VM:
+
+vagrant halt
+
+To Delete VM:
+
+vagrant destroy
+
+NOTES:
+
+The vagrant_devbox directory is shared directory accessible in the VM at /vagrant.
+
+There are many configuration options available in the VagrantFile.  See Vagrant documentation for more information.
+
+https://docs.vagrantup.com/v2/
+
+Release Notes:
+
+v0.1.1
+First release
+
+v0.1.2
+Removed redundant shared folder.
+Removed unneeded installation files.
+Added missing foundationdb component.
+
+v0.1.3
+Added VM cleaning to sanitize environment and help compression.
+
+v0.1.4
+Fixed foundationdb rpm installing and defaulting to wrong Java version.
