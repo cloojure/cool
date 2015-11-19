@@ -65,7 +65,8 @@ The following doesn't seem to work (blank screen):
       octave libreoffice \
       tree htop iotop collectl \
       zip unzip dos2unix kuser \
-      alien youtube-dl sbackup rlwrap
+      alien youtube-dl sbackup rlwrap \
+      okular
 
 - Postgres
       postgresql (get latest from postgresql.org)
