@@ -55,11 +55,19 @@ set path+=resources/**
 set path+=source/**
 set path+=source-test/**
 
-" Fix the difficult-to-read default setting for diff text highlighting.  The bang (!) is
-" required since we are overwriting the DiffText setting. The highlighting for "Todo" also
-" looks nice (yellow) if you don't like the "MatchParen" (Aqua) diff color.
-highlight! link DiffText MatchParen     " Aqua diff coloring
-"   highlight! link DiffText Todo           " Yellow diff coloring
+" Fix the difficult-to-read default setting for search/replace text
+" highlighting.  The bang (!) is required since we are overwriting the
+" DiffText setting.  Use the ":highlight" command in vim to see
+" alternate color choices if you don't like "Todo" or "StatusLine"
+highlight! link   IncSearch  Todo           " Yellow 
+highlight! link      Search  StatusLine     " Light tan 
+
+" Fix the difficult-to-read default setting for diff text highlighting.
+" The bang (!) is required since we are overwriting the DiffText
+" setting. The highlighting for "Todo" also looks nice (yellow) if you
+" don't like the "MatchParen" (Aqua) diff color.
+highlight! link DiffText MatchParen     " Aqua 
+"   highlight! link DiffText Todo       " Yellow 
 
 " Note: User-defined commands must begin with a capital letter 
  
