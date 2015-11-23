@@ -1,4 +1,5 @@
 # Global configuration (updates ~/.gitconfig)
+#   Note: using '--global' is optional and results in per-repo changes if omitted
 git config --global user.name           "Joe User"          # set user name
 git config --global user.email          joe@gmail.com       # set user name
 git config --global core.editor         vim                 # set user editor preference

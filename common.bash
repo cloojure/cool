@@ -51,8 +51,8 @@ alias lal="ls -alF --color"
 alias dt="ls -ldtF --color"
 alias dt9="ls -ldtF --color * | head -9"
 
-alias du="du -BG"
-alias df="df -BG"
+alias du="du -m"
+alias df="df -BM"
 
 # Always use egrep
 alias grep="\grep -E --color=auto"  # same as deprecated 'egrep'

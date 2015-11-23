@@ -1,6 +1,7 @@
 
-syntax enable
-colorscheme desert
+" This is all in common.vim now
+" syntax enable
+" colorscheme desert
 " colorscheme slate
 " colorscheme default
 
