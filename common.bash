@@ -10,6 +10,7 @@ path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )  # #todo:  what is this?
 
 if [[ $(hostname) == *touchcommerce.com ]]; then
+  echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
   # echo "Found touchcommerce.com"
   # sleep 1
 else
