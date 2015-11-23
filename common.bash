@@ -1,42 +1,59 @@
 #!/bin/bash 
 # echo "common.bash - enter"
 
-export JAVA_HOME="/opt/java"
-export GROOVY_HOME="/opt/groovy"
-export DATOMIC_HOME="/opt/datomic"
-export IDEA_HOME="/opt/idea"
-export SPARK_HOME="/opt/spark" 
-export HADOOP_HOME="/opt/hadoop" 
-export SOLR_HOME="/opt/solr" 
-
-export CASSANDRA_HOME="/opt/cassandra" 
-export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
-export CQLSH_PORT=9042
-
-
-if [[ $(uname -a) == *Darwin* ]]; then
-  echo "Found Darwin OS"
-  sleep 3
-  # export DYLD_LIBRARY_PATH=/opt/oracle
-  # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
-  # export GROOVY_HOME="/opt/groovy"
-fi
-
 # baseline path
 path=( . ${HOME}/bin )
 path=( $path /opt/bin )
-path=( $path ${JAVA_HOME}/bin )
-path=( $path ${GROOVY_HOME}/bin )
-path=( $path ${IDEA_HOME}/bin )
-path=( $path ${DATOMIC_HOME}/bin )
-path=( $path ${CASSANDRA_HOME}/bin )
-path=( $path ${SPARK_HOME}/bin )
-path=( $path ${HADOOP_HOME}/bin )
-path=( $path ${SOLR_HOME}/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
-path=( $path /opt/gsutil )
+path=( $path /opt/gsutil )  # #todo:  what is this?
+
+if [[ $(hostname) == *touchcommerce.com ]]; then
+  echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
+  # echo "Found touchcommerce.com"
+  # sleep 1
+else
+  export JAVA_HOME="/opt/java"
+  export GROOVY_HOME="/opt/groovy"
+  export DATOMIC_HOME="/opt/datomic"
+  export IDEA_HOME="/opt/idea"
+  export SPARK_HOME="/opt/spark" 
+  export HADOOP_HOME="/opt/hadoop" 
+  export SOLR_HOME="/opt/solr" 
+
+  export CASSANDRA_HOME="/opt/cassandra" 
+  export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
+  export CQLSH_PORT=9042
+
+  path=( $path ${JAVA_HOME}/bin )
+  path=( $path ${GROOVY_HOME}/bin )
+  path=( $path ${IDEA_HOME}/bin )
+  path=( $path ${DATOMIC_HOME}/bin )
+  path=( $path ${CASSANDRA_HOME}/bin )
+  path=( $path ${SPARK_HOME}/bin )
+  path=( $path ${HADOOP_HOME}/bin )
+  path=( $path ${SOLR_HOME}/bin )
+fi
+
+### if [[ $(uname -a) == *Darwin* ]]; then
+###   echo "Found Darwin OS"
+###   sleep 3
+###   # export DYLD_LIBRARY_PATH=/opt/oracle
+###   # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
+###   # export GROOVY_HOME="/opt/groovy"
+### fi
+### if [[ $(uname -a) == *Darwin* ]]; then
+###   alias gvim=mvim
+###   alias du="du -g"
+###   alias df="df -g"
+###   alias d="ls -ldF"
+###   alias lal="ls -alF"
+###   alias dt="ls -ldtF"
+###   alias dt9="ls -ldtF * | head -9"
+###   alias grep='\grep -E'  # same as deprecated 'egrep'
+### fi
+
 
 # We need to add the '2>&/dev/null' part to squelch error messages on Kubuntu 14.04.
 # Remove if you need to see any error messages.
@@ -52,7 +69,7 @@ alias dt="ls -ldtF --color"
 alias dt9="ls -ldtF --color * | head -9"
 
 alias du="du -m"
-alias df="df -BM"
+alias df="df -BG"
 
 # Always use egrep
 alias grep="\grep -E --color=auto"  # same as deprecated 'egrep'
@@ -63,17 +80,6 @@ if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
 else
   # echo "Missing Linux"
   echo "OSX is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
-fi
-
-if [[ $(uname -a) == *Darwin* ]]; then
-  alias gvim=mvim
-  alias du="du -g"
-  alias df="df -g"
-  alias d="ls -ldF"
-  alias lal="ls -alF"
-  alias dt="ls -ldtF"
-  alias dt9="ls -ldtF * | head -9"
-  alias grep='\grep -E'  # same as deprecated 'egrep'
 fi
 
 alias pdirs="find * -maxdepth 0 -type d "
