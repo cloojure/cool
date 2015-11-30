@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 # echo "common.bash - enter"
 
 # baseline path
@@ -10,40 +10,40 @@ path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )  # #todo:  what is this?
 
 if [[ $(hostname) == *touchcommerce.com ]]; then
-  echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
   # echo "Found touchcommerce.com"
   # sleep 1
+  echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
 else
+  # echo "Not-Found touchcommerce.com"
   export JAVA_HOME="/opt/java"
   export GROOVY_HOME="/opt/groovy"
   export DATOMIC_HOME="/opt/datomic"
   export IDEA_HOME="/opt/idea"
-  export SPARK_HOME="/opt/spark" 
-  export HADOOP_HOME="/opt/hadoop" 
-  export SOLR_HOME="/opt/solr" 
+  export SPARK_HOME="/opt/spark"
+  export HADOOP_HOME="/opt/hadoop"
+  export SOLR_HOME="/opt/solr"
 
-  export CASSANDRA_HOME="/opt/cassandra" 
+  export CASSANDRA_HOME="/opt/cassandra"
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
   export CQLSH_PORT=9042
 
-  path=( $path ${JAVA_HOME}/bin )
-  path=( $path ${GROOVY_HOME}/bin )
-  path=( $path ${IDEA_HOME}/bin )
-  path=( $path ${DATOMIC_HOME}/bin )
-  path=( $path ${CASSANDRA_HOME}/bin )
-  path=( $path ${SPARK_HOME}/bin )
-  path=( $path ${HADOOP_HOME}/bin )
-  path=( $path ${SOLR_HOME}/bin )
+  path=( ${JAVA_HOME}/bin $path )
+  path=( ${GROOVY_HOME}/bin $path )
+  path=( ${IDEA_HOME}/bin $path )
+  path=( ${DATOMIC_HOME}/bin $path )
+  path=( ${CASSANDRA_HOME}/bin $path )
+  path=( ${SPARK_HOME}/bin $path )
+  path=( ${HADOOP_HOME}/bin $path )
+  path=( ${SOLR_HOME}/bin $path )
 fi
 
-### if [[ $(uname -a) == *Darwin* ]]; then
+### if [[ $(uname -a) =~ "Darwin" ]]; then
 ###   echo "Found Darwin OS"
 ###   sleep 3
 ###   # export DYLD_LIBRARY_PATH=/opt/oracle
 ###   # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
 ###   # export GROOVY_HOME="/opt/groovy"
-### fi
-### if [[ $(uname -a) == *Darwin* ]]; then
+###
 ###   alias gvim=mvim
 ###   alias du="du -g"
 ###   alias df="df -g"
@@ -58,7 +58,7 @@ fi
 # We need to add the '2>&/dev/null' part to squelch error messages on Kubuntu 14.04.
 # Remove if you need to see any error messages.
 alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
-if [[ $(hostname) == amy ]]; then        
+if [[ $(hostname) == amy ]]; then
   alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 fi
 # old:  if [[ $(uname -a) == *Ubuntu* ]]; then
@@ -129,7 +129,7 @@ alias dk="sudo docker"
 
 # Google Cloud tools
 #
-# Copy local files to Google Cloud Storage using gzip compression for all files 
+# Copy local files to Google Cloud Storage using gzip compression for all files
 # matching *.{txt,xml,csv,tsv,psv,html,js}, and set permission to public-read.
 alias gsutil-cpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
 
@@ -141,9 +141,9 @@ alias litst="linit ; ltst"
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
 alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wifi off/on to re-init after sleep
-mcd() { mkdir -p "$1"; cd "$1";} 
-alias histg="history | grep" 
-alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla" 
+mcd() { mkdir -p "$1"; cd "$1";}
+alias histg="history | grep"
+alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 
 # joyent
@@ -151,10 +151,10 @@ alias gojoy="ssh ubuntu@165.225.137.241"
 
 # TC dev cluster
 dev="athompson@agvdevtest26.touchcommerce.com"
-# aghcl02 
+# aghcl02
 
 #---------------------------------------------------------------------------------------------------
 # temp vars
-aa=~/work/dw/DataWarehouseJobs 
-bb=~/wrk2/dw/DataWarehouseJobs 
+aa=~/work/dw/DataWarehouseJobs
+bb=~/wrk2/dw/DataWarehouseJobs
 
