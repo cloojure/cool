@@ -1,0 +1,29 @@
+NOTE: hadoop uses only a single hypen for long options, not two like gnu/linux
+
+General:
+  hadoop job -list              # List running jobs
+
+HDFS:
+  hadoop fs -help               # fs => "file system" commands help
+  hadoop fs -help du            #   usage for the "du" command
+  hadoop fs -ls  "<str>"        # like unix "ls -l <str>" ; quotes req'd if include wildcards. 
+  hadoop fs -lsr                # like unix "ls -r"
+  hadoop fs -df                 # like unix
+  hadoop fs -du                 # like unix
+  hadoop fs -cp                 # like unix
+  hadoop fs -mv                 # like unix
+  hadoop fs -rm                 # like unix
+  hadoop fs -rmr                # like unix "rm -rf"
+  hadoop fs -mkdir              # like unix
+  hadoop fs -tail               # like unix
+  hadoop fs -copyFromLocal      # tx between hdfs and unix filesystems
+  hadoop fs -moveFromLocal      # tx between hdfs and unix filesystems
+  hadoop fs -copyToLocal        # tx between hdfs and unix filesystems
+  hadoop fs -moveToLocal        # tx between hdfs and unix filesystems
+
+HDFS Example:
+# > hadoop fs -ls "/user/hadoop/events/siteID-*/2015-11-13*"
+#   -rw-r--r--   3 root supergroup   26448524 2015-11-18 07:02 /user/hadoop/events/siteID-149/2015-11-13T24/2015-11-13.events
+#   -rw-r--r--   3 root supergroup 3750599657 2015-11-18 07:03 /user/hadoop/events/siteID-316/2015-11-13T24/2015-11-13.events
+#   -rw-r--r--   3 root supergroup   51617290 2015-11-18 07:03 /user/hadoop/events/siteID-319/2015-11-13T24/2015-11-13.events
+#   -rw-r--r--   3 root supergroup   27880160 2015-11-18 07:03 /user/hadoop/events/siteID-350/2015-11-13T24/2015-11-13.events
