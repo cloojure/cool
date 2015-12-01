@@ -1,0 +1,31 @@
+
+General:
+  hadoop job -list              # List running jobs
+
+HDFS:
+  hadoop fs -help               # fs => "file system" commands help
+  hadoop fs -help du            #   usage for the "du" command
+  hadoop fs -ls  "<str>"        # ls <str> ; quotes req'd if include wildcards (> hadoop fs -ls "/user/*")
+  hadoop fs -lsr                # like unix "ls -r"
+  hadoop fs -df                 # like unix
+  hadoop fs -du                 # like unix
+  hadoop fs -cp                 # like unix
+  hadoop fs -mv                 # like unix
+  hadoop fs -rm                 # like unix
+  hadoop fs -rmr                # like unix "rm -rf"
+  hadoop fs -mkdir              # like unix
+  hadoop fs -tail               # like unix
+  hadoop fs -copyFromLocal      # tx between hdfs and unix filesystems
+  hadoop fs -moveFromLocal      # tx between hdfs and unix filesystems
+  hadoop fs -copyToLocal        # tx between hdfs and unix filesystems
+  hadoop fs -moveToLocal        # tx between hdfs and unix filesystems
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+  hadoop fs ---                 # 
+
