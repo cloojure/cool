@@ -93,12 +93,15 @@ alias hh="history -99"
 alias gvt="~/work/settings/gvt.csh "
 alias gvd="echo gvim -c 'winpos 5 5' -c 'winsize 170 50' "
 
-alias up="cd .."
+alias up=" cd .."
 alias up2="cd ../.."
 alias up3="cd ../../.."
 alias up4="cd ../../../.."
 alias up5="cd ../../../../.."
 alias up6="cd ../../../../../.."
+alias up7="cd ../../../../../../.."
+alias up8="cd ../../../../../../../.."
+alias up9="cd ../../../../../../../../.."
 
 alias gits="git status --short"
 alias gitss="git status"
@@ -109,11 +112,14 @@ alias gitcam="git commit --all -m'misc' "
 alias gitcamp="git commit --all -m'misc' ; git push"
 alias gitsync="git pull ; git push"
 alias gitdns="git diff --name-status"
+alias gitdw="git diff --ignore-all-space --ignore-blank-lines"
 
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
         # old version (doesn't work on mac):
         #   dg      = git difftool --no-prompt --extcmd='gvimdiff --nofork -geometry 180x50+20+40'
+
+alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
 alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
 alias kk="kill -9"
