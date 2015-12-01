@@ -1,0 +1,47 @@
+Use Jenkins to deploy either:
+  solr
+  htapi-loader
+
+Mostly just redeploy loader. If change schema, also need to re-deploy solr
+
+MySQL on devtest
+  >  mysql -u v2arch -p configuration
+  password:  munbah1
+
+  mysql> select siteName from sites where siteID=350;
+
+      siteID  siteName
+      149     Proactiv
+      154     Sprint        # big (not every day in dev cluster)
+      316     SFR
+      319     TotalGym
+      350     SFR Care
+
+run ~/cool/tceast.bash
+
+data goes into dir like:  /home/athompson/tcdata/usr/etl/htapi_logs/20151123_0120/transcript/350_190_1448331469687
+following instructions from http://confluence.touchcommerce.com/display/dev/Loader+Deploy+Instructions
+***** must change solr.host to IP from ifconfig["eth0"]
+***** must change solr.port to 80 (non-std port number)
+
+  HTAPI.properties file looks like:
+    useLocal = true
+    greedy = true
+    engagements.dir = /home/athompson/tcdata/usr/etl/htapi_logs/20151123_0120/transcript/
+
+    num.engagements.to.load = 100
+    batch.size = 100
+
+    queue.size = 20
+    thread.count = 5
+
+    solr.host = 172.26.132.5
+    solr.port = 80
+    index.path = /solr
+
+    hadoop.core.site.file = ./core-site.xml
+
+    load.time.dir = ./
+    load.time.file = load-times.txt
+
+
