@@ -7,7 +7,7 @@
     ] 
     :dependencies [ 
       [criterium                    "0.4.3"] 
-      [org.clojure/clojure          "1.8.0-rc1"]
+      [org.clojure/clojure          "1.8.0-RC3"]
       [org.clojure/tools.namespace  "0.2.9"]
 ;     [org.clojure/tools.nrepl      "0.2.7"]
     ]
@@ -16,6 +16,6 @@
 
     :deploy-repositories {  "snapshots" :clojars
                             "releases"  :clojars }
-    :jvm-opts ["-Xms1g" "-Xmx8g" ]
+    :jvm-opts ["-Xms1g" "-Xmx4g" ]
 ;   :jvm-opts ["-Xms4g" "-Xmx8g" "-server"]
 }}
