@@ -16,21 +16,6 @@ HTAPI = "Historical Transcript" API
   "Loader" is actually named htapi/**/EngagementLoader.java
 
 -----------------------------------------------------------------------------
-Solr/Jenkins Notes:
-
-We use Jenkins (why?) to deploy solr & loader
-  go to jenkins: http://172.26.124.44:8080/
-  you must Login at this point! (username/password)
-  go to the HTAPI tab
-  click "DeploySolr (keep Data Index)" link
-  click "Build with Parameters" link
-    Add in the hostname (eg agvdevtest26.touchcommerce.com)
-    submit the job
-  watch in the "Build History" panel as the job is processed (~1 minute)
-    you can click on the link (eg #113-B-HTAPE-master-to-agvdevtest26.touchcommerce.com) to see job output
-      click on "Console Output"
-
------------------------------------------------------------------------------
 Installation & Config notes:
 
 IT-related help is accessed by sending email to: help@touchcommerce.com
