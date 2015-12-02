@@ -1,0 +1,126 @@
+-----------------------------------------------------------------------------
+Design notes:
+
+RT = "Right Touch" processing s/w
+  Includes GUI for agents to talk w. customers
+  Records events (incl chat transcript) to text log files as pseudo-URI strings (long lines)
+
+DW = "Data Warehouse"
+  Runs under Hadoop
+  Reads events from log files & processes to generate metrics for analysis & reporting
+  "Exporter" = dw/**/TranscriptProcessor.java
+    Writes out data to disk that will later be loaded into Solr
+
+HTAPI = "Historical Transcript" API
+  Loads chat/transcript info from disk (DW output) into Solr
+  "Loader" is actually named htapi/**/EngagementLoader.java
+
+-----------------------------------------------------------------------------
+Solr/Jenkins Notes:
+
+We use Jenkins (why?) to deploy solr & loader
+  go to jenkins: http://172.26.124.44:8080/
+  you must Login at this point! (username/password)
+  go to the HTAPI tab
+  click "DeploySolr (keep Data Index)" link
+  click "Build with Parameters" link
+    Add in the hostname (eg agvdevtest26.touchcommerce.com)
+    submit the job
+  watch in the "Build History" panel as the job is processed (~1 minute)
+    you can click on the link (eg #113-B-HTAPE-master-to-agvdevtest26.touchcommerce.com) to see job output
+      click on "Console Output"
+
+-----------------------------------------------------------------------------
+Installation & Config notes:
+
+IT-related help is accessed by sending email to: help@touchcommerce.com
+
+Work with IT support & the NOC as necessary to get your username/password set
+up for OpenOffice (Office365.com), Stash/JIRA/Confluence/Bamboo, and
+ADP.
+
+Install & log into your account for Outlook email.  Make sure you can access the Outlook 
+webmail at outlook.office.com (or office365.com -> sign-in -> for work)
+
+In the Control Panel, update the power options so that the computer will not
+sleep or shutdown for at least 4 hours when plugged in.  You may also wish to
+set the screen saver time to something in the range of 30 min to 2 hours.
+
+Download & install Chrome. Make it your default browser. Go into
+Settings->Appearance & check "Always show the bookmarks bar".
+
+Open the webpage jira.touchcommerce.com. Start to create a bookmark by typing
+CTRL-D, then click the "Edit" button. Highlight the "Bookmarks bar" line and
+click the "New Folder" button, label the folder "TC", then click "Save".
+Using the "menu" button at the top left (3 horizontal bars), visit home pages
+for Confluence, Stash, & Bamboo. For each of them, make a bookmark (^D) and
+save it in the TC folder.
+
+As you visit new webpages, make additional bookmarks for all the important
+ones (ADP, Portal, etc). When in doubt, bookmark it - you can always delete
+unneed bookmarks later.
+
+Download & install Cygwin.  During install, when you get to the page that
+shows components to install, click the "circle arrows" exactly once. Wait a
+second or 2 until the word "Default" changes to "Install", then proceed with
+the installation.  It will take 5-10 hours to download & install everything,
+so let run in the background or overnight if necessary.
+
+Download & install Windows VIM (vim.org). The one supplied with Cygwin doesn't
+work so well on Windows.
+
+If you wish, you can install Git separately from the one supplied with Cygwin
+(http://git-scm.com/download/win).  I prefer to just use the cygwin version to
+avoid having to maintain multiple environments & configurations (different
+home directories, dot-files, etc).
+
+Check that git is working:  git --version
+
+	If your development environment is windows and you are working under
+	RT development repo, please read below.
+
+	If you’re programming on Windows environment you will run into
+	line-ending issues.  This is because Windows uses both a carriage-return
+	character and a linefeed character for newlines in its files,  whereas Mac and
+	Linux systems use only the linefeed character.  In order to maintain the
+	homogeneity for RT development repo across all environments:
+
+	1.	Check that you have the autocrlf GIT setting set to true by 
+                  executing : git config  --global --edit 
+	2.	Please run : git config --global core.autocrlf  true, if you never set
+	          this property before.
+
+Download & install IntelliJ IDEA (Ultimate version). Get the license key from
+IT support & install it.  You can use the same license key to install IntelliJ
+on both home & work computers.
+
+Make sure that "Skype for Business" is installed and you can login.  This is
+different from plain Skype. It used to be named "Lync".
+
+Go to stash.touchcommerce.com. Bookmark this page in your TC folder.  Click on
+the RightTouch project, then the DW (DataWarehouse) repository. Under the
+ellipsis icon ("...") near the top-left, click the Clone link and copy the git
+URL or the repo.  Go to the terminal and clone the project like:
+
+   > git clone ssh://git@stash.touchcommerce.com:7999/rt/dw.git
+
+(or use IntelliJ).
+
+At the stash webpage, use the top-left menu bar (3 horizontal lines) to switch
+to JIRA and Confluence (named "TouchCommerce Wiki") and bookmark those as well
+under the TC folder.
+
+Bookmark https://touchcommerce.timetask.com and use it to record daily time. Submit weelky
+timesheets once they are completed.
+
+Building/Running
+
+  TC has a modified version of Maven that is in the Stash git repo.  Clone this repo and use this
+  maven version.
+
+  In a newly checked-out repo, go to the top level of the directory and type 
+
+    # mvn clean ; mvn install   # more reliable than "mvn clean install"
+
+  which will download jar file dependencies and compile the project. Note that "mvn test" should
+  work but is broken in DW (#todo fix this).
