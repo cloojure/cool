@@ -64,9 +64,40 @@ We use Jenkins (why?) to deploy solr & loader
       click on "Console Output"
 
 Note that Solr is a flat key-value store.  All values must be primitive types (e.g. string, integer, float).
-  Values may be cardinality-many, so that a list of primitives is permitted, like
+  Values may be "multiValued", so that a list of primitives is permitted, like
     List<String>
     List<Integer>
     List<Float>
-  Sub documents (e.g. recursion or nesting of documents) IS NOT PERMITTED (at least in Solr 4.*)
+
+Solr Nested (Child) Documents (also see "Block Join Query")
+  Sub documents (e.g. recursion or nesting of documents) IS NOT PERMITTED (at least in Solr 4.7)
+  Sub documents are allowed (only ONE nesting level!) in current Solr 5.3.  Load as JSON:
+      [
+        {
+          "id": "1",
+          "title": "Solr adds block join support",
+          "content_type": "parentDocument",
+          "_childDocuments_": [
+            {
+              "id": "2",
+              "comments": "SolrCloud supports it too!"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "title": "New Lucene and Solr release is out",
+          "content_type": "parentDocument",
+          "_childDocuments_": [
+            {
+              "id": "4",
+              "comments": "Lots of new features"
+            }
+          ]
+        }
+      ]
+      Note it is REQUIRED TO USE THE SPECIAL KEY:  "_childDocuments_"
+
+  Queries for nested documents are described here:
+    https://cwiki.apache.org/confluence/display/solr/Other+Parsers#OtherParsers-BlockJoinQueryParsers
 
