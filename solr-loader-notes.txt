@@ -63,3 +63,10 @@ We use Jenkins (why?) to deploy solr & loader
     you can click on the link (eg #113-B-HTAPE-master-to-agvdevtest26.touchcommerce.com) to see job output
       click on "Console Output"
 
+Note that Solr is a flat key-value store.  All values must be primitive types (e.g. string, integer, float).
+  Values may be cardinality-many, so that a list of primitives is permitted, like
+    List<String>
+    List<Integer>
+    List<Float>
+  Sub documents (e.g. recursion or nesting of documents) IS NOT PERMITTED (at least in Solr 4.*)
+
