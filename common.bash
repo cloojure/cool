@@ -164,3 +164,6 @@ dev="athompson@agvdevtest26.touchcommerce.com"
 aa=~/work/dw/DataWarehouseJobs
 bb=~/wrk2/dw/DataWarehouseJobs
 
+aa=~/work/htapi
+bb=~/wrk2/htapi
+

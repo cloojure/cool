@@ -13,4 +13,5 @@ pom.xml.asc
 tags
 target
 profiles.clj
+out.txt
 *.out
