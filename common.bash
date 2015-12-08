@@ -63,6 +63,15 @@ if [[ $(hostname) == amy ]]; then
 fi
 # old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
+function shellVersion {
+  if [[ $ZSH_VERSION != "" ]]; then
+    echo "  zsh $ZSH_VERSION"
+  elif [[ $BASH_VERSION != "" ]]; then
+    echo "  bash $BASH_VERSION"
+  fi
+}
+alias shellver="shellVersion"
+
 alias d="ls -ldF --color"
 alias lal="ls -alF --color"
 alias dt="ls -ldtF --color"
