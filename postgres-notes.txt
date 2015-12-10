@@ -46,9 +46,10 @@ Notes:
   to make an empty, default db for each user even if it is never used.
 
 ******************************************************************************************
-; Trillian staging
-> psql  --host trillian-sandbox.ce2yqgtookax.us-east-1.rds.amazonaws.com \
-        --port 10003 --username trillian  trillian_staging
+> psql  --host somehost.amazonaws.com \
+        --port <someport> \
+        --username <someuser> \
+        my-db-name
 
   => \d                 - describe all tables
   => \d people          - describe table people
@@ -69,10 +70,10 @@ Notes:
         where id=(select max(id) from people);
 
   => begin;             - begin transaction block
-  => update people set hostname='dummy-host' where id=1132;  - make change to db
-  => { commit;          - either commit the change to the db
+  =>   update people set hostname='dummy-host' where id=1132;  - make change to db
+  => [ commit;          - either commit the change to the db
   => or
-  =>   rollback; }      - or rollback (discard) the change
+  =>   rollback; ]      - or rollback (discard) the change
 
 
 Tables:
@@ -228,9 +229,6 @@ Useful definitions:
     where installed_version is not null 
     order by name;
   select * from local_extensions;
-
-
-
 
 -----------------------------------------------------------------------------
 oracle_fdw notes:
