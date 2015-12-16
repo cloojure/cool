@@ -13,19 +13,21 @@ endif
 
 " Note: User-defined commands must begin with a capital letter 
  
-" Window shape commands
-:command! Wl set columns=250        " Width large
-:command! Wm set columns=130        " Width medium
-:command! Ws set columns=60         " Width small
-:command! Ll set lines=99           " Lines large
-:command! Lm set lines=60           " Lines medium
-:command! Ls set lines=40           " Lines small
-
 " Font options
-:command! Fll set guifont=Monospace\ 14     " Font large-large
-:command! Fl  set guifont=Monospace\ 12     " Font large
-:command! Fm  set guifont=Monospace\ 10     " Font medium
-:command! Fs  set guifont=Monospace\ 9      " Font small
+command! Fs  set guifont=Monospace\ 9      " Font small
+command! Fm  set guifont=Monospace\ 10     " Font medium
+command! Fl  set guifont=Monospace\ 12     " Font large
+command! Fll set guifont=Monospace\ 14     " Font large-large
+command! FF  Fll
+command! Laptop  Fll
+
+" Window shape commands
+command! Ls set lines=40           " Lines small
+command! Lm set lines=60           " Lines medium
+command! Ll set lines=99           " Lines large
+command! Ws set columns=60         " Width small
+command! Wm set columns=130        " Width medium
+command! Wl set columns=250        " Width large
 
 " Default size/shape
 function! ConfigStd()
@@ -37,8 +39,18 @@ call ConfigStd()
 
 " Define an easy way to maximize the window (Vertical bar '|' concats 2 commands on one line. It can
 " also be done with a crtl-v/vrtl-j combination)
-:command! WW set columns=250 lines=99
-:command! Ww set columns=120 lines=60
+command! WW set columns=250 lines=99
+
+" match index is 0-based (C-style);  no match = -1
+" if (match( system("uname -a"), "Linux" ) > -1)
+"   set guifont=Monospace\ 10             " default => Linux (27 in. LG monitor)
+"   set guifont=Liberation\ Mono\ 10      " alternative for Fedora
+" endif
+" elseif (match( system("uname -a"), "Darwin" ) > -1)
+"   echo "Found Darwin, setting guifont for mac... \n"
+"   sleep 1
+"   set guifont=Courier\ New:h16
+" endif
 
 " This function is used to swap the orientation of 2 windows (eg left/right), while keeping the
 " cursor in the same pane where it started (eg left pane).
@@ -47,17 +59,7 @@ function! SwapWindows()
   wincmd r      " rotate windows
   wincmd w      " move cursor to 
 endfunction
-:command! SS call SwapWindows()
-
-" match index is 0-based (C-style);  no match = -1
-if (match( system("uname -a"), "Linux" ) > -1)
-  set guifont=Monospace\ 10             " default => Linux (27 in. LG monitor)
-" set guifont=Liberation\ Mono\ 10      " alternative for Fedora
-elseif (match( system("uname -a"), "Darwin" ) > -1)
-  echo "Found Darwin, setting guifont for mac... \n"
-  sleep 1
-  set guifont=Courier\ New:h16
-endif
+command! SS call SwapWindows()
 
 set guioptions-=r  guioptions-=L  guioptions+=l
 
