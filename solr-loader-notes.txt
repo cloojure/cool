@@ -1,3 +1,29 @@
+-----------------------------------------------------------------------------
+Solr Notes:  version 5.4 (2015/12)
+
+***** BEWARE! Do not define the SOLR_HOME environment variable!  ***** 
+  Especially, do not use it like JAVA_HOME where you will add ${JAVA_HOME}/bin to your path.  Note
+  Solr docs are ambiguous on the usage & meaning of SOLR_HOME, also referring to $SOLR_HOME,
+  solr_home, & solr.home,  which generally means either (1) the root of the solr installation, or
+  (2) the root of a core/collection. The env var SOLR_HOME will override (2) - I think.  BEWARE!
+
+How to create a core:
+  > cd /opt/solr (e.g. solr install dir for this example)
+  - ensure /opt/solr/bin is on your classpath
+    > which solr  ->  /opt/solr/bin
+  > solr -help              # to see all help
+  > solr start -help        # solr start help
+  > solr start              # to start solr server
+  > solr create_core -help  # create_core help
+  > solr create_core -c cars -d basic_configs       # create core 'cars' with basic layout
+      layout:
+        /opt/solr/server/solr/cars
+                                |--core.properties  # presence of this defines/creates the core
+                                |--conf
+                                    |--solrconfig.xml   # defines behavior of core
+                                    |--schema.xml       # defines types & fields of core
+  
+-----------------------------------------------------------------------------
 Use Jenkins to deploy either:
   solr
   htapi-loader
@@ -71,7 +97,7 @@ Note that Solr is a flat key-value store.  All values must be primitive types (e
 
 Solr Nested (Child) Documents (also see "Block Join Query")
   Sub documents (e.g. recursion or nesting of documents) IS NOT PERMITTED (at least in Solr 4.7)
-  Sub documents are allowed (only ONE nesting level!) in current Solr 5.3.  Load as JSON:
+  Sub documents are allowed (only ONE nesting level!) in current Solr 5.4.  Load as JSON:
       [
         {
           "id": "1",

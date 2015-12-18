@@ -21,7 +21,6 @@ else
   export IDEA_HOME="/opt/idea"
   export SPARK_HOME="/opt/spark"
   export HADOOP_HOME="/opt/hadoop"
-  export SOLR_HOME="/opt/solr"
 
   export CASSANDRA_HOME="/opt/cassandra"
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -34,7 +33,7 @@ else
   path=( ${CASSANDRA_HOME}/bin $path )
   path=( ${SPARK_HOME}/bin $path )
   path=( ${HADOOP_HOME}/bin $path )
-  path=( ${SOLR_HOME}/bin $path )
+  path=( /opt/solr/bin $path )
 fi
 
 ### if [[ $(uname -a) =~ "Darwin" ]]; then
@@ -130,7 +129,7 @@ alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80
 
 alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
-alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
+alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy"
 alias kk="kill -9"
 alias pk="pkill -9"
 

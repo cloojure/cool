@@ -1,19 +1,24 @@
 #!/bin/zsh
 
-echo""
+echo ""
 echo "-----------------------------------------------------------------------------"
 origPath=${path}
-echo""
+echo ""
 echo "  original path  = [ ${path} ]"
 echo "  original PATH  = [ ${PATH} ]"
 path=( /usr/local/bin  /usr/bin  /bin )
-echo""
+echo ""
 echo "  modified path  = [ ${path} ]"
 echo "  modified PATH  = [ ${PATH} ]"
 path=( $origPath )
-echo""
+echo ""
 echo "restoring path   = [ ${path} ]"
 echo "restoring PATH   = [ ${PATH} ]"
+
+path=( . ~/bin )
+path=( $path /usr/local/opt  /opt/bin )
+path=( $path /usr/local/bin  /usr/bin  /bin )
+path=( $path /usr/local/sbin /usr/sbin /sbin )
 
 echo ""
 echo "-----------------------------------------------------------------------------"
@@ -21,13 +26,24 @@ echo "Alias:"
 alias sampleAlias="echo 'Any command will work, just avoid any spaces at the = sign!!!' "
 sampleAlias
 
-echo""
+echo ""
 echo "-----------------------------------------------------------------------------"
 echo "local variables:"
 myStr1="Again, no spaces are allowed at the equals sign!"
 myStr2="Using curly braces is usually optional, but often clearest."
 echo "myStr1=$myStr1"
 echo "myStr1=${myStr1}"
+
+echo ""
+echo "-----------------------------------------------------------------------------"
+echo "Environment variables: Set & export a var"
+export XYZ="my-xyz-value"
+echo -n "result:  "
+env | grep XYZ
+echo "UnSet the var to 'delete' it"
+unset XYZ
+echo -n "result:  "
+env | grep XYZ
 
 echo ""
 echo "-----------------------------------------------------------------------------"
@@ -40,19 +56,27 @@ fi
 
 echo ""
 echo "-----------------------------------------------------------------------------"
+echo "Calling: uname --all"
+uname --all
+echo ""
+echo "Calling: lsb_release --all"
+lsb_release --all
+
+echo ""
+echo "-----------------------------------------------------------------------------"
 echo "For statement:"
 for it in Hi Hello "How are you?" ; do
   echo "${it}"
 done
 
-echo""
+echo ""
 echo "-----------------------------------------------------------------------------"
 echo "loops:"
 for ((ii=0; i<5; i++)); do
   echo "i: " $i
 done
 
-echo""
+echo ""
 echo "-----------------------------------------------------------------------------"
 echo "arithmetic:"
 myVal=6
@@ -70,7 +94,7 @@ testFn () {
   echo "arg 4='$4'"
   echo "arg 5='$5'"
 }
-echo""
+echo ""
 echo "-----------------------------------------------------------------------------"
 echo "calling testFn() as: 'tstFn a b c' "
 testFn a b c
