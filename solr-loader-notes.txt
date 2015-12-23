@@ -13,7 +13,8 @@ How to create a core:
     > which solr  ->  /opt/solr/bin
   > solr -help              # to see all help
   > solr start -help        # solr start help
-  > solr start              # to start solr server
+  > solr start              # start server
+  > solr stop -all          # stop all servers on this host
   > solr create_core -help  # create_core help
   > solr create_core -c cars -d basic_configs       # create core 'cars' with basic layout
       layout:
@@ -24,12 +25,13 @@ How to create a core:
                                     |--schema.xml       # defines types & fields of core
   
 -----------------------------------------------------------------------------
-Use Jenkins to deploy either:
-  solr
-  htapi-loader
+Maven stuff:
+  To clean and test code:
+    > mvn clean test  (no need to do "mvn clean ; mvn test" as separate commands)
+  Prior to deployment:
+    > mvn clean install (prob. should move functionality into "package" phase)
 
-Mostly just redeploy loader. If change schema, also need to re-deploy solr
-
+-----------------------------------------------------------------------------
 MySQL on devtest
   >  mysql -u v2arch -p configuration
   password:  munbah1
@@ -43,6 +45,7 @@ MySQL on devtest
       319     TotalGym
       350     SFR Care
 
+-----------------------------------------------------------------------------
 run ~/cool/tceast.bash
 
 data goes into dir like:  /home/athompson/tcdata/usr/etl/htapi_logs/20151123_0120/transcript/350_190_1448331469687
@@ -73,6 +76,13 @@ following instructions from http://confluence.touchcommerce.com/display/dev/Load
 To restart solr on devtest
   sudo service solr restart  (start/stop/restart/status)
   view solr admin console: http://agvdevtest26.touchcommerce.com/solr  (port 80 !)
+
+-----------------------------------------------------------------------------
+Use Jenkins to deploy either:
+  solr
+  htapi-loader
+
+Mostly just redeploy loader. If change schema, also need to re-deploy solr
 
 -----------------------------------------------------------------------------
 Solr/Jenkins Notes:
