@@ -13,8 +13,9 @@ fundamentally different from a branch in SVN or CVS. Suppose we have the followi
     \
      25--16--17
 
-where the ID numbers are arbitrary "placeholders" for the actual source code.  In git, a "branch" is
-really just a pointer to one of these code blobs:
+where the ID numbers are arbitrary "placeholders" for the actual source code.  In CVS or SVN, a
+branch would refer to an entire linear structure, either 71-92-13-42 or 71-25-16-17.  However, in
+git, a "branch" is really just a pointer to one of these code blobs:
 
               aa
               |
@@ -26,7 +27,11 @@ really just a pointer to one of these code blobs:
 
 Here, we see 2 "branches" aa and bb (aka "blob pointers"), each of which points to one of the two
 newest code blobs. Note that we also have another branch cc pointing at blob 25, even though it is
-not one of the newest blobs.
+not one of the newest blobs. As we modify the source code & commit changes, git will add new code
+blobs to the history graph and will automatically update our blob pointers (aka branches) to point
+to the newest blob (most of the time).
+
+Onward to the guts of the post!
 
 For the purposes of this post, we will use a few convenient aliases (bash/zsh syntax):
 
@@ -36,7 +41,7 @@ For the purposes of this post, we will use a few convenient aliases (bash/zsh sy
   alias gitcam="git commit --all -m'misc' "
   alias gitdw="git diff --ignore-all-space --ignore-blank-lines"
   alias gitco="git checkout"
-
+  alias gitlg='git log -22 --oneline --graph --decorate' 
 
 Create an empty directory containing a file and number 5 lines like so:
 
