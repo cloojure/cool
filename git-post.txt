@@ -7,7 +7,26 @@ Using older tools like CVS and Subverion (SVN), creating and merging branches fr
 difficult and error-prone.  Git makes things much easier.
 
 The first thing to keep in mind is that a "branch" in git is really a misnomer, as a git branch is
-fundamentally different from a branch in SVN or CVS.
+fundamentally different from a branch in SVN or CVS. Suppose we have the following commit history:
+
+  71--92--13--42
+    \
+     25--16--17
+
+where the ID numbers are arbitrary "placeholders" for the actual source code.  In git, a "branch" is
+really just a pointer to one of these code blobs:
+
+              aa
+              |
+  71--92--13--42
+    \
+     25--16--17
+      |       |
+     cc       bb
+
+Here, we see 2 "branches" aa and bb (aka "blob pointers"), each of which points to one of the two
+newest code blobs. Note that we also have another branch cc pointing at blob 25, even though it is
+not one of the newest blobs.
 
 For the purposes of this post, we will use a few convenient aliases (bash/zsh syntax):
 

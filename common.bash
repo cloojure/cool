@@ -121,6 +121,7 @@ alias gitcamp="git commit --all -m'misc' ; git push"
 alias gitsync="git pull ; git push"
 alias gitdns="git diff --name-status"
 alias gitdw="git diff --ignore-all-space --ignore-blank-lines"
+alias gitlg="git log -22 --oneline --graph --decorate"
 
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
