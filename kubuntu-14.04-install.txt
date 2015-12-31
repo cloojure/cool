@@ -66,7 +66,7 @@ The following doesn't seem to work (blank screen):
       tree htop iotop collectl \
       zip unzip dos2unix kuser \
       alien youtube-dl sbackup rlwrap \
-      okular
+      okular 
 
 - Postgres
       postgresql (get latest from postgresql.org)
@@ -109,6 +109,14 @@ The following doesn't seem to work (blank screen):
     Dropbox
     HipChat
     java
+    liquibase
+    solr
+    datomic
+    cassandra
+    hadoop
+    spark
+    IntelliJ IDEA
+    cursive
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
