@@ -1,11 +1,13 @@
 -----------------------------------------------------------------------------
 Solr Notes:  version 5.4 (2015/12)
 
-***** BEWARE! Do not define the SOLR_HOME environment variable!  ***** 
-  Especially, do not use it like JAVA_HOME where you will add ${JAVA_HOME}/bin to your path.  Note
-  Solr docs are ambiguous on the usage & meaning of SOLR_HOME, also referring to $SOLR_HOME,
-  solr_home, & solr.home,  which generally means either (1) the root of the solr installation, or
-  (2) the root of a core/collection. The env var SOLR_HOME will override (2) - I think.  BEWARE!
+*****************************************************************************
+* BEWARE! Do not define the SOLR_HOME environment variable!
+* Especially, do not use it like JAVA_HOME where you will add ${JAVA_HOME}/bin to your path.  Note
+* Solr docs are ambiguous on the usage & meaning of SOLR_HOME, also referring to $SOLR_HOME,
+* solr_home, & solr.home,  which generally means either (1) the root of the solr installation, or
+* (2) the root of a core/collection. The env var SOLR_HOME will override (2) - I think.  BEWARE!
+*****************************************************************************
 
 How to create a core:
   > cd /opt/solr (e.g. solr install dir for this example)
@@ -18,11 +20,16 @@ How to create a core:
   > solr create_core -help  # create_core help
   > solr create_core -c cars -d basic_configs       # create core 'cars' with basic layout
       layout:
-        /opt/solr/server/solr/cars
+        /opt/solr/server/solr/cars                      # the dir 'cars' defines the name of the core
                                 |--core.properties  # presence of this defines/creates the core
                                 |--conf
                                     |--solrconfig.xml   # defines behavior of core
                                     |--schema.xml       # defines types & fields of core
+
+To re-init a core (delete all data prior to a re-load):
+  > solr stop -all
+  > rm -rf /opt/solr/***/my-core-name/data
+  > solr start
   
 -----------------------------------------------------------------------------
 Maven stuff:
