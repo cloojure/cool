@@ -114,7 +114,6 @@ alias up8="cd ../../../../../../../.."
 alias up9="cd ../../../../../../../../.."
 
 alias gits="git status --short"
-alias gitss="git status"
 alias gitb="git branch"
 alias gitco="git checkout"
 alias gitca="git commit --all"
