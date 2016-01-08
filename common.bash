@@ -21,7 +21,7 @@ else
   export IDEA_HOME="/opt/idea"
   export SPARK_HOME="/opt/spark"
   export HADOOP_HOME="/opt/hadoop"
-  export SOLR_HOME="/opt/solr"
+  export LIQUIBASE_HOME="/opt/liquibase"
 
   export CASSANDRA_HOME="/opt/cassandra"
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -34,7 +34,8 @@ else
   path=( ${CASSANDRA_HOME}/bin $path )
   path=( ${SPARK_HOME}/bin $path )
   path=( ${HADOOP_HOME}/bin $path )
-  path=( ${SOLR_HOME}/bin $path )
+  path=( ${LIQUIBASE_HOME} $path )
+  path=( /opt/solr/bin $path )
 fi
 
 ### if [[ $(uname -a) =~ "Darwin" ]]; then
@@ -113,7 +114,6 @@ alias up8="cd ../../../../../../../.."
 alias up9="cd ../../../../../../../../.."
 
 alias gits="git status --short"
-alias gitss="git status"
 alias gitb="git branch"
 alias gitco="git checkout"
 alias gitca="git commit --all"
@@ -122,6 +122,7 @@ alias gitcamp="git commit --all -m'misc' ; git push"
 alias gitsync="git pull ; git push"
 alias gitdns="git diff --name-status"
 alias gitdw="git diff --ignore-all-space --ignore-blank-lines"
+alias gitlg="git log -22 --oneline --graph --decorate"
 
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
@@ -130,7 +131,7 @@ alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80
 
 alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
-alias shx="chmod a+x *.bash *.csh *.zsh *.groovy"
+alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy"
 alias kk="kill -9"
 alias pk="pkill -9"
 
@@ -176,3 +177,4 @@ bb=~/wrk2/dw/DataWarehouseJobs
 aa=~/work/htapi
 bb=~/wrk2/htapi
 
+alias gef="grep '(Error|Fail)' "

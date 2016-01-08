@@ -1,0 +1,267 @@
+Demo to show fail-safe branching & merging in git
+
+The motivation for this post was to demonstrate that git "does the right thing" when merging branches, allowing you to get work done quickly & easily.
+
+Using older tools like CVS and Subverion (SVN), creating and merging branches frequently was difficult and error-prone.  Git makes things much easier.
+
+The first thing to keep in mind is that a "branch" in git is really a misnomer, as a git branch is fundamentally different from a branch in SVN or CVS. Suppose we have the following commit history:
+
+  71--92--13--42
+    \
+     25--16--17
+
+where the ID numbers are arbitrary "placeholders" for the actual source code.  In CVS or SVN, a branch would refer to an entire linear structure, either 71-92-13-42 or 71-25-16-17.  However, in git, a "branch" is really just a pointer to one of these code blobs:
+
+              aa
+              |
+  71--92--13--42
+    \
+     25--16--17
+      |       |
+     cc       bb
+
+Here, we see 2 "branches" aa and bb (aka "blob pointers"), each of which points to one of the two newest code blobs. Note that we also have another branch cc pointing at blob 25, even though it is not one of the newest blobs. As we modify the source code & commit changes, git will add new code blobs to the history graph and will automatically update our blob pointers (aka branches) to point to the newest blob (most of the time).
+
+Onward to the guts of the post!
+
+For the purposes of this post, we will use a few convenient aliases (bash/zsh syntax):
+
+  alias d="ls -ldF --color"
+  alias gits="git status --short"
+  alias gitb="git branch"
+  alias gitcam="git commit --all -m'misc' "
+  alias gitdw="git diff --ignore-all-space --ignore-blank-lines"
+  alias gitco="git checkout"
+  alias gitlg='git log -22 --oneline --graph --decorate' 
+
+Create an empty directory containing a file and number 5 lines like so:
+
+  ~/tst > d *
+  -rw-rw-r-- 1 alan alan 11 Dec 28 15:27 ff.txt
+  ~/tst > cat ff.txt 
+  1
+  2 
+  3
+  4
+  5
+
+Create a new git repository (repo) and add/commit the file:
+
+  ~/tst > git init .
+  Initialized empty Git repository in /home/alan/tst/.git/
+  ~/tst > gits
+  ?? ff.txt
+  ~/tst > git add ff.txt 
+  ~/tst > gits
+  A  ff.txt
+  ~/tst > gitcam
+  [master (root-commit) 4a43178] misc
+   1 file changed, 5 insertions(+)
+   create mode 100644 ff.txt
+  ~/tst > 
+
+Create 2 new branches. Note that creating the branches does not mean switching to the branches:
+
+  ~/tst > git branch aa
+  ~/tst > git branch bb
+  ~/tst > gitb
+    aa
+    bb
+  * master
+  ~/tst > 
+
+Switch to branch aa and modify line 1:
+
+  ~/tst > gitco aa
+  Switched to branch 'aa'
+  ~/tst > gits
+   M ff.txt
+  ~/tst > cat ff.txt 
+  1 aa
+  2 
+  3
+  4
+  5
+  ~/tst > gitcam
+  [aa 10de35e] misc
+   1 file changed, 1 insertion(+), 1 deletion(-)
+
+Switch to branch bb and modify line 5
+
+  ~/tst > gitco bb
+  Switched to branch 'bb'
+  ~/tst > cat ff.txt 
+  1
+  2 
+  3
+  4
+  5 bb
+  ~/tst > gitcam
+  [bb e6d9e33] misc
+   1 file changed, 1 insertion(+), 1 deletion(-)
+
+We are still on branch bb. Merge in branch aa:
+
+  ~/tst > git merge aa
+  Auto-merging ff.txt
+  Merge made by the 'recursive' strategy.
+   ff.txt | 2 +-
+   1 file changed, 1 insertion(+), 1 deletion(-)
+  ~/tst > cat ff.txt 
+  1 aa
+  2 
+  3
+  4
+  5 bb
+
+Go back to branch aa.  Verify it is unchanged:
+
+  ~/tst > gitco aa
+  Switched to branch 'aa'
+  ~/tst > cat ff.txt 
+  1 aa
+  2 
+  3
+  4
+  5
+
+Merge in the changes from branch bb.  Note we don't need to worry about getting a "double copy" of the edits to line 1:
+
+  ~/tst > git merge bb
+  Updating 10de35e..6111e93
+  Fast-forward
+   ff.txt | 2 +-
+   1 file changed, 1 insertion(+), 1 deletion(-)
+  ~/tst > cat ff.txt 
+  1 aa
+  2 
+  3
+  4
+  5 bb
+
+Verify our branches.  The * character indicates we are still on branch aa (the "aa" part will also show up in green if you are on a color terminal):
+
+  ~/tst > gitb
+  * aa
+    bb
+    master
+
+So now branches aa & bb are identical.  Let's see what happens if we make identical changes on each branch and then try to merge.
+
+Staying on branch aa, modify line 3 to be:
+
+  ~/tst > cat ff.txt 
+  1 aa
+  2 
+  3 xx
+  4
+  5 bb
+
+Commit, then switch to branch bb & make an identical change:
+
+  ~/tst > gitco bb
+  Switched to branch 'bb'
+  ~/tst > gits
+   M ff.txt
+  ~/tst > cat ff.txt 
+  1 aa
+  2 
+  3 xx
+  4
+  5 bb
+  ~/tst > gitcam
+  [bb 428f3df] misc
+   1 file changed, 1 insertion(+), 1 deletion(-)
+  ~/tst > gitb
+    aa
+  * bb
+    master
+
+Notice that git sees both branches as being identical:
+
+  ~/tst > gitdw aa
+
+Try merging in the changes from branch aa:
+
+  ~/tst > git merge aa
+  Merge made by the 'recursive' strategy.
+  ~/tst > cat ff.txt 
+  1 aa
+  2 
+  3 xx
+  4
+  5 bb
+
+So even though the merge occurred successfully, no changes were made to the file. Git recognized that the changes were already present on each branch and did not "double apply" the change to line 3.
+
+Let's go back to master, then merge in both branches aa & bb:
+
+  ~/tst > gitco master 
+  Switched to branch 'master'
+  ~/tst > cat ff.txt 
+  1
+  2 
+  3
+  4
+  5
+
+No changes are present.  Merge in aa first:
+
+  ~/tst > git merge aa
+  Updating 4a43178..529c421
+  Fast-forward
+   ff.txt | 6 +++---
+   1 file changed, 3 insertions(+), 3 deletions(-)
+  ~/tst > cat ff.txt  
+  1 aa
+  2 
+  3 xx
+  4
+  5 bb
+
+All the changes have been merged into master.  Try merging in branch bb now:
+
+  ~/tst > git merge bb
+  Updating 529c421..b3d4ecf
+  Fast-forward
+  ~/tst > cat ff.txt  
+  1 aa
+  2 
+  3 xx
+  4
+  5 bb
+
+The "fast-forward" part is a way of git indicated that no changes are necessary, it just needs to "fast-forward" the branch pointer.  We see that the file is unchanged, and that the "merge" was a no-op.
+
+We can see a graph of our commits with:
+
+  ~/tst > git log --oneline 
+  b3d4ecf Merge branch 'aa' into bb
+  428f3df misc
+  529c421 misc
+  6111e93 Merge branch 'aa' into bb
+  e6d9e33 misc
+  10de35e misc
+  4a43178 misc
+
+  ~/tst > git log --oneline --graph --decorate 
+  *   b3d4ecf (HEAD -> master, bb) Merge branch 'aa' into bb
+  |\  
+  | * 529c421 (aa) misc
+  * | 428f3df misc
+  |/  
+  *   6111e93 Merge branch 'aa' into bb
+  |\  
+  | * 10de35e misc
+  * | e6d9e33 misc
+  |/  
+  * 4a43178 misc
+
+Notice that the last 3 commits have identical contents:
+
+  ~/tst > gitdw b3d4ecf 529c421 
+  ~/tst > gitdw b3d4ecf 428f3df 
+  ~/tst > gitdw 529c421 428f3df
+
+since we made identical changes to first branch aa (428f3df), then branch bb (529c421).  The merged result was also the same (b3d4ecf) as both of its parents.
+

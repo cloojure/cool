@@ -219,6 +219,7 @@ Now login using psql
 
 To use pgadmin3 (aka pgAdmin3)
   Either configure passwords for users, or add this line to "/etc/postgresql/9.4/main/pg_hba.conf"
+    "local all all trust"
     "host all all 127.0.0.1/32 trust"
   to enable all local socket users:
 

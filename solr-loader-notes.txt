@@ -1,9 +1,44 @@
-Use Jenkins to deploy either:
-  solr
-  htapi-loader
+-----------------------------------------------------------------------------
+Solr Notes:  version 5.4 (2015/12)
 
-Mostly just redeploy loader. If change schema, also need to re-deploy solr
+*****************************************************************************
+* BEWARE! Do not define the SOLR_HOME environment variable!
+* Especially, do not use it like JAVA_HOME where you will add ${JAVA_HOME}/bin to your path.  Note
+* Solr docs are ambiguous on the usage & meaning of SOLR_HOME, also referring to $SOLR_HOME,
+* solr_home, & solr.home,  which generally means either (1) the root of the solr installation, or
+* (2) the root of a core/collection. The env var SOLR_HOME will override (2) - I think.  BEWARE!
+*****************************************************************************
 
+How to create a core:
+  > cd /opt/solr (e.g. solr install dir for this example)
+  - ensure /opt/solr/bin is on your classpath
+    > which solr  ->  /opt/solr/bin
+  > solr -help              # to see all help
+  > solr start -help        # solr start help
+  > solr start              # start server
+  > solr stop -all          # stop all servers on this host
+  > solr create_core -help  # create_core help
+  > solr create_core -c cars -d basic_configs       # create core 'cars' with basic layout
+      layout:
+        /opt/solr/server/solr/cars                      # the dir 'cars' defines the name of the core
+                                |--core.properties  # presence of this defines/creates the core
+                                |--conf
+                                    |--solrconfig.xml   # defines behavior of core
+                                    |--schema.xml       # defines types & fields of core
+
+To re-init a core (delete all data prior to a re-load):
+  > solr stop -all
+  > rm -rf /opt/solr/***/my-core-name/data
+  > solr start
+  
+-----------------------------------------------------------------------------
+Maven stuff:
+  To clean and test code:
+    > mvn clean test  (no need to do "mvn clean ; mvn test" as separate commands)
+  Prior to deployment:
+    > mvn clean install (prob. should move functionality into "package" phase)
+
+-----------------------------------------------------------------------------
 MySQL on devtest
   >  mysql -u v2arch -p configuration
   password:  munbah1
@@ -17,6 +52,7 @@ MySQL on devtest
       319     TotalGym
       350     SFR Care
 
+-----------------------------------------------------------------------------
 run ~/cool/tceast.bash
 
 data goes into dir like:  /home/athompson/tcdata/usr/etl/htapi_logs/20151123_0120/transcript/350_190_1448331469687
@@ -49,6 +85,13 @@ To restart solr on devtest
   view solr admin console: http://agvdevtest26.touchcommerce.com/solr  (port 80 !)
 
 -----------------------------------------------------------------------------
+Use Jenkins to deploy either:
+  solr
+  htapi-loader
+
+Mostly just redeploy loader. If change schema, also need to re-deploy solr
+
+-----------------------------------------------------------------------------
 Solr/Jenkins Notes:
 
 We use Jenkins (why?) to deploy solr & loader
@@ -71,7 +114,7 @@ Note that Solr is a flat key-value store.  All values must be primitive types (e
 
 Solr Nested (Child) Documents (also see "Block Join Query")
   Sub documents (e.g. recursion or nesting of documents) IS NOT PERMITTED (at least in Solr 4.7)
-  Sub documents are allowed (only ONE nesting level!) in current Solr 5.3.  Load as JSON:
+  Sub documents are allowed (only ONE nesting level!) in current Solr 5.4.  Load as JSON:
       [
         {
           "id": "1",
