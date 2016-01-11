@@ -38,23 +38,18 @@ else
   path=( /opt/solr/bin $path )
 fi
 
+if [[ $(uname -a) =~ "Linux" ]]; then
+  ### echo "Found Linux"
+  echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
+fi
 ### if [[ $(uname -a) =~ "Darwin" ]]; then
-###   echo "Found Darwin OS"
+###   echo "Found Darwin"
+###   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
 ###   sleep 3
 ###   # export DYLD_LIBRARY_PATH=/opt/oracle
 ###   # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
 ###   # export GROOVY_HOME="/opt/groovy"
-###
-###   alias gvim=mvim
-###   alias du="du -g"
-###   alias df="df -g"
-###   alias d="ls -ldF"
-###   alias lal="ls -alF"
-###   alias dt="ls -ldtF"
-###   alias dt9="ls -ldtF * | head -9"
-###   alias grep='\grep -E'  # same as deprecated 'egrep'
 ### fi
-
 
 # We need to add the '2>&/dev/null' part to squelch error messages on Kubuntu 14.04.
 # Remove if you need to see any error messages.
@@ -62,7 +57,6 @@ alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 if [[ $(hostname) == amy ]]; then
   alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 fi
-# old:  if [[ $(uname -a) == *Ubuntu* ]]; then
 
 function shellVersion {
   if [[ $ZSH_VERSION != "" ]]; then
@@ -73,24 +67,17 @@ function shellVersion {
 }
 alias shellver="shellVersion"
 
-alias d="ls -ldF --color"
-alias lal="ls -alF --color"
-alias dt="ls -ldtF --color"
-alias dt9="ls -ldtF --color * | head -9"
+alias d="   ls -ldF   --color"
+alias lal=" ls -alF   --color"
+alias dt="  ls -ldtF  --color"
+alias dt9=" ls -ldtF  --color * | head -9"
 
 alias du="du -m"
 alias df="df -BG"
 
 # Always use egrep
-alias grep="\grep -E --color=auto"  # same as deprecated 'egrep'
-
-if echo "$(uname -a)" | grep -i Linux > /dev/null ; then
-  # echo "Found Linux"
-  echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
-else
-  # echo "Missing Linux"
-  echo "OSX is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
-fi
+alias  grep="\grep  -E --color=auto"  # same as deprecated 'egrep'
+alias igrep="\grep -iE --color=auto"
 
 alias pdirs="find * -maxdepth 0 -type d "
 alias pfiles="find * -maxdepth 0 -type f "
@@ -113,16 +100,16 @@ alias up7="cd ../../../../../../.."
 alias up8="cd ../../../../../../../.."
 alias up9="cd ../../../../../../../../.."
 
-alias gits="git status --short"
-alias gitb="git branch"
-alias gitco="git checkout"
-alias gitca="git commit --all"
-alias gitcam="git commit --all -m'misc' "
-alias gitcamp="git commit --all -m'misc' ; git push"
-alias gitsync="git pull ; git push"
-alias gitdns="git diff --name-status"
-alias gitdw="git diff --ignore-all-space --ignore-blank-lines"
-alias gitlg="git log -22 --oneline --graph --decorate"
+alias gits="    git status --short"
+alias gitb="    git branch"
+alias gitco="   git checkout"
+alias gitca="   git commit --all"
+alias gitcam="  git commit --all -m'misc' "
+alias gitcamp=" git commit --all -m'misc' ; git push"
+alias gitsync=" git pull ; git push"
+alias gitdns="  git diff --name-status"
+alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
+alias gitlg="   git log -22 --oneline --graph --decorate"
 
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
