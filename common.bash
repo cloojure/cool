@@ -13,6 +13,10 @@ if [[ $(hostname) == *touchcommerce.com ]]; then
   # echo "Found touchcommerce.com"
   # sleep 1
   echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
+  export JAVA_HOME="~/java"
+
+  path=( ${JAVA_HOME}/bin $path )
+  path=( ~/opt/solr/bin $path )
 else
   # echo "Not-Found touchcommerce.com"
   export JAVA_HOME="/opt/java"

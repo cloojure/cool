@@ -1,0 +1,9 @@
+
+TouchCommerce CentOS dev cluster notes:
+
+  yum install -y zsh git ant maven 
+
+Install java & solr
+  Use   ~/opt/java
+        ~/opt/solr
+
