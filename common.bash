@@ -19,9 +19,10 @@ if [[ $(hostname) == *touchcommerce.com ]]; then
   PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
   PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
   PATH="$PATH:/usr/local/opt:/opt/bin"
+
   export JAVA_HOME="/opt/java"                  ; PATH="${JAVA_HOME}/bin:$PATH"
 
-echo "path -> ${path}"
+  echo "PATH -> ${PATH}"
 
   # path=( /opt/solr/bin $path )
 else
