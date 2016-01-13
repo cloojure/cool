@@ -14,34 +14,31 @@ if [[ $(hostname) == *touchcommerce.com ]]; then
   # sleep 1
   echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
   
-# export JAVA_HOME="/opt/jdk1.6.0_45"                 ;  path=( ${JAVA_HOME}/bin $path )
-# export JAVA_HOME="/opt/jdk1.7.0_80"                 ;  path=( ${JAVA_HOME}/bin $path )
-  export JAVA_HOME="/opt/jdk1.8.0_66"                 ;  path=( ${JAVA_HOME}/bin $path )
+# export JAVA_HOME="/opt/jdk1.6.0_45"           ; path=( ${JAVA_HOME}/bin $path )
+# export JAVA_HOME="/opt/jdk1.7.0_80"           ; path=( ${JAVA_HOME}/bin $path )
+# export JAVA_HOME="/opt/jdk1.8.0_66"           ; path=( ${JAVA_HOME}/bin $path )
+  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin $path )
 
-  # path=( ~/opt/solr/bin $path )
+  # path=( /opt/solr/bin $path )
 else
   # echo "Not-Found touchcommerce.com"
-  export JAVA_HOME="/opt/java"
-  export GROOVY_HOME="/opt/groovy"
-  export DATOMIC_HOME="/opt/datomic"
-  export IDEA_HOME="/opt/idea"
-  export SPARK_HOME="/opt/spark"
-  export HADOOP_HOME="/opt/hadoop"
-  export LIQUIBASE_HOME="/opt/liquibase"
+  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin     $path )
+  export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin   $path )
+  export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin  $path )
+  export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin     $path )
+  export SPARK_HOME="/opt/spark"                ; path=( ${SPARK_HOME}/bin    $path )
+  export HADOOP_HOME="/opt/hadoop"              ; path=( ${HADOOP_HOME}/bin   $path )
+  export LIQUIBASE_HOME="/opt/liquibase"        ; path=( ${LIQUIBASE_HOME}    $path )
+  export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin $path )
 
-  export CASSANDRA_HOME="/opt/cassandra"
+  # extra cassandra stuff
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
   export CQLSH_PORT=9042
 
-  path=( ${JAVA_HOME}/bin $path )
-  path=( ${GROOVY_HOME}/bin $path )
-  path=( ${IDEA_HOME}/bin $path )
-  path=( ${DATOMIC_HOME}/bin $path )
-  path=( ${CASSANDRA_HOME}/bin $path )
-  path=( ${SPARK_HOME}/bin $path )
-  path=( ${HADOOP_HOME}/bin $path )
-  path=( ${LIQUIBASE_HOME} $path )
   path=( /opt/solr/bin $path )
+    # ***** do not set SOLR_HOME *****
+    # SOLR_HOME controls the location on disk of the conf & data dirs for a core, 
+    #   NOT the install location of the Solr binaries & libs
 fi
 
 if [[ $(uname -a) =~ "Linux" ]]; then
