@@ -2,7 +2,7 @@
 # echo "common.bash - enter"
 
 # baseline path
-path=( . ${HOME}/bin )
+path=( . ${HOME}/bin ${HOME}/opt/bin )
 path=( $path /opt/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
