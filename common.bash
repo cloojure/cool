@@ -10,9 +10,11 @@ path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )  # #todo:  what is this?
 
 if [[ $(hostname) == *touchcommerce.com ]]; then
-  echo "Found touchcommerce.com"
-  sleep 1
   echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
+# echo ""
+# echo "Found touchcommerce.com"
+# echo ""
+# sleep 1
   
   PATH=".:${HOME}/bin:${HOME}/opt/bin"
   PATH="$PATH:/opt/bin"
@@ -21,12 +23,13 @@ if [[ $(hostname) == *touchcommerce.com ]]; then
   PATH="$PATH:/usr/local/opt:/opt/bin"
 
   export JAVA_HOME="/opt/java"                  ; PATH="${JAVA_HOME}/bin:$PATH"
+  # PATH="/opt/solr/bin:$PATH"
 
-  echo "PATH -> ${PATH}"
-
-  # path=( /opt/solr/bin $path )
+  # echo "PATH -> ${PATH}"
 else
+  # echo ""
   # echo "Not-Found touchcommerce.com"
+  # echo ""
   export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin     $path )
   export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin   $path )
   export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin  $path )
