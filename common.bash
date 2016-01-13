@@ -16,9 +16,9 @@ if [[ $(hostname) == *touchcommerce.com ]]; then
   
   PATH=".:${HOME}/bin:${HOME}/opt/bin"
   PATH="$PATH:/opt/bin"
-  PATH="$PATH:/usr/local/bin::/usr/bin::/bin"
+  PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
   PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
-  PATH="$PATH:/usr/local/opt::/opt/bin"
+  PATH="$PATH:/usr/local/opt:/opt/bin"
   export JAVA_HOME="/opt/java"                  ; PATH="${JAVA_HOME}/bin:$PATH"
 
 echo "path -> ${path}"
