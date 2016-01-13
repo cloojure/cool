@@ -170,4 +170,4 @@ bb=~/wrk2/dw/DataWarehouseJobs
 aa=~/work/htapi
 bb=~/wrk2/htapi
 
-alias gef="grep '(Error|Fail)' "
+alias gef="grep -E '(Error|Fail)' "
