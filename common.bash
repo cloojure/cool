@@ -18,7 +18,7 @@ if [[ $(hostname) == *touchcommerce.com ]]; then
 # export JAVA_HOME="/opt/jdk1.7.0_80"           ; path=( ${JAVA_HOME}/bin $path )
 # export JAVA_HOME="/opt/jdk1.8.0_66"           ; path=( ${JAVA_HOME}/bin $path )
 
-  # export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin $path )
+  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin $path )
 
   # path=( /opt/solr/bin $path )
 else
