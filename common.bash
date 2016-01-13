@@ -30,14 +30,14 @@ else
   # echo ""
   # echo "Not-Found touchcommerce.com"
   # echo ""
-  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin     $path )
-  export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin   $path )
-  export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin  $path )
-  export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin     $path )
-  export SPARK_HOME="/opt/spark"                ; path=( ${SPARK_HOME}/bin    $path )
-  export HADOOP_HOME="/opt/hadoop"              ; path=( ${HADOOP_HOME}/bin   $path )
-  export LIQUIBASE_HOME="/opt/liquibase"        ; path=( ${LIQUIBASE_HOME}    $path )
-  export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin $path )
+  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin         $path )
+  export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin       $path )
+  export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin      $path )
+  export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin         $path )
+  export SPARK_HOME="/opt/spark"                ; path=( ${SPARK_HOME}/bin        $path )
+  export HADOOP_HOME="/opt/hadoop"              ; path=( ${HADOOP_HOME}/bin       $path )
+  export LIQUIBASE_HOME="/opt/liquibase"        ; path=( ${LIQUIBASE_HOME}        $path )
+  export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin    $path )
 
   # extra cassandra stuff
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
