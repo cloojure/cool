@@ -2,7 +2,7 @@
 # echo "common.bash - enter"
 
 # baseline path
-path=( . ${HOME}/bin )
+path=( . ${HOME}/bin ${HOME}/opt/bin )
 path=( $path /opt/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
@@ -167,4 +167,4 @@ bb=~/wrk2/dw/DataWarehouseJobs
 aa=~/work/htapi
 bb=~/wrk2/htapi
 
-alias gef="grep '(Error|Fail)' "
+alias gef="grep -E '(Error|Fail)' "
