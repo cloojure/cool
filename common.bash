@@ -14,11 +14,14 @@ if [[ $(hostname) == *touchcommerce.com ]]; then
   sleep 1
   echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
   
-# export JAVA_HOME="/opt/jdk1.6.0_45"           ; path=( ${JAVA_HOME}/bin $path )
-# export JAVA_HOME="/opt/jdk1.7.0_80"           ; path=( ${JAVA_HOME}/bin $path )
-# export JAVA_HOME="/opt/jdk1.8.0_66"           ; path=( ${JAVA_HOME}/bin $path )
+  PATH=".:${HOME}/bin:${HOME}/opt/bin"
+  PATH="$PATH:/opt/bin"
+  PATH="$PATH:/usr/local/bin::/usr/bin::/bin"
+  PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+  PATH="$PATH:/usr/local/opt::/opt/bin"
+  export JAVA_HOME="/opt/java"                  ; PATH="${JAVA_HOME}/bin:$PATH"
 
-  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin $path )
+echo "path -> ${path}"
 
   # path=( /opt/solr/bin $path )
 else
