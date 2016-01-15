@@ -170,11 +170,13 @@ dev="athompson@agvdevtest26.touchcommerce.com"
 # aghcl02
 
 #---------------------------------------------------------------------------------------------------
-# temp vars
-aa=~/work/dw/DataWarehouseJobs
-bb=~/wrk2/dw/DataWarehouseJobs
+# temp stuff
+alias gef="grep -E '(Error|Fail)' "
 
 aa=~/work/htapi
 bb=~/wrk2/htapi
 
-alias gef="grep -E '(Error|Fail)' "
+aa=~/work/dw/DataWarehouseJobs
+bb=~/wrk2/dw/DataWarehouseJobs
+cc=~/wrk3/dw/DataWarehouseJobs
+
