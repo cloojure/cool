@@ -31,6 +31,8 @@ else
   # echo "Not-Found touchcommerce.com"
   # echo ""
   export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin         $path )
+# export M2_HOME="/opt/maven-3.3.9"             ; path=( ${M2_HOME}/bin           $path )
+  export M2_HOME="/opt/maven-2.2.1"             ; path=( ${M2_HOME}/bin           $path )
   export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin       $path )
   export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin      $path )
   export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin         $path )
