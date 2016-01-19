@@ -22,8 +22,11 @@ HDFS:
   hadoop fs -moveToLocal        # tx between hdfs and unix filesystems
 
 HDFS Example:
-# > hadoop fs -ls "/user/hadoop/events/siteID-*/2015-11-13*"
-#   -rw-r--r--   3 root supergroup   26448524 2015-11-18 07:02 /user/hadoop/events/siteID-149/2015-11-13T24/2015-11-13.events
-#   -rw-r--r--   3 root supergroup 3750599657 2015-11-18 07:03 /user/hadoop/events/siteID-316/2015-11-13T24/2015-11-13.events
-#   -rw-r--r--   3 root supergroup   51617290 2015-11-18 07:03 /user/hadoop/events/siteID-319/2015-11-13T24/2015-11-13.events
-#   -rw-r--r--   3 root supergroup   27880160 2015-11-18 07:03 /user/hadoop/events/siteID-350/2015-11-13T24/2015-11-13.events
+> hadoop fs -ls "/user/hadoop/events/siteID-*/2015-11-13*"
+  -rw-r--r--   3 root supergroup   26448524 2015-11-18 07:02 /user/hadoop/events/siteID-149/2015-11-13T24/2015-11-13.events
+  -rw-r--r--   3 root supergroup 3750599657 2015-11-18 07:03 /user/hadoop/events/siteID-316/2015-11-13T24/2015-11-13.events
+  -rw-r--r--   3 root supergroup   51617290 2015-11-18 07:03 /user/hadoop/events/siteID-319/2015-11-13T24/2015-11-13.events
+  -rw-r--r--   3 root supergroup   27880160 2015-11-18 07:03 /user/hadoop/events/siteID-350/2015-11-13T24/2015-11-13.events
+
+> hadoop fs -ls /user/hadoop/att_events/siteID-10004119  (different, solo folder)
+
