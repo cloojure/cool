@@ -1,4 +1,5 @@
-NOTE: hadoop uses only a single hypen for long options, not two like gnu/linux
+
+***** NOTE: hadoop uses only a single hypen for long options, not two like gnu/linux
 
 General:
   hadoop job -list              # List running jobs
@@ -28,5 +29,7 @@ HDFS Example:
   -rw-r--r--   3 root supergroup   51617290 2015-11-18 07:03 /user/hadoop/events/siteID-319/2015-11-13T24/2015-11-13.events
   -rw-r--r--   3 root supergroup   27880160 2015-11-18 07:03 /user/hadoop/events/siteID-350/2015-11-13T24/2015-11-13.events
 
-> hadoop fs -ls /user/hadoop/att_events/siteID-10004119  (different, solo folder)
+> hadoop fs -ls /user/hadoop/att_events/siteID-10004119  (ATT dir; different, solo folder "due to size")
 
+  If you need latest events for ATT you can get them from folder (re. Alexander Shut)
+    /home/logs/att_monthly_events/ (30+ last days)
