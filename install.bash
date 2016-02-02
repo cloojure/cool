@@ -58,7 +58,7 @@ ln -sv ${coolDir}/user.clj          ~/.lein/user.clj
 # Create links to tools & utils in ~/bin
 toolsDir=${coolDir}/tools
 mkdir -p ~/bin
-for ff in    lein lein-exec lein-exec-p gitdgn.csh
+for ff in    lein lein-exec lein-exec-p gitdgn.csh boot
 do
   if ${forceFlg} ; then
     rm -f ~/bin/${ff}
