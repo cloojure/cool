@@ -47,6 +47,14 @@ git reset --hard                                # discard changes to ALL files
 git diff --name-status <commit>                 # output like 'git status --brief'
 git diff -w            <commit>                 # diff ignore all whitespace
 git difftool --no-prompt                        # best way to invoke for 'vimdiff' 
+git diff topic...master                         # show changes on master since topic branch created
+git diff xxx yyy                                # delta from xxx to yyy: add to xxx(+), remove from xxx(-)
+git diff old new                                # delta from old to new: add to old(+), remove from old(-)
+git diff master@{0} master                      # no-op since master@{0} = master
+git diff master@{1} master                      # delta of most recent commit
+git diff master@{2} master                      # delta of 2 most recent commits
+git diff master@{2} master@{1}                  # delta of 2 commits ago to 1 commit ago
+git diff master@{2016-2-14}                     # delta since Valentine's Day (implies "new" -> HEAD)
 
 # Tagging
 git tag -a f-23-root -m"branch f-23 root"       # create annotated tag
