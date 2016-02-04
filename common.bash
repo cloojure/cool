@@ -173,10 +173,10 @@ dev="athompson@agvdevtest26.touchcommerce.com"
 # temp stuff
 alias gef="grep -E '(Error|Fail)' "
 
-aa=~/work/htapi
-bb=~/wrk2/htapi
-
 aa=~/work/dw/DataWarehouseJobs
 bb=~/wrk2/dw/DataWarehouseJobs
 cc=~/wrk3/dw/DataWarehouseJobs
+
+xx=~/work/htapi
+yy=~/wrk2/htapi
 
