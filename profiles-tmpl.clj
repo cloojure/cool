@@ -1,8 +1,9 @@
 { :user {   
     :plugins [ 
       [lein-ancient     "0.5.5"] 
-      [lein-exec        "0.3.4"] 
+      [lein-exec        "0.3.6"] 
       [lein-pprint      "1.1.1"] 
+      [lein-codox       "0.9.3"] 
 ;     [cider/cider-nrepl "0.8.2"]
     ] 
     :dependencies [ 
