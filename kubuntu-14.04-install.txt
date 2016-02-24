@@ -66,16 +66,18 @@ The following doesn't seem to work (blank screen):
       tree htop iotop collectl \
       zip unzip dos2unix kuser \
       alien youtube-dl sbackup rlwrap \
-      okular lzop parallel
+      okular lzop parallel docker.io \
+      vpnc kvpnc network-manager-vpnc racoon \
+
 
 - Postgres
       postgresql (get latest from postgresql.org)
 
 - Media codecs
-  sudo apt-get install ubuntu-restricted-extras
+  sudo apt install -y ubuntu-restricted-extras
 
 - Uncomplicated Firewall (UFW)
-  sudo apt-get install ufw gufw
+  sudo apt install -y ufw gufw
 
 - For Oracle client on AWS we need:
   sudo apt install -y libaio1         - async I/O (note can use "apt search libaio")

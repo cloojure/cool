@@ -136,12 +136,17 @@ alias kk="kill -9"
 alias pk="pkill -9"
 
 alias blk="sleep 1 ; xset dpms force off"       # set screen to black (power off)
+alias dosleep="systemctl suspend"
 
 # Alias for home Cannon scanner driver
 alias scanner=scangearmp
 
 # Docker stuff
 alias dk="sudo docker"
+alias dkr="dk run"
+alias dkru="    dkr    ubuntu"
+alias dkrd="    dkr -d"
+alias dkrdu="   dkr -d ubuntu"
 
 # Google Cloud tools
 #
@@ -173,10 +178,8 @@ dev="athompson@agvdevtest26.touchcommerce.com"
 # temp stuff
 alias gef="grep -E '(Error|Fail)' "
 
-aa=~/work/dw/DataWarehouseJobs
-bb=~/wrk2/dw/DataWarehouseJobs
-cc=~/wrk3/dw/DataWarehouseJobs
+aa=~/work
+bb=~/wrk2
+cc=~/wrk3
 
-xx=~/work/htapi
-yy=~/wrk2/htapi
 
