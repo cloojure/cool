@@ -16,3 +16,14 @@ total 12
 -rw-r--r--. 1 alan alan  407 Dec 29 22:41 known_hosts  
 
 # Copy the file ~/.ssh/id_rsa.pub to GitHub (Gear symbol -> SSH Keys -> Add SSH Key)
+
+---------------------------------------------------------------------------------------------------
+# Test ssh access for git
+
+> ssh -T git@github.com
+Hi cloojure! You've successfully authenticated, but GitHub does not provide shell access.
+> ssh -T git@bitbucket.com
+logged in as alan-thompson-cenx.
+> ssh -T git@bitbucket-cenx
+logged in as alan-thompson-cenx.
+
