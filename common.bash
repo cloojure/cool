@@ -147,6 +147,7 @@ alias dkr="dk run"
 alias dkru="    dkr    ubuntu"
 alias dkrd="    dkr -d"
 alias dkrdu="   dkr -d ubuntu"
+alias dkc="sudo docker-compose"
 
 # Google Cloud tools
 #

@@ -1,12 +1,16 @@
 # BitBucket - default
-Host bitbucket.com
-  HostName bitbucket.com
-# User git
-  IdentityFile ~/.ssh/id_rsa
+Host bitbucket.org
+  HostName bitbucket.org
+  # User git
+  IdentityFile ~/.ssh/id_rsa_alan
+  LogLevel INFO
+  PreferredAuthentications publickey
 
 # BitBucket - cenx
 Host bitbucket-cenx
   HostName bitbucket.com
-# User git
+  # User git
   IdentityFile ~/.ssh/id_rsa_cenx
+  LogLevel INFO
+  PreferredAuthentications publickey
 

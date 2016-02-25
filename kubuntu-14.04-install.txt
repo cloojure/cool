@@ -69,6 +69,11 @@ The following doesn't seem to work (blank screen):
       okular lzop parallel docker.io \
       vpnc kvpnc network-manager-vpnc racoon \
 
+- Docker - follow website instructions
+    docker
+    docker-compose
+
+- CENX vpnc file: ~/cool/etc--vpnc--cenx.conf  -> /etc/vpnc
 
 - Postgres
       postgresql (get latest from postgresql.org)
