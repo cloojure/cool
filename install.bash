@@ -73,3 +73,4 @@ if ${forceFlg} ; then
 fi
 ln -sv ${coolDir}/ssh-config.txt ~/.ssh/config
 chmod --recursive go-rwx ~/.ssh ${coolDir}/ssh-config.txt
+
