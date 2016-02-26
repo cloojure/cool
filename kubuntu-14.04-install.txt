@@ -60,7 +60,9 @@ The following doesn't seem to work (blank screen):
 
 - Install basic software using yum:
     sudo apt install -y  \
+      lsb \
       vim git zsh tcsh fish tmux curl  \
+      vim-gui-common \
       gcc python ruby \
       octave libreoffice \
       tree htop iotop collectl \
@@ -68,6 +70,30 @@ The following doesn't seem to work (blank screen):
       alien youtube-dl sbackup rlwrap \
       okular lzop parallel docker.io \
       vpnc kvpnc network-manager-vpnc racoon \
+
+- Repositories listed in:  
+      /etc/apt/sources.list              - main file (append new repo's if desired)
+      /etc/apt/sources.list.d/*.list     - any file that like this pattern
+      # example
+      > ls  /etc/apt/sources.list.d/*
+            /etc/apt/sources.list.d/atlassian-hipchat.list
+            /etc/apt/sources.list.d/atlassian-hipchat.list.distUpgrade
+            /etc/apt/sources.list.d/atlassian-hipchat.list.save
+            /etc/apt/sources.list.d/docker.list
+            /etc/apt/sources.list.d/dropbox.list
+            /etc/apt/sources.list.d/dropbox.list.distUpgrade
+            /etc/apt/sources.list.d/dropbox.list.save
+            /etc/apt/sources.list.d/google-chrome.list
+            /etc/apt/sources.list.d/google-chrome.list.distUpgrade
+            /etc/apt/sources.list.d/google-chrome.list.save
+            /etc/apt/sources.list.d/google-talkplugin.list
+            /etc/apt/sources.list.d/pgdg.list
+            /etc/apt/sources.list.d/pgdg.list.distUpgrade
+            /etc/apt/sources.list.d/pgdg.list.save
+            /etc/apt/sources.list.d/postgresql.list
+            /etc/apt/sources.list.d/postgresql.list.save
+            /etc/apt/sources.list.d/webupd8team-ubuntu-java-wily.list
+
 
 - Docker - follow website instructions
     docker
@@ -184,3 +210,143 @@ Favorites - Added to tab under Fedora symbol
 
 Software to install
   cannon pixma mx922        - website + see notes file
+
+-----------------------------------------------------------------------------
+Tips:
+  Ctrl+Alt+T => new terminal window (Unity)
+
+-----------------------------------------------------------------------------
+Install Ubuntu 15.10 Wily into a new VM in VirtualBox
+
+Note the "Host" key is the RIGHT CTRL key (i.e. near the "?" key)
+  Use Host+F (e.g. R-Ctrl + F) to toggle VBox in/out of full screen mode
+  Use Host+L to toggle VBox in/out of Seamless mode (i.e. hides window at the bottom of screen)
+    Use Host+Home to toggle VBox visibility of MenuBar
+  Use Host+C to toggle VBox in/out of Scaled mode (i.e. window is resizable)
+
+boot from the iso (virtual optical disk)
+install ubuntu (user=alan  pass=secret)
+  it may hang on reboot at the end of install - force reset/reboot if needed.
+
+to resize screen larger than 1024x758, *** LOG INTO THE VM *** and do:
+  sudo apt install virtualbox-guest-dkms
+  sudo reboot
+  you should now have all screen sizes available (e.g. 1920x1080) 
+    - in the normal GUI: System Settings -> Displays -> Resolution 
+    - thru the VirtualBox menu: View -> Virtual Screen 1 -> Resize to 1920x1080
+  if you restart & get an error "Could not apply the stored configuration for monitors" in a large vertical pane
+    in VBox menu View -> Virtual Screen 1 -> Resize to 1920x1080 (or R-click monitor icon in lower-right corner of window frame)
+    kill the error msg pane by clicking the X in upper-left corner
+
+Needed to access shared folders from VBox: In the VBox menu choose: 
+  Devices -> Install Guest Additions CD Image...
+    pop-up click "Download" 
+    pop-up "are you sure?" click "Download"
+    pop-up "successfully downloaded", "Do you wish to register this disk image file and insert it
+      into the virtual optical drive?" -> "Insert"
+    pop-up: "VBOXADDITIONS_5.0.14_xxxxxx" contains sofware intended to be automatically started.
+      Would you like to run it?  -> "Run"
+    pop-up: Authentication is needed to run '/bin/sh' as super user -> enter password -> "Authenticate"
+    terminal-window: Verifying archve integrity...(10 lines) Do you wish to continue anyway [yes or no] -> "yes"
+    terminal-window: <many lines> "Press return to close this window" -> <return>
+    > sudo poweroff (or just use the GUI to shutdown the VM)
+  In the VBox GUI:  Settings -> Shared Folders -> Folder Add (e.g. "folder-plus" icon in top right)
+    Folder Path -> <dropdown> -> "Other" -> <navigate to a folder like "~/vbox"> -> "Choose" button (bottom right)
+    See "Folder Path" like "/home/alan/vbox" and "Folder Name" like "vbox". Defaults should be fine but you could edit
+    Be sure to click "Auto-mount".  I would not bother with "Read-only" unless you need it for something
+    When done, click "OK" button in pop-up
+    Click "OK" button in settings dialog box
+  Startup the VM in the VBox gui, login, kill display error msg pane
+    Shared folders are mounted like removable media in the /media partition.  The folder name is prepended with "sf_".
+    Open up the Ubuntu "File Navigator" from the Unity dock (looks like a file cabinate drawer).
+    Select "Computer" from the manu pane and see like "sf_vbox" folder (icon like removeable media)
+      Can also navigate to "removable drive" named like "sf_vbox" directly from menu pane
+      Probably get error "This location could not be displayed" since it is owned by root.
+      To see contents:  sudo ls -l /media/sf_vbox 
+      Cannot fix with chown or chmod VBox ignores these cmds
+
+Install VPN software for Ubuntu 
+  sudo apt install -y vpnc kvpnc network-manager-vpnc racoon 
+  copy CENX vpnc file: cp ~/cool/etc--vpnc--cenx.conf  -> /etc/vpnc/cenx.conf using shared folder
+  sudo cp /media/sf_vbox/etc--vpnc--cenx.conf  /etc/vpnc/cenx.conf 
+  ensure permissions are OK:  sudo chmod -R go-rwx /etc/vpnc
+    should look like:
+      > sudo ls -l /etc/vpnc
+      -rw------- 1 root root 146 Feb 23 19:59 cenx.conf
+
+  start vpn
+    > sudo vpnc cenx --local-port 0 --domain ""
+    Enter password for joe.programmer@xx.xx.xx.xxx:  <type user pass>
+    Password for VPN joe.programmer@xx.xx.xx.xxx: <type vpn pass>
+    result: "VPNC started in background (pid: xxxx)..."
+    
+  verify vpn (must have vpn working on host machine first!)
+    alan@alan-VirtualBox:~$ ping nexus.cenx.localnet
+    PING nexus.cenx.localnet (172.32.1.64) 56(84) bytes of data.        *** it found the right IP ***
+    ^C  *** manually killed after 2 minutes ***
+    --- nexus.cenx.localnet ping statistics ---
+    136 packets transmitted, 0 received, 100% packet loss, time 136063ms
+
+    alan@alan-VirtualBox:~$ ping 172.32.1.64                            *** ping the IP directly ***
+    PING 172.32.1.64 (172.32.1.64) 56(84) bytes of data.    
+    64 bytes from 172.32.1.64: icmp_seq=82 ttl=63 time=109 ms           *** it works after ~30 sec ***
+    64 bytes from 172.32.1.64: icmp_seq=83 ttl=63 time=109 ms
+    64 bytes from 172.32.1.64: icmp_seq=84 ttl=63 time=108 ms
+    64 bytes from 172.32.1.64: icmp_seq=85 ttl=63 time=108 ms
+
+    alan@alan-VirtualBox:~$ ping google.com                             *** no problem with outside servers ***
+    PING google.com (74.125.226.6) 56(84) bytes of data.
+    64 bytes from lga15s42-in-f6.1e100.net (74.125.226.6): icmp_seq=1 ttl=63 time=89.6 ms
+    64 bytes from lga15s42-in-f6.1e100.net (74.125.226.6): icmp_seq=2 ttl=63 time=89.6 ms
+    64 bytes from lga15s42-in-f6.1e100.net (74.125.226.6): icmp_seq=3 ttl=63 time=88.9 ms
+    ^C
+    --- google.com ping statistics ---
+    4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+    rtt min/avg/max/mdev = 88.940/89.306/89.652/0.400 ms
+
+  set up java
+    make /opt look like this:
+      d /opt/*
+        lrwxrwxrwx 1 root root   12 Feb 25 21:31 /opt/java -> jdk1.8.0_72//
+        drwxr-xr-x 8 alan alan 4096 Dec 22 22:13 /opt/jdk1.8.0_72/
+        drwxr-xr-x 9 root root 4096 Feb 25 19:45 /opt/VBoxGuestAdditions-5.0.14/
+    which java
+      /opt/java/bin/java
+    java -version
+      java version "1.8.0_72"
+      Java(TM) SE Runtime Environment (build 1.8.0_72-b15)
+      Java HotSpot(TM) 64-Bit Server VM (build 25.72-b15, mixed mode)
+
+  Set up ~/.bashrc:
+    Add 4 lines to tail end of ~/.bashrc
+      alias d="ls -ldF"
+      export PATH=${HOME}/bin:${PATH}
+      export JAVA_HOME=/opt/java
+      export PATH=${JAVA_HOME}/bin:${PATH}
+    source ~/.bashrc
+
+  Set up lein:
+    cd
+    mkdir -p ~/bin
+    curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > ~/bin/lein
+    chmod u+rwx ~/bin/*
+    d ~/bin/*
+      -rwxrw-r-- 1 alan alan 12871 Feb 25 21:20 /home/alan/bin/lein*
+    lein --version
+      Leiningen 2.6.1 on Java 1.8.0_72 Java HotSpot(TM) 64-Bit Server VM
+
+  Test working with bitbucket repo
+    > ssh-keygen ...(normal stuff) -> copy ~/.ssh/id_rsa.pub to Bitbucket SSH keys through browser
+    > git clone git@bitbucket.org:cenx-cf/parker.git
+    ...<clone works>
+    > cd parker
+    > lein deps
+      Retrieving lein-immutant/lein-immutant/2.0.0/lein-immutant-2.0.0.pom from nexus   *** note pinged nexus ***
+      Retrieving org/clojure/tools.cli/0.3.1/tools.cli-0.3.1.pom from nexus
+      Retrieving org/clojure/pom.contrib/0.1.2/pom.contrib-0.1.2.pom from nexus
+      Retrieving org/sonatype/oss/oss-parent/7/oss-parent-7.pom from nexus
+      Retrieving org/immutant/deploy-tools/2.0.4/deploy-tools-2.0.4.pom from nexus
+      Retrieving org/immutant/fntest/2.0.4/fntest-2.0.4.pom from nexus
+      <...and many more...>
+
+
