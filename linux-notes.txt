@@ -60,3 +60,8 @@ General commands
 ---------------------------------------------------------------------------------------------------
 General commands
   ldd libXXX.so         - display dependencies
+
+---------------------------------------------------------------------------------------------------
+ifconfig            - interface config: shows network info
+netstat             - network info
+getent hosts        - print hosts info

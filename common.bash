@@ -141,14 +141,6 @@ alias dosleep="systemctl suspend"
 # Alias for home Cannon scanner driver
 alias scanner=scangearmp
 
-# Docker stuff
-alias dk="sudo docker"
-alias dkr="dk run"
-alias dkru="    dkr    ubuntu"
-alias dkrd="    dkr -d"
-alias dkrdu="   dkr -d ubuntu"
-alias dkc="sudo docker-compose"
-
 # Google Cloud tools
 #
 # Copy local files to Google Cloud Storage using gzip compression for all files
@@ -171,9 +163,17 @@ alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 # joyent
 alias gojoy="ssh ubuntu@165.225.137.241"
 
-# TC dev cluster
-dev="athompson@agvdevtest26.touchcommerce.com"
-# aghcl02
+# CENX stuff
+export DOCKER_MACHINE_IP=localhost
+alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
+
+# Docker stuff
+alias dk="sudo --preserve-env docker"
+alias dkr="dk run"
+alias dkru="    dkr    ubuntu"
+alias dkrd="    dkr -d"
+alias dkrdu="   dkr -d ubuntu"
+alias dkc="sudo --preserve-env docker-compose"
 
 #---------------------------------------------------------------------------------------------------
 # temp stuff
