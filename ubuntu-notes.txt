@@ -117,8 +117,10 @@ Install VirtualBox from the instructions at:
 
 
 Docker - follow website instructions
-  docker                    https://docs.docker.com/linux/
-  docker-compose
+  docker:  https://docs.docker.com/linux/
+    be sure after docker is installed to do the part to add your user to the "docker" group 
+      avoids need to "sudo" all docker commands like: sudo docker run ...
+  docker-compose:  https://docs.docker.com/compose/install/
 
 CENX vpnc file: ~/cool/etc--vpnc--cenx.conf  -> /etc/vpnc
 
