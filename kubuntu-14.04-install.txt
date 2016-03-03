@@ -55,7 +55,7 @@ The following doesn't seem to work (blank screen):
     file even when Fedora is selected.  If so, the install will fail.  Try again & it'll
     probably work (give the *.rpm file)
 
-- Update all software (~ 30 min)
+- Update all software (~30 min)
   - Software Management -> Updates -> Check for Updates:  Install all found)
 
 - Install basic software using yum:
@@ -116,8 +116,6 @@ The following doesn't seem to work (blank screen):
   sudo alien -i oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
   sudo alien -i oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
     See:  https://help.ubuntu.com/community/Oracle%20Instant%20Client
-
-- rebuild current git 2.2.1 or later (from source)
 
 - Install NVidia Drivers
   - NVidia drivers require the package "kernel-devel" from Fedora.  Install it using
