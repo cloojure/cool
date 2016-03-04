@@ -168,12 +168,12 @@ export DOCKER_MACHINE_IP=localhost
 alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
 
 # Docker stuff
-alias dk="sudo --preserve-env docker"
+alias dk="docker"                       # alias dk="sudo --preserve-env docker"
 alias dkr="dk run"
 alias dkru="    dkr    ubuntu"
 alias dkrd="    dkr -d"
 alias dkrdu="   dkr -d ubuntu"
-alias dkc="sudo --preserve-env docker-compose"
+alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-compose"
 
 #---------------------------------------------------------------------------------------------------
 # temp stuff

@@ -62,9 +62,10 @@ General commands
   ldd libXXX.so         - display dependencies
 
 ---------------------------------------------------------------------------------------------------
-ifconfig            - interface config: shows network info
-netstat             - network info
-getent hosts        - print hosts info
+ifconfig                # interface config: shows network info
+netstat                 # network info
+getent hosts            # print hosts info
+cat /etc/resolv.conf    # show DNS servers
 
 sudo systemctl list-unit-files --type=target
 sudo systemctl list-units --type=target

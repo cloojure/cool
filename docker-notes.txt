@@ -33,3 +33,12 @@ Docker Notes - Fedora 20 (2014-10-21)
     dk unpause      <id>
 
     dk rm           <id>                    # must be stopped to remove
+
+Examples:
+  docker run -it   ubuntu /bin/bash          # interactive shell
+     ^p ^q                                   # detach from a running container
+  docker run -itd  ubuntu /bin/bash          # interactive shell (detached)
+  docker attach <ident>
+
+  docker network ls
+  docker network inspect bridge
