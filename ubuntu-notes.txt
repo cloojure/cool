@@ -42,18 +42,20 @@ Install basic software using yum:
     vim git zsh tcsh fish tmux curl  \
     vim-gui-common \
     gcc python ruby \
-    octave libreoffice \
+    maven octave libreoffice \
     tree htop iotop collectl \
     zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
     okular lzop parallel docker.io \
     vpnc kvpnc network-manager-vpnc racoon \
-    curl ctags gconf-editor unity-tweak-tool \
+    curl ctags gconf-editor unity-tweak-tool dconf-tools \
+
 
 unity-tweak-tool -> Window Manager -> Additional -> Focus Mode: "Sloppy"
 System Settings -> Displays -> Sticky Edges = Off
 System Settings -> Time & Date -> 
   Enable: Show a clock..., Weekday, Date and Month, Year, 12-hour time, Seconds
+dconf-editor -> org -> gnome -> gnome session -> select "auto-save-session"
 
   jq (json formatter tool)  ; #todo where from???
 

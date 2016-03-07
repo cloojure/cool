@@ -206,10 +206,10 @@ Try to connect:
   psql: FATAL:  role "alan" does not exist  
 
 User "alan" or DB "alan" don't exist.  Become user "postgres", then create user & DB "alan"
-  sudo su postgres
-    createuser alan       - old way: psql --command="CREATE ROLE alan LOGIN SUPERUSER"
+  sudo su postgres      - become the user "postgres"
+    createuser alan     - old way: psql --command="CREATE ROLE alan LOGIN SUPERUSER"
     createdb   alan
-  exit      - logout of user "postgres"
+  exit                  - logout of user "postgres"
 
 Now login using psql
   psql
