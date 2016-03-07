@@ -89,8 +89,8 @@ alias du="du -m"
 alias df="df -BG"
 
 # Always use egrep
-alias  grep="\grep  -E --color=auto"  # same as deprecated 'egrep'
-alias igrep="\grep -iE --color=auto"
+alias grep=" \grep  -E --color=auto"  # same as deprecated 'egrep'
+alias grepi="\grep -iE --color=auto"
 
 alias pdirs="find * -maxdepth 0 -type d "
 alias pfiles="find * -maxdepth 0 -type f "
