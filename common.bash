@@ -31,8 +31,6 @@ else
   # echo "Not-Found touchcommerce.com"
   # echo ""
   export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin         $path )
-# export M2_HOME="/opt/maven-3.3.9"             ; path=( ${M2_HOME}/bin           $path )
-  export M2_HOME="/opt/maven-2.2.1"             ; path=( ${M2_HOME}/bin           $path )
   export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin       $path )
   export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin      $path )
   export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin         $path )
@@ -89,8 +87,8 @@ alias du="du -m"
 alias df="df -BG"
 
 # Always use egrep
-alias  grep="\grep  -E --color=auto"  # same as deprecated 'egrep'
-alias igrep="\grep -iE --color=auto"
+alias grep=" \grep  -E --color=auto"  # same as deprecated 'egrep'
+alias grepi="\grep -iE --color=auto"
 
 alias pdirs="find * -maxdepth 0 -type d "
 alias pfiles="find * -maxdepth 0 -type f "
@@ -136,12 +134,10 @@ alias kk="kill -9"
 alias pk="pkill -9"
 
 alias blk="sleep 1 ; xset dpms force off"       # set screen to black (power off)
+alias dosleep="systemctl suspend"
 
 # Alias for home Cannon scanner driver
 alias scanner=scangearmp
-
-# Docker stuff
-alias dk="sudo docker"
 
 # Google Cloud tools
 #
@@ -161,22 +157,60 @@ mcd() { mkdir -p "$1"; cd "$1";}
 alias histg="history | grep"
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
+alias rs="reset"
+alias ipaddr='ip route get 8.8.8.8 | awk "{print \$NF; exit}" '
 
 # joyent
 alias gojoy="ssh ubuntu@165.225.137.241"
 
-# TC dev cluster
-dev="athompson@agvdevtest26.touchcommerce.com"
-# aghcl02
+# Docker stuff
+alias dk="docker"                       # alias dk="sudo --preserve-env docker"
+alias dkr="dk run"
+alias dkru="    dkr    ubuntu"
+alias dkrd="    dkr -d"
+alias dkrdu="   dkr -d ubuntu"
+alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-compose"
+
+
+# CENX stuff
+export DOCKER_MACHINE_IP=$(ipaddr)
+alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
+alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
+alias parker_alias='curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json"'
+
+function customer() {
+    customer=$1
+    #devops=[LOCATION OF DEVOPS]
+    #devops="${HOME}/cx/devops/deployments/rapid-dev/"
+    devops="~/cx/devops/deployments/rapid-dev/"
+    default="${devops}/cortx.yaml"
+    custops="${devops}/customers/${customer}/cortx.yaml"
+ 
+    if ! [[ "$(boot2docker status)" = "running" ]] ; then
+        boot2docker start;
+    fi
+    cortx stop;
+    cortx clean;
+    if [ -e $custops ]; then
+        echo "customer found: ${customer}"
+        use=${custops}
+    else
+        echo "customer not found: ${customer}"
+        echo "using generic"
+        use=${default}
+    fi
+    cp ${use} ~
+    cortx start;
+    curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json";
+    docker exec -i -t ldap ldapadd -x -D "cn=Manager,dc=cenx,dc=com" -w 2112 -f /etc/openldap/sample.ldif
+}
 
 #---------------------------------------------------------------------------------------------------
 # temp stuff
 alias gef="grep -E '(Error|Fail)' "
 
-aa=~/work/dw/DataWarehouseJobs
-bb=~/wrk2/dw/DataWarehouseJobs
-cc=~/wrk3/dw/DataWarehouseJobs
+aa=~/work
+bb=~/wrk2
+cc=~/wrk3
 
-xx=~/work/htapi
-yy=~/wrk2/htapi
 

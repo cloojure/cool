@@ -50,6 +50,7 @@ set scrolloff=5
 set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags
 set path=.
 set path+=src/**
+set path+=html/**
 set path+=test/**
 set path+=resources/**
 set path+=source/**

@@ -66,3 +66,11 @@ do
   ln -sv ${toolsDir}/${ff}  ~/bin/${ff}
 done
 
+# Create links to tools & utils in ~/.ssh
+mkdir -p ~/.ssh
+if ${forceFlg} ; then
+  rm -f ~/.ssh/config
+fi
+ln -sv ${coolDir}/ssh-config.txt ~/.ssh/config
+chmod --recursive go-rwx ~/.ssh ${coolDir}/ssh-config.txt
+

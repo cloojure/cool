@@ -75,3 +75,31 @@ format a usb drive
       sudo mkfs -t vfat /dev/sdb1
     sudo eject /dev/sdb1
 
+ifconfig                # interface config: shows network info
+netstat                 # network info
+getent hosts            # print hosts info
+cat /etc/resolv.conf    # show DNS servers
+
+sudo systemctl list-unit-files --type=target
+sudo systemctl list-units --type=target
+
+sudo systemctl disable postgresql.service
+sudo systemctl status postgresql
+sudo systemctl restart postgresql
+
+sudo systemctl list-dependencies multi-user.target
+sudo systemctl isolate multi-user.target                # like changing runlevel down
+
+sudo systemctl rescue       # single-user "runlevel"
+
+sudo systemctl halt
+sudo systemctl poweroff
+sudo systemctl reboot
+hostnamectl
+localectl
+timedatectl
+loginctl list-users
+loginctl list-sessions
+loginctl show-user alan
+
+
