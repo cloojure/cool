@@ -1,4 +1,21 @@
 -----------------------------------------------------------------------------
+cheatsheet:
+  select version();
+  select * from generate_series(1,10)
+  select * from generate_series( '2014-01-01'::timestamp, '2014-12-01'::timestamp, '42 days' );
+  select x as first_of_the_month from 
+    generate_series('2014-01-01'::timestamp,'2014-12-01'::timestamp,'1 month') as f(x);   
+  select '1 week' + now() as a_week_from_now;
+  select now() at time zone 'PDT' as cali_time;
+  select now() - now() at time zone 'PDT' as cali_diff;  => 8 hours
+  select distinct sku,
+      sum(price)  OVER (PARTITION BY sku) as revenue,
+      count(1)    OVER (PARTITION BY sku) as sales_count,
+      sum(price)  OVER (PARTITION by 0)   as sales_total
+    from invoice_items
+      where date_part('month',created_at) = 9;
+
+-----------------------------------------------------------------------------
 Online resources:
   http://www.postgresql.org/docs/9.4/static/index.html
   http://www.postgresqltutorial.com/

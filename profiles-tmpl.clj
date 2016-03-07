@@ -3,7 +3,7 @@
       [lein-ancient     "0.5.5"] 
       [lein-exec        "0.3.4"] 
       [lein-pprint      "1.1.1"] 
-;     [cider/cider-nrepl "0.8.2"]
+      [jonase/eastwood  "0.2.3"] 
     ] 
     :dependencies [ 
       [criterium                    "0.4.3"] 

@@ -57,6 +57,21 @@ Resource monitoring
 ---------------------------------------------------------------------------------------------------
 General commands
   /etc/ld.so.conf       - a better alternative to LD_LIBRARY_PATH
----------------------------------------------------------------------------------------------------
-General commands
   ldd libXXX.so         - display dependencies
+
+---------------------------------------------------------------------------------------------------
+lsblk                   - list block devices (e.g. find usb drive device)
+
+format a usb drive
+  command line
+    find which one is usb 
+      mount   # look for /media
+        /dev/sda5 on / type ext4 (rw,errors=remount-ro,user_xattr)
+        /dev/sdb1 on /media/E93D-1723 type vfat (rw,nosuid,nodev,uid=1000,gid=1000,shortname=mixed,dmask=0077,utf8=1,showexec,flush,uhelper=udisks)
+      lsblk   # can also use this cmd
+    sudo umount /dev/sdb1
+    gparted (sudo apt install -y gparted)
+    alternate: unmount, make fs, eject:
+      sudo mkfs -t vfat /dev/sdb1
+    sudo eject /dev/sdb1
+
