@@ -159,6 +159,8 @@ alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias rs="reset"
 alias ipaddr='ip route get 8.8.8.8 | awk "{print \$NF; exit}" '
+alias checkip='echo "checkip.amazonaws.com  =>  $(curl --silent http://checkip.amazonaws.com)" '
+
 
 # joyent
 alias gojoy="ssh ubuntu@165.225.137.241"
