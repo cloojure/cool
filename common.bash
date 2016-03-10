@@ -159,17 +159,17 @@ alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias rs="reset"
 
-function fn_localip() {
+function fn_ipaddr() {
   result=$( ip route get 8.8.8.8 | awk '{print $NF; exit}' )
   echo "local IP  =>  ${result}"
 }
-alias localip=fn_localip
+alias ipaddr=fn_ipaddr
 
-function fn_externalip() {
+function fn_ipexternal() {
   result=$( curl --silent http://checkip.amazonaws.com )
   echo "external IP (checkip.amazonaws.com)  =>  ${result}"
 }
-alias externalip=fn_externalip
+alias ipexternal=fn_ipexternal
 
 
 # joyent
