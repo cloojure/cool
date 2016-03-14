@@ -56,6 +56,8 @@ System Settings -> Displays -> Sticky Edges = Off
 System Settings -> Time & Date -> 
   Enable: Show a clock..., Weekday, Date and Month, Year, 12-hour time, Seconds
 dconf-editor -> org -> gnome -> gnome session -> select "auto-save-session"
+System Settings -> Input -> Microphone = HD Pro Webcam C920
+System Settings -> Output -> Line Out (regular stero speakers)
 
   jq (json formatter tool)  ; #todo where from???
 

@@ -160,17 +160,15 @@ alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias rs="reset"
 
 function fn_ipaddr() {
-  result=$( ip route get 8.8.8.8 | awk '{print $NF; exit}' )
-  echo "local IP  =>  ${result}"
+  result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
+  echo ${result}
 }
 alias ipaddr=fn_ipaddr
-
-function fn_ipexternal() {
-  result=$( curl --silent http://checkip.amazonaws.com )
-  echo "external IP (checkip.amazonaws.com)  =>  ${result}"
+alias ipexternal="curl --silent http://checkip.amazonaws.com"
+function ipinfo() {
+  echo "local    IP  =>  $(ipaddr)"
+  echo "external IP  =>  $(ipexternal)"
 }
-alias ipexternal=fn_ipexternal
-
 
 # joyent
 alias gojoy="ssh ubuntu@165.225.137.241"
@@ -181,8 +179,8 @@ alias dkr="dk run"
 alias dkru="    dkr    ubuntu"
 alias dkrd="    dkr -d"
 alias dkrdu="   dkr -d ubuntu"
+alias dkclear=' dk rm `dk ps --no-trunc -aq` '
 alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-compose"
-
 
 # CENX stuff
 export DOCKER_MACHINE_IP=$(ipaddr)
