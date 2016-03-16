@@ -111,6 +111,10 @@ alias up7="cd ../../../../../../.."
 alias up8="cd ../../../../../../../.."
 alias up9="cd ../../../../../../../../.."
 
+alias cuts="cut --char=-99"
+alias cutm="cut --char=-155"
+alias cutl="cut --char=-222"
+
 alias gits="    git status --short"
 alias gitb="    git branch"
 alias gitco="   git checkout"
@@ -159,11 +163,10 @@ alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias rs="reset"
 
-function fn_ipaddr() {
+function ipaddr() {
   result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
   echo ${result}
 }
-alias ipaddr=fn_ipaddr
 alias ipexternal="curl --silent http://checkip.amazonaws.com"
 function ipinfo() {
   echo "local    IP  =>  $(ipaddr)"
@@ -185,6 +188,7 @@ alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-
 # CENX stuff
 export DOCKER_MACHINE_IP=$(ipaddr)
 alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
+alias vpnping='ping -c3 nexus.cenx.localnet'
 alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
 alias parker_alias='curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json"'
 

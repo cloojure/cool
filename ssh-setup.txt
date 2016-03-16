@@ -27,3 +27,46 @@ logged in as alan-thompson-cenx.
 > ssh -T git@bitbucket-cenx
 logged in as alan-thompson-cenx.
 
+---------------------------------------------------------------------------------------------------
+SSH config via ~/.ssh/config  (soft link to ~/cool/config.ssh
+Make it look like this:
+
+  # BitBucket - default
+  Host bitbucket.org
+    HostName bitbucket.org
+    # User git
+    IdentityFile ~/.ssh/id_rsa_alan
+    LogLevel INFO
+    PreferredAuthentications publickey
+
+  # BitBucket - cenx; note "fake" hostname: bitbucket-cenx  (no TLD like ".com" either)
+  Host bitbucket-cenx
+    HostName bitbucket.com
+    # User git
+    IdentityFile ~/.ssh/id_rsa_cenx
+    LogLevel INFO
+    PreferredAuthentications publickey
+
+---------------------------------------------------------------------------------------------------
+Usage - Need to alter hostname before issuing 'git clone' command:
+
+Original (raw) hostname - fails:
+
+  ~/cx > git clone git@bitbucket.org:cenx-cf/ripper.git          
+  Cloning into 'ripper'...
+  conq: repository access denied.
+  fatal: Could not read from remote repository.
+  Please make sure you have the correct access rights
+  and the repository exists.
+
+Modified hostname - works; uses "fake" hostname "bitbucket-cenx" (matches entry in ~/.ssh/config)
+
+  ~/cx > git clone git@bitbucket-cenx:cenx-cf/ripper.git
+  Cloning into 'ripper'...
+  remote: Counting objects: 44806, done.
+  remote: Compressing objects: 100% (19428/19428), done.
+  remote: Total 44806 (delta 20749), reused 27520 (delta 13125)
+  Receiving objects: 100% (44806/44806), 7.37 MiB | 1.11 MiB/s, done.
+  Resolving deltas: 100% (20749/20749), done.
+  Checking connectivity... done.
+
