@@ -46,7 +46,7 @@ Install basic software using yum:
     tree htop iotop collectl gnupg \
     zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
-    okular lzop parallel docker.io \
+    okular lzop jq parallel docker.io \
     vpnc kvpnc network-manager-vpnc racoon \
     curl ctags gconf-editor unity-tweak-tool dconf-tools \
 
@@ -160,7 +160,12 @@ Chrome:
     hadoop
     spark
     IntelliJ IDEA
-    cursive
+    Cursive
+
+- IntelliJ Idea install
+  Ubuntu -> System Settings -> Keyboard -> Shortcuts: disable all 4 "Switch to workspace left/right/above/below"
+    conflicts with Idea "return to previous location" ctrl-alt-left
+  Ubuntu -> System Settings -> Keyboard -> Shortcuts -> Windows: disable "Move Window", "Resize window"
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.

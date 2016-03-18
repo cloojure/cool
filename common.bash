@@ -133,7 +133,7 @@ alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80
 
 alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
-alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy"
+alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
 alias pk="pkill -9"
 
@@ -184,6 +184,8 @@ alias dkrd="    dkr -d"
 alias dkrdu="   dkr -d ubuntu"
 alias dkclear=' dk rm `dk ps --no-trunc -aq` '
 alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-compose"
+alias dkip="docker inspect --format='{{.NetworkSettings.Networks.user_default.IPAddress}}' "  # <container-name>
+                 # or --format='{{json .NetworkSettings.Networks.user_default.IPAddress}}'
 
 # CENX stuff
 export DOCKER_MACHINE_IP=$(ipaddr)
