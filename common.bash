@@ -185,7 +185,7 @@ alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-
 
 
 # CENX stuff
-export DOCKER_MACHINE_IP=$(ipaddr)
+# export DOCKER_MACHINE_IP=$(ipaddr)
 alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
 alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
 alias parker_alias='curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json"'
