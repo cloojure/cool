@@ -52,25 +52,27 @@ if ${forceFlg} ; then
         ~/.lein/user.clj
 fi
 sed -e"s%==user.home==%${HOME}%" profiles-tmpl.clj > profiles.clj
-ln -sv ${coolDir}/profiles.clj      ~/.lein/profiles.clj
-ln -sv ${coolDir}/user.clj          ~/.lein/user.clj
+### ln -sv ${coolDir}/profiles.clj      ~/.lein/profiles.clj
+### ln -sv ${coolDir}/user.clj          ~/.lein/user.clj
 
 # Create links to tools & utils in ~/bin
 toolsDir=${coolDir}/tools
 mkdir -p ~/bin
-for ff in    lein lein-exec lein-exec-p gitdgn.csh boot inlein
-do
-  if ${forceFlg} ; then
-    rm -f ~/bin/${ff}
-  fi
-  ln -sv ${toolsDir}/${ff}  ~/bin/${ff}
-done
+pushd ${toolsDir}
+  for ff in *
+  do
+    if ${forceFlg} ; then
+      rm -f ~/bin/${ff}
+    fi
+    ln -sv ${toolsDir}/${ff}  ~/bin/${ff}
+  done
+popd
 
 # Create links to tools & utils in ~/.ssh
 mkdir -p ~/.ssh
 if ${forceFlg} ; then
   rm -f ~/.ssh/config
 fi
-ln -sv ${coolDir}/ssh-config.txt ~/.ssh/config
-chmod --recursive go-rwx ~/.ssh ${coolDir}/ssh-config.txt
+ln -sv ${coolDir}/config.ssh ~/.ssh/config
+chmod --recursive go-rwx ~/.ssh 
 
