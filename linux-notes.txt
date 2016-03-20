@@ -102,4 +102,8 @@ loginctl list-users
 loginctl list-sessions
 loginctl show-user alan
 
+---------------------------------------------------------------------------------------------------
+Adding an existing user to an existing group
+
+  sudo adduser <user> <group>
 

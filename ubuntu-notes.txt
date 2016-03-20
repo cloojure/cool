@@ -43,10 +43,10 @@ Install basic software using yum:
     vim-gui-common \
     gcc python ruby \
     maven octave libreoffice \
-    tree htop iotop collectl \
+    tree htop iotop collectl gnupg \
     zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
-    okular lzop parallel docker.io \
+    okular lzop jq parallel docker.io \
     vpnc kvpnc network-manager-vpnc racoon \
     curl ctags gconf-editor unity-tweak-tool dconf-tools \
 
@@ -56,6 +56,8 @@ System Settings -> Displays -> Sticky Edges = Off
 System Settings -> Time & Date -> 
   Enable: Show a clock..., Weekday, Date and Month, Year, 12-hour time, Seconds
 dconf-editor -> org -> gnome -> gnome session -> select "auto-save-session"
+System Settings -> Input -> Microphone = HD Pro Webcam C920
+System Settings -> Output -> Line Out (regular stero speakers)
 
   jq (json formatter tool)  ; #todo where from???
 
@@ -158,7 +160,12 @@ Chrome:
     hadoop
     spark
     IntelliJ IDEA
-    cursive
+    Cursive
+
+- IntelliJ Idea install
+  Ubuntu -> System Settings -> Keyboard -> Shortcuts: disable all 4 "Switch to workspace left/right/above/below"
+    conflicts with Idea "return to previous location" ctrl-alt-left
+  Ubuntu -> System Settings -> Keyboard -> Shortcuts -> Windows: disable "Move Window", "Resize window"
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
@@ -219,6 +226,33 @@ Favorites - Added to tab under Fedora symbol
 
 Software to install
   cannon pixma mx922        - website + see notes file
+
+----------------------------------------------------------------------------
+Turning Wi-Fi network devices on/off:  http://askubuntu.com/questions/168032/how-to-disable-built-in-wifi-and-use-only-usb-wifi-card
+  I think the most easy way to do this is with ifconfig. Run
+      ifconfig
+    then look at which adapter you want to turn off, in my case wlan1 is my internal wifi and wlan2 is
+    my usb wifi. Then run
+      sudo ifconfig wlan1 down
+    and it will turn of (type ifconfig to check, note that in the network manager the adapter still
+    shows, but it is turned of). To turn it on again:
+      sudo ifconfig wlan1 up
+    and that's it.
+  (Alan) Go to System Settings -> Network -> Wireless, the find your network name and click the ">"
+    (greater-than symbol) at the far right edge. Then click "Settings" in the lower-right corner, and
+    ensure the "Wi-Fi" tab is selected. The line "Device MAC address" will show both the h/w address
+    and the network name (in parentheses). The network name is the same as that shown by ifconfig.
+    On my computer, the built-in wifi card is "wlp4s0" and the USB wifi device is "wlx803f5d22051b".
+  (Alan) Actually, the above seems to reconnect. Look at the detail page in System Settings -> Network.
+    Instead of Wi-Fi tab, go to General tab and uncheck Automatically connect to this network when it is
+    available, as well as the All users may connect.... This seems to keep the built-in card from
+    connecting to wifi. 
+  The top-rated answer suggests:
+    Add the following line to /etc/network/interfaces:
+      iface wlan0 inet manual
+    NetworkManager doesn't manage interfaces configured in the interfaces file. Replace wlan0 with the interface 
+    you want to disable, if it's not the name of the built-in interface.  Then restart network manager:
+      sudo service network-manager restart
 
 -----------------------------------------------------------------------------
 Tips:

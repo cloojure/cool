@@ -111,6 +111,10 @@ alias up7="cd ../../../../../../.."
 alias up8="cd ../../../../../../../.."
 alias up9="cd ../../../../../../../../.."
 
+alias cuts="cut --char=-99"
+alias cutm="cut --char=-155"
+alias cutl="cut --char=-222"
+
 alias gits="    git status --short"
 alias gitb="    git branch"
 alias gitco="   git checkout"
@@ -129,7 +133,7 @@ alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80
 
 alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
-alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy"
+alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
 alias pk="pkill -9"
 
@@ -159,18 +163,15 @@ alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias rs="reset"
 
-function fn_localip() {
-  result=$( ip route get 8.8.8.8 | awk '{print $NF; exit}' )
-  echo "local IP  =>  ${result}"
+function ipaddr() {
+  result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
+  echo ${result}
 }
-alias localip=fn_localip
-
-function fn_externalip() {
-  result=$( curl --silent http://checkip.amazonaws.com )
-  echo "external IP (checkip.amazonaws.com)  =>  ${result}"
+alias ipexternal="curl --silent http://checkip.amazonaws.com"
+function ipinfo() {
+  echo "local    IP  =>  $(ipaddr)"
+  echo "external IP  =>  $(ipexternal)"
 }
-alias externalip=fn_externalip
-
 
 # joyent
 alias gojoy="ssh ubuntu@165.225.137.241"
@@ -181,12 +182,15 @@ alias dkr="dk run"
 alias dkru="    dkr    ubuntu"
 alias dkrd="    dkr -d"
 alias dkrdu="   dkr -d ubuntu"
+alias dkclear=' dk rm `dk ps --no-trunc -aq` '
 alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-compose"
-
+alias dkip="docker inspect --format='{{.NetworkSettings.Networks.user_default.IPAddress}}' "  # <container-name>
+                 # or --format='{{json .NetworkSettings.Networks.user_default.IPAddress}}'
 
 # CENX stuff
 # export DOCKER_MACHINE_IP=$(ipaddr)
 alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
+alias vpnping='ping -c3 nexus.cenx.localnet'
 alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
 alias parker_alias='curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json"'
 

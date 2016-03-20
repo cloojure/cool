@@ -1,0 +1,2 @@
+#!/usr/bin/env lein-exec
+(println "*clojure-version*  => " *clojure-version*)
