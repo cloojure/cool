@@ -76,4 +76,68 @@ Docker Machine commands
     docker-machine ls                               # list all machines (see col "active")
     docker pull dockerinaction/ch12_painted         # pull image into active machine
 
+----------------------------------------------------------------------------------------
+Dock Swarm commands
+
+docker-machine create --driver virtualbox local
+eval "$(docker-machine env local)"
+
+token=$( docker run --rm swarm create )
+echo $token
+
+docker-machine create \
+  --driver virtualbox \
+  --swarm \
+  --swarm-discovery token://${token} \
+  --swarm-master \
+  machine0-manager
+
+docker-machine create \
+  --driver virtualbox \
+  --swarm \
+  --swarm-discovery token://${token} \
+  machine1
+
+docker-machine create \
+  --driver virtualbox \
+  --swarm \
+  --swarm-discovery token://${token} \
+  machine2
+
+# show current state:
+docker-machine ls
+  #=> NAME               ACTIVE   DRIVER       STATE     URL                         SWARM                       DOCKER    ERRORS
+  #=> local              *        virtualbox   Running   tcp://192.168.99.100:2376                               v1.10.3   
+  #=> machine0-manager   -        virtualbox   Running   tcp://192.168.99.101:2376   machine0-manager (master)   v1.10.3   
+  #=> machine1           -        virtualbox   Running   tcp://192.168.99.102:2376   machine0-manager            v1.10.3   
+  #=> machine2           -        virtualbox   Running   tcp://192.168.99.103:2376   machine0-manager            v1.10.3   
+
+eval "$(docker-machine env --swarm machine0-manager)"       # config to use the swarm cluster
+docker info     # reports on whole swarm, not just one docker daemon
+
+# run a command on the swarm
+docker run -t -d --name hello-swarm \
+  dockerinaction/ch12_painted \
+  Hello Swarm
+docker logs hello-swarm         # see result
+
+docker ps -a -f name=hello-swarm    # look at process status (ps); filter for "hello-swarm" container
+
+docker pull dockerinaction/ch12_painted     # ensure each machine pulls the image
+
+# cleanup the contains
+docker-compose -f flock.yml kill
+docker-compose -f flock.yml rm –vf
+
+# labelled machine creation
+docker-machine create -d virtualbox \
+  --swarm --swarm-discovery token://${token}  --engine-label size=small  little-machine
+docker-machine create -d virtualbox \
+  --swarm --swarm-discovery token://${token}  --engine-label size=xxl    big-machine
+
+# run a constrained container
+docker run -d  -e constraint:size==xxl  -m 4G --cpu-shares 512 postgres
+
+# cleanup the machines
+docker-machine rm -f local machine0-manager machine1 machine2 
 

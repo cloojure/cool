@@ -191,7 +191,7 @@ alias dkip="docker inspect --format='{{.NetworkSettings.Networks.user_default.IP
                  # or --format='{{json .NetworkSettings.Networks.user_default.IPAddress}}'
 
 # CENX stuff
-# export DOCKER_MACHINE_IP=$(ipaddr)
+export DOCKER_MACHINE_IP=$(ipaddr)
 alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
 alias vpnping='ping -c3 nexus.cenx.localnet'
 alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
