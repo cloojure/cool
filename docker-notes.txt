@@ -141,3 +141,7 @@ docker run -d  -e constraint:size==xxl  -m 4G --cpu-shares 512 postgres
 # cleanup the machines
 docker-machine rm -f local machine0-manager machine1 machine2 
 
+# Disable docker-machine, so local docker daemon can be used again
+docker-machine-disable      # alias
+  alias docker-machine-disable=' DOCKER_MACHINE_IP="" ; DOCKER_TLS_VERIFY="" ; DOCKER_HOST="" ; DOCKER_CERT_PATH="" ; DOCKER_MACHINE_NAME="" '
+

@@ -189,6 +189,7 @@ alias dkclear='     dk rm -v $(dklist) '
 alias dk-kill-all=' dk kill $(dk ps -q) '
 alias dkip="docker inspect --format='{{.NetworkSettings.Networks.user_default.IPAddress}}' "  # <container-name>
                  # or --format='{{json .NetworkSettings.Networks.user_default.IPAddress}}'
+alias docker-machine-disable=' DOCKER_MACHINE_IP="" ; DOCKER_TLS_VERIFY="" ; DOCKER_HOST="" ; DOCKER_CERT_PATH="" ; DOCKER_MACHINE_NAME="" '
 
 # CENX stuff
 export DOCKER_MACHINE_IP=$(ipaddr)
