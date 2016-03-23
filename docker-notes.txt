@@ -42,3 +42,38 @@ Examples:
 
   docker network ls
   docker network inspect bridge
+
+----------------------------------------------------------------------------------------
+Docker Machine Install (Ubuntu 15.10) from:  docs.docker.com/machine/install-machine/
+  cd
+  sudo su       # become root
+    curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine 
+    chmod +x /usr/local/bin/docker-machine
+    exit        # stop being root
+
+----------------------------------------------------------------------------------------
+Docker Machine commands
+  docker-machine create --driver virtualbox host1
+  docker-machine ls
+  docker-machine inspect host1
+  docker-machine inspect --format "{{.Driver.IPAddress}}" host1
+  docker-machine ip host1
+  docker-machine upgrade host3
+
+  docker-machine ssh host1
+  docker-machine ssh host1 "echo spot > dog.file"
+  docker-machine scp host1:dog.file host2:dog.file
+  docker-machine ssh host2 "cat dog.file"
+
+  docker-machine stop host2
+  docker-machine kill host3
+  docker-machine start host2
+  docker-machine rm host1 host2 host3
+
+  docker-machine env machine1
+  eval $(docker-machine env machine1)   # set machine1 as the active machine
+    docker-machine active                           # show active machine
+    docker-machine ls                               # list all machines (see col "active")
+    docker pull dockerinaction/ch12_painted         # pull image into active machine
+
+

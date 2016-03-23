@@ -156,12 +156,13 @@ alias litst="linit ; ltst"
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
-alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wifi off/on to re-init after sleep
 mcd() { mkdir -p "$1"; cd "$1";}
 alias histg="history | grep"
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias rs="reset"
+alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wifi off/on to re-init after sleep
+        # maybe try this too:  sudo service network-manager restart
 
 function ipaddr() {
   result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
@@ -177,13 +178,15 @@ function ipinfo() {
 alias gojoy="ssh ubuntu@165.225.137.241"
 
 # Docker stuff
-alias dk="docker"                       # alias dk="sudo --preserve-env docker"
-alias dkr="dk run"
-alias dkru="    dkr    ubuntu"
-alias dkrd="    dkr -d"
-alias dkrdu="   dkr -d ubuntu"
-alias dkclear=' dk rm `dk ps --no-trunc -aq` '
-alias dkc="docker-compose"              # alias dkc="sudo --preserve-env docker-compose"
+alias dk="  docker"
+alias dkc=" docker-compose"
+alias dkm=" docker-machine"
+alias dkrm="        dk  rm -v"          # by default always remove volumes
+alias dkcrm="       dkc rm -vf"         # by default always remove volumes
+alias dkmrm="       dkm rm -f"          # by default always remove volumes
+alias dklist='      dk ps -aq'
+alias dkclear='     dk rm -v $(dklist) '
+alias dk-kill-all=' dk kill $(dk ps -q) '
 alias dkip="docker inspect --format='{{.NetworkSettings.Networks.user_default.IPAddress}}' "  # <container-name>
                  # or --format='{{json .NetworkSettings.Networks.user_default.IPAddress}}'
 

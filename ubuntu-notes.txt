@@ -41,14 +41,14 @@ Install basic software using yum:
     lsb \
     vim git zsh tcsh fish tmux curl  \
     vim-gui-common \
-    gcc python ruby \
-    maven octave libreoffice \
+    gcc python ruby golang \
+    maven octave libreoffice gimp \
     tree htop iotop collectl gnupg \
     zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
     okular lzop jq parallel docker.io \
     vpnc kvpnc network-manager-vpnc racoon \
-    curl ctags gconf-editor unity-tweak-tool dconf-tools \
+    curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager \
 
 
 unity-tweak-tool -> Window Manager -> Additional -> Focus Mode: "Sloppy"
@@ -58,6 +58,14 @@ System Settings -> Time & Date ->
 dconf-editor -> org -> gnome -> gnome session -> select "auto-save-session"
 System Settings -> Input -> Microphone = HD Pro Webcam C920
 System Settings -> Output -> Line Out (regular stero speakers)
+
+See:  http://askubuntu.com/questions/462629/how-to-disable-sticky-edges-in-ubuntu-14-04-ubuntu-13-10-and-earlier-had-a-opti
+  Did you install Unity with the CompizConfig Settings Manager? You can download it with sudo apt-get
+    install compizconfig-settings-manager. Then launch with ccsm. Click the desktop section on the left
+    then Unity plugin, use the filter to find "Edge Stop Velocity" and set it to 0.
+  For those that googled this answer looking for how to disable Window sticky edges. Type ccsm (to
+    install sudo apt-get install compizconfig-settings-manager) and filter by edge. Go to Snapping
+    Windows > Behavior > Snap Type and uncheck Edge resistance and Edge attraction.
 
   jq (json formatter tool)  ; #todo where from???
 
@@ -258,6 +266,22 @@ Turning Wi-Fi network devices on/off:  http://askubuntu.com/questions/168032/how
 Tips:
   Ctrl+Alt+T => new terminal window (Unity)
 
+--------------------------------------------------------------------------------
+octave notes (old 2014):
+  ==> Caveats
+
+  To use the gnuplot plotting engine, you must set the environment
+  variable GNUTERM. Valid choices include:
+      GNUTERM=x11   # X windows must be installed
+      GNUTERM=qt    # gnuplot must have been compiled with Qt support
+      GNUTERM=aqua  # if you are using Aquaterm
+  You may also set this variable from within Octave with the command
+      setenv('GNUTERM','qt') % or 'x11', or 'aqua'
+
+  The Octave GUI is experimental and not enabled by default. To use it,
+  use the command-line argument "--force-gui"; e.g.,
+      octave --force-gui
+
 ****************************************************************************************
 ****************************************************************************************
 ****************************************************************************************
@@ -292,4 +316,23 @@ Old Stuff Below....
   sudo alien -i oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
   sudo alien -i oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
     See:  https://help.ubuntu.com/community/Oracle%20Instant%20Client
+
+--------------------------------------------------------------------------------
+NVidia Driver Upgrade (old 2014; Fedora?)
+  Regardless of card brand (e.g. EVGA), go to the NVidia Linux Driver site (google it)
+  Download the newest (short-lived-branch) driver. It is a (Bourne) shell script.
+  Send the machine into single-user mode (like old runlevel=3):  "sudo init 3".  Login again.
+  Go to the download dir, and execute "sudo /bin/bash NVIDIA-Linux-x86_64-XXX.YY.run" 
+    (need to be root to install)
+  Use arrow keys to highlight "Accept" and then hit <ret>
+  On my new Fedora 21 installation, it says I need the "kernel-devel" (or "kernel-source")
+    RPM installed.  So, switch back to multi-user mode ("sudo init 5") and use regular
+    software update to install "kernel-devel" RPM.
+  OK, "kernel-devel" RPM is installed. Switch back to single-user mode ("sudo init 3"),
+    and repeat "sudo /bin/bash NVIDIA-Linux-x86_64-XXX.YY.run".  This time it works. I
+    answer "yes" to "Install 32-bit libs?" question (probably unnecessary).
+  Select "yes" to nvidia-xconfig question.
+  "Driver installation completed" message is displayed.  Click "OK".
+  Reboot machine "sudo reboot"
+  Both displays are now working!
 

@@ -60,6 +60,41 @@ General commands
   ldd libXXX.so         - display dependencies
 
 ---------------------------------------------------------------------------------------------------
+Disk mounting stuff
+
+sudo fdisk -l       # list disk devices & properties
+lsblk
+lsblk --scsi
+lsblk --output-all
+
+Formatting:  Use Ubuntu utility "Disks", select "ext4" option for Linux use
+  can also used gparted utility to format  
+sudo mkdir /media/external            # Create the mount point ("external" name is arbitrary)
+sudo mount /dev/sdc /media/external   # it can guess the format, don't need (-t ext4)
+df
+  Filesystem     1G-blocks  Used Available Use% Mounted on
+  udev                 16G    0G       16G   0% /dev
+  tmpfs                 4G    1G        4G   1% /run
+  /dev/sda1           443G  178G      243G  43% /
+  /dev/sdc            220G    1G      209G   1% /media/external
+It can be used now
+Time it:
+  ~ > time sudo dd if=/dev/zero of=/media/external/dummy1.dat bs=1024 count=1024        # 1 MB
+  1048576 bytes (1.0 MB) copied, 0.00137457 s, 763 MB/s
+
+  ~ > time sudo dd if=/dev/zero of=/media/external/dummy1.dat bs=1024 count=10240       # 10 MB
+  10485760 bytes (10 MB) copied, 0.0141025 s, 744 MB/s
+
+  ~ > time sudo dd if=/dev/zero of=/media/external/dummy1.dat bs=1024 count=102400      # 100 MB
+  104857600 bytes (105 MB) copied, 2.40164 s, 43.7 MB/s
+
+  ~ > time sudo dd if=/dev/zero of=/media/external/dummy1.dat bs=1024 count=1024000     # 1000 MB
+  1048576000 bytes (1.0 GB) copied, 23.5992 s, 44.4 MB/s
+
+Unmount when done:
+  sudo umount /media/external 
+
+---------------------------------------------------------------------------------------------------
 lsblk                   - list block devices (e.g. find usb drive device)
 
 format a usb drive
