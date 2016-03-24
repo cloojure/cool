@@ -69,10 +69,10 @@ pushd ${toolsDir}
 popd
 
 # Create links to tools & utils in ~/.ssh
-mkdir -p ~/.ssh
-if ${forceFlg} ; then
-  rm -f ~/.ssh/config
-fi
-ln -sv ${coolDir}/config.ssh ~/.ssh/config
-chmod --recursive go-rwx ~/.ssh 
+### mkdir -p ~/.ssh
+### if ${forceFlg} ; then
+###   rm -f ~/.ssh/config
+### fi
+### ln -sv ${coolDir}/config.ssh ~/.ssh/config
+### chmod --recursive go-rwx ~/.ssh 
 
