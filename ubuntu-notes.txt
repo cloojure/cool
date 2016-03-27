@@ -43,6 +43,7 @@ Install basic software using yum:
     vim-gui-common \
     gcc python ruby golang \
     maven octave libreoffice gimp \
+    cryptkeeper \
     tree htop iotop collectl gnupg \
     zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \

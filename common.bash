@@ -65,6 +65,7 @@ fi
 # We need to add the '2>&/dev/null' part to squelch error messages on Kubuntu 14.04.
 # Remove if you need to see any error messages.
 alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
+alias gvimw="\gvim  -geom '300x80+2200+0' "
 if [[ $(hostname) == amy ]]; then
   alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 fi

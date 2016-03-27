@@ -1,0 +1,6 @@
+
+Spelling Dictionary (2 ways)
+  chrome://settings/editDictionary
+  Settings -> Adv. Settings -> Language & input settings -> Custom spelling dictionary
+  
+
