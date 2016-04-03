@@ -31,7 +31,10 @@ The following doesn't seem to work (blank screen):
 Google Chrome browser:
 Do a Google search for "download google chrome", download the *.deb file and let Ubuntu
   auto-install it
-Search for & install JsonView extension
+Search for & install the following extensions:
+  AsciiDoctor.js
+  MarkDown Preview Plus
+  JsonView
 
 Update all software (~30 min)
   Software Management -> Updates -> Check for Updates:  Install all found)
@@ -42,6 +45,7 @@ Install basic software using yum:
     vim git zsh tcsh fish tmux curl  \
     vim-gui-common \
     gcc python ruby golang \
+    build-essential  libssl-dev \
     maven octave libreoffice gimp \
     cryptkeeper \
     tree htop iotop collectl gnupg \

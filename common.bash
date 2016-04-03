@@ -216,6 +216,10 @@ function customer() {
     docker exec -i -t ldap ldapadd -x -D "cn=Manager,dc=cenx,dc=com" -w 2112 -f /etc/openldap/sample.ldif
 }
 
+# Node & NVM stuff
+export NVM_DIR="$HOME/.nvm"
+source ~/cool/tools/nvm.sh      # This loads nvm
+
 #---------------------------------------------------------------------------------------------------
 # temp stuff
 alias gef="grep -E '(Error|Fail)' "

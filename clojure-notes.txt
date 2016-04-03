@@ -2,18 +2,14 @@
 power is nice, but what I need most is confidence
 
 "Code is data": Most of the time, you don't care.
-  In the computer memory, both "code" (e.g. the Math.sin()
-  function) and "data" (e.g. the number 3.14) are stored as
-  bits.  The bits which we choose to execute are called "code";
-  the bits which are not executed are called "data".
+  In the computer memory, both "code" (e.g. the Math.sin() function) and "data" (e.g. the number
+  3.14) are stored as bits.  The bits which we choose to execute are called "code"; the bits which
+  are not executed are called "data".
 
-  Nothing stops us from executing some code which
-  manipulates data bits into another form, and then
-  executing the resulting bits.  In fact, this is exactly
-  what a compiler does:  it takes the source code bits (a
-  sequence of text characters), produces some other bits
-  (the "compiled code"), and we then execute those "compiled
-  code" bits.
+  Nothing stops us from executing some code which manipulates data bits into another form, and then
+  executing the resulting bits.  In fact, this is exactly what a compiler does:  it takes the
+  source code bits (a sequence of text characters), produces some other bits (the "compiled code"),
+  and we then execute those "compiled code" bits.
 
 Single-arg versions of =, or, and, etc are problematical.  Writing (= true) is nearly always an
 error, etc, but is currently silently ignored by Clojure.
@@ -25,3 +21,222 @@ Note that 'lein test' evaluates all namespaces, not just test namespaces.
 Note that "running" a file causes all forms in a file/namespace to be evaluated, even "bare" forms
 like: (println "hello").  It is much like executing a script to define everything, then calling
 -main.
+
+-----------------------------------------------------------------------------
+Add dissoc-in cleanup to cooljure
+
+  Yes, clojure does try to hide what is really happening.  It succeeds in some instances:
+
+    user=> (def m1 {:a {:b 2}})
+    user=> (def m2 (update-in m1 [:a] dissoc :b))
+    ;=> {:a {}}
+    user=> (def m3 (cci/dissoc-in m1 [:a :b]))
+    ;=> {}
+
+    user=> (:x {})
+    ;=> nil
+    user=> (:x nil)
+    ;=> nil
+
+    user=> (count {})
+    ;=> 0
+    user=> (count nil)
+    ;=> 0
+
+  But it fails to hide the difference in other areas:
+
+    user=> (count m2)
+    ;=> 1
+    user=> (count m3)
+    ;=> 0
+
+    user=> (.toString (:a m2))
+    ;=> "{}"
+    user=> (.toString (:a m3))
+
+    NullPointerException   clojure.lang.Reflector.invokeNoArgInstanceMember (Reflector.java:301)
+
+  The unpredictable output of count and the unexpected NPE are the cost of "convenience" in
+  auto-vacuuming empty maps.  Without knowing the context of the call to dissoc-in in every
+  instance, the output is unpredictable and therefore program correctness is unpredictable.  Even
+  if the original author could be certain the original program input would never result in an
+  "invalid" context, new program input or subsequent code changes could invalidate those
+  assumptions, producing errors. Unpredictable behavior of just one function can make the
+  behavior of the entire program unpredictable.
+
+
+  Alan Thompson <cloojure@gmail.com>
+  8/27/14 to clojure-dev 
+
+  The more I think about it, the more I am wishing for an explicit syntax with no ambiguity (after
+  all, this is in the incubator and it isn't impossible to change yet).  The three possibilities I
+  see are:
+
+    user=> (def m1 {:a {:b 2}})
+    user=> (def m2 (cci/dissoc-in m1 [:a :b] ))
+    ;=> {:a {}}
+    user=> (def m3 (cci/dissoc-in m1 [:a :b] :clear ))
+    ;=> {}
+    user=> (def m3 (cci/dissoc-in-clear m1 [:a :b] ))
+    ;=> {}
+    user=> (def m3 (cci/dissoc-empty-vals m2))
+    ;=> {}
+
+  So we could use the tag :clear to specify the auto-vacuum behavior, or create a new function
+  dissoc-in-clear. Alternately, we could create a companion function dissoc-empty-vals to
+  (recursively) remove all keys with "empty" (or nil) values.  While this is a superset of the
+  current behavior, it is both simple and predictable.
+
+  Any thoughts?
+
+-----------------------------------------------------------------------------
+lein:
+  update sample project.clj
+    :update :always :daily :never/none
+    better expl/example on test selectors
+    add checkout example
+    add --main version to: "lein run -m my.namespace # run the -main function of a namespace"
+
+  Add cool-app, cool-compojure, cool-pedestal templates
+    use test/tst/<ns> structure)
+      include "(:use <main-ns>)" line in tst.* files
+    include basic cooljure, clojure.string, schema.core, stuff
+
+  Add template using tst.* convention
+  Improve template for pedestal
+  lein test :only tst.tupelo.nosuchns - should throw error instead of silent zeros
+  lein test :only tst.tupelo.wrong_underscore - should suggest correct ns instead of zeros
+
+-----------------------------------------------------------------------------
+clojure-docs.com:
+  keyword keys 
+    doesn't work for char keys
+  sorted-map: throws if mix keywords/strings
+
+-----------------------------------------------------------------------------
+clojure:
+
+  need a better (more bulletproof) concat fn (maybe a 'cat' fn?).  All of these are
+  non-obvious.  At least need better error messages:
+      user=> (concat [1 2 3] [4 5])
+      (1 2 3 4 5)
+      user=> (concat [1 2 3] 4)
+
+      IllegalArgumentException Don't know how to create ISeq from: java.lang.Long  clojure.lang.RT.seqFrom (RT.java:505)
+      user=> (concat 1 [2 3] )
+
+      IllegalArgumentException Don't know how to create ISeq from: java.lang.Long  clojure.lang.RT.seqFrom (RT.java:505)
+      user=> (into []  1 [2 3] )
+
+      ArityException Wrong number of args (3) passed to: core$into  clojure.lang.AFn.throwArity (AFn.java:437)
+      user=> (flatten  [1 [2 3] ])
+      (1 2 3)
+
+
+  Clojure needs better error messages.  Even minimal type checking would prevent this:
+    user=> (def mm {:a 1 :b 2 :c 3})
+    #'user/mm
+    user=> mm
+    {:a 1, :c 3, :b 2}
+    user=> (select-keys mm [:a :b])
+    {:b 2, :a 1}
+    user=> (select-keys [:a :b] mm)
+    {}
+  Need paren matching on ns macro
+
+    perhaps "(deft [:int x :vec y]" -> (defn ...
+
+  need deep diff for nested maps & vectors that only prints diffs while doing a recursive walk
+
+  lein run -m my.name.space/my-func   # works for ANY function, not just -main
+
+  make map->sorted-map conversion fn (others?)
+    using (into (sorted-map) my-map) is non-intuitive
+    error msgs inadequate
+      fail: (sorted-map my-map)         - java-style
+      fail: (apply sorted-map my-map    - almost: (apply sorted-map {:a 1 :b 2} )
+      fail: (apply sorted-map (seq my-map))
+    check input type
+    allow options map?
+    or, maybe just ->sorted-map that automagically figures out the original type 
+      (like overloaded java constructors)
+    other converters?
+
+  clojure.repl fns are only referred into user ns!!! Why not all?
+
+  ns macro needs better error correction.  Missing paren here:
+      (ns cooljure.core-test
+        (:require [cooljure.core :refer :all ]
+        (:use [clojure.test]
+        ))
+  results in:
+      ~/cool > lein test
+      lein test user
+      Ran 0 tests containing 0 assertions.
+      0 failures, 0 errors.
+      ~/cool >
+  
+  Add (throws? ...) (threw?) as function (& not-throws?)
+
+-----------------------------------------------------------------------------
+Confusing things about clojure:
+  Namespaces (under src/) are like mylib/tools/util.clj
+  A function in util.clj might be (defn add-42 [arg] (+ 42 arg))
+  The location & name of the source file determine the namespace:
+    file:   mylib/tools/util.clj    ; source file
+    ns:     mylib.tools.util        ; includes both dirs and filename root!!!
+
+  this is different than java where we would have:
+    file:   mylib/tools/Util.java   ; source file
+    ns:     mylib.tools             ; ns includes only dirs 
+    class:              Util        ; note capitalized
+
+  So, the ns in clojure is like the fully-qualified classname in Java:
+    mylib.tools.Util        ; java fully-qualified classname 
+    mylib.tools.util        ; clojure namespace
+
+  Note that clojure uses the period '.' to separate each segment in the ns, 
+  *** whether dir part or filename part ***   Clojure only uses the slash '/' to 
+  separate the ns from the function name:
+    mylib.tools.Util.add42        ; java    fully-qualified class/function
+    mylib.tools.util/add42        ; clojure fully-qualified namespace/function
+
+
+-----------------------------------------------------------------------------
+Pronouncable Clojure:
+  (< a b)               - in-order a b - less a b
+  (->  a f g h)         - thread-first a...
+  (->> a f g h)         - thread-last  a...
+  (->MyRec ...)         - into MyRec ... 
+  (long->float ...)     - long-to-float ...
+  (->float ...)         - to-float 
+  (let [ _ (spyx ...)]  - let blank spyx...
+  [?ent :person/name ?name]     - var-ent person/name var-name
+
+  (.-value xxx)         - "dodash-value" xxx | "get-value" | "field-value"     (cljs object member getter)
+
+  "str"                 - "stir"
+  *.clj                 - "cloj"
+  *.cljs                - "clo-jess"
+  *.cljc                - "clo-see"
+
+  --path                - dashes path
+
+-----------------------------------------------------------------------------
+Clojure error msgs:
+
+  need error msg if ns doesn't match file name
+  (load-file "proj.my-ns.clj")  ; should auto-correct hypen to underscore (or warn)
+  (load "proj.my-ns")  ; should work
+
+********************************************************************************
+lein error msgs:
+
+  need error msg "lein test :only <ns>" ns doesn't exist (not 0 tests 0 errors)
+  need warning if file name like my-file-name.clj instead of my_file_name.clj
+
+********************************************************************************
+repl tutorial:  (ref: 8thlight tutorial)
+  (use clojure.repl)
+  (dir my.ns-name)      ; not quoted! not *ns* (why?)
+    need like matlab "work" command: (dir (ns-nsme *ns*))  ; why not work?
