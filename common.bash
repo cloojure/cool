@@ -1,5 +1,6 @@
 #!/bin/bash
-# echo "common.bash - enter"
+##### WARNING - 'echo' statements in ~/.bashrc or ~/.zshrc will cause 'ssh' remote login to fail!
+# echo "common.bash - enter"   
 
 # baseline path
 path=( . ${HOME}/bin ${HOME}/opt/bin )
@@ -11,21 +12,6 @@ path=( $path /opt/gsutil )  # #todo:  what is this?
 
 if [[ $(hostname) == *touchcommerce.com ]]; then
   echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
-# echo ""
-# echo "Found touchcommerce.com"
-# echo ""
-# sleep 1
-  
-  PATH=".:${HOME}/bin:${HOME}/opt/bin"
-  PATH="$PATH:/opt/bin"
-  PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
-  PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
-  PATH="$PATH:/usr/local/opt:/opt/bin"
-
-  export JAVA_HOME="/opt/java"                  ; PATH="${JAVA_HOME}/bin:$PATH"
-  # PATH="/opt/solr/bin:$PATH"
-
-  # echo "PATH -> ${PATH}"
 else
   # echo ""
   # echo "Not-Found touchcommerce.com"
@@ -43,10 +29,14 @@ else
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
   export CQLSH_PORT=9042
 
+  path=( /opt/phantomjs/bin $path )
+
   path=( /opt/solr/bin $path )
     # ***** do not set SOLR_HOME *****
     # SOLR_HOME controls the location on disk of the conf & data dirs for a core, 
     #   NOT the install location of the Solr binaries & libs
+
+  # echo "PATH -> ${PATH}"
 fi
 
 if [[ $(uname -a) =~ "Linux" ]]; then

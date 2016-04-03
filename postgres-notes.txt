@@ -184,7 +184,6 @@ alan=# SELECT a,
  3 | other
 (3 rows)
 
-
 -----------------------------------------------------------------------------
 Installation on Ubuntu:
   If necessary, configure latest apt-get sources from http://www.postgresql.org/download/linux/ubuntu/
