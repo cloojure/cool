@@ -240,3 +240,7 @@ repl tutorial:  (ref: 8thlight tutorial)
   (use clojure.repl)
   (dir my.ns-name)      ; not quoted! not *ns* (why?)
     need like matlab "work" command: (dir (ns-nsme *ns*))  ; why not work?
+
+----------------------------------------------------------------------------------------
+Quoting:  '[a b c] is same as ['a 'b 'c]
+
