@@ -96,7 +96,7 @@ git commit --all -m'feat-23a-rc1'           # save squashed commits on rc1 branc
 git push --set-upstream origin feat-23a-rc1 # save new branch to origin 
 
 # When finished:
-  git branch -d myFeat                  # deleted now-useless feature branch
+git branch -d myFeat                        # deleted now-useless feature branch
 --------------------------------------------------------------------------------
 
 # Working with remote repos
@@ -148,13 +148,19 @@ Install GIT - most recent version
 Git Core PPA repository is maintain by team on launchpad. Execute following commands one
 by one in a sequence to add ppa in our system and install Latest git version.
 
-$ sudo add-apt-repository ppa:git-core/ppa
-$ sudo apt-get update
-$ sudo apt-get install git  
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git  
 
 Check GIT Version
 
 To check current version installed of Git use following command.
+git --version
 
-$ git --version
-git version 2.1.1
+-----------------------------------------------------------------------------
+git grep -e <regexp> my_other_branch -- '*.js'
+
+git grep <regexp> $(git rev-list --all)
+git rev-list --all | (while read rev; do git grep -e <regexp> $rev; done)   # if repo too big
+
+git log -G <regexp>     # search log for <regexp>

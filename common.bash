@@ -154,6 +154,7 @@ alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias rs="reset"
 alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wifi off/on to re-init after sleep
         # maybe try this too:  sudo service network-manager restart
+alias pingg="ping -c5 google.com"
 
 function ipaddr() {
   result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
