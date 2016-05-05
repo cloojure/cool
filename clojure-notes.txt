@@ -1,4 +1,8 @@
+----------------------------------------------------------------------------------------
+todo:
+  clojure cheatsheet: filter/filterv, map/mapv always paired
 
+----------------------------------------------------------------------------------------
 power is nice, but what I need most is confidence
 
 "Code is data": Most of the time, you don't care.
@@ -243,4 +247,18 @@ repl tutorial:  (ref: 8thlight tutorial)
 
 ----------------------------------------------------------------------------------------
 Quoting:  '[a b c] is same as ['a 'b 'c]
+
+defnk ideas:
+  ; (:require [tupelo.explicit :as tx] )   ; forward to regular function
+  (tx/partition { :group  3
+                  :step   2
+                  :seq    (range 11)
+                  :pad    (range 11 99) } )
+    alt names:  partition
+                partition-
+                partition-x
+                partition*
+                partition+
+                partitionx
+                xpartition
 
