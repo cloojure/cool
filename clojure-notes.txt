@@ -1,4 +1,6 @@
 
+-----------------------------------------------------------------------------
+
 power is nice, but what I need most is confidence
 
 "Code is data": Most of the time, you don't care.
@@ -179,6 +181,20 @@ clojure:
   Add (throws? ...) (threw?) as function (& not-throws?)
 
 -----------------------------------------------------------------------------
+Questions:
+  Is (merge map1 map2) equiv. to (glue m1 m2) ?
+
+-----------------------------------------------------------------------------
+Autoconversion is Evil!
+(seq some-map) should require an explicit conversion
+  (get {:a 1} :b) -> nil ; No!
+
+Maps & Keywords should not be functions.  To confusing. Should require explicit grab/fetch-in
+
+(get [0 1] 5) -> nil ; No!
+(nth [0 1] 5) -> Exception ; Always use n'th for vector indexing, never "get"
+
+-----------------------------------------------------------------------------
 Confusing things about clojure:
   Namespaces (under src/) are like mylib/tools/util.clj
   A function in util.clj might be (defn add-42 [arg] (+ 42 arg))
@@ -243,4 +259,53 @@ repl tutorial:  (ref: 8thlight tutorial)
 
 ----------------------------------------------------------------------------------------
 Quoting:  '[a b c] is same as ['a 'b 'c]
+
+----------------------------------------------------------------------------------------
+Tupelo default naming:
+
+  (ns clj.core
+    (:use tupelo.core)
+    (:require [clojure.core               :as clj]
+              [clojure.string             :as str]
+              [clojure.set                :as cs]
+              [clojure.pprint             :as cpp ]
+              [clojure.core.match         :as ccm ]
+              [clojure.test               :as ct]
+              [cheshire.core              :as cheshire]
+              [schema.core                :as s]
+              [tupelo.types               :as tt]
+              [tupelo.schema              :as ts]
+              [criterium.core             :as crit] )
+    (:require [clojure.core.async :as a
+         :refer [>! >!! <! <!! put! take! go go-loop chan buffer close! thread
+                 alts! alts!! timeout ]] )
+  )
+
+  ; Prismatic Schema type definitions
+  (s/set-fn-validation! true)   ; #todo add to Schema docs
+
+-----------------------------------------------------------------------------
+General thoughts:
+
+Side Effects in functions (non-pure functions)
+  It is like having invisible inputs & outputs for the function (i.e. the
+  function is affected by things not in the arg list, and creates change not
+  reflected in the return value).
+
+Datomic EAV format
+  In C or Java records, the memory address is always an invisible but
+  implicit part of each record:
+    int* p1 = new int(5);
+    int* p2 = new int(5);
+    (assert  p1 !=  p2)  although
+    (assert *p1 == *p2)
+  So the TOTAL data is really more like:    
+    { :eid p1 :attr-1 val-1  :attr-2 val-2 }
+    { :eid p2 :attr-1 val-2  :attr-2 val-2 }
+  But, since :eid is constant for all records (by definition, each record has
+  a unique address), we could write it in Datalog-style:
+    [ p1 :attr-1 val-1 ]
+    [ p1 :attr-2 val-2 ]
+    [ p2 :attr-1 val-1 ]
+    [ p2 :attr-2 val-2 ]
 

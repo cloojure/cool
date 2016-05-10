@@ -31,6 +31,11 @@ lein do clean, test foo.test-core, jar  - can chain commands with "do xxx, yyy, 
                                           ("do" and comma separators)
 lein deploy clojars                     - package & deploy project to clojars.org
 
+----------------------------------------------------------------------------------------
+  :jvm-opts [ 
+              ; "-XX:+PrintFlagsFinal" 
+            ]
+
 
 TODO:
   ~/.m2 directory?  local lib repo?
