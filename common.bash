@@ -59,6 +59,7 @@ alias gvimw="\gvim  -geom '300x80+2200+0' "
 if [[ $(hostname) == amy ]]; then
   alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
 fi
+alias idea="idea.sh"
 
 function shellVersion {
   if [[ $ZSH_VERSION != "" ]]; then
