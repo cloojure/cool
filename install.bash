@@ -52,8 +52,8 @@ if ${forceFlg} ; then
         ~/.lein/user.clj
 fi
 sed -e"s%==user.home==%${HOME}%" profiles-tmpl.clj > profiles.clj
-### ln -sv ${coolDir}/profiles.clj      ~/.lein/profiles.clj
-### ln -sv ${coolDir}/user.clj          ~/.lein/user.clj
+ln -sv ${coolDir}/profiles.clj      ~/.lein/profiles.clj
+ln -sv ${coolDir}/user.clj          ~/.lein/user.clj
 
 # Create links to lein profiles.clj
 mkdir -p ~/.boot
