@@ -1,7 +1,7 @@
 ; Default "user" namespace for repl use (re. Stuart Sierra "My Workflow Reloaded")
 
-; (ns user
-;   (:use tupelo.core))
+(ns user
+  (:use tupelo.core))
 
 ;;; #_(do
 ;;; 
