@@ -12,6 +12,5 @@ pom.xml.asc
 /.nrepl-port
 tags
 target
-profiles.clj
 out*.txt
 *.out

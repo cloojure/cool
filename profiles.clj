@@ -13,9 +13,6 @@
 ;     [org.clojure/tools.namespace  "0.2.9"]
 ;     [org.clojure/tools.nrepl      "0.2.7"]
     ]
-;   :source-paths [ "==user.home==/.lein" ]
+;   :source-paths [ "/home/alan/.lein" ]
 ;   :repl-options { :init-ns user }
-;   :deploy-repositories {  "snapshots" :clojars
-;                           "releases"  :clojars }
-;   :jvm-opts ["-Xms1g" "-Xmx4g" ] ;   "-server"
 }}
