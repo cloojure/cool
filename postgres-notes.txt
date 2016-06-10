@@ -27,9 +27,12 @@ shell:
   postgres          -D /var/postgresql    ; start the postgres server (blocking)
     ^-Use this for Clojure Cookbook testing
 
-  createuser <user-name>    ; user-name aka "rolename" in docs
-  dropeuser  <user-name>
-  createdb   <db-name>      ; or "createdb -O <owner-name> <db-name> "
+  ; setup commands
+  sudo --user=postgres  createuser <user>    ; user-name aka "rolename" in docs
+  sudo --user=postgres  createdb   <user>  --owner=<user> 
+  sudo --user=postgres  psql -c "alter user <user> superuser"
+
+  dropuser  <user-name>
   dropedb    <db-name>
 
 psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
@@ -222,10 +225,11 @@ Try to connect:
   psql: FATAL:  role "alan" does not exist  
 
 User "alan" or DB "alan" don't exist.  Become user "postgres", then create user & DB "alan"
-  sudo su postgres      - become the user "postgres"
-    createuser alan     - old way: psql --command="CREATE ROLE alan LOGIN SUPERUSER"
-    createdb   alan
-  exit                  - logout of user "postgres"
+
+  - execute as the user "postgres"
+  sudo --user=postgres  createuser  alan     - old way: psql --command="CREATE ROLE alan LOGIN SUPERUSER"
+  sudo --user=postgres  createdb    alan
+  sudo --user=postgres  createdb    datapig
 
 Now login using psql
   psql
