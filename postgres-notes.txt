@@ -36,6 +36,7 @@ psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
   \l[+]                         - list databases (+ => extra info)
   \du[+]                        - list users/roles (+ => extra info)
   \dn[+]                        - list schemas (+ => extra info)
+  \dg[+]                        - list roles
   \d                            - list tables, views, sequences
   \d  [<name>]                  - describe tables, views, sequences
   \c   <dbname>                 - connect to <dbname>
@@ -48,6 +49,16 @@ psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
   CREATE DATABASE <db-name>;
   CREATE DATABASE <db-name> OWNER <user-name>;    - user-name aka "rolename" in docs
   DROP   DATABASE <db-name>;
+
+  CREATE SCHEMA  <schema-name>;
+  CREATE SCHEMA  <schema-name> OWNER <user-name>;    - user-name aka "rolename" in docs
+  DROP   SCHEMA  <schema-name>;
+
+    set schema to 'xxx' 
+      set search_path to xxx
+      set search_path to xxx, public
+
+  ALTER USER <user> SUPERUSER;     - give all privs
 
   -----------------------------------------------------------------------------
   Notes:
