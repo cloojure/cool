@@ -145,6 +145,7 @@ alias gsutil-cpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
 alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
 alias ltst=" time lein test :bvt :regression"
 alias litst="linit ; ltst"
+alias ltr="lein test-refresh"
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
