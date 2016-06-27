@@ -173,8 +173,13 @@ alias gojoy="ssh ubuntu@165.225.137.241"
 
 # Docker stuff
 alias dk="  docker"
-alias dkc=" docker-compose"
 alias dkm=" docker-machine"
+alias dkn=" docker network"
+alias dksr="docker service"
+  # "docker swarm"
+  # "docker deploy"
+  # "docker stack"
+alias dkc=" docker-compose"
 alias dkrm="        dk  rm -v"          # by default always remove volumes
 alias dkcrm="       dkc rm -vf"         # by default always remove volumes
 alias dkmrm="       dkm rm -f"          # by default always remove volumes
