@@ -145,3 +145,63 @@ docker-machine rm -f local machine0-manager machine1 machine2
 docker-machine-disable      # alias
   alias docker-machine-disable=' DOCKER_MACHINE_IP="" ; DOCKER_TLS_VERIFY="" ; DOCKER_HOST="" ; DOCKER_CERT_PATH="" ; DOCKER_MACHINE_NAME="" '
 
+-----------------------------------------------------------------------------
+docker 1.12 testing  2016-6-26
+
+  Follow these instructions!  http://blog.mantika.io/docker-1.12-swarm/
+
+  Remember:
+    alias dkm=docker-machine
+  verify
+    dk      --version       ;=> Docker version 1.12.0-rc2, build 906eacd
+    dkm     --version       ;=> docker-machine version 0.8.0-rc1, build fffa6c9
+  Created 3 test machines using docker-machine
+    dkm create --driver virtualbox      manager1 / worker1 / worker2
+
+  dkm ls
+  dk swarm init --listen-addr $(dkm ip manager1):2377
+  dk node ls
+  dkm ssh worker1 "docker swarm join $(dkm ip manager1):2377"
+  dkm ssh worker2 "docker swarm join $(dkm ip manager1):2377"
+  dkm ssh manager1 "docker node ls"
+    ID                           NAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+    197f4kk3pwq742oyqre8omuzk *  manager1  Accepted    Ready   Active        Leader
+    818its2forlhhgn2mhir77cux    worker1   Accepted    Ready   Active        
+    8chzzm3y04zbgiagbuiigc9j1    worker2   Accepted    Ready   Active        
+
+  docker service create --replicas 1 --name helloworld alpine ping docker.com
+  docker service ls
+  docker service inspect --pretty helloworld
+  docker service tasks  helloworld
+  docker service scale helloworld=5
+  docker service ls
+  docker service inspect --pretty helloworld
+  docker service rm helloworld
+  
+  docker service create --replicas 3 --name redis --update-delay 10s --update-parallelism 1 redis:3.0.6
+  docker service inspect redis --pretty
+  docker service update --image redis:3.0.7 redis
+  docker service inspect redis --pretty
+  docker service tasks redis
+
+  docker node ls
+  docker service tasks redis
+  docker node update --availability drain worker1
+  docker node inspect --pretty worker1
+  docker node update --availability active worker1
+  docker node inspect --pretty worker1
+
+
+  From https://docs.docker.com/engine/userguide/networking/get-started-overlay/
+       https://docs.docker.com/engine/userguide/networking/dockernetworks/
+
+    ifconfig                # host network display
+    cat /etc/hosts          # host network config
+    docker network create --driver bridge isolated_nw
+    docker network create --driver overlay --subnet=10.0.9.0/24 my-net   # multi-host network
+    docker network ls
+
+    docker network inspect bridge
+    docker network inspect <NAME>
+    docker run --net=<NAME> ...
+

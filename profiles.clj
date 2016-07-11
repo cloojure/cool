@@ -1,6 +1,7 @@
 { :user {   
     :dependencies [ 
       [org.clojure/clojure          "1.9.0-alpha10"]
+      [criterium                    "0.4.4"]
 ;     [org.clojure/tools.namespace  "0.2.9"]
 ;     [org.clojure/tools.nrepl      "0.2.7"]
     ]
