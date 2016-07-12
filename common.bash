@@ -10,24 +10,28 @@ path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
 path=( $path /opt/gsutil )  # #todo:  what is this?
 
-if [[ $(hostname) == *touchcommerce.com ]]; then
+if [[ $(hostname) == *dummy.com ]]; then
   echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
 else
   # echo ""
   # echo "Not-Found touchcommerce.com"
   # echo ""
-  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin         $path )
-  export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin       $path )
-  export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin      $path )
-  export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin         $path )
-  export SPARK_HOME="/opt/spark"                ; path=( ${SPARK_HOME}/bin        $path )
-  export HADOOP_HOME="/opt/hadoop"              ; path=( ${HADOOP_HOME}/bin       $path )
-  export LIQUIBASE_HOME="/opt/liquibase"        ; path=( ${LIQUIBASE_HOME}        $path )
-  export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin    $path )
+  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin           $path )
+  export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin         $path )
+  export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin        $path )
+  export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin           $path )
+  export SPARK_HOME="/opt/spark"                ; path=( ${SPARK_HOME}/bin          $path )
+  export HADOOP_HOME="/opt/hadoop"              ; path=( ${HADOOP_HOME}/bin         $path )
+  export LIQUIBASE_HOME="/opt/liquibase"        ; path=( ${LIQUIBASE_HOME}          $path )
+  export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin      $path )
+  export ODL_KARAF_DIR="/opt/karaf"             ; path=( ${ODL_KARAF_DIR}/bin       $path )
 
   # extra cassandra stuff
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
   export CQLSH_PORT=9042
+
+  # Maven stuff for ODL
+  export MAVEN_OPTS="-Xmx1048m -XX:MaxPermSize=512m"
 
   path=( /opt/phantomjs/bin $path )
 
@@ -227,6 +231,9 @@ function customer() {
 # Node & NVM stuff
 export NVM_DIR="$HOME/.nvm"
 source ~/cool/tools/nvm.sh      # This loads nvm
+
+# ODL is installed using Apache karaf
+alias odl=karaf
 
 #---------------------------------------------------------------------------------------------------
 # temp stuff

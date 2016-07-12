@@ -140,5 +140,12 @@ loginctl show-user alan
 ---------------------------------------------------------------------------------------------------
 Adding an existing user to an existing group
 
-  sudo adduser <user> <group>
+  sudo adduser <user> <group>           ; create <user> as member of <group>
+  sudo usermod -aG <group> <user>       ; append <group> to list of groups for <user>
+  sudo usermod -aG sudo    <user>       ; add <user> to group "sudo" (give sudo privledges)
+
+  sudo vim ~/etc/passwd                 ; simplest way to change new user's shell
+
+  sudo deluser <user>                   ; remove a user
+  sudo deluser <user> --remove-home     ; ... and their home directory
 
