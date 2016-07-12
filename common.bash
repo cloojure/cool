@@ -31,7 +31,8 @@ else
   export CQLSH_PORT=9042
 
   # Maven stuff for ODL
-  export MAVEN_OPTS="-Xmx1048m -XX:MaxPermSize=512m"
+# export MAVEN_OPTS="-Xmx1048m -XX:MaxPermSize=512m"
+  export MAVEN_OPTS="-Xmx1048m"
 
   path=( /opt/phantomjs/bin $path )
 
