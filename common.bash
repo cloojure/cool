@@ -31,7 +31,6 @@ else
   export CQLSH_PORT=9042
 
   # Maven stuff for ODL
-# export MAVEN_OPTS="-Xmx1048m -XX:MaxPermSize=512m"
   export MAVEN_OPTS="-Xmx1048m"
 
   path=( /opt/phantomjs/bin $path )
@@ -162,6 +161,7 @@ alias rs="reset"
 alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wifi off/on to re-init after sleep
         # maybe try this too:  sudo service network-manager restart
 alias pingg="ping -c5 google.com"
+alias ping4="ping -c4"
 
 function ipaddr() {
   result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
@@ -232,9 +232,6 @@ function customer() {
 # Node & NVM stuff
 export NVM_DIR="$HOME/.nvm"
 source ~/cool/tools/nvm.sh      # This loads nvm
-
-# ODL is installed using Apache karaf
-alias odl=karaf
 
 #---------------------------------------------------------------------------------------------------
 # temp stuff

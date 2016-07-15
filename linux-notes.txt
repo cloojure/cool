@@ -149,3 +149,21 @@ Adding an existing user to an existing group
   sudo deluser <user>                   ; remove a user
   sudo deluser <user> --remove-home     ; ... and their home directory
 
+-----------------------------------------------------------------------------
+Networking commands
+  ping -c5 <host>           ; ping count 5
+  ifconfig                  ; show interface (network) config
+  tcpdump -n                ; show network packet activity
+  arp                       ; view/manage ARP cache
+  traceroute                ; vew entire path a packet takes between devices
+  dig (& nslookup)          ; troubleshoot DNS name resolution issues
+  netstat                   ; display tcp/ip stats & connections
+    -t --tcp
+    -r --route
+    -i --interfaces
+    -g --groups
+    -s --statistics
+  nslookup                  ; query internet name servers
+  route                     ; display & manage the routing table
+  nbtstat (lesser used)     ; display NetBIOS stats & info
+

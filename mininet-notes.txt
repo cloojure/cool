@@ -1,0 +1,19 @@
+
+mn            ; minimal network;  switch: s1   hosts: h0 h1
+  (use "ssh -X" if need to ssh into a VM to enable x-windows)
+
+  mininet> h1 ping h2         ; tell h1 to ping h2
+  mininet> xterm h1           ; create an xterm in h1
+  mininet> pingall            ; all hosts ping each other once
+  mininet> iperf              ; test bandwidth between hosts
+  mininet> iperfudp           ;   UDP version
+  mininet> exit
+
+sudo mn -c                ; cleanup any zombies
+
+sudo mn --link tc,bw=10,delay=10ms
+
+sudo mn --topo=single,4         ; single switch, 4 hosts
+sudo mn --topo=linear,4         ; 4 switches, each with 1 host
+sudo mn --topo=tree,2,2         ; tree, 2-level, 2-fanout
+

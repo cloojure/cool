@@ -48,6 +48,7 @@ Install basic software using yum:
     build-essential  libssl-dev \
     maven octave libreoffice gimp \
     cryptkeeper \
+    mininet wireshark \
     tree htop iotop collectl gnupg \
     zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
