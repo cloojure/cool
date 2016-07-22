@@ -1,0 +1,21 @@
+
+feature:list    | grep netconf
+log:display     | grep initialized
+log:set     DEBUG org.sdnhub
+log:tail
+shutdown -f
+system:shutdown or <ctrl-d> or logout       ; to shutdown
+
+REST interface:
+  localhost:8181/restconf/operational/network-topology:network-topology/topology/topology-netconf
+
+docker
+  docker attach router1
+  netopeer-cli
+    connect localhost
+      <passwd>
+    status
+    get-config
+      running 
+
+  

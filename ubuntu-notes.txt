@@ -29,12 +29,12 @@ The following doesn't seem to work (blank screen):
 --------------------------------------------------------------------------------
 
 Google Chrome browser:
-Do a Google search for "download google chrome", download the *.deb file and let Ubuntu
-  auto-install it
-Search for & install the following extensions:
-  AsciiDoctor.js
-  MarkDown Preview Plus
-  JsonView
+  Do a Google search for "download google chrome", download the *.deb file and let Ubuntu auto-install it
+  Search for & install the following extensions:
+    AsciiDoctor.js
+    MarkDown Preview Plus
+    JsonView
+    Postman
 
 Update all software (~30 min)
   Software Management -> Updates -> Check for Updates:  Install all found)
@@ -139,6 +139,8 @@ Docker - follow website instructions
     be sure after docker is installed to do the part to add your user to the "docker" group 
       avoids need to "sudo" all docker commands like: sudo docker run ...
   docker-compose:  https://docs.docker.com/compose/install/
+
+vagrant from vagrantup.com
 
 CENX vpnc file: ~/cool/etc--vpnc--cenx.conf  -> /etc/vpnc
 
@@ -323,7 +325,7 @@ Old Stuff Below....
   sudo alien -i oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
     See:  https://help.ubuntu.com/community/Oracle%20Instant%20Client
 
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 NVidia Driver Upgrade (old 2014; Fedora?)
   Regardless of card brand (e.g. EVGA), go to the NVidia Linux Driver site (google it)
   Download the newest (short-lived-branch) driver. It is a (Bourne) shell script.
@@ -342,3 +344,6 @@ NVidia Driver Upgrade (old 2014; Fedora?)
   Reboot machine "sudo reboot"
   Both displays are now working!
 
+-----------------------------------------------------------------------------
+2016-7-22 Trying to upgrade to Ubuntu 16.04
+  Have NVIDIA GTX 960 card
