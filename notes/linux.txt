@@ -110,6 +110,8 @@ format a usb drive
       sudo mkfs -t vfat /dev/sdb1
     sudo eject /dev/sdb1
 
+lsusb --verbose         # list all usb device info
+
 ifconfig                # interface config: shows network info
 netstat                 # network info
 getent hosts            # print hosts info

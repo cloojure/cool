@@ -1,0 +1,14 @@
+
+BGP     border gateway protocol
+MD-SAL  model driven service abstraction layer
+NCS     network control system (tail-f)
+NED     network element drivers (tail-f)
+NETCONF network configuration protocol
+ODL     OpenDaylight
+OF      OpenFlow
+OVS     OpenVSwitch
+SAL     service abstraction layer
+SDN     software defined networking
+SNMP    
+YANG    device modeling language for netconf (Yet Another Next Generation)
+tail-f  company
