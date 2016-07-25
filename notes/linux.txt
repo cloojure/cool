@@ -1,5 +1,6 @@
-Ubuntu:
-  online:   apt-get install -y <name>
+-----------------------------------------------------------------------------
+Ubuntu package tools
+  online:   apt install -y <name>
 
   *.deb:    dpkg -i xxxxx.deb               # install
             dpkg -r fdb-document-layer      # remove
@@ -8,28 +9,11 @@ Ubuntu:
   apt list --all-versions   "*user*"          - all packages matching pattern *user*
   apt search                  user            - packages with any text matching 'user'
 
-CentOS/Fedora:
-  online:   yum     install -y <name>
-
-  *.rpm:    rpm -Uvh xxxxx.rpm              # U=update v=verbose h=hashes
-            rpm --erase  fdb-document-layer
-            rpm --query  fdb-document-layer
-
----------------------------------------------------------------------------------------------------
-KDE shortcuts:
-  crtl-alt-L                      # lock screen
-  crtl-shift-alt-PgDwn            # shutdown
-  crtl-shift-alt-PgUp             # reboot
-
+-----------------------------------------------------------------------------
 konqueror:
   URL=sysinfo:/    # linux system info
 
----------------------------------------------------------------------------------------------------
-Ubuntu (Upstart) - https://help.ubuntu.com/community/UbuntuBootupHowto
-  service   fdb-document-layer  start/stop/restart      # control a service (old way)
-  service   fdb-sql-layer       start/stop/restart      # control a service (old way)
-  service   --status-all
-
+-----------------------------------------------------------------------------
 Fedora (Systemd):
   Tutorial:     http://www.linux.com/learn/tutorials/788613-understanding-and-using-systemd
   Cheatsheet:   https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
@@ -45,7 +29,7 @@ Fedora (Systemd):
 
   Ex:  systemctl status postgresql-9.3
 
----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 Resource monitoring
   htop      (a better 'top')
   iotop     (an I/O 'top')
@@ -54,16 +38,17 @@ Resource monitoring
   collectl  -sd (or -sD)  ; disk
   collectl  --vmstat
 
----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 General commands
   /etc/ld.so.conf       - a better alternative to LD_LIBRARY_PATH
   ldd libXXX.so         - display dependencies
 
----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 Disk mounting stuff
 
-sudo fdisk -l       # list disk devices & properties
-lsblk
+sudo fdisk -l               # list disk devices & properties
+
+lsblk                       ; list block devices
 lsblk --scsi
 lsblk --output-all
 
@@ -95,7 +80,8 @@ Unmount when done:
   sudo umount /media/external 
 
 ---------------------------------------------------------------------------------------------------
-lsblk                   - list block devices (e.g. find usb drive device)
+lsblk                   ; list block devices (e.g. find usb drive device)
+lsusb --verbose         ; list all usb device info
 
 format a usb drive
   command line
@@ -110,13 +96,8 @@ format a usb drive
       sudo mkfs -t vfat /dev/sdb1
     sudo eject /dev/sdb1
 
-lsusb --verbose         # list all usb device info
 
-ifconfig                # interface config: shows network info
-netstat                 # network info
-getent hosts            # print hosts info
-cat /etc/resolv.conf    # show DNS servers
-
+--------------------------------------------------------------------------------
 sudo systemctl list-unit-files --type=target
 sudo systemctl list-units --type=target
 
@@ -132,6 +113,7 @@ sudo systemctl rescue       # single-user "runlevel"
 sudo systemctl halt
 sudo systemctl poweroff
 sudo systemctl reboot
+
 hostnamectl
 localectl
 timedatectl
@@ -139,9 +121,8 @@ loginctl list-users
 loginctl list-sessions
 loginctl show-user alan
 
----------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------
 Adding an existing user to an existing group
-
   sudo adduser <user> <group>           ; create <user> as member of <group>
   sudo usermod -aG <group> <user>       ; append <group> to list of groups for <user>
   sudo usermod -aG sudo    <user>       ; add <user> to group "sudo" (give sudo privledges)
@@ -154,7 +135,9 @@ Adding an existing user to an existing group
 -----------------------------------------------------------------------------
 Networking commands
   ping -c5 <host>           ; ping count 5
-  ifconfig                  ; show interface (network) config
+  ifconfig                  ; interface config: shows network info
+  netstat                   ; network info
+  getent hosts              ; print hosts info
   tcpdump -n                ; show network packet activity
   arp                       ; view/manage ARP cache
   traceroute                ; vew entire path a packet takes between devices
@@ -168,4 +151,22 @@ Networking commands
   nslookup                  ; query internet name servers
   route                     ; display & manage the routing table
   nbtstat (lesser used)     ; display NetBIOS stats & info
+  cat /etc/resolv.conf      ; show DNS servers
 
+---------------------------------------------------------------------------
+old Ubuntu (Upstart) - https://help.ubuntu.com/community/UbuntuBootupHowto
+  service   fdb-document-layer  start/stop/restart      # control a service (old way)
+  service   fdb-sql-layer       start/stop/restart      # control a service (old way)
+  service   --status-all
+----------------------------------------------------------------------------
+KDE shortcuts:
+  crtl-alt-L                      # lock screen
+  crtl-shift-alt-PgDwn            # shutdown
+  crtl-shift-alt-PgUp             # reboot
+-----------------------------------------------------------------------------
+CentOS/Fedora:
+  online:   yum install -y <name>
+
+  *.rpm:    rpm -Uvh xxxxx.rpm              # U=update v=verbose h=hashes
+            rpm --erase  fdb-document-layer
+            rpm --query  fdb-document-layer
