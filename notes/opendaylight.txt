@@ -43,6 +43,8 @@ bin/karaf       ; wait 30-60 sec until CPU meter gets quiet again from being peg
     Alan you can see here, that the default bootstrap doesn’t bring up the RESTconf server which is
     why nothing was working. You have to enable the features including:
     > feature:install sdnhub-tutorial-netconf-exercise
+  try:
+    feature:install odl-restconf-all
 
 sudo mn --topo single,3 --mac --switch ovsk,protocols=OpenFlow13 --controller remote
   h1 ping h2
@@ -75,7 +77,7 @@ In 1st window
 Open a browser (firefox) in the VM. 
   for topology: localhost:8181/restconf/operational/network-topology:network-topology/topology/topology-netconf/
 
-Execute in a shell in 1st window
+Execute in a shell in 1st window (notice user="admin"   pass="admin"
   curl -u admin:admin -v -X PUT -H "Content-Type: application/xml" -d '
         <interfaces xmlns="urn:sdnhub:odl:tutorial:router">
           <id>eth0</id>

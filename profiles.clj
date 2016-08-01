@@ -12,8 +12,7 @@
 ;     [org.clojure/tools.namespace  "0.2.9"]
 ;     [org.clojure/tools.nrepl      "0.2.7"]
     ]
-    :test-refresh { :notify-command ["terminal-notifier" "-title" "Tests" "-message"]
-                    :quiet true
+    :test-refresh { :quiet true
                     :changes-only true }
 ;   :source-paths [ "/home/odl/.lein" ]
 ;   :repl-options { :init-ns user }

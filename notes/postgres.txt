@@ -127,8 +127,9 @@ Tables:
   INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
       VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
 
-  SELECT * FROM weather;                - star "*" means all columns
-  SELECT city, temp_lo, temp_hi, prcp, date FROM weather;       - list col's wanted
+  SELECT * FROM weather;                                        ; star "*" means all columns
+  SELECT city, temp_lo, temp_hi, prcp, date FROM weather;       ; list col's wanted
+  table weather limit 5;                                        ; same as "select * from weather limit 5"
 
   SELECT * FROM weather
     WHERE city = 'San Francisco' AND prcp > 0.0;

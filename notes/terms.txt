@@ -1,6 +1,8 @@
 
+BSC     Brocade SDN Controller
 BGP     border gateway protocol
 MD-SAL  model driven service abstraction layer
+LLDP    Link Layer Discovery Protocol
 NCS     network control system (tail-f)
 NED     network element drivers (tail-f)
 NETCONF network configuration protocol
@@ -12,3 +14,4 @@ SDN     software defined networking
 SNMP    
 YANG    device modeling language for netconf (Yet Another Next Generation)
 tail-f  company
+
