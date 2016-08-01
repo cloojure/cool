@@ -8,14 +8,12 @@
       [com.jakemccrary/lein-test-refresh "0.15.0"]
     ] 
     :dependencies [ 
-      [org.clojure/clojure          "1.8.0"]
+      [org.clojure/clojure          "1.9.0-alpha10"]
+;     [criterium                    "0.4.3"] 
 ;     [org.clojure/tools.namespace  "0.2.9"]
 ;     [org.clojure/tools.nrepl      "0.2.7"]
     ]
-    :test-refresh { :notify-command ["terminal-notifier" "-title" "Tests" "-message"]
-                    :quiet true
-                    :changes-only true }
-;   :source-paths [ "/home/odl/.lein" ]
+;   :source-paths [ "/home/alan/.lein" ]
 ;   :repl-options { :init-ns user }
 ;   :deploy-repositories {  "snapshots" :clojars
 ;                           "releases"  :clojars }
