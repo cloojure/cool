@@ -1,5 +1,6 @@
 
 BSC     Brocade SDN Controller
+BWC     Brocade Workflow Composer (new name for StackStorm)
 BGP     border gateway protocol
 MD-SAL  model driven service abstraction layer
 LLDP    Link Layer Discovery Protocol

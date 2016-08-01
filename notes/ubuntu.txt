@@ -39,31 +39,43 @@ Google Chrome browser:
 Update all software (~30 min)
   Software Management -> Updates -> Check for Updates:  Install all found)
 
-Install basic software using yum:
+Install basic software:
   sudo apt install -y  \
-    lsb \
-    vim git zsh tcsh fish tmux curl  \
-    vim-gui-common \
+    git zsh tcsh fish tmux curl  \
+    vim vim-gnome \
     gcc python ruby golang \
     build-essential  libssl-dev \
     maven octave libreoffice gimp \
     cryptkeeper \
+    lxc lxd \
     mininet wireshark \
     tree htop iotop collectl gnupg \
-    zip unzip dos2unix kuser \
+    lsb zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
     okular lzop jq parallel docker.io \
     vpnc kvpnc network-manager-vpnc racoon \
     curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager \
 
 
-unity-tweak-tool -> Window Manager -> Additional -> Focus Mode: "Sloppy"
+unity-tweak-tool 
+  -> Unity -> Launcher -> Auto-hide: on
+  -> Window Manager -> Additional 
+    -> Focus Mode: "Sloppy"
+    -> Auto raise: off
+  -> Window Manager -> Workspace Settings -> Workspace Switcher: On (2 horiz, 2 vert)
+  -> Window Manager -> Window snapping: off
+  -> Appearance -> Fonts -> Ubuntu * 11 for all
 System Settings -> Displays -> Sticky Edges = Off
-System Settings -> Time & Date -> 
+System Settings -> Time & Date -> Clock tab
   Enable: Show a clock..., Weekday, Date and Month, Year, 12-hour time, Seconds
+System Settings -> Personal -> Appearance -> Behavior 
+  -> Show the menues for a window: "In the window's title bar"
+  -> Menus visibility: Always
+  -> Add show desktop idon to the launcher: true
+System Settings -> Sound -> Input  -> Microphone = HD Pro Webcam C920
+                         -> Output -> Line Out (regular stero speakers)
+
 dconf-editor -> org -> gnome -> gnome session -> select "auto-save-session"
-System Settings -> Input -> Microphone = HD Pro Webcam C920
-System Settings -> Output -> Line Out (regular stero speakers)
 
 See:  http://askubuntu.com/questions/462629/how-to-disable-sticky-edges-in-ubuntu-14-04-ubuntu-13-10-and-earlier-had-a-opti
   Did you install Unity with the CompizConfig Settings Manager? You can download it with sudo apt-get
@@ -184,6 +196,7 @@ Chrome:
     spark
     IntelliJ IDEA
     Cursive
+    skype
 
 - IntelliJ Idea install
   Ubuntu -> System Settings -> Keyboard -> Shortcuts: disable all 4 "Switch to workspace left/right/above/below"
