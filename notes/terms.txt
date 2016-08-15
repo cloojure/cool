@@ -1,18 +1,24 @@
 
+karaf   apache project, osgi framework
+ARP     address resolution protocol
 BSC     Brocade SDN Controller
 BWC     Brocade Workflow Composer (new name for StackStorm)
 BGP     border gateway protocol
+ICMP    ping protocol / router discovery (Internet Control Message Protocol)
 MD-SAL  model driven service abstraction layer
 LLDP    Link Layer Discovery Protocol
+MAAPI   Managed Application API (tail-f ncs)
+MPLS    Multi-Protocol Label Switching 
 NCS     network control system (tail-f)
 NED     network element drivers (tail-f)
 NETCONF network configuration protocol
 ODL     OpenDaylight
 OF      OpenFlow
+OSS/BSS Operations/Business Support Systems
 OVS     OpenVSwitch
 SAL     service abstraction layer
 SDN     software defined networking
 SNMP    
 YANG    device modeling language for netconf (Yet Another Next Generation)
-tail-f  company
+tail-f  company, now part of CICSO (2014)
 

@@ -53,7 +53,7 @@ Install basic software:
     lsb zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
     okular lzop jq parallel docker.io \
-    vpnc kvpnc network-manager-vpnc racoon \
+    openvpn vpnc kvpnc network-manager-vpnc racoon \
     curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager \
 
 

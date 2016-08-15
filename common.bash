@@ -196,12 +196,9 @@ alias dkip="docker inspect --format='{{.NetworkSettings.Networks.user_default.IP
                  # or --format='{{json .NetworkSettings.Networks.user_default.IPAddress}}'
 alias docker-machine-disable=' DOCKER_MACHINE_IP="" ; DOCKER_TLS_VERIFY="" ; DOCKER_HOST="" ; DOCKER_CERT_PATH="" ; DOCKER_MACHINE_NAME="" '
 
-# CENX stuff
-export DOCKER_MACHINE_IP=$(ipaddr)
-alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
-alias vpnping='ping -c3 nexus.cenx.localnet'
-alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
-alias parker_alias='curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json"'
+# Brocade stuff 
+alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u athomps'
+  # need to leave running in background or open window
 
 function customer() {
     customer=$1
@@ -242,4 +239,15 @@ aa=~/work
 bb=~/wrk2
 cc=~/wrk3
 
+
+###################################################################################################
+# Old Stuff #######################################################################################
+###################################################################################################
+
+# CENX stuff
+### export DOCKER_MACHINE_IP=$(ipaddr)
+### alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
+### alias vpnping='ping -c3 nexus.cenx.localnet'
+### alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
+### alias parker_alias='curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json"'
 
