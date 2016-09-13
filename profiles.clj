@@ -8,7 +8,7 @@
       [com.jakemccrary/lein-test-refresh "0.16.0"]
     ] 
     :dependencies [ 
-      [org.clojure/clojure          "1.9.0-alpha10"]
+      [org.clojure/clojure          "1.9.0-alpha12"]
     ; [org.clojure/clojure          "1.8.0"]
 ;     [criterium                    "0.4.3"] 
 ;     [org.clojure/tools.namespace  "0.2.9"]
