@@ -25,6 +25,7 @@ else
   export LIQUIBASE_HOME="/opt/liquibase"        ; path=( ${LIQUIBASE_HOME}          $path )
   export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin      $path )
   export ODL_KARAF_DIR="/opt/karaf"             ; path=( ${ODL_KARAF_DIR}/bin       $path )
+  export MAVEN_HOME="/opt/apache-maven"         ; path=( ${MAVEN_HOME}/bin          $path )
 
   # extra cassandra stuff
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -74,10 +75,11 @@ function shellVersion {
 }
 alias shellver="shellVersion"
 
-alias d="   ls -ldF   --color"
-alias lal=" ls -alF   --color"
-alias dt="  ls -ldtF  --color"
-alias dt9=" ls -ldtF  --color * | head -9"
+alias d='   ls -ldF   --color'
+alias da='  ls -ldF   --color *'
+alias lal=' ls -alF   --color'
+alias dt='  ls -ldtF  --color'
+alias dt9=' ls -ldtF  --color * | head -9'
 
 alias du="du -m"
 alias df="df -BG"

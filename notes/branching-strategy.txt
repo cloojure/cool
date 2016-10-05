@@ -1,0 +1,213 @@
+
+
+Branching for Software Development
+
+The branching ability provided by git and related hosting services provides a powerful way to
+isolate new development and experiments from existing production code. However, it is important to
+remember that every feature comes with a cost and it is quite possible for the cost of a new feature
+to overwhelm the benefits of that feature if one is not careful.
+
+
+Software Documentation
+
+It is of of the first importance that one document what software does and how to use it.  Since
+software evolves over time, the documentation must stay in sync with the software it describes.
+
+One important aspect of documentation is to record when new features are added to the software.
+This is normally accomplished in a "changelog", either a separate file (e.g. "Changelog.adoc") at
+the root of the repository or, perhaps, incorporated into the project README file.
+
+Semantic versioning is usually the preferred way to label different software versions:
+
+    "v2.3.1  Added feature X"       - changelog entry
+
+A user can then use git or other SCM to retrieve a copy of the software as of that point in time:
+
+    > git checkout v2.3.1
+
+A similar type of functionality can be achieved by using timestamps, although tags are easier and
+provide better documentation.
+
+
+Section 1: No Branching
+
+While it may sound obvious, not using a feature (i.e. branching) is always the option with the
+lowest cost.  For small projects with only 1-5 developers, there is often little or no benefit to
+branching.  So, if branching has little or no benefit, then there is no point in paying the cost in
+time & complexity of branching. In this case branching should not be used.
+
+The basic idea is that all development is performed at the tip of the "master" branch, and 
+that new development is (almost always) additive in nature.  If the product is a library, users of
+the library can upgrade to a newer release at any time and newer, unused features will be of no
+consequence.
+
+If breaking changes are required, semantic versioning requires that these be reserved for a change
+of the major version number (i.e. when v2.3.1 -> v 3.0.0), as a warning to the user that they should
+be on the lookout for any conflicts.  Of course, any known breaking changes must also be documented
+in the changelog.
+
+As usual, appropriate automated tests should be saved in parallel to core project code, and the full
+test suite MUST be run and passed successfully before any code is publicly committed to the git
+repo.
+
+When bugs are found, the best (lowest cost) answer is usually to avoid complicated tracing of the
+commit history and simply diagnose and fix the bug at the tip of the master branch. Tracing through
+the commit history to find the exact time the but arose is usually unproductive time that could be
+better spend simply fixing the bug and improving any associated unit tests for better detection &
+prevention in the future.
+
+
+Section 2: Feature Branches
+
+When two or more developers are working on a project simultaneously, they should normally isolate their
+work from each other until it is stable.  This also applies to only a single developer if the
+project is being actively used by others while development is taking place.
+
+In this case, the developer creates a feature branch for all new development. Normally, the new
+branch is created from the tip of master:
+
+  > git checkout master       - move to branch master
+  > git pull                  - move to the tip
+  > git checkout -b feat-X    - create new branch "feat-X" from current location AND move there
+  > git branch                - verify that we are on the new branch
+    master 
+  * feat-X
+
+We can now make edits and commit via normal "git commit -m..." and all changes will be made on the
+"feat-X" branch. When all changes have been tested and are ready for public use, the branch should
+be merged back onto the master branch:
+
+  > git checkout master                 - move to branch master
+  > git pull                            - move to the tip
+  > git merge --no-commit feat-X        - merge branch feat-X into the current branch  (master)
+
+If you leave off the "--no-commit" option and the merge has no conflicts, git will auto-commit the
+merged code.  Using "--no-commit" allows one to review the merged code (e.g. using "git diff") and
+then commit it normally via "git commit -m...".
+
+Needless to say, merge conflicts are significantly reduced by two practices:
+
+  - keep feature branches on independent, non-overlapping topics
+  - keep feature branches to short durations
+
+Both of these practices will greatly reduce merge conflicts, which are slow, painful, and
+error-prone to resolve.
+
+
+Section 2b - Release Candidate Branches
+
+If you get into a situation where you have a lot of merge conflicts or you are working with an
+alpha- or beta-level feature, you may not want to commit to master right away.  The best solution in
+this case is a Release Candidate Branch:
+
+  <we are working on branch feat-X>
+  > git checkout master             - switch to the master branch
+  > git pull                        - ensure we are at the tip
+  > git checkout -b feat-X-rc1      - create and switch to the release-candididate-1 branch
+  > git merge feat-X                - merge in all changes from the feat-X branch
+
+You may now resolve any merge conflicts.  When ready, merge feat-X-rc1 onto master as normal.
+
+If you are too slow and more merge conflicts arise between master and feat-X-rc1, then 
+make a new branch feat-x-rc2 from the tip of master and repeat the process as necessary.
+
+
+Section 2c: Squash Commit
+
+Unless you have a large, public project this option is probably more trouble than it worth.  When
+merging onto master, one has the option to say:
+
+  > git checkout master             - move to branch master
+  > git pull                        - move to the tip
+  > git merge --squash feat-X       - copy all edits from feat-X into files on master, but don't commit
+
+This does not merge feat-X, but instead copies all the edits from feat-X as if you had performed a
+single monster hacking session. The copied edits are not committed yet, so you must then type:
+
+  > git commit -m'Merged from branch feat-X'        ; save edits from feat-X to a new commit on master
+
+
+Section 3: Online Maven Repos
+
+For Clojure projects we are used to automatically finding and downloading library dependencies from
+either the Maven Central or Clojars sites.  For non-public development, several options are
+available.
+
+
+Section 3a: Local Repositories Using lein-checkouts
+
+This option avoids the use of online maven resources in favor of locally checked-out copies of
+depenency libraries. The directory structure looks like this
+
+  drwxrwxr-x 11 alan alan 4096 Sep 26 08:06 tupelo/
+  drwxrwxr-x  8 alan alan 4096 Sep 27 12:31 tupelo-datomic/
+  drwxrwxr-x  2 alan alan 4096 Sep 27 12:31 tupelo-datomic/checkouts/
+  lrwxrwxrwx  1 alan alan   17 Sep 27 12:31 tupelo-datomic/checkouts/tupelo -> /home/alan/tupelo/
+
+Here we see two clojure projects, "tupelo" and "tupelo-datomic". The tupelo-datomic depends on
+features from the tupelo library. To use the lein-checkouts feature, we need to make a directory
+"tupelo-datomic/checkouts". Within this directory, we make a unix symbolic link (aka "symlink")
+pointing to the root dir of the dependency project.
+
+We may then use git to control which version of tupelo is used by the tupelo-datomic project.  For
+example, we could type:
+
+  > cd ~/tupelo
+  > git checkout v2.3.1
+  > cd ~/tupelo-datomic
+  > lein test
+
+and then the tupelo-datomic project would be using V2.3.1 of the tupelo library.  Any other version
+could be selected in a similar way.
+
+
+Section 3b:  Online Repositories Using s3-wagon-private
+
+A lein plugin is available to use Amazon's Simple Storage Service (S3) as a substitute for Clojars:
+
+  https://github.com/technomancy/s3-wagon-private 
+
+To use this option the project must set up an AWS account and distribute the AWS Access Key and AWS
+Secret Key.  Please see the project notes on github for details.
+
+
+Section 3c:  Online Maven Hosting Using Sonatype Nexus
+
+Sonatype is a company that produces the Nexus open-source software used by Maven Central.  Any
+project is free to set up their own maven server using Nexus, and Sonatype also provides private
+hosting services in the cloud. Please see the details at:  
+
+  https://www.sonatype.com/nexus-repository-sonatype
+
+
+Section 3d: Using Git Submodules
+
+It is possible for a project in one git repo to "include" a reference a project in another git repo.
+This has been poorly supported and error-prone in the past, but may be useful in some instances.
+The primary use-case for this feature is when your project needs to make custom modifications to an
+outside library. These changes can be captured in the sub-module and merged with future changes in
+the outside library.  Full details are can be found at:
+
+  https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+
+Section 4: Other Workflows
+
+More complicated strategies are possible for branching within a repo and for organizing multiple
+repositories among the sub-projects of a larger project (e.g. the Linux kernel, for example).
+Usually the need to coordinate 100's or 1000's of developers can be mitigated by breaking the work
+up into independent sub-projects. When this is insufficient, more complicated workflows can be
+constructed. 
+
+Some of the best discussion of the choices & tradeoffs IMHO is found in the book "Git in Practice"
+by Mike McQuaid.  In particular, the "Mike Flow" has a good tradeoff of costs & benefits. See
+details of the book here:
+
+  https://www.manning.com/books/git-in-practice
+
+Online resources discussing some of the choices can also be found here:
+
+  https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows
+  https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows
+
+

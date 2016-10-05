@@ -8,7 +8,7 @@
       [com.jakemccrary/lein-test-refresh "0.16.0"]
     ] 
     :dependencies [ 
-      [org.clojure/clojure          "1.9.0-alpha12"]
+      [org.clojure/clojure          "1.9.0-alpha13"]
     ; [org.clojure/clojure          "1.8.0"]
 ;     [criterium                    "0.4.3"] 
 ;     [org.clojure/tools.namespace  "0.2.9"]
@@ -16,6 +16,9 @@
     ]
     :test-refresh { :quiet true
                     :changes-only true }
+    :repositories           [ ["clojars" {:url "https://repo.clojars.org"} ] ]
+    :plugin-repositories    [ ["clojars" {:url "https://repo.clojars.org"} ] ]
+
 ;   :source-paths [ "/home/alan/.lein" ]
 ;   :repl-options { :init-ns user }
 ;   :deploy-repositories {  "snapshots" :clojars

@@ -155,6 +155,10 @@ Networking commands
   cat /etc/resolv.conf      ; show DNS servers
 
 ---------------------------------------------------------------------------
+tools:
+  strace, wireshark, perf, ngrep, ps, netstat (2016 Julia Evans strangeloop talk)
+
+---------------------------------------------------------------------------
 old Ubuntu (Upstart) - https://help.ubuntu.com/community/UbuntuBootupHowto
   service   fdb-document-layer  start/stop/restart      # control a service (old way)
   service   fdb-sql-layer       start/stop/restart      # control a service (old way)
