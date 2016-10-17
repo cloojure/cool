@@ -198,6 +198,10 @@ alias dkip="docker inspect --format='{{.NetworkSettings.Networks.user_default.IP
                  # or --format='{{json .NetworkSettings.Networks.user_default.IPAddress}}'
 alias docker-machine-disable=' DOCKER_MACHINE_IP="" ; DOCKER_TLS_VERIFY="" ; DOCKER_HOST="" ; DOCKER_CERT_PATH="" ; DOCKER_MACHINE_NAME="" '
 
+# maven trick for ODL (-nsu => "No Snapshot Updates" downloaded from nexus.opendaylight.org)
+mvnInstallCmd='mvn clean install -Dcheckstyle.skip=true -DskipTests -nsu'
+alias mvn-install="echo ${mvnInstallCmd}; ${mvnInstallCmd}";
+
 # Brocade stuff 
 alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u athomps'
   # need to leave running in background or open window

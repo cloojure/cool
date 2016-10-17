@@ -1,0 +1,39 @@
+
+~/.m2                                       ; location of local maven cache
+~/.m2/settings.xml                          ; local profile information (overrides pom.xml)
+
+mvn help:effective-pom                      ; show the final pom after all inheritance & merging
+mvn help:active-profiles                    ; show profiles effective during a build
+        -Doutput=effective-pom.xml          ; to redirect output
+
+mvn dependency:tree     *** try this!
+mvn dependency:tree -Dverbose -Dincludes=commons-net
+
+mvn clean                                   ; clean all build products
+mvn clean install                           ; clean & build local project (install in ~/.m2)
+
+mvn -o <package>                            ; build offline w/o accessing internet
+
+;-----------------------------------------------------------------------------
+***** for ODL insanity, need this (in ~/cool/common.bash) *****
+
+  # maven trick for ODL (-nsu => "No Snapshot Updates" downloaded from nexus.opendaylight.org)
+  mvnInstallCmd='mvn clean install -Dcheckstyle.skip=true -DskipTests -nsu'
+  alias mvn-install="echo ${mvnInstallCmd}; ${mvnInstallCmd}";
+
+;-----------------------------------------------------------------------------
+Internal Repository
+  Using the internal repository is quite simple. Simply make a change to add a repositories element:
+
+      <project>
+        ...
+        <repositories>
+          <repository>
+            <id>my-internal-site</id>
+            <url>http://myserver/repo</url>
+          </repository>
+        </repositories>
+        ...
+      </project>
+
+

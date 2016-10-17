@@ -136,7 +136,7 @@ Adding an existing user to an existing group
 -----------------------------------------------------------------------------
 Networking commands
   ping -c5 <host>           ; ping count 5
-  ifconfig                  ; interface config: shows network info
+  ifconfig                  ; interface config: shows network info  ***** -> deprecated. use 'ip' command
   netstat                   ; network info
   getent hosts              ; print hosts info
   tcpdump -n                ; show network packet activity
@@ -153,6 +153,14 @@ Networking commands
   route                     ; display & manage the routing table
   nbtstat (lesser used)     ; display NetBIOS stats & info
   cat /etc/resolv.conf      ; show DNS servers
+
+  ip link show                                      ; list net devices
+  ip route show                                     ; see routing info
+  route -n                                          ; disp ip routing table
+  hostname                                          ; disp/set hostname
+  sudo service networking stop/start/restart        ; control network status
+  sudo systemctl status networking                  ; view network status
+  sudo systemctl stop/start/restart networking      ; control network status
 
 ---------------------------------------------------------------------------
 tools:
