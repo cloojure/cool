@@ -1,0 +1,84 @@
+# Create a new user and login to the new account
+> sudo adduser cljuser
+Adding user `cljuser'
+<snip>
+~/cool/notes > sudo su - cljuser
+
+# Starting with a new, empty user account.  Define a useful alias
+cljuser@brandy:~$ alias d="ls -ldF"
+
+# Display where I have java installed on this computer
+cljuser@brandy:~$ d /opt/*
+lrwxrwxrwx  1 root root   11 Feb  1  2016 /opt/java -> jdk1.8.0_72/
+drwxr-xr-x  8 alan alan 4096 Dec 22  2015 /opt/jdk1.8.0_72/
+
+# Set up env var for java, and augment the path to find the java executable file
+cljuser@brandy:~$ export JAVA_HOME=/opt/java
+cljuser@brandy:~$ export PATH=${JAVA_HOME}/bin:${PATH} 
+cljuser@brandy:~$ java -version
+java version "1.8.0_72"
+Java(TM) SE Runtime Environment (build 1.8.0_72-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 25.72-b15, mixed mode)
+
+# We will install the lein shell script launcher in ~/bin
+cljuser@brandy:~$ mkdir ~/bin
+cljuser@brandy:~$ d ~/bin
+drwxrwxr-x 2 cljuser cljuser 4096 Oct 18 20:16 /home/cljuser/bin/
+cljuser@brandy:~$ cd bin
+cljuser@brandy:~/bin$ curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 12871  100 12871    0     0  48805      0 --:--:-- --:--:-- --:--:-- 48939
+
+# We have the script, but need to make it executable
+cljuser@brandy:~/bin$ d *
+-rw-rw-r-- 1 cljuser cljuser 12871 Oct 18 20:16 lein
+cljuser@brandy:~/bin$ chmod a+x lein 
+cljuser@brandy:~/bin$ d *
+-rwxrwxr-x 1 cljuser cljuser 12871 Oct 18 20:16 lein*
+
+# Update to path so lein will run from any location
+cljuser@brandy:~/bin$ cd
+cljuser@brandy:~$ export PATH=~/bin:${PATH} 
+cljuser@brandy:~$ which lein
+/home/cljuser/bin/lein
+
+# First time downloads the actual "lein" executable. 2nd & later runs skip the download
+cljuser@brandy:~$ lein --version
+Downloading Leiningen to /home/cljuser/.lein/self-installs/leiningen-2.7.1-standalone.jar now...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   605    0   605    0     0    928      0 --:--:-- --:--:-- --:--:--   927
+100 14.6M  100 14.6M    0     0  1583k      0  0:00:09  0:00:09 --:--:-- 2015k
+Leiningen 2.7.1 on Java 1.8.0_72 Java HotSpot(TM) 64-Bit Server VM
+cljuser@brandy:~$ lein --version
+Leiningen 2.7.1 on Java 1.8.0_72 Java HotSpot(TM) 64-Bit Server VM
+
+# We are in the home dir, but we could still run lein
+cljuser@brandy:~$ d *
+drwxrwxr-x 2 cljuser cljuser 4096 Oct 18 20:16 bin/
+-rw-r--r-- 1 cljuser cljuser 8980 Oct 18 20:13 examples.desktop
+
+# create a new Clojure project named "sample" and run it
+cljuser@brandy:~$ lein new app sample
+Generating a project called sample based on the 'app' template.
+cljuser@brandy:~$ cd sample
+
+# first run downloads some *.jar files
+cljuser@brandy:~/sample$ lein run
+Retrieving org/clojure/clojure/1.8.0/clojure-1.8.0.pom from central
+Retrieving org/sonatype/oss/oss-parent/7/oss-parent-7.pom from central
+Retrieving org/clojure/tools.nrepl/0.2.12/tools.nrepl-0.2.12.pom from central
+Retrieving org/clojure/pom.contrib/0.1.2/pom.contrib-0.1.2.pom from central
+Retrieving clojure-complete/clojure-complete/0.2.4/clojure-complete-0.2.4.pom from clojars
+Retrieving org/clojure/tools.nrepl/0.2.12/tools.nrepl-0.2.12.jar from central
+Retrieving org/clojure/clojure/1.8.0/clojure-1.8.0.jar from central
+Retrieving clojure-complete/clojure-complete/0.2.4/clojure-complete-0.2.4.jar from clojars
+Hello, World!
+
+# 2nd & later runs skip download
+cljuser@brandy:~/sample$ lein run
+Hello, World!
+
+# All finished! Enjoy!
+
