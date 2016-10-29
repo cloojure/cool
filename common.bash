@@ -75,13 +75,12 @@ function shellVersion {
 }
 alias shellver="shellVersion"
 
-alias lal='  ls -alF   --color'
 alias d='    ls -ldF   --color'
 alias da='   d *'
 alias dal='  ls -ldF * | less'
-alias dt='   d'
-alias dt9='  d * | head -9'
-alias dt22=' d * | head -22'
+alias lal='  ls -alF   --color'
+alias dt9='  d -t * | head -9'
+alias dt22=' d -t * | head -22'
 
 alias du="du -m"
 alias df="df -BG"
