@@ -71,7 +71,7 @@ System Settings -> Time & Date -> Clock tab
 System Settings -> Personal -> Appearance -> Behavior 
   -> Show the menues for a window: "In the window's title bar"
   -> Menus visibility: Always
-  -> Add show desktop idon to the launcher: true
+  -> Add show desktop icon to the launcher: Checked
 System Settings -> Sound -> Input  -> Microphone = HD Pro Webcam C920
                          -> Output -> Line Out (regular stero speakers)
 
@@ -175,10 +175,6 @@ sudo apt install -y ufw gufw
 Install NVidia Drivers
 System Settings -> Software & Updates -> Additional Drivers
   Under "NVIDIA Corporation" select "Using NVIDIA binary driver.....(proprietary, tested)"
-
-Ubuntu Software Center install
-  GVim
-  LibreOffice
 
 Chrome: 
   add JsonView Chrome extension

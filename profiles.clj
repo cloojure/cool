@@ -8,12 +8,12 @@
       [lein-pprint      "1.1.1"] 
     ] 
     :dependencies [ 
-      [org.clojure/clojure "1.9.0-alpha13"]
+      [org.clojure/clojure "1.9.0-alpha14"]
     ]
-    :test-refresh { :quiet true
+    :test-refresh { :quiet        true
                     :changes-only true }
-    :repositories           [ ["clojars" {:url "https://repo.clojars.org"} ] ]
-    :plugin-repositories    [ ["clojars" {:url "https://repo.clojars.org"} ] ]
+  ; :repositories           [ ["clojars" {:url "https://repo.clojars.org"} ] ]
+  ; :plugin-repositories    [ ["clojars" {:url "https://repo.clojars.org"} ] ]
   ; :jvm-opts ["-Xms1g" "-Xmx4g" ] ;   "-server"
   }
 }
