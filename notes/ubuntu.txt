@@ -152,7 +152,7 @@ Docker - follow website instructions
       avoids need to "sudo" all docker commands like: sudo docker run ...
   docker-compose:  https://docs.docker.com/compose/install/
 
-Install vagrant (vagrantup.com)
+Config vagrant from website:  vagrantup.com
   vagrant init ubuntu/xenial64      ; create the Vagrantfile
   vagrant up                        ; start the machine
   vagrant ssh                       ; ssh into the machine
