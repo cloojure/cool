@@ -126,9 +126,9 @@ Java
   *** Manual Install ***
   For multiple installations, 
       see:  https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04#managing-java
-    sudo update-alternatives --config jav
-    sudo gvim /etc/environment, set last line like
-       JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+    > sudo update-alternatives --config java
+    > sudo gvim /etc/environment          # set last line like this:
+         JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 
   *** Alternative (untested) apt install ***
     sudo apt-get install oracle-java8-installer
