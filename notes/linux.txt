@@ -9,6 +9,12 @@ Ubuntu package tools
   apt list --all-versions   "*user*"          - all packages matching pattern *user*
   apt search                  user            - packages with any text matching 'user'
 
+how to install openjdk-7-jdk when absent from main repositories
+
+  sudo add-apt-repository ppa:openjdk-r/ppa  
+  sudo apt-get update   
+  sudo apt-get install openjdk-7-jdk
+
 -----------------------------------------------------------------------------
 konqueror:
   URL=sysinfo:/    # linux system info

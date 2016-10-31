@@ -187,6 +187,15 @@ Docker - follow website instructions
       avoids need to "sudo" all docker commands like: sudo docker run ...
   docker-compose:  https://docs.docker.com/compose/install/
 
+Config vagrant from website:  vagrantup.com
+  vagrant init ubuntu/xenial64      ; create the Vagrantfile
+  vagrant up                        ; start the machine
+  vagrant ssh                       ; ssh into the machine
+
+  vagrant suspend                   ; suspend (sleep) the machine; saves state
+  vagrant halt                      ; halt (poweroff) the machine; retains virt disks
+  vagrant destroy [-f]              ; destroy the machine; like it never existed [without confirmation]
+
 CENX vpnc file: ~/cool/etc--vpnc--cenx.conf  -> /etc/vpnc
 
 Postgres
