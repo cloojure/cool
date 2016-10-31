@@ -203,6 +203,8 @@ alias docker-machine-disable=' DOCKER_MACHINE_IP="" ; DOCKER_TLS_VERIFY="" ; DOC
 mvnInstallCmd='mvn clean install -Dcheckstyle.skip=true -DskipTests -nsu'
 alias mvn-install="echo ${mvnInstallCmd}; ${mvnInstallCmd}";
 
+alias cp-shared=" sudo bash -c 'mv /media/sf_shared/* /shared; chown -R alan:alan /shared '  "
+
 # Brocade stuff 
 alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u athomps'
   # need to leave running in background or open window

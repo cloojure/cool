@@ -130,10 +130,14 @@ Java
     > sudo gvim /etc/environment          # set last line like this:
          JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 
+  *** openjdk-7-jdk install ***
+      sudo add-apt-repository ppa:openjdk-r/ppa  
+      sudo apt-get update   
+      sudo apt-get install openjdk-7-jdk
+
   *** Alternative (untested) apt install ***
     sudo apt-get install oracle-java8-installer
     
-
 VirtualBox
   *** Manual install ***  go to https://www.virtualbox.org/wiki/Downloads
     There are 2 downloads required:
