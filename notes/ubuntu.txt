@@ -122,6 +122,18 @@ See:  http://askubuntu.com/questions/462629/how-to-disable-sticky-edges-in-ubunt
             /etc/apt/sources.list.d/postgresql.list.save
             /etc/apt/sources.list.d/webupd8team-ubuntu-java-wily.list
 
+Java
+  *** Manual Install ***
+  For multiple installations, 
+      see:  https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04#managing-java
+    sudo update-alternatives --config jav
+    sudo gvim /etc/environment, set last line like
+       JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+
+  *** Alternative (untested) apt install ***
+    sudo apt-get install oracle-java8-installer
+    
+
 VirtualBox
   *** Manual install ***  go to https://www.virtualbox.org/wiki/Downloads
     There are 2 downloads required:
@@ -198,7 +210,6 @@ Chrome:
 - Other software: go to website to install
     Dropbox
     HipChat
-    java
     liquibase
     solr
     datomic
