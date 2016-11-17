@@ -1,0 +1,28 @@
+
+2016-11-1 VPN PulseSecure crashes and hoses /etc/resolv.conf
+
+  So VPN Pulse Secure just died and killed my network config in the process. It hosed /etc/resolv.conf
+  which is required for DNS to work, causing google.com (& the rest of the world) to become
+  unreachable.  Thankfully I had a second computer and could search for network diagnostic tips.
+  StackExchange was a lifesaver.  Also, it would appear that this is what killed my computer on
+  Friday.
+
+  It is normally a symlink like:  
+      root root 29 Oct 30 15:41 /etc/resolv.conf -> ../run/resolvconf/resolv.conf﻿⁠⁠⁠⁠
+
+  When you run PulseSecure, it deletes the symlink and replaces it with a file:
+
+    > cat /etc/resolv.conf
+    search brocade.com corp.brocade.com englab.brocade.com
+    nameserver 10.70.20.23
+    nameserver 10.70.20.43
+
+  If PulseSecure exits normally, it replaces the symlink.  If it crashes, you are left with a hosed
+  computer and no DNS and no connection to anything. (edited)
+
+  diagnose with 'dig' tool, get no DNS responses
+     > dig
+    ; <<>> DiG 9.10.3-P4-Ubuntu <<>>
+    ;; global options: +cmd
+    ;; connection timed out; no servers could be reached
+

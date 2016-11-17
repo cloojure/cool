@@ -60,13 +60,16 @@ Install basic software:
     maven octave libreoffice gimp \
     cryptkeeper \
     lxc lxd \
-    mininet wireshark \
+    mininet wireshark tshark \
     tree htop iotop collectl gnupg \
     lsb zip unzip dos2unix kuser \
     alien youtube-dl sbackup rlwrap \
     okular lzop jq parallel docker.io \
     openvpn vpnc kvpnc network-manager-vpnc racoon \
     curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager \
+
+*** remember DEBIAN_FRONTEND=noninteractive env var for "apt install -y" ***
+*** can also explore apt-cacher (re. Ferris 2016-11-7)
 
 
 unity-tweak-tool 
@@ -137,6 +140,10 @@ Java
 
   *** Alternative (untested) apt install ***
     sudo apt-get install oracle-java8-installer
+
+Bash aliases 
+  /etc/bash.bashrc          - can put basic aliases here
+  /etc/environment          - can set env vars here (e.g.  JAVA_HOME="/usr/lib/jvm/java-8-oracle" )
     
 VirtualBox
   *** Manual install ***  go to https://www.virtualbox.org/wiki/Downloads

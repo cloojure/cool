@@ -36,6 +36,16 @@ Fedora (Systemd):
   Ex:  systemctl status postgresql-9.3
 
 -----------------------------------------------------------------------------
+systemd stuff
+  systemd-cgtop     - systemd Control Group top command
+                        which cgroup is eating my resources?
+                        to kill bad service:  systemctl kill xyz.service
+  systemd-cgls /system.slice/xyz.service  - list processes in cgroup
+  coredumpctl       - retrieve coredumps from systemd's journal
+  bootctl           - control systemd-boot (not GRUB) for booting firmware
+  man systemd.index - TOC for systemd man pages
+
+-----------------------------------------------------------------------------
 Resource monitoring
   htop      (a better 'top')
   iotop     (an I/O 'top')
@@ -140,6 +150,11 @@ Add/modify a user in Linux
 
   sudo deluser <user>                   ; remove a user
   sudo deluser <user> --remove-home     ; ... and their home directory
+
+-----------------------------------------------------------------------------
+System-Wide Config:
+  /etc/bash.bashrc          - can put basic aliases here
+  /etc/environment          - can set env vars here (e.g.  JAVA_HOME="/usr/lib/jvm/java-8-oracle" )
 
 -----------------------------------------------------------------------------
 Networking commands

@@ -14,6 +14,7 @@ Config vagrant from website:  vagrantup.com
   vagrant up                        ; start the machine
   vagrant ssh                       ; ssh into the machine
   vagrant status
+  vagrant reload
   vagrant suspend                   ; suspend (sleep) the machine; saves state
   vagrant halt                      ; halt (poweroff) the machine; retains virt disks
   vagrant destroy [-f]              ; destroy the machine; like it never existed [without confirmation]
@@ -23,3 +24,8 @@ The vagrant_devbox directory is shared directory accessible in the VM at /vagran
 There are many configuration options available in the VagrantFile.  See Vagrant documentation for more information.
   https://docs.vagrantup.com/v2/
 
+Vagrant.configure("2") do |config|
+  # other config here
+
+  config.vm.synced_folder   "src/",  "/srv/website"   ; <(rel|abs) host path>, <absolute guest path>
+end

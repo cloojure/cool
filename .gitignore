@@ -7,8 +7,6 @@
 /target
 /classes
 /checkouts
-pom.xml
-pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port

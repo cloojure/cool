@@ -125,6 +125,7 @@ alias gitsy="   git pull ; git push"    # git-sync
 alias gitdns="  git diff --name-status"
 alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
 alias gitlg="   git log -22 --oneline --graph --decorate"
+alias git-unadd='git reset HEAD'  # git unadd
 
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
@@ -139,6 +140,10 @@ alias pk="pkill -9"
 
 alias blk="sleep 1 ; xset dpms force off"       # set screen to black (power off)
 alias dosleep="systemctl suspend"
+
+# Misc tools
+# Return a timestamp string like "20161117-111307" (from  date --iso-8601=seconds => # "2016-11-17T11:13:07-08:00")
+alias dateTimeStr=" date --iso-8601=seconds | sed -e's/^\(.\{19\}\)\(.*\)/\1/' | sed -e's/-//g' | sed -e's/://g' | sed -e's/T/-/g' "
 
 # Alias for home Cannon scanner driver
 alias scanner=scangearmp
