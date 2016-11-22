@@ -46,6 +46,31 @@ systemd stuff
   man systemd.index - TOC for systemd man pages
 
 -----------------------------------------------------------------------------
+supervisord stuff   (Ubuntu install:  sudo apt install -y supervisor)
+
+  supervisord     -v | --version 
+  supervisorctl   --help
+
+  /etc/supervisor/supervisord.conf          # config file location (ubuntu)
+  /etc/supervisor/conf.d/*.conf             # child config files included by supervisord.conf
+  /var/log/supervisor/supervisord.log       # supervisor log file
+  /var/log/supervisor/*.log                 # child log files
+  /var/run/supervisor.sock                  # unix socket for http server
+
+  sudo supervisorctl stop all
+  sudo supervisorctl reread
+  sudo supervisorctl update
+  sudo supervisorctl start all
+  sudo supervisorctl status
+  sudo supervisorctl 
+    supervisor> help
+    supervisor> start tick
+    supervisor> ^D          # CTRL-D or "exit" terminates 
+  
+  sudo systemctl restart  supervisor
+  sudo systemctl status   supervisor
+
+-----------------------------------------------------------------------------
 Resource monitoring
   htop      (a better 'top')
   iotop     (an I/O 'top')

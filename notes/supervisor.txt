@@ -1,0 +1,60 @@
+# Ubuntu install 
+sudo apt install -y supervisor
+
+supervisord     -v | --version 
+supervisorctl   --help
+
+/etc/supervisor/supervisord.conf          # config file location (ubuntu)
+/etc/supervisor/conf.d/*.conf             # child config files included by supervisord.conf
+/var/log/supervisor/supervisord.log       # supervisor log file
+/var/log/supervisor/*.log                 # child log files
+/var/run/supervisor.sock                  # unix socket for http server
+
+sudo supervisorctl status
+sudo supervisorctl restart all
+sudo supervisorctl start   all
+sudo supervisorctl stop    all
+sudo supervisorctl reread
+sudo supervisorctl update
+
+sudo supervisorctl 
+  supervisor> help
+  supervisor> restart tick
+  supervisor> ^D          # CTRL-D or "exit" terminates 
+
+sudo systemctl restart  supervisor
+sudo systemctl status   supervisor
+
+
+# /etc/supervisor/conf.d/tick.conf        # sample child config file
+-----------------------------------------------------------------------------
+  ; tick config file
+  [program:tick]
+  command=/home/alan/brcd/supervisor/ticker.bash
+  autostart=true
+  autorestart=true
+  environment=CTX="bogus-42"
+
+
+# /home/alan/brcd/supervisor/ticker.bash
+-----------------------------------------------------------------------------
+  #!/bin/bash
+  while true ; do
+    echo "tick   CTX='${CTX}'   SUPERVISOR_PROCESS_NAME=${SUPERVISOR_PROCESS_NAME}   $(date)"
+    sleep 1
+  done
+
+
+-----------------------------------------------------------------------------
+logs:
+  > d /var/log/supervisor/*                                        
+  -rw-r--r-- 1 root root  1607 Nov 22 15:17 /var/log/supervisor/supervisord.log
+  -rw------- 1 root root     0 Nov 22 15:16 /var/log/supervisor/tick-stderr---supervisor-S4zZDy.log
+  -rw------- 1 root root 16548 Nov 22 15:19 /var/log/supervisor/tick-stdout---supervisor-5z8GTx.log
+
+  > sudo tail -3 /var/log/supervisor/tick-stdout---supervisor-5z8GTx.log
+  tick   CTX='bogus-42'   SUPERVISOR_PROCESS_NAME=tick   Tue Nov 22 15:20:12 PST 2016
+  tick   CTX='bogus-42'   SUPERVISOR_PROCESS_NAME=tick   Tue Nov 22 15:20:13 PST 2016
+  tick   CTX='bogus-42'   SUPERVISOR_PROCESS_NAME=tick   Tue Nov 22 15:20:14 PST 2016
+
+
