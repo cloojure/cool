@@ -138,6 +138,10 @@ alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
 alias pk="pkill -9"
 
+function pg {
+  ps -Fp $(pgrep ${1} )
+}
+
 alias blk="sleep 1 ; xset dpms force off"       # set screen to black (power off)
 alias dosleep="systemctl suspend"
 

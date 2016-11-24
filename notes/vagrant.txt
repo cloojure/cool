@@ -18,6 +18,7 @@ Config vagrant from website:  vagrantup.com
   vagrant suspend                   ; suspend (sleep) the machine; saves state
   vagrant halt                      ; halt (poweroff) the machine; retains virt disks
   vagrant destroy [-f]              ; destroy the machine; like it never existed [without confirmation]
+  vagrant box update                ; download the newest version of the box
 
 The vagrant_devbox directory is shared directory accessible in the VM at /vagrant.
 
@@ -26,6 +27,23 @@ There are many configuration options available in the VagrantFile.  See Vagrant 
 
 Vagrant.configure("2") do |config|
   # other config here
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network "private_network", ip: "192.168.42.43"    # like static IP addr
 
-  config.vm.synced_folder   "src/",  "/srv/website"   ; <(rel|abs) host path>, <absolute guest path>
+  config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+      vb.memory = "8192"    # custom memory
+      vb.cpus   = "4"       # custom num cpus
+    end
+
+  # custom config
+  config.vm.provision "shell", inline: <<-SHELL
+    # apt update
+      apt install -y vim git zsh
+  SHELL
+
+  # synced dirs             <(rel|abs) host path>   <absolute guest path>
+  # default                   ".",                 "/vagrant"
+  config.vm.synced_folder     "src/",              "/srv/website"   
 end
