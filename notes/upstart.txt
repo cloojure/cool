@@ -1,0 +1,90 @@
+This file shows how to use Upstart on Ubuntu 14.04
+
+#-----------------------------------------------------------------------------
+#
+# /etc/init/tick.conf
+# startup results & errors  =>  /var/log/upstart/tick.log
+#
+description "Job that runs the foo daemon"
+
+# start in normal runlevels when disks are mounted and networking is available
+start on filesystem or runlevel [2345]
+
+# stop on shutdown/halt, single-user mode and reboot
+stop on shutdown
+
+# pass env vars into the system service
+env logdir=/var/log/tick
+env logfile=/var/log/tick/tick.log
+
+pre-start script
+  mkdir -p "$logdir" # create a directory needed by the daemon
+  echo  ""                 >> $logfile
+  echo  "`date`  starting" >> $logfile
+  echo  ""                 >> $logfile
+end script
+
+pre-stop script
+  echo  ""                >> $logfile
+  echo  "`date`  stoping" >> $logfile
+  echo  ""                >> $logfile
+end script
+
+# The main script
+script
+  exec /usr/local/bin/ticker.bash hello world
+end script
+
+# Note that our 2 "env" directives show up as env vars in the script like below.
+# Note there is no HOME, etc.  Entire env is:
+#   logfile=/var/log/tick/tick.log
+#   logdir=/var/log/tick
+#   TERM=linux
+#   PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+#   PWD=/
+#   SHLVL=1
+#   UPSTART_INSTANCE=
+#   UPSTART_JOB=tick
+#   _=/usr/bin/env
+
+
+-----------------------------------------------------------------------------
+#!/bin/bash
+#
+# /usr/local/bin/ticker.bash
+#
+function doall {
+  echo ""
+  echo "fn args: $*"        # receives 4 args:  begin hello world end
+  echo ""
+  echo "env:"
+  env
+  echo ""
+  while true ; do
+    echo "tick  $(date)"
+    sleep 1
+  done
+}
+# This "$*" is the args passed into the script
+echo "`date`  main args: $*" >> /var/log/tick/tick-main.log 
+
+# We use fn so can redirect all stdout & stderr to file.  # Note that args must be passed along to
+# function here. We add "begin" and "end" to show that the "$*" in the function receives these args,
+# not the args passed into the script
+doall begin $* end >> /var/log/tick/tick.log 2>&1
+
+
+-----------------------------------------------------------------------------
+#!/bin/bash -v
+#
+# /vagrant/deploy.bash 
+# This is the easiest way to deploy changes since /vagrant dir isn't yet mounted when upstart/init runs
+#
+
+sudo cp tick.conf       /etc/init
+sudo cp ticker.bash     /usr/local/bin
+
+sudo ls -ldF  {.,/etc/init}/tick.conf 
+sudo ls -ldF  {.,/usr/local/bin}/ticker.bash 
+
+
