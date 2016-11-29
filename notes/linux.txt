@@ -166,10 +166,12 @@ loginctl show-user alan
 Add/modify a user in Linux
 
   # not useradd
-  sudo adduser <user> [ <group> ]       ; Dialog to create <user> [as member of <group> ]  
+  sudo adduser  <user> [ <group> ]      ; Dialog to create <user> [as member of <group> ]  
+  sudo addgroup <group>                 ; Dialog to create <group>
 
   sudo usermod -aG <group> <user>       ; append <group> to list of groups for <user>
   sudo usermod -aG sudo    <user>       ; add <user> to group "sudo" (give sudo privledges)
+  groups <user>                         ; show a user's groups
 
   sudo vim ~/etc/passwd                 ; simplest way to change new user's shell
 
