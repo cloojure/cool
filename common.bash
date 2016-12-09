@@ -71,6 +71,8 @@ function shellVersion {
     echo "  zsh $ZSH_VERSION"
   elif [[ $BASH_VERSION != "" ]]; then
     echo "  bash $BASH_VERSION"
+  else
+    echo "  *** unknown shell! ***"
   fi
 }
 alias shellver="shellVersion"

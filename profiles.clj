@@ -5,7 +5,7 @@
       [lein-pprint      "1.1.1"] 
       [lein-codox       "0.9.3"] 
       [jonase/eastwood  "0.2.3"] 
-      [com.jakemccrary/lein-test-refresh "0.15.0"]
+      [com.jakemccrary/lein-test-refresh "0.18.0"]
     ] 
     :dependencies [ 
     ; [org.clojure/clojure          "1.9.0-alpha14"]
