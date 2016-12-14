@@ -53,7 +53,7 @@ Update all software (~30 min)
 
 Install basic software:
   sudo apt install -y  \
-    git zsh tcsh fish tmux curl  \
+    git gitk zsh tcsh fish tmux curl  \
     vim vim-gnome \
     gcc python ruby golang \
     build-essential  libssl-dev \

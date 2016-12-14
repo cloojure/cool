@@ -91,11 +91,15 @@ alias df="df -BG"
 alias grep=" \grep  -E --color=auto"  # same as deprecated 'egrep'
 alias grepi="\grep -iE --color=auto"
 
-alias pdirs="find * -maxdepth 0 -type d "
-alias pfiles="find * -maxdepth 0 -type f "
-alias dd='d `pdirs` '
+alias radirs="find . -type d "                                  # Recursive All Dirs
+alias rdirs="radirs | grep -v '/\.' | sed -e 's/^..//' "        # Recursive Dirs
+alias ldirs="find * -maxdepth 0 -type d "                       # Local Dirs
+alias lfiles="find * -maxdepth 0 -type f "                      # Local Files
+alias dd='d $(ldirs) '                                          # d Dirs
+alias ddr='d $(rdirs) '                                         # d Dirs Recursive
+alias ddra='d $(radirs) '                                       # d Dirs Recursive All
 
-alias wcl="wc -l"
+alias wcl="wc -l"       # Word Count Lines
 
 alias hh="history -99"
 
@@ -177,6 +181,8 @@ alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wif
         # maybe try this too:  sudo service network-manager restart
 alias pingg="ping -c5 google.com"
 alias ping4="ping -c4"
+alias gopen="gnome-open"
+alias go="   gnome-open"
 
 function ipaddr() {
   result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns

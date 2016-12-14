@@ -213,6 +213,19 @@ Networking commands
   sudo systemctl stop/start/restart networking      ; control network status
 
 ---------------------------------------------------------------------------
+command line tools:
+
+  gnome-open (alias "go")       ; launch tools to open PDF file (Evince, Okular, Nautilus, etc)
+        also xdg-open           ;   universal    version
+        also kde-open           ;   kde desktop  version
+  go *.pdf                      ; read PDF files
+  go *.png                      ; view PNG
+  go *.odf                      ; launch OpenOffice document
+  go <dir>                      ; launch Nautilus dir viewer
+  go http://www.google.com      ; open default browser
+  go mailto:user@google.com     ; launch email
+
+---------------------------------------------------------------------------
 tools:
   strace, wireshark, perf, ngrep, ps, netstat (2016 Julia Evans strangeloop talk)
 
