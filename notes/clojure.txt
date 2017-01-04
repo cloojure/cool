@@ -232,6 +232,7 @@ Pronouncable Clojure:
   [?ent :person/name ?name]     - var-ent person/name var-name
 
   (.-value xxx)         - "dodash-value" xxx | "get-value" | "field-value"     (cljs object member getter)
+  (.-name)              - "dosh" name
 
   "str"                 - "stir"
   *.clj                 - "cloj"
@@ -239,6 +240,9 @@ Pronouncable Clojure:
   *.cljc                - "clo-see"
 
   --path                - dashes path
+
+  /user                 - "fash" user (Forward  slASH)
+  \user                 - "bash" user (Backward slASH)
 
 -----------------------------------------------------------------------------
 Clojure error msgs:

@@ -124,6 +124,7 @@ alias cutl="cut --char=-222"
 alias gits="    git status --short"
 alias gitb="    git branch"
 alias gitco="   git checkout"
+# alias gitmer="  git merge --no-ff --no-commit"
 alias gitca="   git commit --all"
 alias gitcam="  git commit --all -m'misc' "
 alias gitcamp=" git commit --all -m'misc' ; git push"
@@ -165,10 +166,15 @@ alias scanner=scangearmp
 alias gsutil-cpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
 
 # lein abbreviations
-alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
-alias ltst=" time lein test :bvt :regression"
-alias litst="linit ; ltst"
+alias lt=" time lein test"
+alias lta="time lein test :all"
 alias ltr="lein test-refresh"
+alias lex="lein autoexpect"
+alias lrsh="lein ring server-headless"
+# dead??? #todo
+#   alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
+#   alias litst="linit ; ltst"
+#   alias ltst=" time lein test :bvt :regression"
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
