@@ -54,6 +54,13 @@ else
   echo "Linux: not found"
 fi
 
+if true; then   # bash: /bin/true & /bin/false;   zsh: shell built-in's
+  echo "yes"    # this will print
+else
+  echo "no"
+fi
+
+
 echo ""
 echo "-----------------------------------------------------------------------------"
 echo "Calling: uname --all"
