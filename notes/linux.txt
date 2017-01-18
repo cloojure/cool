@@ -226,6 +226,19 @@ command line tools:
   go mailto:user@google.com     ; launch email
 
 ---------------------------------------------------------------------------
+debugging: (netflix: linux performance analysis in 60s)
+  uptime
+  dmesg | tail
+  vmstat 1
+  mpstat -P ALL 1
+  pidstat 1
+  iostat -xz 1
+  free -m
+  SAR -n DEV 1
+  SAR -n TCP,ETCP 1
+  top
+
+---------------------------------------------------------------------------
 tools:
   strace, wireshark, perf, ngrep, ps, netstat (2016 Julia Evans strangeloop talk)
 

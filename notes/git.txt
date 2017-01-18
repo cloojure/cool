@@ -36,6 +36,7 @@ git log --before=2014-04-15                     # linit end time of listing
 gitk                                            # GUI history viewer
 git log --oneline master...myBranch             # view only commits since myBranch
 git log --oneline master...                     #   was created from master
+git shortlog -s -n --since=2016-01-01 --until=2017-01-01
 
 # Discarding changes to a file
 git checkout <branch>                           # move to <branch>

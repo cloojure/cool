@@ -55,11 +55,11 @@ Install basic software:
   sudo apt install -y  \
     git gitk zsh tcsh fish tmux curl  \
     vim vim-gnome \
-    gcc ruby golang \
+    gcc ruby golang autoconf \
     python python-pip python3 python3-pip \
     build-essential  libssl-dev \
     maven octave libreoffice gimp \
-    supervisor cryptkeeper \
+    supervisor cryptkeeper s3cmd \
     lxc lxd \
     mininet wireshark tshark traceroute \
     tree htop iotop collectl gnupg \
@@ -423,6 +423,19 @@ Turning Wi-Fi network devices on/off:  http://askubuntu.com/questions/168032/how
 -----------------------------------------------------------------------------
 Tips:
   Ctrl+Alt+T => new terminal window (Unity)
+
+--------------------------------------------------------------------------------
+Google Cloud Platform
+
+  export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+  echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  sudo apt-get update && sudo apt-get install google-cloud-sdk
+  gcloud init
+
+  Then:
+    gsutil --version  (see 4.22 <= version)
+
 
 --------------------------------------------------------------------------------
 octave notes (old 2014):

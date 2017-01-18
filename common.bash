@@ -26,6 +26,7 @@ else
   export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin      $path )
   export ODL_KARAF_DIR="/opt/karaf"             ; path=( ${ODL_KARAF_DIR}/bin       $path )
   export MAVEN_HOME="/opt/apache-maven"         ; path=( ${MAVEN_HOME}/bin          $path )
+  export PYTHON_PREFIX="${HOME}/.local/bin"           ; path=( ${PYTHON_PREFIX}           $path )
 
   # extra cassandra stuff
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -175,6 +176,10 @@ alias lrsh="lein ring server-headless"
 #   alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
 #   alias litst="linit ; ltst"
 #   alias ltst=" time lein test :bvt :regression"
+
+# python abbreviations
+alias pyx="chmod a+x *.py "
+alias pyt="pytest -v"
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings

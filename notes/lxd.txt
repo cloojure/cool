@@ -1,0 +1,24 @@
+sudo adduser joe lxd                    ; add user "joe" to the group 'lxd'
+sudo lxd init -> <answer questions>     ; enable/init lxd on system
+
+lxc image list ubuntu:xenial        ; list all ubuntu/xenial images
+lxc launch ubuntu:xenial foo        ; launch image foo
+lxc list
+lxc info foo                        ; info on container foo
+lxc delete foo --force              ; delete container foo
+lxc start/stop/restart
+lxc exec foo bash                   ; run bash in container foo
+
+# Mount /opt in container foo at /opt
+lxc config device add foo opt disk source=/opt path=opt
+lxc help config                     ; for info
+lxc config edit foo                 ; to edit foo
+
+# mask a device 'eth1' in a container foo by setting type to 'none'
+lxc config device add foo eth1 none
+
+lxc move c1 final-beta
+lxc snapshot c1 snap-yyyy-mm-dd
+lxc restore u1 snap-yyyy-mm-dd
+lxc copy u1/snap-yyyy-mm-dd testcontainer
+
