@@ -80,6 +80,7 @@ alias shellver="shellVersion"
 
 alias d='    ls -ldF   --color'
 alias da='   d *'
+alias dar='  d **/*'
 alias dal='  ls -ldF * | less'
 alias lal='  ls -alF   --color'
 alias dt9='  d -t * | head -9'
