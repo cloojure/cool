@@ -2,6 +2,7 @@
 ##### WARNING - 'echo' statements in ~/.bashrc or ~/.zshrc will cause 'ssh' remote login to fail!
 # echo "common.bash - enter"   
 
+#todo this only works with zsh
 # baseline path
 path=( . ${HOME}/bin ${HOME}/opt/bin )
 path=( $path /opt/bin )
@@ -26,7 +27,7 @@ else
   export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin      $path )
   export ODL_KARAF_DIR="/opt/karaf"             ; path=( ${ODL_KARAF_DIR}/bin       $path )
   export MAVEN_HOME="/opt/apache-maven"         ; path=( ${MAVEN_HOME}/bin          $path )
-  export PYTHON_PREFIX="${HOME}/.local/bin"           ; path=( ${PYTHON_PREFIX}           $path )
+  export PYTHON_PREFIX="${HOME}/.local/bin"     ; path=( ${PYTHON_PREFIX}           $path )
 
   # extra cassandra stuff
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -67,7 +68,7 @@ if [[ $(hostname) == amy ]]; then
 fi
 alias idea="idea.sh &"
 
-function shellVersion {
+function shellVersion() {
   if [[ $ZSH_VERSION != "" ]]; then
     echo "  zsh $ZSH_VERSION"
   elif [[ $BASH_VERSION != "" ]]; then
@@ -100,6 +101,9 @@ alias lfiles="find * -maxdepth 0 -type f "                      # Local Files
 alias dd='d $(ldirs) '                                          # d Dirs
 alias ddr='d $(rdirs) '                                         # d Dirs Recursive
 alias ddra='d $(radirs) '                                       # d Dirs Recursive All
+alias ddr3='find .  -maxdepth 3  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
+alias ddr4='find .  -maxdepth 4  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
+alias ddr5='find .  -maxdepth 5  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
 
 alias wcl="wc -l"       # Word Count Lines
 
@@ -147,7 +151,7 @@ alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
 alias pk="pkill -9"
 
-function pg {
+function pg() {
   ps -Fp $(pgrep ${1} )
 }
 
@@ -178,9 +182,19 @@ alias lrsh="lein ring server-headless"
 #   alias litst="linit ; ltst"
 #   alias ltst=" time lein test :bvt :regression"
 
+# python env vars
+export PYTHONDONTWRITEBYTECODE="enable"     # invaluable for avoiding stale cache errors
 # python abbreviations
 alias pyx="chmod a+x *.py "
 alias pyt="pytest -v"
+alias venv2='virtualenv -p /usr/bin/python2 venv'
+alias venv3='virtualenv -p /usr/bin/python3 venv'
+function venvon() {
+  echo '    source venv/bin/activate'
+            source venv/bin/activate }
+function venvoff() {
+  echo '    deactivate'
+            deactivate }
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
@@ -238,44 +252,17 @@ alias cp-shared=" sudo bash -c 'mv /media/sf_shared/* /shared; chown -R alan:ala
 alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u athomps'
   # need to leave running in background or open window
 
-function customer() {
-    customer=$1
-    #devops=[LOCATION OF DEVOPS]
-    #devops="${HOME}/cx/devops/deployments/rapid-dev/"
-    devops="~/cx/devops/deployments/rapid-dev/"
-    default="${devops}/cortx.yaml"
-    custops="${devops}/customers/${customer}/cortx.yaml"
- 
-    if ! [[ "$(boot2docker status)" = "running" ]] ; then
-        boot2docker start;
-    fi
-    cortx stop;
-    cortx clean;
-    if [ -e $custops ]; then
-        echo "customer found: ${customer}"
-        use=${custops}
-    else
-        echo "customer not found: ${customer}"
-        echo "using generic"
-        use=${default}
-    fi
-    cp ${use} ~
-    cortx start;
-    curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json";
-    docker exec -i -t ldap ldapadd -x -D "cn=Manager,dc=cenx,dc=com" -w 2112 -f /etc/openldap/sample.ldif
-}
-
 # Node & NVM stuff
-export NVM_DIR="$HOME/.nvm"
-source ~/cool/tools/nvm.sh      # This loads nvm
+### export NVM_DIR="$HOME/.nvm"
+### source ~/cool/tools/nvm.sh      # This loads nvm
 
 #---------------------------------------------------------------------------------------------------
 # temp stuff
-alias gef="grep -E '(Error|Fail)' "
+### alias gef="grep -E '(Error|Fail)' "
 
-aa=~/work
-bb=~/wrk2
-cc=~/wrk3
+### aa=~/work
+### bb=~/wrk2
+### cc=~/wrk3
 
 
 ###################################################################################################
@@ -285,7 +272,4 @@ cc=~/wrk3
 # CENX stuff
 ### export DOCKER_MACHINE_IP=$(ipaddr)
 ### alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
-### alias vpnping='ping -c3 nexus.cenx.localnet'
-### alias cortx='docker run --rm -t -v ~:/opt/cenx docker.cenx.localnet:5000/deployer'
-### alias parker_alias='curl -X POST http://localhost:8983/solr/admin/collections\?action\=CREATEALIAS\&name\=parker\&collections\=parker1 -H "Content-Type: application/json"'
 
