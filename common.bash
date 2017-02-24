@@ -191,14 +191,18 @@ alias venv2='virtualenv -p /usr/bin/python2 venv'
 alias venv3='virtualenv -p /usr/bin/python3 venv'
 function venvon() {
   echo '    source venv/bin/activate'
-            source venv/bin/activate }
+            source venv/bin/activate 
+}
 function venvoff() {
   echo '    deactivate'
-            deactivate }
+            deactivate 
+}
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
-mcd() { mkdir -p "$1"; cd "$1";}
+function mcd() { 
+  mkdir -p "$1"; cd "$1";
+}
 alias histg="history | grep"
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
@@ -212,7 +216,7 @@ alias go="   gnome-open"
 
 function ipaddr() {
   result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
-  echo ${result}
+  echo "${result}"
 }
 alias ipexternal="curl --silent http://checkip.amazonaws.com"
 function ipinfo() {
