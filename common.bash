@@ -134,7 +134,7 @@ alias gitco="   git checkout"
 alias gitca="   git commit --all"
 alias gitcam="  git commit --all -m'misc' "
 alias gitcamp=" git commit --all -m'misc' ; git push"
-alias gitsy="   git pull ; git push"    # git-sync
+alias gitsy="   git pull ; git push --tags"    # git-sync (also push tags)
 alias gitdns="  git diff --name-status"
 alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
 alias gitlg="   git log -22 --oneline --graph --decorate"
@@ -256,24 +256,4 @@ alias cp-shared=" sudo bash -c 'mv /media/sf_shared/* /shared; chown -R alan:ala
 alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u athomps'
   # need to leave running in background or open window
 
-# Node & NVM stuff
-### export NVM_DIR="$HOME/.nvm"
-### source ~/cool/tools/nvm.sh      # This loads nvm
-
-#---------------------------------------------------------------------------------------------------
-# temp stuff
-### alias gef="grep -E '(Error|Fail)' "
-
-### aa=~/work
-### bb=~/wrk2
-### cc=~/wrk3
-
-
-###################################################################################################
-# Old Stuff #######################################################################################
-###################################################################################################
-
-# CENX stuff
-### export DOCKER_MACHINE_IP=$(ipaddr)
-### alias vpnstart='sudo vpnc cenx --local-port 0 --domain "" '
-
+# echo "common.bash - exit"   
