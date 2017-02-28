@@ -127,7 +127,7 @@ alias cuts="cut --char=-99"
 alias cutm="cut --char=-155"
 alias cutl="cut --char=-222"
 
-alias gits="    git status --short"
+alias gits="    git status --short --branch"
 alias gitb="    git branch"
 alias gitco="   git checkout"
 # alias gitmer="  git merge --no-ff --no-commit"
