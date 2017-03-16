@@ -13,7 +13,42 @@ Docker Notes - Fedora 20 (2014-10-21)
 
   Commands:
     dk version
-    dk run <image> <cmd> <args>     # run a job
+    dk run <flags>  <image>     <cmd & args>     # run a job
+    dk run -it      ubuntu    /bin/bash
+    dk run -itd     ubuntu                      # start container in background (--detach)
+
+                    <cont name>     <image>
+    dk run -itd     --name=mycont   ubuntu      # start container in background (--detach)
+
+                        <nw name>
+    dk network ls                                   # list all networks (also 'list')
+    dk network inspect bridge                       # show details on "bridge" network
+    dk network disconnect bridge mycont             # remove container from network
+
+    dk network create                   my-bridge-nw    # default:  --driver=bridge
+    dk network create --driver=bridge   my-bridge-nw    # create your own "bridge" network
+    dk network inspect                  my-bridge-nw    # inspect network
+
+    dk run -d --net=my-bridge-nw --name db training/postgres
+    dk network connect my-bridge-nw web        # attach web container to m-b-network
+
+    dk run -itd --name container1 busybox           # create 2 containers
+    dk run -itd --name container2 busybox
+    dk network create -d bridge --subnet 172.25.0.0/16  isolated_nw         # create network
+    dk network connect isolated_nw container2       # connect c2 to network
+    dk network inspect isolated_nw                  # verify
+
+    dk attach container4                            # attach to a running container
+    ping -w4 c5                                     # ping another container on the network
+    dk network disconnect isolated_nw container5    # disconnect container from network
+    dk network rm isolated_nw                       # remove a network
+
+    dk image ls                                     # list images
+    dk images                                       # list images
+    dk run docker-whale                             # run image; it then exits
+    dk build -t perf-1 .                            # build ./Dockerfile and tag "perf-1"
+
+
 
     dk ps                           # list running containers
     dk ps -a                        # list ALL     containers

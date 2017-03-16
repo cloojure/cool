@@ -138,12 +138,21 @@ alias gitsy="   git pull ; git push --tags"    # git-sync (also push tags)
 alias gitdns="  git diff --name-status"
 alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
 alias gitlg="   git log -22 --oneline --graph --decorate"
-alias git-unadd='git reset HEAD'  # git unadd
+alias git-unadd='git reset HEAD'    # git unadd
+function gitg() { # sample:   gittag v0.1.0
+  tagStr=$1
+  if [[ "$tagStr" == "" ]]; then
+    git tag
+  else
+    git tag "$tagStr" -m"$tagStr"
+  fi
+}
 
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
         # old version (doesn't work on mac):
         #   dg      = git difftool --no-prompt --extcmd='gvimdiff --nofork -geometry 180x50+20+40'
+
 
 alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
@@ -239,6 +248,8 @@ alias dkc=" docker-compose"
 alias dkrm="        dk  rm -v"          # by default always remove volumes
 alias dkcrm="       dkc rm -vf"         # by default always remove volumes
 alias dkmrm="       dkm rm -f"          # by default always remove volumes
+alias dkps='        dk ps'
+alias dkpsa='       dk ps -a'
 alias dklist='      dk ps -aq'
 alias dkclear='     dk rm -v $(dklist) '
 alias dk-kill-all=' dk kill $(dk ps -q) '
