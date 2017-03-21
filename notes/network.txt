@@ -1,4 +1,5 @@
-new: "ip" cmds
+NEW: iproute2
+  # address commands
   ip address                # address / addr / a   (all legal)
   ip addr                   # display all ip addrs
   ip a
@@ -12,6 +13,7 @@ new: "ip" cmds
 
   ip addr add 192.168,0.77/24 broadcast 192.168.0.255 dev eth0
 
+  # link commands
   ip link show                                      # display all
   ip link set eth0 up                               # eth0 enable
   ip link set eth0 down                             # eth0 disable
@@ -27,16 +29,8 @@ new: "ip" cmds
   ip link set dev eth0 arp on                       # or off
 
   ip link set name          # rename network interfaces
-  ip maddr                  # multicast
 
-  # stats
-  ip -s link
-  ip -s link  show eth0
-  ip -s addr
-  ip -s route
-  ip -s link/addr/route/maddr/netns/...
-
-  # see also file:  /etc/network/interfaces  (network restart required)
+  # route commands (see also file:  /etc/network/interfaces  (network restart required)
   ip route show                                             # show route table
   ip route add default via 192.168.50.100           # add default gateway
   ip route get 192.168.88.77                        # query which interface a packet will hit
@@ -52,10 +46,21 @@ new: "ip" cmds
   ip neigh show dev eth0
   ip neigh add 192.168.0.1 lladdr 00:11:22:33:44:55 nud permanent dev eth0  # add ARP table entry
 
+  # stats
+  ip -s link
+  ip -s link  show eth0
+  ip -s addr
+  ip -s route
+  ip -s maddr
+  ip -s netns
+
+  # other
   ip tunnel
   ip rule show
+  ip maddr                  # multicast
 
-old: ifconfig, route, nameif, iwconfig, iptunnel, netstat, arp
+
+OLD: ifconfig, route, nameif, iwconfig, iptunnel, netstat, arp
   ifconfig eth0 add 192.168.1.1 
   ifconfig eth0 del 192.168.1.1 
 
@@ -69,7 +74,13 @@ old: ifconfig, route, nameif, iwconfig, iptunnel, netstat, arp
   ifconfig eth0 up/down                             # eth0 enable/disable
   ifconfig eth0 arp/-arp                            # enable/disable arp
 
-
+NETSTAT:
+  netstat --tcp/-t                # show all tcp ports
+  netstat --tcp/-t -4             # show all tcp ports; ipv4 only
+  netstat --udp/-u                # show all udp ports
+  netstat --unix                  # show all unix ports
+  netstat --all/-a
+  netstat --listening/-l
 
 OVS video
   ip link
