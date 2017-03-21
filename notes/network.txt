@@ -1,3 +1,125 @@
+new: "ip" cmds
+  ip address                # address / addr / a   (all legal)
+  ip addr                   # display all ip addrs
+  ip a
+  ip -4 addr                # display all ipv4 addrs
+  ip -6 addr                # display all ipv6 addrs
+
+  ip addr show                                   # display all
+  ip addr show eth0                              # display eth0
+  ip addr add 192.168.1.1 dev eth0               # add/del ip address for eth0
+  ip addr del 192.168.1.1 dev eth0
+
+  ip addr add 192.168,0.77/24 broadcast 192.168.0.255 dev eth0
+
+  ip link show                                      # display all
+  ip link set eth0 up                               # eth0 enable
+  ip link set eth0 down                             # eth0 disable
+  ip link show eth0
+  ip link show up/down
+
+  ip link set dev eth0 address 00:11:22:33:44:55    # set eth0 mac address 
+  ip link set dev eth0 mtu 2345                     # set eth0 mtu
+  ip link set dev eth0 multicast on                 # or off
+  ip link set dev eth0 txqueuelen 1200
+  ip link set dev eth0 promisc on                   # or off
+  ip link set dev eth0 allmulti on                  # or off
+  ip link set dev eth0 arp on                       # or off
+
+  ip link set name          # rename network interfaces
+  ip maddr                  # multicast
+
+  # stats
+  ip -s link
+  ip -s link  show eth0
+  ip -s addr
+  ip -s route
+  ip -s link/addr/route/maddr/netns/...
+
+  # see also file:  /etc/network/interfaces  (network restart required)
+  ip route show                                             # show route table
+  ip route add default via 192.168.50.100           # add default gateway
+  ip route get 192.168.88.77                        # query which interface a packet will hit
+  ip route add 192.168.3.0/24 dev eth3
+  ip route del 192.168.3.0/24 dev eth3
+  ip route add 10.0.1.0/24 via 192.168.50.100               # add static route
+  ip route add 10.0.1.0/24 via 192.168.50.100 dev eth3      # add static route
+  ip route del 10.0.1.0/24                                  # del static route
+  ip route add blackhole   10.10.20.0/24    # create blackhole route; drop all pkts; no icmp msgs
+  ip route add unreachable 10.10.20.0/24    # create unreachable route; drop all pkts; send icmp unreachable msgs
+
+  ip neigh show
+  ip neigh show dev eth0
+  ip neigh add 192.168.0.1 lladdr 00:11:22:33:44:55 nud permanent dev eth0  # add ARP table entry
+
+  ip tunnel
+  ip rule show
+
+old: ifconfig, route, nameif, iwconfig, iptunnel, netstat, arp
+  ifconfig eth0 add 192.168.1.1 
+  ifconfig eth0 del 192.168.1.1 
+
+  ifconfig eth0 hw ether 00:11:22:33:44:55          # set eth0 mac address 
+  ifconfig eth0 mtu 2000                            # set eth0 mtu
+  ifconfig eth0 multicast                           # enable
+  ifconfig eth0 txqueuelen 1200
+  ifconfig eth0 promisc
+  ifconfig eth0 allmulti
+
+  ifconfig eth0 up/down                             # eth0 enable/disable
+  ifconfig eth0 arp/-arp                            # enable/disable arp
+
+
+
+OVS video
+  ip link
+  ip address
+  ip route
+
+  ip netns add red      # add network namespace
+  ip netns add green
+  ip netns              # list network ns's
+  ls /var/run/netns
+  ip netns exec red ip link     # run "ip link" in the red namespace
+
+  ovs-vsctl add-br ovs1       # add bridge switch "ovs1"
+  ovs-vsctl show              # show switches
+  ip link                     # can see ovs1 added to root ns
+
+  ip link add eth0-r type veth peer name veth-r    # create virtual eth pair (unconnected pipe)
+  ip link                     # show both ends in root ns
+  ip link set eth0-r netns red        # place end "eth0-r" into red ns
+  ip link                             # etho0-r is no longer visible in root ns
+  ip netns exec red ip link           #   can see it here now
+  ovs-vsctl add-port ovs1 veth-r      # Add end "veth-r" to vswitch "ovs1"
+
+  ip link add eth0-g type veth peer name veth-g    # create virtual eth pair (unconnected pipe)
+  ip link set eth0-g netns green      # place end "eth0-g" into green ns
+  ovs-vsctl add-port ovs1 veth-g      # Add end "veth-g" to vswitch "ovs1"
+
+  ip link set veth-r up               # turn on veth-r
+  ip netns exec red ip link set dev lo up
+  ip netns exec red ip link set dev eth0-r up
+  ip netns exec red ip address add 10.0.0.1/24 dev eth0-r     # give it an ip addr (add/del choice)
+  ip netns exec red ip a                                      # a=address show what is here
+  ip netns exec red ip route                                  # show red routes
+  ip route                                                    # show root ns routes
+
+  ip link set veth-g up               # turn on veth-r
+  ip netns exec green bash            # start new bash in green ns
+                    ip link set dev lo up
+                    ip link set dev eth0-g up
+                    ip address add 10.0.0.2/24 dev eth0-g     # give it an ip addr
+                    ip a                                      # a=address show what is here
+                    ip route                                  # show red routes
+                    exit              # leave bash, back to root ns
+  ip route                            # show root ns routes
+
+  ip netns exec red bash
+    ping 10.0.0.2
+    exit
+  ip netns identify <pid>             # identify the ns of a PID (eg a DHCP server like dnsmasq)
+
 
 2016-11-1 VPN PulseSecure crashes and hoses /etc/resolv.conf
 
