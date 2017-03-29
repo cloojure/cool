@@ -179,9 +179,10 @@ Add/modify a user in Linux
   sudo deluser <user> --remove-home     ; ... and their home directory
 
 -----------------------------------------------------------------------------
-System-Wide Config:
+System-Wide Config (environment variables & aliases)
   /etc/bash.bashrc          - can put basic aliases here
-  /etc/environment          - can set env vars here (e.g.  JAVA_HOME="/usr/lib/jvm/java-8-oracle" )
+  /etc/environment          - can set env vars here (e.g.  JAVA_HOME="/usr/lib/jvm/java-8-oracle" ); Not a script file!
+  /etc/profile.d/*.sh       - these *.sh files are all executed
 
 -----------------------------------------------------------------------------
 Networking commands

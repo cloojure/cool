@@ -1,3 +1,8 @@
+Networking Restart:
+  ip addr flush enp0s3              # or eth0, etc
+  systemctl restart networking      # full name:  networking.service
+    # systemctl restart NetworkManager.service   # ???
+
 NEW: iproute2
   # address commands
   ip address                # address / addr / a   (all legal)
@@ -74,6 +79,29 @@ OLD: ifconfig, route, nameif, iwconfig, iptunnel, netstat, arp
   ifconfig eth0 up/down                             # eth0 enable/disable
   ifconfig eth0 arp/-arp                            # enable/disable arp
 
+/etc/network/interfaces (sample)
+  # Loopback IP Config:
+  auto lo
+  iface lo inet loopback
+
+  # Static IP Config:
+  auto eth0
+  iface eth0 inet static
+    address  10.0.0.100
+    netmask  255.255.255.0
+    gateway  10.0.0.1
+
+Static Hostnames:   /etc/hosts (overrides DNS)
+  127.0.0.1	localhost
+  127.0.1.1	ubuntu-server
+  10.0.0.11	server1 server1.example.com vpn
+  10.0.0.12	server2 server2.example.com mail
+  10.0.0.13	server3 server3.example.com www
+  10.0.0.14	server4 server4.example.com file
+
+My Hostname:  /etc/hostname
+
+
 NETSTAT:
   netstat --tcp/-t                # show all tcp ports
   netstat --tcp/-t -4             # show all tcp ports; ipv4 only
@@ -81,6 +109,14 @@ NETSTAT:
   netstat --unix                  # show all unix ports
   netstat --all/-a
   netstat --listening/-l
+
+  netstat -ln                       # show routes
+  netstat -rn                       # show routes
+  netstat -ia                       # show status/errors
+  netstat  atunp                    # show status/errors
+
+ARP:
+  arp -a                            # show arp lookup table
 
 OVS video
   ip link

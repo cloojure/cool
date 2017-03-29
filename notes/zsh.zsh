@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+set -e      # abort on error
+set -u      # abort on use of undefined variable
+# set -x    # debug flag
+
 echo ""
 echo "-----------------------------------------------------------------------------"
 origPath=${path}
@@ -80,13 +84,12 @@ echo ""
 echo "-----------------------------------------------------------------------------"
 echo "loops:"
 for ((ii=0; i<5; i++)); do
-  echo "i: " $i
+  echo "C-style i: " $i
 done
-
 echo ""
 echo "-----------------------------------------------------------------------------"
 echo "seq function:"
-for i in $(seq 1 3); do 
+for i in $(seq 1 5); do 
   echo "i: " $i
 done
 

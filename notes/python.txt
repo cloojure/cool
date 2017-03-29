@@ -1,0 +1,9 @@
+
+Suppressing *.pyc file generation
+
+  > cat /etc/environment
+    PYTHONDONTWRITEBYTECODE=enable                  # don't use export (not a script file)
+
+  > cat /etc/profile.d/python-env.sh
+    export PYTHONDONTWRITEBYTECODE=enable           # use export
+

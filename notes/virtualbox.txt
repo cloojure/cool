@@ -1,0 +1,26 @@
+-----------------------------------------------------------------------------
+VirtualBox Shared Folders:
+
+  in gui:  Devices -> Shared Folders -> Shared Folder Settings
+  click on "plus folder" icon near top right edge
+  in pop-up window:  Folder Path -> Other (dropdown menu) -> find existing host folder -> "Choose" button
+    Example:    select a pre-existing host folder like "/home/joe/sample" 
+                "Folder Name" field is populated with "sample"
+  select both "Auto-mount" and "Make Permanent" checkboxes
+  select "Read-Only" checkbox if desired (i.e. guest cannot write to host)
+  click "OK" button
+
+  *** Restart the VM to make it auto-mount the folder ***
+
+  folder "sample" is now visible as /media/sf_sample, owned by user "root" & group "vboxsf"
+    this cannot be changed by "chown" or "chmod", it seems
+
+  to facility access, you must append group "vboxsf" to list of groups for user "joe"
+    sudo usermod -aG vboxsf joe
+
+  now you can use ls, cd, etc:
+    ls -al  /media/sf_sample
+    cd      /media/sf_sample
+    date >  /media/sf_sample/tmp.txt
+    cat  >  /media/sf_sample/tmp.txt
+
