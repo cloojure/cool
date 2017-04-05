@@ -1,7 +1,7 @@
 {
   :user {
     :plugins [ 
-      [com.jakemccrary/lein-test-refresh "0.18.1"]
+      [com.jakemccrary/lein-test-refresh "0.19.0"]
       [jonase/eastwood          "0.2.3"] 
       [lein-ancient             "0.6.0"]
 ;     [lein-autoexpect          "1.9.0"]
