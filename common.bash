@@ -190,6 +190,10 @@ alias lrsh="lein ring server-headless"
 #   alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
 #   alias litst="linit ; ltst"
 #   alias ltst=" time lein test :bvt :regression"
+alias lf="lein figwheel"
+alias lc="lein clean"
+alias lclf="lein clean ; lein figwheel"
+alias rlf="lein clean ; rlwrap lein figwheel"
 
 # python env vars
 export PYTHONDONTWRITEBYTECODE="enable"     # invaluable for avoiding stale cache errors

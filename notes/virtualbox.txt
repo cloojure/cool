@@ -17,6 +17,7 @@ VirtualBox Shared Folders:
 
   to facility access, you must append group "vboxsf" to list of groups for user "joe"
     sudo usermod -aG vboxsf joe
+  User "joe" must not log out & back in for new permissions to take effect
 
   now you can use ls, cd, etc:
     ls -al  /media/sf_sample
