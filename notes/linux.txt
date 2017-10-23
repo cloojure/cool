@@ -244,6 +244,46 @@ tools:
   strace, wireshark, perf, ngrep, ps, netstat (2016 Julia Evans strangeloop talk)
 
 ---------------------------------------------------------------------------
+Use `update-alternatives` to manage global config for multiple versions of software
+  which mvn
+      /usr/bin/mvn -> /etc/alternatives/mvn*
+      /etc/alternatives/mvn -> /usr/share/maven/bin/mvn*
+
+  mvn --version
+      Apache Maven 3.0.5
+      Maven home: /usr/share/maven
+      Java version: 1.8.0_111, vendor: Oracle Corporation
+      Java home: /usr/lib/jvm/java-8-openjdk-amd64/jre
+      Default locale: en_US, platform encoding: UTF-8
+      OS name: "linux", version: "3.13.0-119-generic", arch: "amd64", family: "unix"
+
+
+  sudo update-alternatives --install  /usr/bin/mvn  mvn  /opt/apache-maven-3.5.0/bin/mvn  350
+  sudo update-alternatives --display mvn
+      mvn - auto mode
+        link currently points to /opt/apache-maven-3.5.0/bin/mvn
+      /opt/apache-maven-3.5.0/bin/mvn - priority 350
+      /usr/share/maven/bin/mvn - priority 150
+        slave mvn.1.gz: /usr/share/maven/man/mvn.1.gz
+        slave mvnDebug: /usr/share/maven/bin/mvnDebug
+        slave mvnDebug.1.gz: /usr/share/maven/man/mvnDebug.1.gz
+      Current 'best' version is '/opt/apache-maven-3.5.0/bin/mvn'.
+
+  mvn --version
+      Apache Maven 3.5.0 (ff8f5e7444045639af65f6095c62210b5713f426; 2017-04-03T19:39:06Z)
+      Maven home: /opt/apache-maven-3.5.0
+      Java version: 1.8.0_111, vendor: Oracle Corporation
+      Java home: /usr/lib/jvm/java-8-openjdk-amd64/jre
+      Default locale: en_US, platform encoding: UTF-8
+      OS name: "linux", version: "3.13.0-119-generic", arch: "amd64", family: "unix"
+
+  which mvn
+      /usr/bin/mvn -> /etc/alternatives/mvn*
+      /etc/alternatives/mvn -> /opt/apache-maven-3.5.0/bin/mvn*
+
+
+
+---------------------------------------------------------------------------
 old Ubuntu (Upstart) - https://help.ubuntu.com/community/UbuntuBootupHowto
   service   fdb-document-layer  start/stop/restart      # control a service (old way)
   service   fdb-sql-layer       start/stop/restart      # control a service (old way)

@@ -20,6 +20,10 @@ Config vagrant from website:  vagrantup.com
   vagrant destroy [-f]              ; destroy the machine; like it never existed [without confirmation]
   vagrant box update                ; download the newest version of the box
 
+Boxes
+  ubuntu/trusty64       - 14.04
+  ubuntu/xenial64       - 16.04
+
 The vagrant_devbox directory is shared directory accessible in the VM at /vagrant.
 
 There are many configuration options available in the VagrantFile.  See Vagrant documentation for more information.
