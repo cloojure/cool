@@ -267,6 +267,13 @@ repl tutorial:  (ref: 8thlight tutorial)
 Quoting:  '[a b c] is same as ['a 'b 'c]
 
 ----------------------------------------------------------------------------------------
+"auto-eval" for symbols & lists
+  sym               => replace with value
+  (some-fn 1 2 3)   => replace with value
+
+  Use quoting to "turn off" auto-eval.  Similar to escaping in strings, etc to "turn off" normal interpretation.
+
+----------------------------------------------------------------------------------------
 Tupelo default naming:
 
   (ns clj.core
