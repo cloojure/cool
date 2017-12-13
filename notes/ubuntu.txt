@@ -242,6 +242,12 @@ Postgres
   *** manual install ***
   postgresql (get latest from postgresql.org)
 
+NeoVim
+  *** manual install ***
+  sudo add-apt-repository ppa:neovim-ppa/stable
+  sudo apt-get update
+  sudo apt-get install neovim
+
 Media codecs
   sudo apt install -y ubuntu-restricted-extras
 
