@@ -28,6 +28,7 @@ else
   export ODL_KARAF_DIR="/opt/karaf"             ; path=( ${ODL_KARAF_DIR}/bin       $path )
   export MAVEN_HOME="/opt/apache-maven"         ; path=( ${MAVEN_HOME}/bin          $path )
   export PYTHON_PREFIX="${HOME}/.local/bin"     ; path=( ${PYTHON_PREFIX}           $path )
+  export POSTMAN_HOME="/opt/Postman"            ; path=( ${POSTMAN_HOME}            $path )
 
   # extra cassandra stuff
   export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -173,6 +174,9 @@ alias dateTimeStr=" date --iso-8601=seconds | sed -e's/^\(.\{19\}\)\(.*\)/\1/' |
 
 # Alias for home Cannon scanner driver
 alias scanner=scangearmp
+
+# Alias for Postman app (local install)
+alias postman=Postman
 
 # Google Cloud tools
 #

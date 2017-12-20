@@ -238,6 +238,12 @@ Config vagrant from website:  vagrantup.com
 
 CENX vpnc file: ~/cool/etc--vpnc--cenx.conf  -> /etc/vpnc
 
+Postman
+  *** manual install ***
+  go to https://www.getpostman.com/apps 
+  download *.tar.gz file
+  unpack and intall into /opt/postman
+
 Postgres
   *** manual install ***
   postgresql (get latest from postgresql.org)
