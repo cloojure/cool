@@ -4,7 +4,7 @@
 
 #todo this only works with zsh
 # baseline path
-path=( . ${HOME}/bin ${HOME}/opt/bin )
+path=( . ${HOME}/bin ${HOME}/cool/bin ${HOME}/opt/bin )
 path=( $path /opt/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )

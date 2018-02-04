@@ -63,17 +63,17 @@ fi
 ln -sv ${coolDir}/boot.properties  ~/.boot/boot.properties
 
 # Create links to tools & utils in ~/bin
-toolsDir=${coolDir}/tools
-mkdir -p ~/bin
-pushd ${toolsDir}
-  for ff in *
-  do
-    if ${forceFlg} ; then
-      rm -f ~/bin/${ff}
-    fi
-    ln -sv ${toolsDir}/${ff}  ~/bin/${ff}
-  done
-popd
+###   toolsDir=${coolDir}/tools
+###   mkdir -p ~/bin
+###   pushd ${toolsDir}
+###     for ff in *
+###     do
+###       if ${forceFlg} ; then
+###         rm -f ~/bin/${ff}
+###       fi
+###       ln -sv ${toolsDir}/${ff}  ~/bin/${ff}
+###     done
+###   popd
 
 # Create links to tools & utils in ~/.ssh
 ### mkdir -p ~/.ssh
