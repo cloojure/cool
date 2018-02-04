@@ -9,7 +9,7 @@ path=( $path /opt/bin )
 path=( $path /usr/local/bin  /usr/bin  /bin )
 path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
-path=( $path /opt/gsutil )  # #todo:  what is this?
+path=( $path ~/.local/bin )  # awscli stuff
 
 if [[ $(hostname) == *dummy.com ]]; then
   echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block

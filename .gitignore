@@ -10,8 +10,8 @@
 /classes
 /checkouts
 *.class
-/.lein-*
-/.nrepl-port
+.lein-*
+.nrepl-port
 tags
 target
 out*.txt
