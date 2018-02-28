@@ -1,0 +1,24 @@
+date:       (js/Date.)  ; construct a native Date object
+color:      "#f88"      ; RGB in hex (0-f) for each primary color, as a string
+
+     [:div.example-clock
+       {:style {:color @(rf/subscribe [:time-color])}}
+       (-> @(rf/subscribe [:time])
+           .toTimeString
+           (str/split " ")
+           first)]
+
+timing events
+  setTimeout(  fn, millis )         ; a one-time callback
+  setInterval( fn, millis )         ; a repeated callback
+
+  or (`window.` optional)
+    myVar = window.setTimeout(  fn, millis )         ; a one-time callback
+    myVar = window.setInterval( fn, millis )         ; a repeated callback
+
+  clearing timers
+    clearTimout(   myVar )
+    clearInterval( myVar )
+
+setting:
+  document.getElementById("demo").innerHTML = "Hello World!";
