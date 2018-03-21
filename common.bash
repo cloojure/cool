@@ -69,7 +69,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
 fi
 if [[ $(uname -a) =~ "Darwin" ]]; then
-  echo "Found Darwin"
+  # echo "Found Darwin"
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
   # export DYLD_LIBRARY_PATH=/opt/oracle
