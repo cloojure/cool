@@ -17,6 +17,13 @@ else
   # echo ""
   # echo "Not-Found touchcommerce.com"
   # echo ""
+  echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
+fi
+
+if [[ $(uname -a) =~ "Linux" ]]; then
+  ### echo "Found Linux"
+  echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
+
   export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin           $path )
   export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin         $path )
   export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin        $path )
@@ -45,29 +52,35 @@ else
     #   NOT the install location of the Solr binaries & libs
 
   # echo "PATH -> ${PATH}"
-fi
 
-if [[ $(uname -a) =~ "Linux" ]]; then
-  ### echo "Found Linux"
-  echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
-fi
-### if [[ $(uname -a) =~ "Darwin" ]]; then
-###   echo "Found Darwin"
-###   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
-###   sleep 3
-###   # export DYLD_LIBRARY_PATH=/opt/oracle
-###   # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
-###   # export GROOVY_HOME="/opt/groovy"
-### fi
-
-# We need to add the '2>&/dev/null' part to squelch error messages on Kubuntu 14.04.
-# Remove if you need to see any error messages.
-alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
-alias gvimw="\gvim  -geom '300x80+2200+0' "
-if [[ $(hostname) == amy ]]; then
   alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
+  alias gvimw="\gvim  -geom '300x80+2200+0' "
+  if [[ $(hostname) == amy ]]; then
+    alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
+  fi
+
+  alias d='    ls -ldF   --color'
+  alias lal='  ls -alF   --color'
+  alias ddr3='find .  -maxdepth 3  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
+  alias ddr4='find .  -maxdepth 4  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
+  alias ddr5='find .  -maxdepth 5  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
+
+  alias idea="idea.sh &"
+
 fi
-alias idea="idea.sh &"
+if [[ $(uname -a) =~ "Darwin" ]]; then
+  echo "Found Darwin"
+  echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
+  # sleep 3
+  # export DYLD_LIBRARY_PATH=/opt/oracle
+  # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
+  # export GROOVY_HOME="/opt/groovy"
+
+  alias d='    ls -ldF'
+  alias lal='  ls -alF'
+  alias idea=echo "not implemented; start IDEA from dock"
+
+fi
 
 function shellVersion() {
   if [[ $ZSH_VERSION != "" ]]; then
@@ -80,11 +93,9 @@ function shellVersion() {
 }
 alias shellver="shellVersion"
 
-alias d='    ls -ldF   --color'
 alias da='   d *'
-alias dar='  d **/*'
 alias dal='  ls -ldF * | less'
-alias lal='  ls -alF   --color'
+alias dar='  d **/*'
 alias dt9='  d -t * | head -9'
 alias dt22=' d -t * | head -22'
 
@@ -102,9 +113,6 @@ alias lfiles="find * -maxdepth 0 -type f "                      # Local Files
 alias dd='d $(ldirs) '                                          # d Dirs
 alias ddr='d $(rdirs) '                                         # d Dirs Recursive
 alias ddra='d $(radirs) '                                       # d Dirs Recursive All
-alias ddr3='find .  -maxdepth 3  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
-alias ddr4='find .  -maxdepth 4  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
-alias ddr5='find .  -maxdepth 5  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
 
 alias wcl="wc -l"       # Word Count Lines
 
