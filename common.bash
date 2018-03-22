@@ -78,7 +78,7 @@ if [[ $(uname -a) =~ "Darwin" ]]; then
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
-  alias idea=echo "not implemented; start IDEA from dock"
+  alias idea='echo "not implemented; start IDEA from dock" '
 
 fi
 
