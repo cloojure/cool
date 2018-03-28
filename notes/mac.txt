@@ -1,19 +1,28 @@
 
+xcode-select --install      # apple dev tools
+
 software to load:
   brew      <== do this first!!!
 
+install:
+  Chrome
+  IntelliJ IDEA
+  Slack
+  HomeBrew (aka "brew")
+
 brew install:
   bash      (newest version)
-  zsh
+  dos2unix
+  git
+  h2
+  iterm2 (shows up at "iterm" replacing default "iterm" from apple)
+  macvim
+  pgadmin3
+  postgresql
   tcsh
   tree
-  iterm2
-  macvim
-  git
-  postgresql
-  pgadmin3
-  h2
-  dos2unix
+  vim
+  zsh
 
 web download & install:
   chrome
@@ -28,3 +37,8 @@ git clone:
   cool.git
     cd ~/cool  <- install dir
     ./install.zsh
+
+
+Apple Menue (top left of screen)
+  -> About This Mac
+    -> Software Update
