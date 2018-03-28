@@ -100,7 +100,7 @@ alias dt9='  d -t * | head -9'
 alias dt22=' d -t * | head -22'
 
 alias du="du -m"
-alias df="df -BG"
+alias df="df -m"
 
 # Always use egrep
 alias grep=" \grep  -E --color=auto"  # same as deprecated 'egrep'
