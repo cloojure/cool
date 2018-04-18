@@ -76,6 +76,8 @@ if [[ $(uname -a) =~ "Darwin" ]]; then
   # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
   # export GROOVY_HOME="/opt/groovy"
 
+  export H2_HOME="/opt/h2"                  ; path=( ${H2_HOME}/bin           $path )
+
   alias d='    ls -ldF'
   alias lal='  ls -alF'
   alias idea='echo "not implemented; start IDEA from dock" '
