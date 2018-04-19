@@ -1,5 +1,5 @@
 {
-  :dev {
+  :user {
     :plugins [
       [com.jakemccrary/lein-test-refresh "0.22.0"]
       [jonase/eastwood          "0.2.5"]
