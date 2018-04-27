@@ -173,6 +173,7 @@ function git-common-root() {
     git merge-base $1 $2  |  cut -c -10
   fi
 }
+alias git-log-string='git log -S'  # search log for changes to a string
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
         # old version (doesn't work on mac):
