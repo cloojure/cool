@@ -150,7 +150,7 @@ alias gitdns="  git diff --name-status"
 alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
 alias gitlg="   git log -22 --oneline --graph --decorate"
 alias git-unadd='git reset HEAD'    # git unadd
-function gitg() { # sample:   gittag v0.1.0
+function gitg() { # usage:   gittag v0.1.0
   tagStr=$1
   if [[ "$tagStr" == "" ]]; then
     git tag
@@ -159,6 +159,20 @@ function gitg() { # sample:   gittag v0.1.0
   fi
 }
 
+function git-current-branch() {  # returns the name of the current branch
+  git rev-parse --abbrev-ref HEAD
+}
+function git-common-root() {
+  if [[ $# = 0 || $# > 2 ]]; then
+    echo "usage:  "
+    echo "  git-common-root <branch-other>         # find common root of current branch and <branch-other> "
+    echo "  git-common-root <branch-1> <branch-2>  # find common root of <branch-1> and <branch-2> "
+  elif [[ "$#" == "1" ]]; then
+    echo $(git-common-root $1 $(git-current-branch))
+  else
+    git merge-base $1 $2  |  cut -c -10
+  fi
+}
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
         # old version (doesn't work on mac):
