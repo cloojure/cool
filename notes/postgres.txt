@@ -37,14 +37,24 @@ shell:
 
 psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
   \l[+]                         - list databases (+ => extra info)
-  \du[+]                        - list users/roles (+ => extra info)
-  \dn[+]                        - list schemas (+ => extra info)
-  \dg[+]                        - list roles
   \d                            - list tables, views, sequences
+  \dt[+]                        - list tables (+ => extra info)
+  \du[+]                        - list users/roles (+ => extra info)
+  \dg[+]                        - list roles
+  \dn[+]                        - list schemas (+ => extra info)
   \d  [<name>]                  - describe tables, views, sequences
   \c   <dbname>                 - connect to <dbname>
-  \h                            - help
+  \conninfo                     - connection info
+  \h                            - help or `\?`
   \q                            - quit (or CRTL-D)
+
+  select version();             - version of postgres
+  show config-file;             - location of config file
+  show data-directory;          - location of data directory
+  show log-directory;           - location of log directory (may be relative to data dir)
+
+
+
   CREATE USER <name>;       - synonym for "CREATE ROLE <name> LOGIN;"
   CREATE USER <name> SUPERUSER LOGIN;
   DROP   USER <name>;

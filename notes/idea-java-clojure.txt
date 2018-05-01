@@ -1,0 +1,102 @@
+
+file -> new project
+  select java
+  -> Additional Libraries & Frameworks
+    select Clojure
+    select Download
+  click Next
+  enter Project Name (eg "demo5")
+    let location autoselect
+  click Finish
+
+
+OPen the "demo5" project in the Project view panel (click triangle)
+R-click on the "src" dir 
+  select New -> Java class
+    name it "Main"; click OK
+    in editor, delete comments and add:
+
+      import clojure.lang.IFn;
+      import clojure.java.api.Clojure;
+      import static java.lang.System.out;
+      public class Main {
+	  public static void main(String[] args) {
+	      out.println("hello from java");
+
+	      IFn plus = Clojure.var("clojure.core", "+");
+	      out.println("three = " + plus.invoke(1, 2) );
+
+	      IFn require = Clojure.var("clojure.core", "require");
+	      require.invoke(Clojure.read("sub"));
+
+	      IFn hello = Clojure.var("sub", "hello");
+	      out.println("sub says: " + hello.invoke() );
+	  }
+      }
+
+Menu Run -> Run (select Main class) to execute Main.java, get error:
+
+    hello from java
+    three = 3
+    Exception in thread "main" java.io.FileNotFoundException: Could not locate sub__init.class or sub.clj on classpath.
+    ...
+    Process finished with exit code 1
+
+We need to add the Clojure namespace "sub".  
+R-click on "src" dir
+  select New -> Clojure Namespace
+    name it "sub"
+    see that "sub.clj" is created within src dir
+  make sub.clj look like:
+
+    (ns sub)
+    (defn hello []
+      (println "hello from clojure")
+      "clojure done")
+
+Attempt Run -> Run (Main).  Get same error:
+
+  Exception in thread "main" java.io.FileNotFoundException: Could not locate sub__init.class or sub.clj on classpath.
+
+File -> Settings -> Build, Edecution, Deployment 
+  -> Compiler -> Clojure Compiler
+    Check "Compile all Clojure namespaces"
+
+File -> Project Structure -> Modules
+  Select "Dependencies" tab
+  click the "+" button
+    select (1) Jars or Directories
+    select the demo5/src dir and click OK
+    it will be listed as "Empty Library", you can change the name if you want
+      with the "pencil" edit icon to "SubDir" or similar if desired (not necessary)
+Build -> Rebuild Project
+You will now see sub*.class files:
+    > find out
+    out
+    out/production
+    out/production/demo5
+    out/production/demo5/Main.class
+    out/production/demo5/sub$fn__20.class
+    out/production/demo5/sub$hello.class
+    out/production/demo5/sub$loading__5340__auto____18.class
+    out/production/demo5/sub__init.class
+
+Run -> Run 'Main'  to get correct output:
+
+  hello from java
+  three = 3
+  hello from clojure
+  sub says: clojure done
+
+  Process finished with exit code 0
+
+Enjoy!
+
+-----------------------------------------------------------------------------
+
+If you follow another path, you may need this:
+  R-click on "src" dir
+    "Mark Directory As" -> "Sources Root"
+  It should already be done using the above steps, so the options shows up as:
+    "Unmark as Sources Root"
+
