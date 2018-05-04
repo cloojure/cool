@@ -66,17 +66,22 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   alias ddr5='find .  -maxdepth 5  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
 
   alias idea="idea.sh &"
-
 fi
-if [[ $(uname -a) =~ "Darwin" ]]; then
+
+if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
   # echo "Found Darwin"
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
-  # export DYLD_LIBRARY_PATH=/opt/oracle
-  # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
-  # export GROOVY_HOME="/opt/groovy"
 
-  export H2_HOME="/opt/h2"                  ; path=( ${H2_HOME}/bin           $path )
+  enable_java_version="1.8"   # "1.8" or "10"
+  if [[ $enable_java_version = "1.8" ]]; then
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+  elif [[ $enable_java_version = "10" ]]; then
+    export JAVA_HOME=`/usr/libexec/java_home -v 10`
+  fi
+  path=( ${JAVA_HOME}/bin $path )
+
+  export H2_HOME="/opt/h2" ; path=( ${H2_HOME}/bin           $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
@@ -159,16 +164,16 @@ function gitg() { # usage:   gittag v0.1.0
   fi
 }
 
-function git-current-branch() {  # returns the name of the current branch
+function git-branch-current() {  # returns the name of the current branch
   git rev-parse --abbrev-ref HEAD
 }
-function git-common-root() {
+function git-branch-root() {
   if [[ $# = 0 || $# > 2 ]]; then
     echo "usage:  "
-    echo "  git-common-root <branch-other>         # find common root of current branch and <branch-other> "
-    echo "  git-common-root <branch-1> <branch-2>  # find common root of <branch-1> and <branch-2> "
+    echo "  git-branch-root <branch-other>         # find common root of current branch and <branch-other> "
+    echo "  git-branch-root <branch-1> <branch-2>  # find common root of <branch-1> and <branch-2> "
   elif [[ "$#" == "1" ]]; then
-    echo $(git-common-root $1 $(git-current-branch))
+    echo $(git-branch-root $1 $(git-branch-current))
   else
     git merge-base $1 $2  |  cut -c -10
   fi
