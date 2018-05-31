@@ -68,6 +68,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
     path=( ${JAVA_HOME}/bin ${path} )
     java  --version
   }
+  java10  >& /dev/null
 
   alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
@@ -89,7 +90,8 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
 
-  export H2_HOME="/opt/h2" ; path=( ${H2_HOME}/bin           $path )
+  export JAVA_HOME='/opt/java'          ; path=( ${JAVA_HOME}/bin       $path )
+  export H2_HOME='/opt/h2'              ; path=( ${H2_HOME}/bin         $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
@@ -97,6 +99,11 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
 
   function java8() {
     export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+    path=( ${JAVA_HOME}/bin $path )
+    java -version
+  }
+  function java9() {
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.9`
     path=( ${JAVA_HOME}/bin $path )
     java -version
   }
