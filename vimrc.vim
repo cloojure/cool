@@ -45,6 +45,12 @@ set selectmode="mouse,key,cmd"
 set fileformat=unix
 set fileformats=unix,dos
 set ruler
+set nowrap
+set equalalways
+set selectmode="mouse,key,cmd"
+set fileformat=unix
+set fileformats=unix,dos
+set ruler
 set textwidth=100
 set scrolloff=5
 set tags=./tags,../tags,../../tags,../../../tags,../../../../tags,tags

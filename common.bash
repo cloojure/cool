@@ -66,15 +66,22 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   alias ddr5='find .  -maxdepth 5  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
 
   alias idea="idea.sh &"
-
 fi
-if [[ $(uname -a) =~ "Darwin" ]]; then
+
+if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
   # echo "Found Darwin"
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
-  # export DYLD_LIBRARY_PATH=/opt/oracle
-  # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home"
-  # export GROOVY_HOME="/opt/groovy"
+
+  enable_java_version="1.8"   # "1.8" or "10"
+  if [[ $enable_java_version = "1.8" ]]; then
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+  elif [[ $enable_java_version = "10" ]]; then
+    export JAVA_HOME=`/usr/libexec/java_home -v 10`
+  fi
+  path=( ${JAVA_HOME}/bin $path )
+
+  export H2_HOME="/opt/h2" ; path=( ${H2_HOME}/bin           $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
@@ -152,7 +159,7 @@ alias gitdns="  git diff --name-status"
 alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
 alias gitlg="   git log -22 --oneline --graph --decorate"
 alias git-unadd='git reset HEAD'    # git unadd
-function gitg() { # sample:   gittag v0.1.0
+function gitg() { # usage:   gittag v0.1.0
   tagStr=$1
   if [[ "$tagStr" == "" ]]; then
     git tag
@@ -161,6 +168,21 @@ function gitg() { # sample:   gittag v0.1.0
   fi
 }
 
+function git-branch-current() {  # returns the name of the current branch
+  git rev-parse --abbrev-ref HEAD
+}
+function git-branch-root() {
+  if [[ $# = 0 || $# > 2 ]]; then
+    echo "usage:  "
+    echo "  git-branch-root <branch-other>         # find common root of current branch and <branch-other> "
+    echo "  git-branch-root <branch-1> <branch-2>  # find common root of <branch-1> and <branch-2> "
+  elif [[ "$#" == "1" ]]; then
+    echo $(git-branch-root $1 $(git-branch-current))
+  else
+    git merge-base $1 $2  |  cut -c -10
+  fi
+}
+alias git-log-string='git log -S'  # search log for changes to a string
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
 # alias gitdg="git difftool --noprompt"
         # old version (doesn't work on mac):
