@@ -94,7 +94,7 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
     java -version
   }
   function java9() {
-    export JAVA_HOME=`/usr/libexec/java_home -v 1.9`
+    export JAVA_HOME=`/usr/libexec/java_home -v 9`
     path=( ${JAVA_HOME}/bin $path )
     java -version
   }
