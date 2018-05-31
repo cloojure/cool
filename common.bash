@@ -53,6 +53,22 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
   # echo "PATH -> ${PATH}"
 
+  function java8() {
+    export JAVA_HOME=/opt/java8
+    path=( ${JAVA_HOME}/bin ${path} )
+    java  -version
+  }
+  function java9() {
+    export JAVA_HOME=/opt/java9
+    path=( ${JAVA_HOME}/bin ${path} )
+    java  --version
+  }
+  function java10() {
+    export JAVA_HOME=/opt/java10
+    path=( ${JAVA_HOME}/bin ${path} )
+    java  --version
+  }
+
   alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
   if [[ $(hostname) == amy ]]; then
@@ -73,25 +89,25 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
 
-  enable_java_version="1.8"   # "1.8" or "10"
-  if [[ $enable_java_version = "1.8" ]]; then
-    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-  elif [[ $enable_java_version = "10" ]]; then
-    export JAVA_HOME=`/usr/libexec/java_home -v 10`
-  fi
-  path=( ${JAVA_HOME}/bin $path )
-
   export H2_HOME="/opt/h2" ; path=( ${H2_HOME}/bin           $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
   alias idea='echo "not implemented; start IDEA from dock" '
 
-fi
+  function java8() {
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+    path=( ${JAVA_HOME}/bin $path )
+    java -version
+  }
+  function java10() {
+    export JAVA_HOME=`/usr/libexec/java_home -v 10`
+    path=( ${JAVA_HOME}/bin $path )
+    java -version
+  }
+  java8  >& /dev/null
 
-alias java8=' export JAVA_HOME=/opt/java8;  path=( ${JAVA_HOME}/bin ${path} ); java  -version '
-alias java9=' export JAVA_HOME=/opt/java9;  path=( ${JAVA_HOME}/bin ${path} ); java --version '
-alias java10='export JAVA_HOME=/opt/java10; path=( ${JAVA_HOME}/bin ${path} ); java --version '
+fi
 
 function shellVersion() {
   if [[ $ZSH_VERSION != "" ]]; then
