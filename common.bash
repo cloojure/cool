@@ -11,15 +11,6 @@ path=( $path /usr/local/sbin /usr/sbin /sbin )
 path=( $path /usr/local/opt  /opt/bin )
 path=( $path ~/.local/bin )  # awscli stuff
 
-if [[ $(hostname) == *dummy.com ]]; then
-  echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
-else
-  # echo ""
-  # echo "Not-Found touchcommerce.com"
-  # echo ""
-  echo "dummy" > /dev/null  # KLUDGE: stupid bash can't handle an empty if block
-fi
-
 if [[ $(uname -a) =~ "Linux" ]]; then
   ### echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
@@ -273,7 +264,7 @@ function venvoff() {
 }
 
 # misc stuff
-alias crashrm="sudo rm /var/crash/*"                                # remove Ubuntu crash files that create annoying warnings
+alias crashrm="sudo rm /var/crash/*"       # remove Ubuntu crash files that create annoying warnings
 function mcd() { 
   mkdir -p "$1"; cd "$1";
 }
