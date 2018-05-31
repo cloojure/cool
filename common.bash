@@ -82,6 +82,10 @@ if [[ $(uname -a) =~ "Darwin" ]]; then
 
 fi
 
+alias java8=' export JAVA_HOME=/opt/java8;  path=( ${JAVA_HOME}/bin ${path} ); java  -version '
+alias java9=' export JAVA_HOME=/opt/java9;  path=( ${JAVA_HOME}/bin ${path} ); java --version '
+alias java10='export JAVA_HOME=/opt/java10; path=( ${JAVA_HOME}/bin ${path} ); java --version '
+
 function shellVersion() {
   if [[ $ZSH_VERSION != "" ]]; then
     echo "  zsh $ZSH_VERSION"
