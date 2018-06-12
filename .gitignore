@@ -14,14 +14,12 @@
 /checkouts
 /classes
 /lib
+/node_modules
 /out
 /resources/public/js/compiled/**
 /target
 figwheel_server.log
-node_modules
-out
 out*.txt
 package-lock.json
 pom.xml
 tags
-target
