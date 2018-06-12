@@ -14,10 +14,10 @@ endif
 " Note: User-defined commands must begin with a capital letter 
  
 " Font options
-command! Fs  set guifont=Monospace\ 9      " Font small
-command! Fm  set guifont=Monospace\ 10     " Font medium
-command! Fl  set guifont=Monospace\ 12     " Font large
-command! Fll set guifont=Monospace\ 14     " Font large-large
+command! Fs  set guifont=Ubuntu\ Mono\ 10     " Font small
+command! Fm  set guifont=Ubuntu\ Mono\ 12     " Font medium
+command! Fl  set guifont=Ubuntu\ Mono\ 14     " Font large
+command! Fll set guifont=Ubuntu\ Mono\ 16     " Font large-large
 command! FF  Fll
 command! Laptop  Fll
 
@@ -33,7 +33,7 @@ command! Wl set columns=250        " Width large
 function! ConfigStd()
   set columns=130
   set lines=60
-  set guifont=Monospace\ 10
+  set guifont=Ubuntu\ Mono\ 14
 endfunction
 call ConfigStd()
 

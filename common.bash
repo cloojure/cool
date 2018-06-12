@@ -61,7 +61,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   }
   java10  >& /dev/null
 
-  alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
+  alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
   if [[ $(hostname) == amy ]]; then
     alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
