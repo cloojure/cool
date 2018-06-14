@@ -289,8 +289,18 @@ function ipinfo() {
   echo "external IP  =>  $(ipexternal)"
 }
 
+#-----------------------------------------------------------------------------
 # joyent
-alias gojoy="ssh ubuntu@165.225.137.241"
+# alias gojoy="ssh ubuntu@165.225.137.241"
+export TRITON_PROFILE="env"
+export TRITON_URL="https://us-sw-1.api.joyent.com"
+export TRITON_ACCOUNT="catalan42"
+unset  TRITON_USER
+export TRITON_KEY_ID="$(ssh-keygen -l -f $HOME/.ssh/id_rsa.pub | awk '{print $2}')"
+unset  TRITON_TESTING
+unset  TRITON_PROFILE
+#-----------------------------------------------------------------------------
+
 
 # Docker stuff
 alias dk="  docker"

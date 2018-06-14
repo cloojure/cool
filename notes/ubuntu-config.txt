@@ -314,6 +314,14 @@ Chrome:
   - Configure Konsole
     - Tab Bar: Always Show, Tabs Above Terminal Area
 
+- Ubuntu Launcher 
+  - Startup Applications Preferences
+      gnome-terminal --geometry 200x70+1810+740  --window-with-profile=large  --tab-with-profile=large
+      gnome-terminal  --geometry 180x50+3850+1140  --window-with-profile=large   --tab-with-profile=large
+      gnome-system-monitor
+      /opt/google/chrome/chrome
+      ssh key agent:  /usr/bin/gnome-keyring-daemon --start --components=ssh
+
 - Set wallpaper
   - Right-click on background Default Desktop Settings -> View -> "Get New Wallpapers"
     - Selecting INSTALL for each wallpaper copies it to your computer
