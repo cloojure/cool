@@ -59,6 +59,12 @@ if [[ $(uname -a) =~ "Linux" ]]; then
     path=( ${JAVA_HOME}/bin ${path} )
     java  --version
   }
+  function zulu10() {
+    export JAVA_HOME=/opt/zulu10
+    path=( ${JAVA_HOME}/bin ${path} )
+    java  --version
+  }
+
   java10  >& /dev/null
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
