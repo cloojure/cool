@@ -61,6 +61,7 @@ supervisord stuff   (Ubuntu install:  sudo apt install -y supervisor)
   sudo supervisorctl reread
   sudo supervisorctl update
   sudo supervisorctl start all
+  sudo supervisorctl restart all
   sudo supervisorctl status
   sudo supervisorctl 
     supervisor> help
@@ -69,6 +70,52 @@ supervisord stuff   (Ubuntu install:  sudo apt install -y supervisor)
   
   sudo systemctl restart  supervisor
   sudo systemctl status   supervisor
+
+-----------------------------------------------------------------------------
+networkctl utility
+  sudo systemctl status systemd-networkd   # check status
+
+  - enable
+  sudo systemctl start systemd-networkd 
+  sudo systemctl enable systemd-networkd
+
+  networkctl  [-a]
+    IDX LINK             TYPE               OPERATIONAL SETUP     
+      1 lo               loopback           carrier     unmanaged 
+      2 enp3s0           ether              no-carrier  unmanaged 
+      3 wlp4s0           wlan               routable    unmanaged 
+      4 docker0          ether              no-carrier  unmanaged 
+      5 lxcbr0           ether              no-carrier  unmanaged 
+
+  networkctl status          
+         State: routable
+       Address: 192.168.1.139 on wlp4s0
+                172.17.0.1 on docker0
+                10.0.3.1 on lxcbr0
+                2605:e000:1c02:c4ad:4d33:aa8b:5c5c:750 on wlp4s0
+                2605:e000:1c02:c4ad:9e98:d534:aca6:a969 on wlp4s0
+                fe80::1555:d55f:ea8d:1545 on wlp4s0
+       Gateway: 192.168.1.1 on wlp4s0
+                fe80::6238:e0ff:fe0f:fd2b on wlp4s0
+
+  networkctl status wlp4s0
+      3: wlp4s0
+           Link File: /lib/systemd/network/99-default.link
+        Network File: n/a
+                Type: wlan
+               State: routable (unmanaged)
+                Path: pci-0000:04:00.0
+              Driver: iwlwifi
+              Vendor: Intel Corporation
+               Model: Wireless 8260 (Dual Band Wireless-AC 8260)
+          HW Address: 60:f6:77:96:01:3b
+             Address: 192.168.1.139
+                      2605:e000:1c02:c4ad:4d33:aa8b:5c5c:750
+                      2605:e000:1c02:c4ad:9e98:d534:aca6:a969
+                      fe80::1555:d55f:ea8d:1545
+             Gateway: 192.168.1.1
+                      fe80::6238:e0ff:fe0f:fd2b
+
 
 -----------------------------------------------------------------------------
 Resource monitoring

@@ -179,13 +179,35 @@ alias gitdns="  git diff --name-status"
 alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
 alias gitlg="   git log -22 --oneline --graph --decorate"
 alias git-unadd='git reset HEAD'    # git unadd
-function gitg() { # usage:   gittag v0.1.0
+  
+#  usage:   gittag v9.3.1   - create a tag
+#           gittag          - display all tags
+function gitg() {  
   tagStr=$1
   if [[ "$tagStr" == "" ]]; then
     git tag
   else
     git tag "$tagStr" -m"$tagStr"
   fi
+}
+
+# delete a tag from local and remote (origin)
+function git-tag-delete() {
+  tagStr=$1
+  remoteStr=$2
+  if [[ $# == 0 ]]; then  
+    echo ""
+    echo "  usage:  git-tag-delete <tag> [<remote-repo-name>]"
+    echo ""
+    return;
+  fi
+  if [[ "$remoteStr" == "" ]]; then
+    remoteStr="origin"
+  fi
+  echo "  deleting tag '$tagStr' from local and remote ($remoteStr) repos..."
+  echo ""
+  git tag  --delete            $tagStr
+  git push --delete $remoteStr $tagStr
 }
 
 function git-branch-current() {  # returns the name of the current branch
