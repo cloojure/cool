@@ -361,4 +361,7 @@ alias cp-shared=" sudo bash -c 'mv /media/sf_shared/* /shared; chown -R alan:ala
 alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u athomps'
   # need to leave running in background or open window
 
+# GCP stuff
+export gcp1=35.230.123.85
+
 # echo "common.bash - exit"   
