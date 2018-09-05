@@ -12,13 +12,18 @@ function backup-tar-name() {
   echo "$(dateTimeStr)-$(hostname)$(homeStr).tar"
 }
 
-echo "now   => $(dateTimeStr)"
-echo "home  => $(homeStr)"
-echo "name  => $(backup-tar-name)"
+function output-pathname() {
+  echo "/media/alan/SeagateBackup/$(backup-tar-name)"
+}
 
-exit 1
+echo "name              => $(backup-tar-name)"
+echo "output-pathname   => $(output-pathname)"
+echo ""
+echo "Starting backup in 5 seconds..."
+echo ""
+
 tar --create --verbose  \
-  --file "/media/alan/SeagateBackup/$(backup-tar-name)"  \
+  --file "${output-pathname}"  \
   --exclude-from ~/cool/bk/tar-excludes.txt  \
   ${HOME}
 
