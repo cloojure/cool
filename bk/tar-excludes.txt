@@ -1,0 +1,14 @@
+*.vdi
+.IntelliJ*
+.cache
+.config
+.git
+.idea*
+.m2
+.npm
+.vagrant
+Downloads
+Dropbox
+Virt-cp
+VirtualBox*
+target
