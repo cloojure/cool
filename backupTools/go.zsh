@@ -16,14 +16,14 @@ function output-pathname() {
   echo "/media/alan/SeagateBackup/$(backup-tar-name)"
 }
 
-echo "name              => $(backup-tar-name)"
+echo ""
 echo "output-pathname   => $(output-pathname)"
 echo ""
-echo "Starting backup in 5 seconds..."
-echo ""
+
+echo $0
 
 tar --create --verbose  \
   --file "${output-pathname}"  \
-  --exclude-from ~/cool/bk/tar-excludes.txt  \
+  --exclude-from tar-excludes.txt  \
   ${HOME}
 
