@@ -20,8 +20,6 @@ echo ""
 echo "output-pathname   => $(output-pathname)"
 echo ""
 
-echo $0
-
 tar --create --verbose  \
   --file "${output-pathname}"  \
   --exclude-from tar-excludes.txt  \
