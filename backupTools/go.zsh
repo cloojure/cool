@@ -19,9 +19,10 @@ function output-pathname() {
 echo ""
 echo "output-pathname   => $(output-pathname)"
 echo ""
+sleep 5
 
 tar --create --verbose  \
-  --file "${output-pathname}"  \
+  --file "$(output-pathname)"  \
   --exclude-from tar-excludes.txt  \
   ${HOME}
 
