@@ -1,0 +1,23 @@
+Old Fedora notes:  
+  See:  https://wiki.postgresql.org/wiki/YUM_Installation
+        https://wiki.postgresql.org/wiki/First_steps
+
+  Change auth method from "ident" to "trust" in pg_hba.conf (/var/lib/psql/...)
+    -- I had 2 of them!
+    -- looks like /var/lib/pgsql/9.3 is the correct one (fedora 20, postgres 9.3, 2014/7)
+    -- log file:  /var/lib/pgsql/9.3/data/pg_log/postgresql-Fri.log   (etc)
+
+  After creation/init:
+  > sudo su - postgres
+  > psql                                        -- implicitly uses DB=postgres
+  postgres=# CREATE USER alan SUPERUSER LOGIN;
+  postgres=# \q                                 -- exit
+  > exit                                        -- logout from user postgres
+  > psql -d postgres                            -- must specify an existing DB
+  postgres=# \l                                 -- list databases
+  postgres=# \da                                -- list schema info
+  postgres=# \d                                 -- list tables
+  postgres=# postgres=# CREATE DATABASE alan;            -- easiest to create dummy DB for all users.
+  postgres=# \l                                 -- DB alan now exists
+  postgres=# \q                                 -- quit
+

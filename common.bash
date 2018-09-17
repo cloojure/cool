@@ -12,9 +12,11 @@ export PATH=$PATH:/usr/local/opt:/opt/bin
 export PATH=$PATH:~/.local/bin   # awscli stuff
 
 if [[ $(uname -a) =~ "Linux" ]]; then
-  echo "Found Linux"
+  # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
+  export PGDATA="/var/edb/postgresql"
+  export EDB_HOME="/opt/PostgreSQL/10"          ; export PATH="${EDB_HOME}/bin:$PATH"
   export JAVA_HOME="/opt/java"                  ; export PATH="${JAVA_HOME}/bin:$PATH"
   export GROOVY_HOME="/opt/groovy"              ; export PATH="${GROOVY_HOME}/bin:$PATH"
   export DATOMIC_HOME="/opt/datomic"            ; export PATH="${DATOMIC_HOME}/bin:$PATH"
@@ -364,5 +366,8 @@ alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u atho
 
 # GCP stuff
 export gcp1=35.230.123.85
+
+# lumanu
+alias lum='cd ~/work/lumanu && . Envfile && cd ic'
 
 # echo "common.bash - exit"   
