@@ -59,15 +59,17 @@ Install basic software:
     python python-pip python3 python3-pip pylint \
     build-essential  libssl-dev \
     maven octave libreoffice gimp \
-    supervisor cryptkeeper s3cmd \
+    supervisor s3cmd \
     lxc lxd \
     mininet wireshark tshark traceroute \
     tree htop iotop collectl gnupg \
-    lsb zip unzip dos2unix kuser \
-    alien youtube-dl sbackup rlwrap \
+    lsb zip unzip dos2unix \
+    alien youtube-dl rlwrap \
     okular lzop jq parallel docker.io \
     openvpn vpnc kvpnc network-manager-vpnc racoon \
     curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager \
+
+old: cryptkeeper kuser sbackup 
 
 ===================
 *** VBox basic version

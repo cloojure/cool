@@ -387,26 +387,33 @@ Mac OSX Files
         start       - start service ("restart" does not exist)
 
 -----------------------------------------------------------------------------
-Fedora notes:  
-  See:  https://wiki.postgresql.org/wiki/YUM_Installation
-        https://wiki.postgresql.org/wiki/First_steps
+EDB postgresql notes
 
-  Change auth method from "ident" to "trust" in pg_hba.conf (/var/lib/psql/...)
-    -- I had 2 of them!
-    -- looks like /var/lib/pgsql/9.3 is the correct one (fedora 20, postgres 9.3, 2014/7)
-    -- log file:  /var/lib/pgsql/9.3/data/pg_log/postgresql-Fri.log   (etc)
+from ~/cool/common.bash
+  export PGDATA="/var/edb/postgresql"
+  export EDB_HOME="/opt/PostgreSQL/10"          ; export PATH="${EDB_HOME}/bin:$PATH"
 
-  After creation/init:
-  > sudo su - postgres
-  > psql                                        -- implicitly uses DB=postgres
-  postgres=# CREATE USER alan SUPERUSER LOGIN;
-  postgres=# \q                                 -- exit
-  > exit                                        -- logout from user postgres
-  > psql -d postgres                            -- must specify an existing DB
-  postgres=# \l                                 -- list databases
-  postgres=# \da                                -- list schema info
-  postgres=# \d                                 -- list tables
-  postgres=# postgres=# CREATE DATABASE alan;            -- easiest to create dummy DB for all users.
-  postgres=# \l                                 -- DB alan now exists
-  postgres=# \q                                 -- quit
+install notes:
+  install dir:   /var/edb/postgresql   # owned by alan
+  data dir       /var/edb/postgresql   # PGDATA in env - alan
+
+  # EDB wants to run as a regular user (not root)
+  pg_ctl init       # how to create RDBMS cluster (server stuff)
+
+  result:
+    Success. You can now start the database server using: 
+      /opt/PostgreSQL/10/bin/pg_ctl -D /var/edb/postgresql -l logfile start
+  before can start successfully, remove all old postgres installs
+    sudo systemctl stop  postgresql
+    sudo apt remove -y   postgresql
+    sudo rm /tmp/.s*                # lockfile & socket
+
+  # EDB wants to run as a regular user (not root)
+  pg_ctl start/stop/restart    # run db (as reg user) from a terminal
+    -l <logfile>               # or get log log msgs at terminal
+
+  # EDB wants to run as a regular user (not root)
+  # createuser alan    ; username aka "role" in docs (user 'alan' created during install)
+  alan> createdb  <user> [ --owner=<user> ]   # still need this
+  # psql -c "alter user <user> superuser"  # not needed since created during install
 

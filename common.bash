@@ -4,40 +4,42 @@
 
 #todo this only works with zsh
 # baseline path
-path=( . ${HOME}/bin ${HOME}/cool/bin ${HOME}/opt/bin )
-path=( $path /opt/bin )
-path=( $path /usr/local/bin  /usr/bin  /bin )
-path=( $path /usr/local/sbin /usr/sbin /sbin )
-path=( $path /usr/local/opt  /opt/bin )
-path=( $path ~/.local/bin )  # awscli stuff
+export PATH=.:${HOME}/bin:${HOME}/cool/bin:${HOME}/opt/bin
+export PATH=$PATH:/opt/bin
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin 
+export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin 
+export PATH=$PATH:/usr/local/opt:/opt/bin 
+export PATH=$PATH:~/.local/bin   # awscli stuff
 
 if [[ $(uname -a) =~ "Linux" ]]; then
-  ### echo "Found Linux"
+  # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
-  export JAVA_HOME="/opt/java"                  ; path=( ${JAVA_HOME}/bin           $path )
-  export GROOVY_HOME="/opt/groovy"              ; path=( ${GROOVY_HOME}/bin         $path )
-  export DATOMIC_HOME="/opt/datomic"            ; path=( ${DATOMIC_HOME}/bin        $path )
-  export IDEA_HOME="/opt/idea"                  ; path=( ${IDEA_HOME}/bin           $path )
-  export SPARK_HOME="/opt/spark"                ; path=( ${SPARK_HOME}/bin          $path )
-  export HADOOP_HOME="/opt/hadoop"              ; path=( ${HADOOP_HOME}/bin         $path )
-  export LIQUIBASE_HOME="/opt/liquibase"        ; path=( ${LIQUIBASE_HOME}          $path )
-  export CASSANDRA_HOME="/opt/cassandra"        ; path=( ${CASSANDRA_HOME}/bin      $path )
-  export ODL_KARAF_DIR="/opt/karaf"             ; path=( ${ODL_KARAF_DIR}/bin       $path )
-  export MAVEN_HOME="/opt/apache-maven"         ; path=( ${MAVEN_HOME}/bin          $path )
-  export PYTHON_PREFIX="${HOME}/.local/bin"     ; path=( ${PYTHON_PREFIX}           $path )
-  export POSTMAN_HOME="/opt/Postman"            ; path=( ${POSTMAN_HOME}            $path )
+  export PGDATA="/var/edb/postgresql"
+  export EDB_HOME="/opt/PostgreSQL/10"          ; export PATH="${EDB_HOME}/bin:$PATH"
+  export JAVA_HOME="/opt/java"                  ; export PATH="${JAVA_HOME}/bin:$PATH"
+  export GROOVY_HOME="/opt/groovy"              ; export PATH="${GROOVY_HOME}/bin:$PATH"
+  export DATOMIC_HOME="/opt/datomic"            ; export PATH="${DATOMIC_HOME}/bin:$PATH"
+  export IDEA_HOME="/opt/idea"                  ; export PATH="${IDEA_HOME}/bin:$PATH"
+# export SPARK_HOME="/opt/spark"                ; export PATH="${SPARK_HOME}/bin:$PATH"
+# export HADOOP_HOME="/opt/hadoop"              ; export PATH="${HADOOP_HOME}/bin:$PATH"
+# export LIQUIBASE_HOME="/opt/liquibase"        ; export PATH="${LIQUIBASE_HOME}:$PATH"
+# export CASSANDRA_HOME="/opt/cassandra"        ; export PATH="${CASSANDRA_HOME}/bin:$PATH"
+# export ODL_KARAF_DIR="/opt/karaf"             ; export PATH="${ODL_KARAF_DIR}/bin:$PATH"
+  export MAVEN_HOME="/opt/apache-maven"         ; export PATH="${MAVEN_HOME}/bin:$PATH"
+  export PYTHON_PREFIX="${HOME}/.local/bin"     ; export PATH="${PYTHON_PREFIX}:$PATH"
+  export POSTMAN_HOME="/opt/Postman"            ; export PATH="${POSTMAN_HOME}:$PATH"
 
   # extra cassandra stuff
-  export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
-  export CQLSH_PORT=9042
+  # export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
+  # export CQLSH_PORT=9042
 
   # Maven stuff for ODL
-  export MAVEN_OPTS="-Xmx1048m"
+  # export MAVEN_OPTS="-Xmx1048m"
 
   path=( /opt/phantomjs/bin $path )
 
-  path=( /opt/solr/bin $path )
+  # path=( /opt/solr/bin $path )
     # ***** do not set SOLR_HOME *****
     # SOLR_HOME controls the location on disk of the conf & data dirs for a core, 
     #   NOT the install location of the Solr binaries & libs
@@ -70,7 +72,8 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
   if [[ $(hostname) == amy ]]; then
-    alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
+    # alias gvim="\gvim  -geom '+3300+0' 2>&/dev/null"
+    unalias gvim
   fi
 
   alias d='    ls -ldF   --color'
@@ -363,5 +366,8 @@ alias vpn-pulse='/usr/local/pulse/PulseClient.sh  -h hq.vpn.brocade.com  -u atho
 
 # GCP stuff
 export gcp1=35.230.123.85
+
+# lumanu
+alias lum='cd ~/work/lumanu && . Envfile && cd ic'
 
 # echo "common.bash - exit"   
