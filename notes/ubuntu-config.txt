@@ -53,7 +53,7 @@ Update all software (~30 min)
 
 Install basic software:
   sudo apt install -y  \
-    git gitk zsh tcsh fish tmux curl  \
+    git gitk zsh tcsh fish tmux curl samba  \
     vim vim-gnome \
     gcc ruby golang autoconf \
     python python-pip python3 python3-pip pylint \
@@ -86,28 +86,74 @@ Install basic software:
     curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager 
 
 ===================
+Samba File Sharing install
+  location:   ~/samba-share
+  right-click on dir in file browser (nautilis) & select "Local Network Share"
+  finish config in gui
+
+===================
+Add Java
+  Oracle Java 8,10 => /opt    Make it look like:
+
+      /opt/java -> java10/
+      /opt/java10 -> jdk-10.0.1//
+      /opt/java7 -> jdk1.7.0_80/
+      /opt/java8 -> jdk1.8.0_161/
+      /opt/java9 -> jdk-9.0.4//
+      /opt/jdk-10.0.1/
+      /opt/jdk1.7.0_80/
+      /opt/jdk1.8.0_161/
+      /opt/jdk-9.0.4/
+
+===================
+Install IntelliJ IDEA
+  configure license via account
+  add license file for offline use
+  add Cursive license
+
+      /opt/idea -> idea-IU-181.4668.68/
+      /opt/idea-IU-181.4668.68/
+
+===================
+Add zoom.us (download & install)
+
+===================
+Others  => /opt
+
+      /opt/datomic -> datomic-pro-0.9.5359/
+      /opt/datomic-pro-0.9.5359/
+
+      /opt/postman -> Postman/
+      /opt/Postman/
+
+      /opt/vagrant/
+
+===================
 
 *** remember DEBIAN_FRONTEND=noninteractive env var for "apt install -y" ***
 *** can also explore apt-cacher (re. Ferris 2016-11-7)
 
+"Tweaks" app - search & install
+  then look for below items and adjust 
 
-unity-tweak-tool 
-  -> Unity -> Launcher -> Auto-hide: on
-  -> Window Manager -> Additional 
-    -> Focus Mode: "Sloppy"
-    -> Auto raise: off
-  -> Window Manager -> Workspace Settings -> Workspace Switcher: On (2 horiz, 2 vert)
-  -> Window Manager -> Window snapping: off
-  -> Appearance -> Fonts -> Ubuntu * 11 for all
-System Settings -> Displays -> Sticky Edges = Off
-System Settings -> Time & Date -> Clock tab
-  Enable: Show a clock..., Weekday, Date and Month, Year, 12-hour time, Seconds
-System Settings -> Personal -> Appearance -> Behavior 
-  -> Show the menues for a window: "In the window's title bar"
-  -> Menus visibility: Always
-  -> Add show desktop icon to the launcher: Checked
-System Settings -> Sound -> Input  -> Microphone = HD Pro Webcam C920
-                         -> Output -> Line Out (regular stero speakers)
+  old
+    unity-tweak-tool 
+      -> Unity -> Launcher -> Auto-hide: on
+      -> Window Manager -> Additional 
+        -> Focus Mode: "Sloppy"
+        -> Auto raise: off
+      -> Window Manager -> Workspace Settings -> Workspace Switcher: On (2 horiz, 2 vert)
+      -> Window Manager -> Window snapping: off
+      -> Appearance -> Fonts -> Ubuntu * 11 for all
+    System Settings -> Displays -> Sticky Edges = Off
+    System Settings -> Time & Date -> Clock tab
+      Enable: Show a clock..., Weekday, Date and Month, Year, 12-hour time, Seconds
+    System Settings -> Personal -> Appearance -> Behavior 
+      -> Show the menues for a window: "In the window's title bar"
+      -> Menus visibility: Always
+      -> Add show desktop icon to the launcher: Checked
+    System Settings -> Sound -> Input  -> Microphone = HD Pro Webcam C920
+                             -> Output -> Line Out (regular stero speakers)
 
 dconf-editor -> org -> gnome -> gnome session -> select "auto-save-session"
 
