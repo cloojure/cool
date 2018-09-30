@@ -229,6 +229,25 @@ VirtualBox
         Use linux apt to install
       VirtualBox 5.0.14 Oracle VM VirtualBox Extension Pack (aka "Guest Additions")
 
+-----------------------------------------------------------------------------
+NPM - install using ppa (private package archive)
+  much newer than officially supported version
+  ubuntu-16.04 default:  npm --version  =>  2.15.11 
+  
+  install via ppa
+    cd ~
+    curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+    vim nodesource_setup.sh         # or any editor 
+    sudo bash nodesource_setup.sh   # install the ppa
+    sudo apt-get install nodejs
+    npm --version  =>  6.4.1
+
+    npm install -g npx 
+    npx --version  =>  10.2.0
+
+
+
+-----------------------------------------------------------------------------
 Vagrant
   *** Manual install ***  go to https://www.vagrantup.com
     vagrant init ubuntu/xenial64      ; create the Vagrantfile

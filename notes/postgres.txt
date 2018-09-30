@@ -30,7 +30,7 @@ shell:
   ; setup commands
   sudo --user=postgres  createuser <user>    ; user-name aka "rolename" in docs
   sudo --user=postgres  createdb   <user>  --owner=<user> 
-  sudo --user=postgres  psql -c "alter user <user> superuser"
+  sudo --user=postgres  psql -c "alter role <user> superuser"
 
   dropuser  <user-name>
   dropedb    <db-name>
@@ -71,7 +71,7 @@ psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
       set search_path to xxx
       set search_path to xxx, public
 
-  ALTER USER <user> SUPERUSER;     - give all privs
+  ALTER ROLE <user> SUPERUSER;     - give all privs
 
   -----------------------------------------------------------------------------
   Notes:
@@ -415,5 +415,5 @@ install notes:
   # EDB wants to run as a regular user (not root)
   # createuser alan    ; username aka "role" in docs (user 'alan' created during install)
   alan> createdb  <user> [ --owner=<user> ]   # still need this
-  # psql -c "alter user <user> superuser"  # not needed since created during install
+  # psql -c "alter role <user> superuser"  # not needed since created during install
 

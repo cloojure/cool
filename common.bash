@@ -61,13 +61,18 @@ if [[ $(uname -a) =~ "Linux" ]]; then
     path=( ${JAVA_HOME}/bin ${path} )
     java  --version
   }
+  function java11() {
+    export JAVA_HOME=/opt/java11
+    path=( ${JAVA_HOME}/bin ${path} )
+    java  --version
+  }
   function zulu10() {
     export JAVA_HOME=/opt/zulu10
     path=( ${JAVA_HOME}/bin ${path} )
     java  --version
   }
 
-  java10  >& /dev/null
+  java11  >& /dev/null
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
@@ -217,15 +222,29 @@ function git-branch-current() {  # returns the name of the current branch
   git rev-parse --abbrev-ref HEAD
 }
 function git-branch-root() {
-  if [[ $# = 0 || $# > 2 ]]; then
+  if [[ $1 = "-h" \
+     || $1 = "--help" \
+     || $# > 2 ]]; then
     echo "usage:  "
+    echo "  git-branch-root                        # find common root of current branch and `master` branch"
     echo "  git-branch-root <branch-other>         # find common root of current branch and <branch-other> "
     echo "  git-branch-root <branch-1> <branch-2>  # find common root of <branch-1> and <branch-2> "
+  elif [[ "$#" == "0" ]]; then
+    eval "git-branch-root  master  $(git-branch-current)"
   elif [[ "$#" == "1" ]]; then
-    echo $(git-branch-root $1 $(git-branch-current))
+    eval "git-branch-root  $1      $(git-branch-current)"
   else
-    git merge-base $1 $2  |  cut -c -10
+    rootSpec=$(git merge-base $1 $2  |  cut -c -10)
+    echo "  ${rootSpec} "
+    echo "    |-- $1"
+    echo "    |-- $2"
   fi
+}
+function first() {
+  echo "$1"
+}
+function git-branch-log() {
+  git log --oneline $(first $(git-branch-root))..$(git-branch-current)
 }
 alias git-log-string='git log -S'  # search log for changes to a string
 alias gitdg='git difftool --noprompt --extcmd="gvim -d --nofork -geometry 220x80+2000+40" '
