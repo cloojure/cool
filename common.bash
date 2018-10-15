@@ -300,6 +300,9 @@ alias rlf="lein clean ; rlwrap lein figwheel"
 # python env vars
 export PYTHONDONTWRITEBYTECODE="enable"     # invaluable for avoiding stale cache errors
 # python abbreviations
+alias python=python3
+alias py2=python2
+alias py3=python3
 alias pyx="chmod a+x *.py "
 alias pyt="pytest -v"
 alias venv2='virtualenv -p /usr/bin/python2 venv'
@@ -388,5 +391,8 @@ export gcp1=35.230.123.85
 
 # lumanu
 alias lum='cd ~/work/lumanu && . Envfile && cd ic'
+export alan_host_1_name="ec2-54-149-36-244.us-west-2.compute.amazonaws.com"
+export alan_host_1_ip="54.149.36.244"
+alias ssh-alan-host-1="ssh -i /home/alan/.ssh/alan-keypair-1.pem ubuntu@${alan_host_1_name}"
 
 # echo "common.bash - exit"   

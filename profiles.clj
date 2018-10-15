@@ -1,11 +1,13 @@
 {
   :user {
     :plugins [
-      [com.jakemccrary/lein-test-refresh "0.22.0"]
-      [jonase/eastwood          "0.2.5"]
+      [com.jakemccrary/lein-test-refresh "0.23.0"]
+      [jonase/eastwood          "0.3.1"]
       [lein-ancient             "0.6.15"]
-      [lein-codox               "0.10.3"]
-      [lein-exec                "0.3.7"]]
+      [lein-codox               "0.10.5"]
+      [lein-environ             "1.1.0"]
+      [lein-exec                "0.3.7"]
+      [lein-pprint              "1.2.0"] ]
     :jvm-opts ["-Xms1g" "-Xmx4g" 
 ;              "-server"
               ] 
