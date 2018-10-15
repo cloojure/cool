@@ -46,6 +46,8 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
   # echo "PATH -> ${PATH}"
 
+  # ********** don't forget about symlink /opt/java -> /opt/java10 **********
+
   function java8() {
     export JAVA_HOME=/opt/java8
     path=( ${JAVA_HOME}/bin ${path} )
@@ -72,7 +74,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
     java  --version
   }
 
-  java11  >& /dev/null
+  java10  >& /dev/null  # ********** default java version to use **********  
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
