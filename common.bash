@@ -74,7 +74,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
     java  --version
   }
 
-  java10  >& /dev/null  # ********** default java version to use **********  
+  java8  >& /dev/null  # ********** default java version to use **********  
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
@@ -285,19 +285,21 @@ alias postman=Postman
 alias gsutil-cpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
 
 # lein abbreviations
-alias lt=" time lein test"
-alias lta="time lein test :all"
-alias ltr="lein test-refresh"
+alias lc="lein clean"
+alias lt="   time lein test"
+alias lta="  time lein test :all"
+alias ltr="       lein test-refresh"
+alias doo="     time lein doo phantom test once"
+alias dooc="lc; time lein doo phantom test once"
 alias lex="lein autoexpect"
 alias lrsh="lein ring server-headless"
 # dead??? #todo
 #   alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
 #   alias litst="linit ; ltst"
 #   alias ltst=" time lein test :bvt :regression"
-alias lf="lein figwheel"
-alias lc="lein clean"
-alias lclf="lein clean ; lein figwheel"
-alias rlf="lein clean ; rlwrap lein figwheel"
+alias lf="      lein figwheel"
+alias lfc="lc ; lein figwheel"
+alias lfr="lc ; rlwrap lein figwheel"
 
 # python env vars
 export PYTHONDONTWRITEBYTECODE="enable"     # invaluable for avoiding stale cache errors
