@@ -2,7 +2,7 @@
   :user {
     :plugins [
       [com.jakemccrary/lein-test-refresh "0.23.0"]
-      [jonase/eastwood          "0.3.1"]
+      [jonase/eastwood          "0.3.3"]
       [lein-ancient             "0.6.15"]
       [lein-codox               "0.10.5"]
       [lein-environ             "1.1.0"]
