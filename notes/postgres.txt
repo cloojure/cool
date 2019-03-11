@@ -71,7 +71,8 @@ psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
       set search_path to xxx
       set search_path to xxx, public
 
-  ALTER ROLE <user> SUPERUSER;     - give all privs
+  alter role <user> superuser;              - give all privs
+  alter role joe password  'secret';        - change password for user 'joe'
 
   -----------------------------------------------------------------------------
   Notes:
