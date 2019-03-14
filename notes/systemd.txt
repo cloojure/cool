@@ -1,0 +1,79 @@
+
+Ubuntu config
+
+System files (not system files):
+
+  /etc/systemd/system   *** priority location ***    <- $(pkg-config systemd --variable=systemdsystemconfdir)
+  /lib/systemd/system                                <- $(pkg-config systemd --variable=systemdsystemunitdir)
+
+Sample user service:  ticker.bash
+
+  #!/bin/bash 
+  function iso-date {
+    date '+%Y-%m-%d %H:%M:%S'
+  } 
+  function doall {
+    echo ""
+    echo "fn args: $*"
+    echo ""
+    echo "env:"
+    env
+    echo ""
+    while true ; do
+      echo "tick  $(iso-date)"
+      sleep 1
+    done
+  } 
+  doall
+
+Sample service unit file:    /lib/systemd/user/ticker.service
+
+    [Unit]
+    Description=Sample systemd service.
+
+    [Service]
+    Type=simple
+    ExecStart=/bin/bash /home/alan/expr/systemd/ticker.bash
+    Restart=always
+    RestartSec=2
+
+    [Install]
+    WantedBy= multi-user.target
+
+Enable:
+  sudo systemctl daemon-reload     - reload systemd unit files
+
+  sudo systemctl status         ticker        - display status
+  sudo systemctl enable         ticker        - enable for start at bood
+  sudo systemctl disable        ticker        - disable...  
+  sudo systemctl start          ticker        - start the service
+  sudo systemctl stop           ticker        - stop...
+  sudo systemctl restart        ticker        - restart the service (& reload its conf files)
+  sudo systemctl show           ticker        - show all config params
+
+Don't try to use
+  sudo systemctl reload          ticker        - start the service
+
+Shortcuts for machine control:
+  sudo systemctl reboot         <= /sbin/reboot
+  sudo systemctl poweroff       <= /sbin/poweroff
+
+Verify the TZ setting:  
+  timedatectl status
+
+Tail logs for a particular unit:
+  journalctl -f  -u ticker       #  -f => "--follow" (aka forever)   -u ticker => '--unit=ticker'
+
+Stats:
+  journalctl --disk-usage 
+
+Config:  /etc/systemd/journald.conf
+
+
+
+
+###################################################################################################
+###   User files (not system files):  requires use of `systemd --user` (why bother?)
+###     /usr/lib/systemd/user   -- $(pkg-config systemd --variable=systemduserunitdir)
+###     /etc/systemd/user       -- $(pkg-config systemd --variable=systemduserconfdir)
+

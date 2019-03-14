@@ -14,19 +14,19 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
   export PGDATA="/var/edb/postgresql"
-  export EDB_HOME="/opt/PostgreSQL/10"          ; export PATH="${EDB_HOME}/bin:$PATH"
-  export JAVA_HOME="/opt/java"                  ; export PATH="${JAVA_HOME}/bin:$PATH"
-  export GROOVY_HOME="/opt/groovy"              ; export PATH="${GROOVY_HOME}/bin:$PATH"
-  export DATOMIC_HOME="/opt/datomic"            ; export PATH="${DATOMIC_HOME}/bin:$PATH"
-  export IDEA_HOME="/opt/idea"                  ; export PATH="${IDEA_HOME}/bin:$PATH"
-# export SPARK_HOME="/opt/spark"                ; export PATH="${SPARK_HOME}/bin:$PATH"
-# export HADOOP_HOME="/opt/hadoop"              ; export PATH="${HADOOP_HOME}/bin:$PATH"
-# export LIQUIBASE_HOME="/opt/liquibase"        ; export PATH="${LIQUIBASE_HOME}:$PATH"
-# export CASSANDRA_HOME="/opt/cassandra"        ; export PATH="${CASSANDRA_HOME}/bin:$PATH"
-# export ODL_KARAF_DIR="/opt/karaf"             ; export PATH="${ODL_KARAF_DIR}/bin:$PATH"
-  export MAVEN_HOME="/opt/apache-maven"         ; export PATH="${MAVEN_HOME}/bin:$PATH"
-  export PYTHON_PREFIX="${HOME}/.local/bin"     ; export PATH="${PYTHON_PREFIX}:$PATH"
-  export POSTMAN_HOME="/opt/Postman"            ; export PATH="${POSTMAN_HOME}:$PATH"
+  export EDB_HOME="/opt/PostgreSQL/10"                    ; export PATH="${EDB_HOME}/bin:$PATH"
+  export JAVA_HOME="/opt/java"                            ; export PATH="${JAVA_HOME}/bin:$PATH"
+  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"  ; export PATH="${YOURKIT_HOME}/bin:$PATH" # => profiler.sh
+  export DATOMIC_HOME="/opt/datomic"                      ; export PATH="${DATOMIC_HOME}/bin:$PATH"
+  export IDEA_HOME="/opt/idea"                            ; export PATH="${IDEA_HOME}/bin:$PATH"
+# export SPARK_HOME="/opt/spark"                          ; export PATH="${SPARK_HOME}/bin:$PATH"
+# export HADOOP_HOME="/opt/hadoop"                        ; export PATH="${HADOOP_HOME}/bin:$PATH"
+# export LIQUIBASE_HOME="/opt/liquibase"                  ; export PATH="${LIQUIBASE_HOME}:$PATH"
+# export CASSANDRA_HOME="/opt/cassandra"                  ; export PATH="${CASSANDRA_HOME}/bin:$PATH"
+# export ODL_KARAF_DIR="/opt/karaf"                       ; export PATH="${ODL_KARAF_DIR}/bin:$PATH"
+  export MAVEN_HOME="/opt/apache-maven"                   ; export PATH="${MAVEN_HOME}/bin:$PATH"
+  export PYTHON_PREFIX="${HOME}/.local/bin"               ; export PATH="${PYTHON_PREFIX}:$PATH"
+  export POSTMAN_HOME="/opt/Postman"                      ; export PATH="${POSTMAN_HOME}:$PATH"
 
   # extra cassandra stuff
   # export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -88,6 +88,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   alias ddr5='find .  -maxdepth 5  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
 
   alias idea="idea.sh &"
+  alias yourkit="${YOURKIT_HOME}/bin/profiler.sh &"
 fi
 
 if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
@@ -339,21 +340,35 @@ alias lc="       lein clean"
 alias lt="  time lein test"
 alias lta=" time lein test :all"
 alias ltr="      lein test-refresh"
-alias ldoo="time lein doo phantom test once"
 alias lct="  lc; lt"
 alias lcta=" lc; lta"
 alias lctr=" lc; ltr"
 alias lcdoo="lc; ldoo"
-alias door="    time lein doo phantom test "
-alias lcu="  lc; lein uberjar"
+alias ldoo="time lein doo phantom test once"
+alias door="time lein doo phantom test "
+alias lcdoor="lc; door"
+alias lcu="   lc; lein uberjar"
 
-# dead??? #todo
-#   alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
-#   alias litst="linit ; ltst"
-#   alias ltst=" time lein test :bvt :regression"
+alias lr="      lein run"
+alias lcr="lc ; lr"
 alias lf="      lein figwheel"
-alias lfc="lc ; lein figwheel"
-alias lfr="lc ; rlwrap lein figwheel"
+alias lcf="lc ; lf"
+alias lcfr="lc ; rlwrap lein figwheel"
+
+function lanc() {  # Lein ANCient
+  echo ""
+  echo ""-----------------------------------------------------------------------------
+  echo "project.clj:"
+  echo ""
+  lein ancient check           :all 
+  echo ""
+  echo ""-----------------------------------------------------------------------------
+  echo "profiles.clj:"
+  echo ""
+  lein ancient check-profiles  :all
+  echo ""-----------------------------------------------------------------------------
+  echo ""
+}
 
 # python env vars
 export PYTHONDONTWRITEBYTECODE="enable"     # invaluable for avoiding stale cache errors

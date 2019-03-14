@@ -1,0 +1,12 @@
+
+If already have an ISO image:
+
+  use ubuntu launcher for:  brasero  (disk burner)
+
+    -> burn image (existing cd/dvd image to disc)
+    -> insert blank dvd in drive
+    -> select iso image file as source
+    -> can use default properties ("maximum speed" vs 16x or 8x)  
+            reports effective speed ~9x on my machine => ~10 min to burn
+
+
