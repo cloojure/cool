@@ -28,6 +28,8 @@ colorscheme desert
 set shell=/bin/zsh
 
 " Basic settings
+set visualbell
+set noerrorbells
 set diffopt=filler,iwhite
 set shiftwidth=2
 set tabstop=4

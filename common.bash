@@ -1,5 +1,3 @@
-#!/bin/bash
-##### WARNING - 'echo' statements in ~/.bashrc or ~/.zshrc will cause 'ssh' remote login to fail!
 # echo "common.bash - enter"   
 
 #todo this only works with zsh
@@ -120,6 +118,58 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
     java -version
   }
   java8  >& /dev/null
+
+# # cambia http proxy stuff
+# function containsElement() {
+#   local e
+#   for e in “${@:2}“; do [[ “$e” == “$1" ]] && return 0; done
+#   return 1
+# }
+
+# REGENCE_PROXY=“http://utrgproxywest.regence.com:8080”
+# DO_NOT_PROXY=“localhost,127.0.0.1,localaddress,.localdomain.com,*.healthsparq.com,*.regence.com,*.healthsparq.net”
+# REGENCE_EXT_IP=(“199.79.222.119”)
+# external_ip=“$(curl -s http://ipinfo.io/ip)”
+# #Location-specific settings
+# if containsElement “${external_ip}” “${REGENCE_EXT_IP[@]}“; then
+#   export HTTP_PROXY=“${REGENCE_PROXY}”
+#   export http_proxy=“${REGENCE_PROXY}”
+#   export https_proxy=“${REGENCE_PROXY}”
+#   export HTTPS_proxy=“${REGENCE_PROXY}”
+#   export ftp_proxy=“${REGENCE_PROXY}”
+#   export FTP_PROXY=“${REGENCE_PROXY}”
+#   export no_proxy=“${DO_NOT_PROXY}”
+#   export NO_PROXY=“${DO_NOT_PROXY}”
+# else
+#   unset http_proxy
+#   unset HTTP_PROXY
+#   unset https_proxy
+#   unset HTTPS_PROXY
+#   unset ftp_proxy
+#   unset FTP_PROXY
+#   unset no_proxy
+#   unset NO_PROXY
+# fi
+
+
+# REGENCE_PROXY="http://utrgproxywest.regence.com:8080"
+# export HTTP_PROXY="${REGENCE_PROXY}"
+# export http_proxy="${REGENCE_PROXY}"
+# export HTTPS_PROXY="${REGENCE_PROXY}"
+# export https_proxy="${REGENCE_PROXY}"
+# export FTP_PROXY="${REGENCE_PROXY}"
+# export ftp_proxy="${REGENCE_PROXY}"
+# export NO_PROXY="${DO_NOT_PROXY}"
+# export no_proxy="${DO_NOT_PROXY}"
+
+  unset HTTP_PROXY
+  unset http_proxy
+  unset HTTPS_PROXY
+  unset https_proxy
+  unset FTP_PROXY
+  unset ftp_proxy
+  unset NO_PROXY
+  unset no_proxy
 
 fi
 
@@ -295,6 +345,7 @@ alias lcta=" lc; lta"
 alias lctr=" lc; ltr"
 alias lcdoo="lc; ldoo"
 alias door="    time lein doo phantom test "
+alias lcu="  lc; lein uberjar"
 
 # dead??? #todo
 #   alias linit="time lein run --init-db --no-start-server --no-start-wamp-server"
@@ -348,6 +399,8 @@ function ipinfo() {
   echo "local    IP  =>  $(ipaddr)"
   echo "external IP  =>  $(ipexternal)"
 }
+
+alias ipinfo="curl  -s http://ipinfo.io/ip"
 
 #-----------------------------------------------------------------------------
 # joyent

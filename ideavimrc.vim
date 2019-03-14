@@ -1,7 +1,10 @@
 " Settings for IntelliJ IDEA vim emulation
 
-" set visualbell
-" set hls
-" set ic
-
 source ~/.vimrc
+
+set visualbell
+set noerrorbells
+
+set hls
+set ic
+
