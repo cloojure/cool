@@ -48,6 +48,11 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
   # ********** don't forget about symlink /opt/java -> /opt/java10 **********
 
+  function zulu10() {
+    export JAVA_HOME=/opt/zulu10
+    path=( ${JAVA_HOME}/bin ${path} )
+    java  --version
+  }
   function java8() {
     export JAVA_HOME=/opt/java8
     path=( ${JAVA_HOME}/bin ${path} )
@@ -68,13 +73,13 @@ if [[ $(uname -a) =~ "Linux" ]]; then
     path=( ${JAVA_HOME}/bin ${path} )
     java  --version
   }
-  function zulu10() {
-    export JAVA_HOME=/opt/zulu10
+  function java12() {
+    export JAVA_HOME=/opt/java12
     path=( ${JAVA_HOME}/bin ${path} )
     java  --version
   }
 
-  java11  >& /dev/null  # ********** default java version to use **********  
+  java12  >& /dev/null  # ********** default java version to use **********  
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
