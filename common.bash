@@ -29,7 +29,7 @@ export PATH=.
   path_append /usr/sbin
   path_append /sbin 
   path_append /usr/local/opt
-  path_append ${HOME}/.local/bin   # awscli stuff
+  path_append ${HOME}/.local/bin # awscli stuff
 
 if [[ $(uname -a) =~ "Linux" ]]; then
   # echo "Found Linux"
