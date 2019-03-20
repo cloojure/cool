@@ -1,34 +1,49 @@
-#!/bin/bash
-##### WARNING - 'echo' statements in ~/.bashrc or ~/.zshrc will cause 'ssh' remote login to fail!
 # echo "common.bash - enter"   
 
-#todo this only works with zsh
-# baseline path
-export PATH=.:${HOME}/bin:${HOME}/cool/bin:${HOME}/opt/bin
-export PATH=$PATH:/opt/bin
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin 
-export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin 
-export PATH=$PATH:/usr/local/opt:/opt/bin 
-export PATH=$PATH:~/.local/bin   # awscli stuff
+function path_prepend() {
+  path_search_dir=$1
+  export PATH="${path_search_dir}:${PATH}"
+}
+function path_append() {
+  path_search_dir=$1
+  export PATH="${PATH}:${path_search_dir}"
+}
+
+# baseline path (old way)
+  # export PATH=.:${HOME}/bin:${HOME}/cool/bin:${HOME}/opt/bin
+  # export PATH=$PATH:/opt/bin
+  # export PATH=$PATH:/usr/local/bin:/usr/bin:/bin 
+  # export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin 
+  # export PATH=$PATH:/usr/local/opt:/opt/bin 
+  # export PATH=$PATH:~/.local/bin   # awscli stuff
+
+export PATH=.
+  path_append ${HOME}/bin
+  path_append ${HOME}/cool/bin
+  path_append ${HOME}/opt/bin
+  path_append /opt/bin
+  path_append /usr/local/bin
+  path_append /usr/bin
+  path_append /bin 
+  path_append /usr/local/sbin
+  path_append /usr/sbin
+  path_append /sbin 
+  path_append /usr/local/opt
+  path_append ${HOME}/.local/bin   # awscli stuff
 
 if [[ $(uname -a) =~ "Linux" ]]; then
   # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
   export PGDATA="/var/edb/postgresql"
-  export EDB_HOME="/opt/PostgreSQL/10"                    ; export PATH="${EDB_HOME}/bin:$PATH"
-  export JAVA_HOME="/opt/java"                            ; export PATH="${JAVA_HOME}/bin:$PATH"
-  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"  ; export PATH="${YOURKIT_HOME}/bin:$PATH" # => profiler.sh
-  export DATOMIC_HOME="/opt/datomic"                      ; export PATH="${DATOMIC_HOME}/bin:$PATH"
-  export IDEA_HOME="/opt/idea"                            ; export PATH="${IDEA_HOME}/bin:$PATH"
-# export SPARK_HOME="/opt/spark"                          ; export PATH="${SPARK_HOME}/bin:$PATH"
-# export HADOOP_HOME="/opt/hadoop"                        ; export PATH="${HADOOP_HOME}/bin:$PATH"
-# export LIQUIBASE_HOME="/opt/liquibase"                  ; export PATH="${LIQUIBASE_HOME}:$PATH"
-# export CASSANDRA_HOME="/opt/cassandra"                  ; export PATH="${CASSANDRA_HOME}/bin:$PATH"
-# export ODL_KARAF_DIR="/opt/karaf"                       ; export PATH="${ODL_KARAF_DIR}/bin:$PATH"
-  export MAVEN_HOME="/opt/apache-maven"                   ; export PATH="${MAVEN_HOME}/bin:$PATH"
-  export PYTHON_PREFIX="${HOME}/.local/bin"               ; export PATH="${PYTHON_PREFIX}:$PATH"
-  export POSTMAN_HOME="/opt/Postman"                      ; export PATH="${POSTMAN_HOME}:$PATH"
+  export EDB_HOME="/opt/PostgreSQL/10"                    ; path_prepend ${EDB_HOME}/bin
+  export JAVA_HOME="/opt/java"                            ; path_prepend ${JAVA_HOME}/bin
+  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"  ; path_prepend ${YOURKIT_HOME}/bin
+  export DATOMIC_HOME="/opt/datomic"                      ; path_prepend ${DATOMIC_HOME}/bin
+  export IDEA_HOME="/opt/idea"                            ; path_prepend ${IDEA_HOME}/bin
+  export MAVEN_HOME="/opt/apache-maven"                   ; path_prepend ${MAVEN_HOME}/bin
+# export PYTHON_PREFIX="${HOME}/.local/bin"               ; path_prepend ${PYTHON_PREFIX}
+  export POSTMAN_HOME="/opt/Postman"                      ; path_prepend ${POSTMAN_HOME}
 
   # extra cassandra stuff
   # export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -50,27 +65,27 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
   function zulu10() {
     export JAVA_HOME=/opt/zulu10
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend ${JAVA_HOME}/bin
     java  --version
   }
   function java8() {
     export JAVA_HOME=/opt/java8
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  -version
   }
   function java9() {
     export JAVA_HOME=/opt/java9
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
   function java10() {
     export JAVA_HOME=/opt/java10
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
   function java11() {
     export JAVA_HOME=/opt/java11
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
   function java12() {
@@ -103,29 +118,86 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
 
-  export JAVA_HOME='/opt/java'          ; path=( ${JAVA_HOME}/bin       $path )
-  export H2_HOME='/opt/h2'              ; path=( ${H2_HOME}/bin         $path )
+  # export JAVA_HOME='/opt/java'          ; path=( ${JAVA_HOME}/bin       $path )
+  # export H2_HOME='/opt/h2'              ; path=( ${H2_HOME}/bin         $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
   alias idea='echo "not implemented; start IDEA from dock" '
 
   function java8() {
-    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-    path=( ${JAVA_HOME}/bin $path )
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    path_prepend ${JAVA_HOME}/bin
     java -version
   }
   function java9() {
-    export JAVA_HOME=`/usr/libexec/java_home -v 9`
-    path=( ${JAVA_HOME}/bin $path )
+    export JAVA_HOME=$(/usr/libexec/java_home -v 9)
+    path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  function java10() {
-    export JAVA_HOME=`/usr/libexec/java_home -v 10`
-    path=( ${JAVA_HOME}/bin $path )
+  function java11() {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+    path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  java8  >& /dev/null
+  function java12() {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 12)
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
+  java8  # >& /dev/null
+
+# # cambia http proxy stuff
+# function containsElement() {
+#   local e
+#   for e in “${@:2}“; do [[ “$e” == “$1" ]] && return 0; done
+#   return 1
+# }
+
+# REGENCE_PROXY=“http://utrgproxywest.regence.com:8080”
+# DO_NOT_PROXY=“localhost,127.0.0.1,localaddress,.localdomain.com,*.healthsparq.com,*.regence.com,*.healthsparq.net”
+# REGENCE_EXT_IP=(“199.79.222.119”)
+# external_ip=“$(curl -s http://ipinfo.io/ip)”
+# #Location-specific settings
+# if containsElement “${external_ip}” “${REGENCE_EXT_IP[@]}“; then
+#   export HTTP_PROXY=“${REGENCE_PROXY}”
+#   export http_proxy=“${REGENCE_PROXY}”
+#   export https_proxy=“${REGENCE_PROXY}”
+#   export HTTPS_proxy=“${REGENCE_PROXY}”
+#   export ftp_proxy=“${REGENCE_PROXY}”
+#   export FTP_PROXY=“${REGENCE_PROXY}”
+#   export no_proxy=“${DO_NOT_PROXY}”
+#   export NO_PROXY=“${DO_NOT_PROXY}”
+# else
+#   unset http_proxy
+#   unset HTTP_PROXY
+#   unset https_proxy
+#   unset HTTPS_PROXY
+#   unset ftp_proxy
+#   unset FTP_PROXY
+#   unset no_proxy
+#   unset NO_PROXY
+# fi
+
+
+# REGENCE_PROXY="http://utrgproxywest.regence.com:8080"
+# export HTTP_PROXY="${REGENCE_PROXY}"
+# export http_proxy="${REGENCE_PROXY}"
+# export HTTPS_PROXY="${REGENCE_PROXY}"
+# export https_proxy="${REGENCE_PROXY}"
+# export FTP_PROXY="${REGENCE_PROXY}"
+# export ftp_proxy="${REGENCE_PROXY}"
+# export NO_PROXY="${DO_NOT_PROXY}"
+# export no_proxy="${DO_NOT_PROXY}"
+
+  unset HTTP_PROXY
+  unset http_proxy
+  unset HTTPS_PROXY
+  unset https_proxy
+  unset FTP_PROXY
+  unset ftp_proxy
+  unset NO_PROXY
+  unset no_proxy
 
 fi
 
@@ -295,14 +367,23 @@ alias lc="       lein clean"
 alias lt="  time lein test"
 alias lta=" time lein test :all"
 alias ltr="      lein test-refresh"
+alias lct="  (lc; lt)"
+alias lcta=" (lc; lta)"
+alias lctr=" (lc; ltr)"
+alias lcdoo="(lc; ldoo)"
 alias ldoo="time lein doo phantom test once"
-alias lct="  lc; lt"
-alias lcta=" lc; lta"
-alias lctr=" lc; ltr"
-alias lcdoo="lc; ldoo"
-alias door="      time lein doo phantom test "
-alias lcdoor="lc; door"
-function lanc() {
+alias door="time lein doo phantom test "
+alias lcdoor="(lc; door)"
+alias lu="lein uberjar"
+alias lcu="  (lc; lu)"
+
+alias lr="      lein run"
+alias lcr="(lc ; lr)"
+alias lf="lein figwheel"
+alias lcf="(lc ; lf)"
+alias lcfr="lc ; rlwrap lein figwheel"
+
+function lanc() {  # Lein ANCient
   echo ""
   echo ""-----------------------------------------------------------------------------
   echo "project.clj:"
@@ -316,12 +397,6 @@ function lanc() {
   echo ""-----------------------------------------------------------------------------
   echo ""
 }
-
-alias lr="      lein run"
-alias lcr="lc ; lein run"
-alias lf="      lein figwheel"
-alias lcf="lc ; lein figwheel"
-alias lcfr="lc ; rlwrap lein figwheel"
 
 # python env vars
 export PYTHONDONTWRITEBYTECODE="enable"     # invaluable for avoiding stale cache errors
@@ -367,6 +442,8 @@ function ipinfo() {
   echo "local    IP  =>  $(ipaddr)"
   echo "external IP  =>  $(ipexternal)"
 }
+
+alias ipinfo="curl  -s http://ipinfo.io/ip"
 
 #-----------------------------------------------------------------------------
 # joyent

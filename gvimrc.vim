@@ -14,12 +14,18 @@ endif
 " Note: User-defined commands must begin with a capital letter 
  
 " Font options
-command! Fs  set guifont=Ubuntu\ Mono\ 10     " Font small
-command! Fm  set guifont=Ubuntu\ Mono\ 12     " Font medium
-command! Fl  set guifont=Ubuntu\ Mono\ 14     " Font large
-command! Fll set guifont=Ubuntu\ Mono\ 16     " Font large-large
-command! FF  Fll
-command! Laptop  Fll
+if has('mac') " osx
+" echo "Found mac... \n"
+" sleep 1
+  command! MM  set guifont=AndaleMono:h18  " MacBook Pro 2018 font (43" 4K monitor)
+else
+  command! Fs  set guifont=Ubuntu\ Mono\ 10     " Font small
+  command! Fm  set guifont=Ubuntu\ Mono\ 12     " Font medium
+  command! Fl  set guifont=Ubuntu\ Mono\ 14     " Font large
+  command! Fll set guifont=Ubuntu\ Mono\ 16     " Font large-large
+  command! FF  Fll
+  command! Laptop  Fll
+endif
 
 " Window shape commands
 command! Ls set lines=40           " Lines small
@@ -33,7 +39,11 @@ command! Wl set columns=250        " Width large
 function! ConfigStd()
   set columns=130
   set lines=60
-  set guifont=Ubuntu\ Mono\ 14
+  if has('mac')
+    set guifont=AndaleMono:h18  " MacBook Font 
+  else
+    set guifont=Ubuntu\ Mono\ 14
+  endif
 endfunction
 call ConfigStd()
 
