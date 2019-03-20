@@ -1,14 +1,5 @@
 # echo "common.bash - enter"   
 
-#todo this only works with zsh
-# baseline path
-export PATH=.:${HOME}/bin:${HOME}/cool/bin:${HOME}/opt/bin
-export PATH=$PATH:/opt/bin
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin 
-export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin 
-export PATH=$PATH:/usr/local/opt:/opt/bin 
-export PATH=$PATH:~/.local/bin   # awscli stuff
-
 function path_prepend() {
   path_search_dir=$1
   export PATH="${path_search_dir}:${PATH}"
@@ -18,24 +9,41 @@ function path_append() {
   export PATH="${PATH}:${path_search_dir}"
 }
 
+# baseline path (old way)
+  # export PATH=.:${HOME}/bin:${HOME}/cool/bin:${HOME}/opt/bin
+  # export PATH=$PATH:/opt/bin
+  # export PATH=$PATH:/usr/local/bin:/usr/bin:/bin 
+  # export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin 
+  # export PATH=$PATH:/usr/local/opt:/opt/bin 
+  # export PATH=$PATH:~/.local/bin   # awscli stuff
+
+export PATH=.
+  path_append ${HOME}/bin
+  path_append ${HOME}/cool/bin
+  path_append ${HOME}/opt/bin
+  path_append /opt/bin
+  path_append /usr/local/bin
+  path_append /usr/bin
+  path_append /bin 
+  path_append /usr/local/sbin
+  path_append /usr/sbin
+  path_append /sbin 
+  path_append /usr/local/opt
+  path_append ${HOME}/.local/bin   # awscli stuff
+
 if [[ $(uname -a) =~ "Linux" ]]; then
   # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
   export PGDATA="/var/edb/postgresql"
-  export EDB_HOME="/opt/PostgreSQL/10"                    ; export PATH="${EDB_HOME}/bin:$PATH"
-  export JAVA_HOME="/opt/java"                            ; export PATH="${JAVA_HOME}/bin:$PATH"
-  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"  ; export PATH="${YOURKIT_HOME}/bin:$PATH" # => profiler.sh
-  export DATOMIC_HOME="/opt/datomic"                      ; export PATH="${DATOMIC_HOME}/bin:$PATH"
-  export IDEA_HOME="/opt/idea"                            ; export PATH="${IDEA_HOME}/bin:$PATH"
-# export SPARK_HOME="/opt/spark"                          ; export PATH="${SPARK_HOME}/bin:$PATH"
-# export HADOOP_HOME="/opt/hadoop"                        ; export PATH="${HADOOP_HOME}/bin:$PATH"
-# export LIQUIBASE_HOME="/opt/liquibase"                  ; export PATH="${LIQUIBASE_HOME}:$PATH"
-# export CASSANDRA_HOME="/opt/cassandra"                  ; export PATH="${CASSANDRA_HOME}/bin:$PATH"
-# export ODL_KARAF_DIR="/opt/karaf"                       ; export PATH="${ODL_KARAF_DIR}/bin:$PATH"
-  export MAVEN_HOME="/opt/apache-maven"                   ; export PATH="${MAVEN_HOME}/bin:$PATH"
-  export PYTHON_PREFIX="${HOME}/.local/bin"               ; export PATH="${PYTHON_PREFIX}:$PATH"
-  export POSTMAN_HOME="/opt/Postman"                      ; export PATH="${POSTMAN_HOME}:$PATH"
+  export EDB_HOME="/opt/PostgreSQL/10"                    ; path_prepend ${EDB_HOME}/bin
+  export JAVA_HOME="/opt/java"                            ; path_prepend ${JAVA_HOME}/bin
+  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"  ; path_prepend ${YOURKIT_HOME}/bin
+  export DATOMIC_HOME="/opt/datomic"                      ; path_prepend ${DATOMIC_HOME}/bin
+  export IDEA_HOME="/opt/idea"                            ; path_prepend ${IDEA_HOME}/bin
+  export MAVEN_HOME="/opt/apache-maven"                   ; path_prepend ${MAVEN_HOME}/bin
+# export PYTHON_PREFIX="${HOME}/.local/bin"               ; path_prepend ${PYTHON_PREFIX}
+  export POSTMAN_HOME="/opt/Postman"                      ; path_prepend ${POSTMAN_HOME}
 
   # extra cassandra stuff
   # export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
