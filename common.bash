@@ -9,6 +9,15 @@ export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
 export PATH=$PATH:/usr/local/opt:/opt/bin 
 export PATH=$PATH:~/.local/bin   # awscli stuff
 
+function path_prepend() {
+  path_search_dir=$1
+  export PATH="${path_search_dir}:${PATH}"
+}
+function path_append() {
+  path_search_dir=$1
+  export PATH="${PATH}:${path_search_dir}"
+}
+
 if [[ $(uname -a) =~ "Linux" ]]; then
   # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
@@ -48,27 +57,27 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
   function java8() {
     export JAVA_HOME=/opt/java8
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  -version
   }
   function java9() {
     export JAVA_HOME=/opt/java9
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
   function java10() {
     export JAVA_HOME=/opt/java10
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
   function java11() {
     export JAVA_HOME=/opt/java11
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
   function zulu10() {
     export JAVA_HOME=/opt/zulu10
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
 
@@ -96,29 +105,34 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
 
-  export JAVA_HOME='/opt/java'          ; path=( ${JAVA_HOME}/bin       $path )
-  export H2_HOME='/opt/h2'              ; path=( ${H2_HOME}/bin         $path )
+  # export JAVA_HOME='/opt/java'          ; path=( ${JAVA_HOME}/bin       $path )
+  # export H2_HOME='/opt/h2'              ; path=( ${H2_HOME}/bin         $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
   alias idea='echo "not implemented; start IDEA from dock" '
 
   function java8() {
-    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-    path=( ${JAVA_HOME}/bin $path )
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    path_prepend ${JAVA_HOME}/bin
     java -version
   }
   function java9() {
-    export JAVA_HOME=`/usr/libexec/java_home -v 9`
-    path=( ${JAVA_HOME}/bin $path )
+    export JAVA_HOME=$(/usr/libexec/java_home -v 9)
+    path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  function java10() {
-    export JAVA_HOME=`/usr/libexec/java_home -v 10`
-    path=( ${JAVA_HOME}/bin $path )
+  function java11() {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+    path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  java8  >& /dev/null
+  function java12() {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 12)
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
+  java8  # >& /dev/null
 
 # # cambia http proxy stuff
 # function containsElement() {
