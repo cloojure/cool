@@ -134,6 +134,38 @@ General commands
 -----------------------------------------------------------------------------
 Disk mounting stuff
 
+from https://help.ubuntu.com/community/InstallingANewHardDrive
+
+> sudo lshw -C disk
+  *-disk                  
+       description: ATA Disk
+       product: Samsung SSD 850
+       physical id: 0.0.0
+       bus info: scsi@0:0.0.0
+       logical name: /dev/sda
+       version: 2B6Q
+       serial: S2RENXAH308211V
+       size: 931GiB (1TB)
+       capabilities: partitioned partitioned:dos
+       configuration: ansiversion=5 logicalsectorsize=512 sectorsize=512 signature=e6a674a4
+  *-disk
+       description: ATA Disk
+       product: Samsung SSD 860    # <===== ***** the new one *****
+       physical id: 0.0.0
+       bus info: scsi@1:0.0.0
+       logical name: /dev/sdb      # <===== ***** the new one is /dev/sdb *****
+       version: 1B6Q
+       serial: S3Z8NB0KA32023K
+       size: 931GiB (1TB)
+       configuration: ansiversion=5 logicalsectorsize=512 sectorsize=512
+
+> sudo fdisk /dev/sdb    # start fdisk (older program - 'parted' is the newer)
+
+see also:
+  https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux
+  http://manpages.ubuntu.com/manpages/xenial/en/man5/fstab.5.html
+
+-----------------------------------------------------------------------------
 sudo fdisk -l               # list disk devices & properties
 
 lsblk                       ; list block devices

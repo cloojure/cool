@@ -29,7 +29,7 @@ export PATH=.
   path_append /usr/sbin
   path_append /sbin 
   path_append /usr/local/opt
-  path_append ${HOME}/.local/bin   # awscli stuff
+  path_append ${HOME}/.local/bin # awscli stuff
 
 if [[ $(uname -a) =~ "Linux" ]]; then
   # echo "Found Linux"
@@ -52,9 +52,9 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   # Maven stuff for ODL
   # export MAVEN_OPTS="-Xmx1048m"
 
-  path=( /opt/phantomjs/bin $path )
+  path_prepend /opt/phantomjs/bin
 
-  # path=( /opt/solr/bin $path )
+  # path_prepend  /opt/solr/bin $path 
     # ***** do not set SOLR_HOME *****
     # SOLR_HOME controls the location on disk of the conf & data dirs for a core, 
     #   NOT the install location of the Solr binaries & libs
@@ -63,6 +63,11 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
   # ********** don't forget about symlink /opt/java -> /opt/java10 **********
 
+  function zulu10() {
+    export JAVA_HOME=/opt/zulu10
+    path_prepend ${JAVA_HOME}/bin
+    java  --version
+  }
   function java8() {
     export JAVA_HOME=/opt/java8
     path_prepend "${JAVA_HOME}/bin" 
@@ -83,13 +88,13 @@ if [[ $(uname -a) =~ "Linux" ]]; then
     path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
-  function zulu10() {
-    export JAVA_HOME=/opt/zulu10
+  function java12() {
+    export JAVA_HOME=/opt/java12
     path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
 
-  java11  >& /dev/null  # ********** default java version to use **********  
+  java12  >& /dev/null  # ********** default java version to use **********  
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
