@@ -125,11 +125,6 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  function java9() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 9)
-    path_prepend ${JAVA_HOME}/bin
-    java -version
-  }
   function java11() {
     export JAVA_HOME=$(/usr/libexec/java_home -v 11)
     path_prepend ${JAVA_HOME}/bin
@@ -140,7 +135,7 @@ if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  java8  # >& /dev/null
+  java12 >& /dev/null
 
 # # cambia http proxy stuff
 # function containsElement() {
