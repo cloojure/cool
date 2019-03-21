@@ -52,9 +52,9 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   # Maven stuff for ODL
   # export MAVEN_OPTS="-Xmx1048m"
 
-  path=( /opt/phantomjs/bin $path )
+  path_prepend /opt/phantomjs/bin
 
-  # path=( /opt/solr/bin $path )
+  # path_prepend  /opt/solr/bin $path 
     # ***** do not set SOLR_HOME *****
     # SOLR_HOME controls the location on disk of the conf & data dirs for a core, 
     #   NOT the install location of the Solr binaries & libs
@@ -90,7 +90,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   }
   function java12() {
     export JAVA_HOME=/opt/java12
-    path=( ${JAVA_HOME}/bin ${path} )
+    path_prepend "${JAVA_HOME}/bin" 
     java  --version
   }
 
