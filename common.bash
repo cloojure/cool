@@ -52,7 +52,7 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   # Maven stuff for ODL
   # export MAVEN_OPTS="-Xmx1048m"
 
-  path_prepend /opt/phantomjs/bin
+  # path_prepend /opt/phantomjs/bin
 
   # path_prepend  /opt/solr/bin $path 
     # ***** do not set SOLR_HOME *****
@@ -332,7 +332,7 @@ alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
 alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
-alias pk="pkill -9"
+alias pk="pkill -i -9"
 
 function pg() {
   ps -Fp $(pgrep ${1} )
@@ -366,11 +366,11 @@ alias lct="  (lc; lt)"
 alias lcta=" (lc; lta)"
 alias lctr=" (lc; ltr)"
 alias lcdoo="(lc; ldoo)"
-alias ldoo="time lein doo phantom test once"
-alias door="time lein doo phantom test "
+alias ldoo="time lein doo chrome test once"  # phantomjs is deprecated, stuck at old React version
+alias door="time lein doo chrome test "      # phantomjs is deprecated, stuck at old React version
 alias lcdoor="(lc; door)"
-alias lu="lein uberjar"
-alias lcu="  (lc; lu)"
+alias lu="time lein uberjar"
+alias lcu="(lc; lu)"
 
 alias lr="      lein run"
 alias lcr="(lc ; lr)"
