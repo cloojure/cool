@@ -332,7 +332,7 @@ alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
 alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
-alias pk="pkill -i -9"
+alias pk="pkill -9 -i"
 
 function pg() {
   ps -Fp $(pgrep ${1} )
