@@ -372,11 +372,11 @@ alias lcdoor="(lc; door)"
 alias lu="time lein uberjar"
 alias lcu="(lc; lu)"
 
-alias lr="      lein run"
+alias lr="lein run"
 alias lcr="(lc ; lr)"
-alias lf="lein figwheel"
-alias lcf="(lc ; lf)"
-alias lcfr="lc ; rlwrap lein figwheel"
+alias lfig="lein figwheel"
+alias lcfig="(lc ; lfig)"
+alias lcfigr="lc ; rlwrap lein figwheel"
 
 function lanc() {  # Lein ANCient
   echo ""
