@@ -113,13 +113,29 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   alias yourkit="${YOURKIT_HOME}/bin/profiler.sh &"
 fi
 
-if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
-  # echo "Found Darwin"
+function isMac() {
+  if [[ $(uname -a) =~ "Darwin" ]]; then
+    true
+  else
+    false
+  fi
+}
+function isLinux() {
+  if [[ $(uname -a) =~ "Linux" ]]; then
+    true
+  else
+    false
+  fi
+}
+# sample 1-line usage
+# isMac    && echo "Found Darwin"
+# isLinux  && echo "Found Linux"
+
+# Mac OSX config
+if [[ isMac ]]; then
+  # echo "Found Darwin (block)"
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
-
-  # export JAVA_HOME='/opt/java'          ; path=( ${JAVA_HOME}/bin       $path )
-  # export H2_HOME='/opt/h2'              ; path=( ${H2_HOME}/bin         $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
@@ -332,7 +348,10 @@ alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
 alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
-alias pk="pkill -9 -i"
+
+
+isMac    && alias pk="pkill -9 -i"
+isLinux  && alias pk="pkill -9"
 
 function pg() {
   ps -Fp $(pgrep ${1} )
