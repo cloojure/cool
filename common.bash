@@ -1,4 +1,4 @@
-# echo "common.bash - enter"   
+# echo "common.bash - enter"
 
 function nil() { # same as $(true) => 0 exit status
   true
@@ -42,9 +42,9 @@ function cons() {
 # baseline path (old way)
   # export PATH=.:${HOME}/bin:${HOME}/cool/bin:${HOME}/opt/bin
   # export PATH=$PATH:/opt/bin
-  # export PATH=$PATH:/usr/local/bin:/usr/bin:/bin 
-  # export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin 
-  # export PATH=$PATH:/usr/local/opt:/opt/bin 
+  # export PATH=$PATH:/usr/local/bin:/usr/bin:/bin
+  # export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+  # export PATH=$PATH:/usr/local/opt:/opt/bin
   # export PATH=$PATH:~/.local/bin   # awscli stuff
 
 function path_prepend() {
@@ -63,14 +63,37 @@ export PATH=.
   path_append /opt/bin
   path_append /usr/local/bin
   path_append /usr/bin
-  path_append /bin 
+  path_append /bin
   path_append /usr/local/sbin
   path_append /usr/sbin
-  path_append /sbin 
+  path_append /sbin
   path_append /usr/local/opt
   path_append ${HOME}/.local/bin # awscli stuff
 
-if [[ $(uname -a) =~ "Linux" ]]; then
+function isMac() {
+  if [[ $(uname -a) =~ "Darwin" ]]; then
+    true
+  else
+    false
+  fi
+}
+function isLinux() {
+  if [[ $(uname -a) =~ "Linux" ]]; then
+    true
+  else
+    false
+  fi
+}
+
+# function xxx() {
+#   if ((0)) ; then
+#     echo "truthy"
+#   else
+#     echo "falsey"
+#   fi
+# }
+
+if $(isLinux) ; then
   # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
@@ -93,9 +116,9 @@ if [[ $(uname -a) =~ "Linux" ]]; then
 
   # path_prepend /opt/phantomjs/bin
 
-  # path_prepend  /opt/solr/bin $path 
+  # path_prepend  /opt/solr/bin $path
     # ***** do not set SOLR_HOME *****
-    # SOLR_HOME controls the location on disk of the conf & data dirs for a core, 
+    # SOLR_HOME controls the location on disk of the conf & data dirs for a core,
     #   NOT the install location of the Solr binaries & libs
 
   # echo "PATH -> ${PATH}"
@@ -109,31 +132,31 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   }
   function java8() {
     export JAVA_HOME=/opt/java8
-    path_prepend "${JAVA_HOME}/bin" 
+    path_prepend "${JAVA_HOME}/bin"
     java  -version
   }
   function java9() {
     export JAVA_HOME=/opt/java9
-    path_prepend "${JAVA_HOME}/bin" 
+    path_prepend "${JAVA_HOME}/bin"
     java  --version
   }
   function java10() {
     export JAVA_HOME=/opt/java10
-    path_prepend "${JAVA_HOME}/bin" 
+    path_prepend "${JAVA_HOME}/bin"
     java  --version
   }
   function java11() {
     export JAVA_HOME=/opt/java11
-    path_prepend "${JAVA_HOME}/bin" 
+    path_prepend "${JAVA_HOME}/bin"
     java  --version
   }
   function java12() {
     export JAVA_HOME=/opt/java12
-    path_prepend "${JAVA_HOME}/bin" 
+    path_prepend "${JAVA_HOME}/bin"
     java  --version
   }
 
-  java12  >& /dev/null  # ********** default java version to use **********  
+  java12  >& /dev/null  # ********** default java version to use **********
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
@@ -152,13 +175,15 @@ if [[ $(uname -a) =~ "Linux" ]]; then
   alias yourkit="${YOURKIT_HOME}/bin/profiler.sh &"
 fi
 
-if [[ $(uname -a) =~ "Darwin" ]]; then  # Mac OSX config
-  # echo "Found Darwin"
+# sample 1-line usage
+# isMac    && echo "Found Darwin"
+# isLinux  && echo "Found Linux"
+
+# Mac OSX config
+if $(isMac) ; then
+  # echo "Found Darwin (block)"
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
-
-  # export JAVA_HOME='/opt/java'          ; path=( ${JAVA_HOME}/bin       $path )
-  # export H2_HOME='/opt/h2'              ; path=( ${H2_HOME}/bin         $path )
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
@@ -301,10 +326,10 @@ alias gitdns="  git diff --name-status"
 alias gitdw="   git diff --ignore-all-space --ignore-blank-lines"
 alias gitlg="   git log -22 --oneline --graph --decorate"
 alias git-unadd='git reset HEAD'    # git unadd
-  
+
 #  usage:   gittag v9.3.1   - create a tag
 #           gittag          - display all tags
-function gitg() {  
+function gitg() {
   local tagStr=$1
   if [[ "$tagStr" == "" ]]; then
     git tag
@@ -317,7 +342,7 @@ function gitg() {
 function git-tag-delete() {
   local tagStr=$1
   local remoteStr=$2
-  if [[ $# == 0 ]]; then  
+  if [[ $# == 0 ]]; then
     echo ""
     echo "  usage:  git-tag-delete <tag> [<remote-repo-name>]"
     echo ""
@@ -371,7 +396,10 @@ alias diffw="diff --ignore-all-space --ignore-blank-lines"
 
 alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
-alias pk="pkill -9 -i"
+
+
+isMac    && alias pk="pkill -9 -i"
+isLinux  && alias pk="pkill -9"
 
 function pg() {
   ps -Fp $(pgrep ${1} )
@@ -411,11 +439,11 @@ alias lcdoor="(lc; door)"
 alias lu="time lein uberjar"
 alias lcu="(lc; lu)"
 
-alias lr="      lein run"
+alias lr="lein run"
 alias lcr="(lc ; lr)"
-alias lf="lein figwheel"
-alias lcf="(lc ; lf)"
-alias lcfr="lc ; rlwrap lein figwheel"
+alias lfig="lein figwheel"
+alias lcfig="(lc ; lfig)"
+alias lcfigr="lc ; rlwrap lein figwheel"
 
 alias figc="rm -rf ./target"
 
@@ -424,7 +452,7 @@ function lanc() {  # Lein ANCient
   echo ""-----------------------------------------------------------------------------
   echo "project.clj:"
   echo ""
-  lein ancient check           :all 
+  lein ancient check           :all
   echo ""
   echo ""-----------------------------------------------------------------------------
   echo "profiles.clj:"
@@ -446,16 +474,16 @@ alias venv2='virtualenv -p /usr/bin/python2 venv'
 alias venv3='virtualenv -p /usr/bin/python3 venv'
 function venvon() {
   echo '    source venv/bin/activate'
-            source venv/bin/activate 
+            source venv/bin/activate
 }
 function venvoff() {
   echo '    deactivate'
-            deactivate 
+            deactivate
 }
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"       # remove Ubuntu crash files that create annoying warnings
-function mcd() { 
+function mcd() {
   mkdir -p "$1"; cd "$1";
 }
 alias histg="history | grep"
@@ -530,4 +558,4 @@ export alan_host_1_name="ec2-54-149-36-244.us-west-2.compute.amazonaws.com"
 export alan_host_1_ip="54.149.36.244"
 alias ssh-alan-host-1="ssh -i /home/alan/.ssh/alan-keypair-1.pem ubuntu@${alan_host_1_name}"
 
-# echo "common.bash - exit"   
+# echo "common.bash - exit"
