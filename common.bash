@@ -1,12 +1,42 @@
 # echo "common.bash - enter"   
 
-function path_prepend() {
-  local path_search_dir=$1
-  export PATH="${path_search_dir}:${PATH}"
+function nil() { # same as $(true) => 0 exit status
+  true
 }
-function path_append() {
-  local path_search_dir=$1
-  export PATH="${PATH}:${path_search_dir}"
+function identity() {
+  echo "count = $#"
+  echo "$@"  # or $* ???
+}
+function count() {
+  echo $#
+}
+function str() {
+  echo "count = $#"
+  result=""
+  for arg in $@ ; do
+    result+=$arg
+  done
+  echo "$result"
+}
+function add() {
+  echo "count = $#"
+  result=0
+  for arg in $@ ; do
+    $((result+=arg))
+  done
+  echo "$result"
+}
+function first() {
+  echo $1
+}
+function rest() {
+  shift
+  echo "$@" 
+}
+function cons() {
+  echo "count = $#"
+  echo "1 = $1"
+  echo "2 = $2"
 }
 
 # baseline path (old way)
@@ -16,6 +46,15 @@ function path_append() {
   # export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin 
   # export PATH=$PATH:/usr/local/opt:/opt/bin 
   # export PATH=$PATH:~/.local/bin   # awscli stuff
+
+function path_prepend() {
+  local path_search_dir=$1
+  export PATH="${path_search_dir}:${PATH}"
+}
+function path_append() {
+  local path_search_dir=$1
+  export PATH="${PATH}:${path_search_dir}"
+}
 
 export PATH=.
   path_append ${HOME}/bin
@@ -377,6 +416,8 @@ alias lcr="(lc ; lr)"
 alias lf="lein figwheel"
 alias lcf="(lc ; lf)"
 alias lcfr="lc ; rlwrap lein figwheel"
+
+alias figc="rm -rf ./target"
 
 function lanc() {  # Lein ANCient
   echo ""

@@ -3,71 +3,113 @@ Docker Notes - Fedora 20 (2014-10-21)
   sudo systemctl start docker       # start docker
   sudo systemctl enable docker      # enable docker to start at boot
 
-  alias dk="sudo docker"
-  dk --help                         # general help
-  dk <cmd> --help                   # help for <cmd>
+  # alias dk="sudo docker" ; no longer needed
+  docker --help                         # general help
+  docker <cmd> --help                   # help for <cmd>
 
-  dk run -it ubuntu /bin/bash       # test if working (-i=interactive  -t=tty)
+  docker run -it ubuntu /bin/bash       # test if working (-i=interactive  -t=tty)
     ^p ^q   # detach w/o exit
-  dk attach         <id>            # attach to a running container
+  docker attach         <id>            # attach to a running container
 
   Commands:
-    dk version
-    dk run <flags>  <image>     <cmd & args>     # run a job
-    dk run -it      ubuntu    /bin/bash
-    dk run -itd     ubuntu                      # start container in background (--detach)
+    docker --version            # normal
+    docker version              # more detailed
+    docker info                 # very detailed
+    docker run hello-world      # basic health check
 
-                    <cont name>     <image>
-    dk run -itd     --name=mycont   ubuntu      # start container in background (--detach)
+    docker run <flags>  <image>     <cmd & args>     # run a job
+    docker run -it      ubuntu    /bin/bash
+    docker run -itd     ubuntu                      # start container in background (--detach)
 
-                        <nw name>
-    dk network ls                                   # list all networks (also 'list')
-    dk network inspect bridge                       # show details on "bridge" network
-    dk network disconnect bridge mycont             # remove container from network
+                        <cont name>     <image>
+    docker run -itd     --name=mycont   ubuntu      # start container in background (--detach)
 
-    dk network create                   my-bridge-nw    # default:  --driver=bridge
-    dk network create --driver=bridge   my-bridge-nw    # create your own "bridge" network
-    dk network inspect                  my-bridge-nw    # inspect network
+          ports =>  <out>:<in>    <image>
+    docker run    -p 4000:80    friendlyhello       # --publish <list> (not "port")
+    docker run -d -p 4000:80    friendlyhello       # --detach, returns container <sha> 
+    docker container stop <sha>                     # stop container <sha>
 
-    dk run -d --net=my-bridge-nw --name db training/postgres
-    dk network connect my-bridge-nw web        # attach web container to m-b-network
+    # after `docker login` user/pass
+                 <image>        <user>/<repo>:<tag>
+    docker tag friendlyhello  cloojure/get-started:part2    # tag image
+    docker push cloojure/get-started:part2                  # push image to docker hub
+    docker run  -p 4000:80  <user>/<repo>:<tag>             # run image on any machine
 
-    dk run -itd --name container1 busybox           # create 2 containers
-    dk run -itd --name container2 busybox
-    dk network create -d bridge --subnet 172.25.0.0/16  isolated_nw         # create network
-    dk network connect isolated_nw container2       # connect c2 to network
-    dk network inspect isolated_nw                  # verify
+    docker swarm init
+    docker stack deploy -c docker-compose.yml getstartedlab
+    docker service ls                                           # ls the service
+    docker stack services  getstartedlab                        #   another way
+    docker service   ps getstartedlab_web                       # status on all tasks in a service
+    docker container ps getstartedlab                           # status on all tasks in a stack
+    docker stack rm getstartedlab                               # take down the stack
+    docker swarm leave --force                                  # take down the swarm
 
-    dk attach container4                            # attach to a running container
+    docker-machine create --driver virtualbox myvm1             # create 1 vm...
+    docker-machine create --driver virtualbox myvm2             # ...and another
+    docker-machine ls                                           # list vm's
+    docker-machine ssh myvm1 \              # vvv e.g.  192.168.99.100  (*** don't use a port here! ***)
+        "docker swarm init --advertise-addr <myvm1 ip>"
+    docker-machine ssh myvm1 "docker node ls"
+
+    docker-machine ssh myvm1 "docker swarm leave --force"       # for leader
+    docker-machine ssh myvm2 "docker swarm leave"               # for others
+
+    docker-machine env myvm1                                    # & cut/paste `eval` cmd
+
+
+---------------------------------------------------------------------------------------------------
+                             <nw name>
+    docker network ls                                   # list all networks (also 'list')
+    docker network inspect    bridge                    # show details on "bridge" network
+    docker network disconnect bridge mycont             # remove container from network
+
+    docker network create                   my-bridge-nw    # default:  --driver=bridge
+    docker network create --driver=bridge   my-bridge-nw    # create your own "bridge" network
+    docker network inspect                  my-bridge-nw    # inspect network
+
+    docker run -d --net=my-bridge-nw --name db training/postgres
+    docker network connect my-bridge-nw web        # attach web container to m-b-network
+
+    docker run -itd --name container1 busybox           # create 2 containers
+    docker run -itd --name container2 busybox
+    docker network create -d bridge --subnet 172.25.0.0/16  isolated_nw         # create network
+    docker network connect isolated_nw container2       # connect c2 to network
+    docker network inspect isolated_nw                  # verify
+
+    docker attach container4                            # attach to a running container
     ping -w4 c5                                     # ping another container on the network
-    dk network disconnect isolated_nw container5    # disconnect container from network
-    dk network rm isolated_nw                       # remove a network
+    docker network disconnect isolated_nw container5    # disconnect container from network
+    docker network rm isolated_nw                       # remove a network
 
-    dk image ls                                     # list images
-    dk images                                       # list images
-    dk run docker-whale                             # run image; it then exits
-    dk build -t perf-1 .                            # build ./Dockerfile and tag "perf-1"
+    docker image ls                                     # list images
+    docker images                                       # list images
+    docker run docker-whale                             # run image; it then exits
+    docker build --tag=perf-1 .                         # build ./Dockerfile and tag "perf-1"
+
+    docker container ls                                 # list images
+    docker container ls --all
+    docker container ls -aq                             # all, quiet
+    docker container --help
 
 
+    docker ps                           # list running containers
+    docker ps -a                        # list ALL     containers
 
-    dk ps                           # list running containers
-    dk ps -a                        # list ALL     containers
-
-    dk logs         <id>            # cat logs
-    dk logs -f      <id>            # "tail -f" logs
-    dk top          <id>
-    dk inspect      <id>            # detailed json output
+    docker logs         <id>            # cat logs
+    docker logs -f      <id>            # "tail -f" logs
+    docker top          <id>
+    docker inspect      <id>            # detailed json output
 
     ID=$(dkru -d <image> <prog> <args>)        # daemon job
-    dk stop         <id>
-    dk start        <id>
-    dk restart      <id>
-    dk kill         <id>
+    docker stop         <id>
+    docker start        <id>
+    docker restart      <id>
+    docker kill         <id>
 
-    dk pause        <id>
-    dk unpause      <id>
+    docker pause        <id>
+    docker unpause      <id>
 
-    dk rm           <id>                    # must be stopped to remove
+    docker rm           <id>                    # must be stopped to remove
 
 Examples:
   docker run -it   ubuntu /bin/bash          # interactive shell
@@ -186,16 +228,16 @@ docker 1.12 testing  2016-6-26
   Follow these instructions!  http://blog.mantika.io/docker-1.12-swarm/
 
   Remember:
-    alias dkm=docker-machine
+    # alias dkm=docker-machine
   verify
-    dk      --version       ;=> Docker version 1.12.0-rc2, build 906eacd
-    dkm     --version       ;=> docker-machine version 0.8.0-rc1, build fffa6c9
+    docker      --version       ;=> Docker version 1.12.0-rc2, build 906eacd
+    # dkm     --version       ;=> docker-machine version 0.8.0-rc1, build fffa6c9
   Created 3 test machines using docker-machine
     dkm create --driver virtualbox      manager1 / worker1 / worker2
 
   dkm ls
-  dk swarm init --listen-addr $(dkm ip manager1):2377
-  dk node ls
+  docker swarm init --listen-addr $(dkm ip manager1):2377
+  docker node ls
   dkm ssh worker1 "docker swarm join $(dkm ip manager1):2377"
   dkm ssh worker2 "docker swarm join $(dkm ip manager1):2377"
   dkm ssh manager1 "docker node ls"
