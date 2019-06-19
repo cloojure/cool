@@ -93,7 +93,7 @@ function isLinux() {
 #   fi
 # }
 
-if $(isLinux) ; then
+if $(isLinux) ; then #{
   # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
@@ -173,14 +173,17 @@ if $(isLinux) ; then
 
   alias idea="idea.sh &"
   alias yourkit="${YOURKIT_HOME}/bin/profiler.sh &"
-fi
+
+  # python abbreviations
+  alias python=python3
+fi #}
 
 # sample 1-line usage
 # isMac    && echo "Found Darwin"
 # isLinux  && echo "Found Linux"
 
 # Mac OSX config
-if $(isMac) ; then
+if $(isMac) ; then #{
   # echo "Found Darwin (block)"
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
@@ -188,6 +191,8 @@ if $(isMac) ; then
   alias d='    ls -ldF'
   alias lal='  ls -alF'
   alias idea='echo "not implemented; start IDEA from dock" '
+
+  path_prepend "/usr/local/Cellar/python/3.7.2_2/libexec/bin"
 
   function java8() {
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
@@ -206,49 +211,6 @@ if $(isMac) ; then
   }
   java12 >& /dev/null
 
-# # cambia http proxy stuff
-# function containsElement() {
-#   local e
-#   for e in “${@:2}“; do [[ “$e” == “$1" ]] && return 0; done
-#   return 1
-# }
-
-# REGENCE_PROXY=“http://utrgproxywest.regence.com:8080”
-# DO_NOT_PROXY=“localhost,127.0.0.1,localaddress,.localdomain.com,*.healthsparq.com,*.regence.com,*.healthsparq.net”
-# REGENCE_EXT_IP=(“199.79.222.119”)
-# external_ip=“$(curl -s http://ipinfo.io/ip)”
-# #Location-specific settings
-# if containsElement “${external_ip}” “${REGENCE_EXT_IP[@]}“; then
-#   export HTTP_PROXY=“${REGENCE_PROXY}”
-#   export http_proxy=“${REGENCE_PROXY}”
-#   export https_proxy=“${REGENCE_PROXY}”
-#   export HTTPS_proxy=“${REGENCE_PROXY}”
-#   export ftp_proxy=“${REGENCE_PROXY}”
-#   export FTP_PROXY=“${REGENCE_PROXY}”
-#   export no_proxy=“${DO_NOT_PROXY}”
-#   export NO_PROXY=“${DO_NOT_PROXY}”
-# else
-#   unset http_proxy
-#   unset HTTP_PROXY
-#   unset https_proxy
-#   unset HTTPS_PROXY
-#   unset ftp_proxy
-#   unset FTP_PROXY
-#   unset no_proxy
-#   unset NO_PROXY
-# fi
-
-
-# REGENCE_PROXY="http://utrgproxywest.regence.com:8080"
-# export HTTP_PROXY="${REGENCE_PROXY}"
-# export http_proxy="${REGENCE_PROXY}"
-# export HTTPS_PROXY="${REGENCE_PROXY}"
-# export https_proxy="${REGENCE_PROXY}"
-# export FTP_PROXY="${REGENCE_PROXY}"
-# export ftp_proxy="${REGENCE_PROXY}"
-# export NO_PROXY="${DO_NOT_PROXY}"
-# export no_proxy="${DO_NOT_PROXY}"
-
   unset HTTP_PROXY
   unset http_proxy
   unset HTTPS_PROXY
@@ -258,7 +220,7 @@ if $(isMac) ; then
   unset NO_PROXY
   unset no_proxy
 
-fi
+fi #}
 
 function shellVersion() {
   if [[ $ZSH_VERSION != "" ]]; then
@@ -445,7 +407,7 @@ alias lfig="lein figwheel"
 alias lcfig="(lc ; lfig)"
 alias lcfigr="lc ; rlwrap lein figwheel"
 
-alias figc="rm -rf ./target"
+alias rmt="rm -rf ./target"
 
 function lanc() {  # Lein ANCient
   echo ""
@@ -465,7 +427,7 @@ function lanc() {  # Lein ANCient
 # python env vars
 export PYTHONDONTWRITEBYTECODE="enable"     # invaluable for avoiding stale cache errors
 # python abbreviations
-alias python=python3
+# alias python=python3
 alias py2=python2
 alias py3=python3
 alias pyx="chmod a+x *.py "
