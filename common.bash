@@ -520,4 +520,12 @@ export alan_host_1_name="ec2-54-149-36-244.us-west-2.compute.amazonaws.com"
 export alan_host_1_ip="54.149.36.244"
 alias ssh-alan-host-1="ssh -i /home/alan/.ssh/alan-keypair-1.pem ubuntu@${alan_host_1_name}"
 
+# consent
+# export authentication-service.service.host='https://authentication-service.dev.janusplatform.io'
+# export DB_HOST=localhost
+# export DB_USERNAME=postgres
+# export JANUS_ENVIRONMENT=local
+# export LOCAL_DB=t
+# export USER_PREFERENCE_SERVICE_URL=https://user-preference-service.dev.janusplatform.io
+
 # echo "common.bash - exit"
