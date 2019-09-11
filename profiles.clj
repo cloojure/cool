@@ -3,7 +3,7 @@
     :plugins [
      ;[jonase/eastwood          "0.3.5"]
       [lein-ancient             "0.6.15"]
-      [lein-codox               "0.10.6"]
+      [lein-codox               "0.10.7"]
       [lein-exec                "0.3.7"]]
     :jvm-opts ["-Xms1g" "-Xmx4g" 
 ;              "-server"
