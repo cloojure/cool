@@ -1,2 +1,2 @@
 #!/bin/bash
-lein-ancient check :all
+lein ancient check :all
