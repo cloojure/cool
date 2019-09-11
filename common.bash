@@ -98,14 +98,14 @@ if $(isLinux) ; then #{
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
   export PGDATA="/var/edb/postgresql"
-  export EDB_HOME="/opt/PostgreSQL/10"                    ; path_prepend ${EDB_HOME}/bin
-  export JAVA_HOME="/opt/java"                            ; path_prepend ${JAVA_HOME}/bin
-  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"  ; path_prepend ${YOURKIT_HOME}/bin
-  export DATOMIC_HOME="/opt/datomic"                      ; path_prepend ${DATOMIC_HOME}/bin
-  export IDEA_HOME="/opt/idea"                            ; path_prepend ${IDEA_HOME}/bin
-  export MAVEN_HOME="/opt/apache-maven"                   ; path_prepend ${MAVEN_HOME}/bin
-# export PYTHON_PREFIX="${HOME}/.local/bin"               ; path_prepend ${PYTHON_PREFIX}
-  export POSTMAN_HOME="/opt/Postman"                      ; path_prepend ${POSTMAN_HOME}
+  export EDB_HOME="/opt/PostgreSQL/10"                        ; path_prepend ${EDB_HOME}/bin
+  export JAVA_HOME="/opt/java"                                ; path_prepend ${JAVA_HOME}/bin
+  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"      ; path_prepend ${YOURKIT_HOME}/bin
+  export DATOMIC_HOME="/opt/datomic"                          ; path_prepend ${DATOMIC_HOME}/bin
+  export IDEA_HOME="/opt/idea"                                ; path_prepend ${IDEA_HOME}/bin
+  export MAVEN_HOME="/opt/apache-maven"                       ; path_prepend ${MAVEN_HOME}/bin
+# export PYTHON_PREFIX="${HOME}/.local/bin"                   ; path_prepend ${PYTHON_PREFIX}
+  export POSTMAN_HOME="/opt/Postman"                          ; path_prepend ${POSTMAN_HOME}
 
   # extra cassandra stuff
   # export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -219,6 +219,10 @@ if $(isMac) ; then #{
   unset ftp_proxy
   unset NO_PROXY
   unset no_proxy
+
+
+# export RUBY_HOME=~/.rbenv/versions/2.6.4       ;  path_prepend ${RUBY_HOME}/bin
+  export RUBY_HOME=/usr/local/Cellar/ruby/2.6.3  ;  path_prepend ${RUBY_HOME}/bin
 
 fi #}
 
@@ -519,5 +523,13 @@ alias lum='cd ~/work/lumanu && . Envfile && cd ic'
 export alan_host_1_name="ec2-54-149-36-244.us-west-2.compute.amazonaws.com"
 export alan_host_1_ip="54.149.36.244"
 alias ssh-alan-host-1="ssh -i /home/alan/.ssh/alan-keypair-1.pem ubuntu@${alan_host_1_name}"
+
+# consent
+# export authentication-service.service.host='https://authentication-service.dev.janusplatform.io'
+# export DB_HOST=localhost
+# export DB_USERNAME=postgres
+# export JANUS_ENVIRONMENT=local
+# export LOCAL_DB=t
+# export USER_PREFERENCE_SERVICE_URL=https://user-preference-service.dev.janusplatform.io
 
 # echo "common.bash - exit"
