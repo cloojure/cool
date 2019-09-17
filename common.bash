@@ -156,6 +156,12 @@ if $(isLinux) ; then #{
     java  --version
   }
 
+  function java13() {
+    export JAVA_HOME=/opt/java13
+    path_prepend "${JAVA_HOME}/bin"
+    java  --version
+  }
+
   java12  >& /dev/null  # ********** default java version to use **********
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
@@ -209,7 +215,13 @@ if $(isMac) ; then #{
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  java12 >& /dev/null
+  function java13() {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 13)
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
+
+  java13 >& /dev/null
 
   unset HTTP_PROXY
   unset http_proxy
@@ -221,8 +233,8 @@ if $(isMac) ; then #{
   unset no_proxy
 
 
-# export RUBY_HOME=~/.rbenv/versions/2.6.4       ;  path_prepend ${RUBY_HOME}/bin
-  export RUBY_HOME=/usr/local/Cellar/ruby/2.6.3  ;  path_prepend ${RUBY_HOME}/bin
+# export RUBY_HOME=/usr/local/Cellar/ruby/2.6.3  # Missing `bundle`, etc
+  export RUBY_HOME=~/.rbenv/versions/2.6.4       ;  path_prepend ${RUBY_HOME}/bin  # this one works
 
 fi #}
 
