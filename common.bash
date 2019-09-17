@@ -416,6 +416,7 @@ alias door="time lein doo chrome test "      # phantomjs is deprecated, stuck at
 alias lcdoor="(lc; door)"
 alias lu="time lein uberjar"
 alias lcu="(lc; lu)"
+alias laca="{lein ancient check :all}"
 
 alias lr="lein run"
 alias lcr="(lc ; lr)"
