@@ -379,3 +379,6 @@ CentOS/Fedora:
   *.rpm:    rpm -Uvh xxxxx.rpm              # U=update v=verbose h=hashes
             rpm --erase  fdb-document-layer
             rpm --query  fdb-document-layer
+
+-----------------------------------------------------------------------------
+curl -k https://localhost:3001/api -s -o /dev/null -w  "%{time_starttransfer}\n"  # reports elapsed time

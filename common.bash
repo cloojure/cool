@@ -403,26 +403,26 @@ alias postman=Postman
 alias gsutil-cpz="gsutil cp -z txt,xml,csv,tsv,psv,html,js -a public-read "
 
 # lein abbreviations
-alias lc="       lein clean"
-alias lt="  time lein test"
-alias lta=" time lein test :all"
-alias ltr="      lein test-refresh"
-alias lct="  (lc; lt)"
-alias lcta=" (lc; lta)"
-alias lctr=" (lc; ltr)"
+alias lr="  time (lein run)"
+alias lcr=" time (lein do clean, run)"
+alias lc="  time (lein clean)"
+alias lt="  time (lein test)"
+alias lta=" time (lein test :all)"
+alias ltr=" time (lein test-refresh)"
+alias lct=" time (lein do clean, test)"
+alias lcta="time (lein do clean, test :all)"
+alias lctr="time (lein do clean, test-refresh)"
+
+alias lu="time lein uberjar"
+# alias lcu="(lc; lu)"
+alias lcu="time lein do clean, uberjar"
+alias laca="{lein ancient check :all}"
+
+
 alias lcdoo="(lc; ldoo)"
 alias ldoo="time lein doo chrome test once"  # phantomjs is deprecated, stuck at old React version
 alias door="time lein doo chrome test "      # phantomjs is deprecated, stuck at old React version
 alias lcdoor="(lc; door)"
-alias lu="time lein uberjar"
-alias lcu="(lc; lu)"
-alias laca="{lein ancient check :all}"
-
-alias lr="lein run"
-alias lcr="(lc ; lr)"
-alias lfig="lein figwheel"
-alias lcfig="(lc ; lfig)"
-alias lcfigr="lc ; rlwrap lein figwheel"
 
 alias rmt="rm -rf ./target"
 
