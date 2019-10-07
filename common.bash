@@ -162,7 +162,7 @@ if $(isLinux) ; then #{
     java  --version
   }
 
-  java12  >& /dev/null  # ********** default java version to use **********
+  java13  >& /dev/null  # ********** default java version to use **********
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
