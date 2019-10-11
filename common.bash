@@ -173,6 +173,7 @@ if $(isLinux) ; then #{
 
   alias d='    ls -ldF   --color'
   alias lal='  ls -alF   --color'
+  alias ldl='  ls -ldF   --color .*'
   alias ddr3='find .  -maxdepth 3  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
   alias ddr4='find .  -maxdepth 4  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
   alias ddr5='find .  -maxdepth 5  -type d  | sed -e 's/^..//' | xargs ls -ldF --color'
