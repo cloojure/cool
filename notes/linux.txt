@@ -382,3 +382,5 @@ CentOS/Fedora:
 
 -----------------------------------------------------------------------------
 curl -k https://localhost:3001/api -s -o /dev/null -w  "%{time_starttransfer}\n"  # reports elapsed time
+
+or use Postman:   GET   https://minerva-api.dev.janusplatform.io/api   => full response (`https` required!)

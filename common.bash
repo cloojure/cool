@@ -200,6 +200,11 @@ if $(isMac) ; then #{
 
   path_prepend "/usr/local/Cellar/python/3.7.2_2/libexec/bin"
 
+  function graalvm() {
+    export JAVA_HOME=/opt/graalvm-ce-19.2.1/Contents/Home
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
   function java8() {
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     path_prepend ${JAVA_HOME}/bin
@@ -222,6 +227,10 @@ if $(isMac) ; then #{
   }
 
   java13 >& /dev/null
+
+
+  export GOPATH=${HOME}/go
+  path_prepend ${GOPATH}/bin
 
   unset HTTP_PROXY
   unset http_proxy
@@ -474,7 +483,6 @@ alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wif
 alias pingg="ping -c5 google.com"
 alias ping4="ping -c4"
 alias gopen="gnome-open"
-alias go="   gnome-open"
 
 function ipaddr() {
   local result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
