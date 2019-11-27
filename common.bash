@@ -162,6 +162,13 @@ if $(isLinux) ; then #{
     java  --version
   }
 
+  function graalvm() {
+    export JAVA_HOME=/opt/graalvm
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
+
+
   java13  >& /dev/null  # ********** default java version to use **********
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
@@ -222,6 +229,12 @@ if $(isMac) ; then #{
     java -version
   }
 
+  function graalvm() {
+    export JAVA_HOME=/opt/graalvm/Contents/Home
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
+
   java13 >& /dev/null
 
   export GOPATH=${HOME}/go
@@ -241,12 +254,6 @@ if $(isMac) ; then #{
   export RUBY_HOME=~/.rbenv/versions/2.6.4       ;  path_prepend ${RUBY_HOME}/bin  # this one works
 
 fi #}
-
-function graalvm() {
-  export JAVA_HOME=/opt/graalvm
-  path_prepend ${JAVA_HOME}/bin
-  java -version
-}
 
 function shellVersion() {
   if [[ $ZSH_VERSION != "" ]]; then
