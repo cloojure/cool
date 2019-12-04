@@ -124,6 +124,12 @@ if $(isLinux) ; then #{
 
   # ********** don't forget about symlink /opt/java -> /opt/java10 **********
 
+  function graalvm() {
+    export JAVA_HOME=/opt/graalvm
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
+
   function zulu10() {
     export JAVA_HOME=/opt/zulu10
     path_prepend ${JAVA_HOME}/bin
@@ -160,6 +166,7 @@ if $(isLinux) ; then #{
     path_prepend "${JAVA_HOME}/bin"
     java  --version
   }
+
 
   java13  >& /dev/null  # ********** default java version to use **********
 
@@ -198,7 +205,6 @@ if $(isMac) ; then #{
   alias lal='  ls -alF'
   alias idea='echo "not implemented; start IDEA from dock" '
 
-  path_append "/usr/local/Cellar/python/3.7.2_2/libexec/bin"
 
   function graalvm() {
     export JAVA_HOME=/opt/graalvm/Contents/Home
@@ -206,6 +212,7 @@ if $(isMac) ; then #{
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
+
   function java8() {
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     path_prepend ${JAVA_HOME}/bin
@@ -227,8 +234,13 @@ if $(isMac) ; then #{
     java -version
   }
 
-  java13 >& /dev/null
+  function graalvm() {
+    export JAVA_HOME=/opt/graalvm/Contents/Home
+    path_prepend ${JAVA_HOME}/bin
+    java -version
+  }
 
+  java13 >& /dev/null
 
   export GOPATH=${HOME}/go
   path_prepend ${GOPATH}/bin
@@ -423,10 +435,10 @@ alias lct=" time (lein do clean, test)"
 alias lcta="time (lein do clean, test :all)"
 alias lctr="time (lein do clean, test-refresh)"
 
-alias lu="time lein uberjar"
+alias lu="time (lein uberjar)"
 # alias lcu="(lc; lu)"
-alias lcu="time lein do clean, uberjar"
-alias laca="{lein ancient check :all}"
+alias lcu="time { lein do clean, uberjar; }"  # terminating `;` & space required by bash, but not zsh
+alias laca="time {lein ancient check :all}"   # <= this works in zsh, but not bash
 
 
 alias lcdoo="(lc; ldoo)"
