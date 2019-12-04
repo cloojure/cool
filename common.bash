@@ -57,18 +57,17 @@ function path_append() {
 }
 
 export PATH=.
-  path_append ${HOME}/bin
-  path_append ${HOME}/cool/bin
-  path_append ${HOME}/opt/bin
-  path_append /opt/bin
-  path_append /usr/local/bin
-  path_append /usr/bin
-  path_append /bin
-  path_append /usr/local/sbin
-  path_append /usr/sbin
-  path_append /sbin
-  path_append /usr/local/opt
-  path_append ${HOME}/.local/bin # awscli stuff
+  path_prepend /bin
+  path_prepend /usr/bin
+  path_prepend /usr/local/bin
+  path_prepend /usr/local/opt
+  path_prepend /opt/bin
+  path_prepend ${HOME}/bin
+  path_prepend ${HOME}/cool/bin
+  path_prepend ${HOME}/opt/bin
+# path_append /usr/local/sbin
+# path_append /usr/sbin
+# path_append /sbin
 
 function isMac() {
   if [[ $(uname -a) =~ "Darwin" ]]; then
@@ -199,10 +198,11 @@ if $(isMac) ; then #{
   alias lal='  ls -alF'
   alias idea='echo "not implemented; start IDEA from dock" '
 
-  path_prepend "/usr/local/Cellar/python/3.7.2_2/libexec/bin"
+  path_append "/usr/local/Cellar/python/3.7.2_2/libexec/bin"
 
   function graalvm() {
-    export JAVA_HOME=/opt/graalvm-ce-19.2.1/Contents/Home
+    export JAVA_HOME=/opt/graalvm/Contents/Home
+    export GRAALVM_HOME=${GRAALVM_HOME}  # not needed for Java/Clojure (just llvm/polyglot stuff)
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
