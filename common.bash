@@ -479,8 +479,8 @@ function venvoff() {
 
 # misc stuff
 alias crashrm="sudo rm /var/crash/*"       # remove Ubuntu crash files that create annoying warnings
-function mcd() {
-  mkdir -p "$1"; cd "$1";
+function mkpath() {
+  mkdir -p "$1"
 }
 alias histg="history | grep"
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
