@@ -497,12 +497,14 @@ alias pingg="ping -c5 google.com"
 alias ping4="ping -c4"
 alias gopen="gnome-open"
 
-function ipaddr() {
-  local result=$(ip route get 8.8.8.8 | awk '{print $NF; exit}' )         # 8.8.8.8 is google dns
-  echo "${result}"
+# what your computer thinks its ip address is
+function iplocal() {
+  ip route get 8.8.8.8 | awk '{print $NF; exit}'    # 8.8.8.8 is google dns
 }
-alias ipexternal="curl --silent http://checkip.amazonaws.com"
-alias ipexternal-ipinfo="curl  -s http://ipinfo.io/ip"
+# what the outside world thinks your ip address is
+function ipexternal() {
+  curl --silent http://checkip.amazonaws.com # or:  http://ipinfo.io/ip
+}
 function ipinfo() {
   echo "local    IP  =>  $(ipaddr)"
   echo "external IP  =>  $(ipexternal)"
