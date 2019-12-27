@@ -502,12 +502,12 @@ function ipaddr() {
   echo "${result}"
 }
 alias ipexternal="curl --silent http://checkip.amazonaws.com"
+alias ipexternal-ipinfo="curl  -s http://ipinfo.io/ip"
 function ipinfo() {
   echo "local    IP  =>  $(ipaddr)"
   echo "external IP  =>  $(ipexternal)"
 }
 
-alias ipinfo="curl  -s http://ipinfo.io/ip"
 
 #-----------------------------------------------------------------------------
 # joyent
