@@ -130,33 +130,19 @@ if $(isLinux) ; then #{
     java -version
   }
 
-  function zulu10() {
-    export JAVA_HOME=/opt/zulu10
+  function zulu11() {
+    export JAVA_HOME=/opt/zulu11
     path_prepend ${JAVA_HOME}/bin
     java  --version
   }
+
   function java8() {
     export JAVA_HOME=/opt/java8
     path_prepend "${JAVA_HOME}/bin"
     java  -version
   }
-  function java9() {
-    export JAVA_HOME=/opt/java9
-    path_prepend "${JAVA_HOME}/bin"
-    java  --version
-  }
-  function java10() {
-    export JAVA_HOME=/opt/java10
-    path_prepend "${JAVA_HOME}/bin"
-    java  --version
-  }
   function java11() {
     export JAVA_HOME=/opt/java11
-    path_prepend "${JAVA_HOME}/bin"
-    java  --version
-  }
-  function java12() {
-    export JAVA_HOME=/opt/java12
     path_prepend "${JAVA_HOME}/bin"
     java  --version
   }
@@ -167,8 +153,8 @@ if $(isLinux) ; then #{
     java  --version
   }
 
-
   java13  >& /dev/null  # ********** default java version to use **********
+
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
