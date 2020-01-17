@@ -312,6 +312,13 @@ array of LIKEs
   SELECT sum(product_cost) FROM t_test WHERE product_code LIKE ANY(      ‘{%123%,%234%,%345%,%456%,%567%}’ );
 
 -----------------------------------------------------------------------------
+EnterpriseDB (EDB) files: 
+  /opt/PostgreSQL/10/data/postgresql.conf
+  /opt/PostgreSQL/10/data/pg_hba.conf
+  /opt/PostgreSQL/10/data/pg_ident.conf
+  /opt/PostgreSQL/10/data/postgresql.auto.conf
+
+-----------------------------------------------------------------------------
 Ubuntu files: 
   /etc/init.d/postgresql
 

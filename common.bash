@@ -492,7 +492,7 @@ function ipexternal() {
   curl --silent http://checkip.amazonaws.com # or:  http://ipinfo.io/ip
 }
 function ipinfo() {
-  echo "local    IP  =>  $(ipaddr)"
+  echo "local    IP  =>  $(iplocal)"
   echo "external IP  =>  $(ipexternal)"
 }
 
