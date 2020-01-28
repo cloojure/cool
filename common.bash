@@ -62,6 +62,8 @@ export PATH=.
   path_prepend /usr/local/bin
   path_prepend /usr/local/opt
   path_prepend /opt/bin
+  path_prepend /opt/dart-sass
+  path_prepend /opt/local/bin
   path_prepend ${HOME}/bin
   path_prepend ${HOME}/cool/bin
   path_prepend ${HOME}/opt/bin
@@ -472,6 +474,18 @@ function venvoff() {
 alias crashrm="sudo rm /var/crash/*"       # remove Ubuntu crash files that create annoying warnings
 function mkpath() {
   mkdir -p "$1"
+}
+function mkParents() {
+  tgtFile=$1
+  # echo $tgtFile
+  tgtDir=${tgtFile%/*}
+  # echo $tgtDir
+  mkdir -p ${tgtDir}
+}
+function touchPath() {
+  tgtFile=$1
+  mkParents ${tgtFile}
+  touch ${tgtFile}
 }
 alias histg="history | grep"
 alias websiteget="wget --random-wait -r -p -e robots=off -U mozilla"
