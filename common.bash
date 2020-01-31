@@ -475,12 +475,15 @@ alias crashrm="sudo rm /var/crash/*"       # remove Ubuntu crash files that crea
 function mkpath() {
   mkdir -p "$1"
 }
+function mkdirs() {
+  mkdir -p "$1"
+}
 function mkParents() {
   tgtFile=$1
   # echo $tgtFile
   tgtDir=${tgtFile%/*}
   # echo $tgtDir
-  mkdir -p ${tgtDir}
+  mkpath ${tgtDir}
 }
 function touchPath() {
   tgtFile=$1
