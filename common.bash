@@ -426,7 +426,6 @@ alias lctr="time (lein do clean, test-refresh)"
 alias lu="time (lein uberjar)"
 # alias lcu="(lc; lu)"
 alias lcu="time { lein do clean, uberjar; }"  # terminating `;` & space required by bash, but not zsh
-alias laca="time {lein ancient check :all}"   # <= this works in zsh, but not bash
 
 
 alias lcdoo="(lc; ldoo)"
@@ -436,17 +435,18 @@ alias lcdoor="(lc; door)"
 
 alias rmt="rm -rf ./target"
 
+alias laca="lein ancient check :all"   # <= this works in zsh, but not bash
 function lanc() {  # Lein ANCient
   echo ""
   echo ""-----------------------------------------------------------------------------
   echo "project.clj:"
   echo ""
-  lein ancient check           :all
+  lein ancient check           :all  # lanc()
   echo ""
   echo ""-----------------------------------------------------------------------------
   echo "profiles.clj:"
   echo ""
-  lein ancient check-profiles  :all
+  lein ancient check-profiles  :all  # lanc()
   echo ""-----------------------------------------------------------------------------
   echo ""
 }
