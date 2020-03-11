@@ -43,26 +43,43 @@ Sample service unit file:    /lib/systemd/user/ticker.service
 Enable:
   sudo systemctl daemon-reload     - reload systemd unit files
 
-  sudo systemctl status         ticker        - display status
-  sudo systemctl enable         ticker        - enable for start at bood
-  sudo systemctl disable        ticker        - disable...  
-  sudo systemctl start          ticker        - start the service
-  sudo systemctl stop           ticker        - stop...
-  sudo systemctl restart        ticker        - restart the service (& reload its conf files)
-  sudo systemctl show           ticker        - show all config params
+  sudo systemctl status                 ticker          # display status
+  sudo systemctl status                 ticker.service  # (uses full name)
+  sudo systemctl enable                 ticker          # enable for start at bood
+  sudo systemctl disable                ticker          # disable...  
+  sudo systemctl start                  ticker          # start the service
+  sudo systemctl stop                   ticker          # stop...
+  sudo systemctl restart                ticker          # restart the service (& reload its conf files)
+  sudo systemctl show                   ticker          # show all config params
+  sudo systemctl list-dependencies      ticker          
+  sudo systemctl edit --full            ticker          # invoke editor (eg vim) on config file
+  sudo systemctl edit                   ticker          # invoke editor for "snippet"
 
 Don't try to use
   sudo systemctl reload          ticker        - start the service
 
+Other
+  sudo systemctl list-units 
+  sudo systemctl list-units  --all
+  sudo systemctl get-default                # show default target state (eg graphical.target
+
 Shortcuts for machine control:
   sudo systemctl reboot         <= /sbin/reboot
   sudo systemctl poweroff       <= /sbin/poweroff
+  sudo systemctl rescue                     # boot into rescue mode
 
 Verify the TZ setting:  
   timedatectl status
 
+Tail all logs:
+  journalctl --since today
+  journalctl --since "2019-09-05 15:04:33"      # local time (eg PDT)
+  journalctl --until "2019-09-05 15:04:33"      # or use both at once
+
 Tail logs for a particular unit:
-  journalctl -f  -u ticker       #  -f => "--follow" (aka forever)   -u ticker => '--unit=ticker'
+  journalctl -f  -u ticker          #  -f => "--follow" (aka forever)   -u ticker => '--unit=ticker'
+  journalctl -b                     # only files since last boot
+  journalctl -k                     # only kernel msgs, like `dmesg`
 
 Stats:
   journalctl --disk-usage 
