@@ -155,7 +155,13 @@ if $(isLinux) ; then #{
     java  --version
   }
 
-  java13  >& /dev/null  # ********** default java version to use **********
+  function java14() {
+    export JAVA_HOME=/opt/java14
+    path_prepend "${JAVA_HOME}/bin"
+    java  --version
+  }
+
+  java14  >& /dev/null  # ********** default java version to use **********
 
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
