@@ -8,7 +8,7 @@
      ;[jonase/eastwood                    "0.3.5"]
     ]
     :jvm-opts ["-Xms1g" "-Xmx4g"
-               "-XX:+UnlockExperimentalVMOptions" "-XX:+UseZGC"
+             ; "-XX:+UnlockExperimentalVMOptions" "-XX:+UseZGC"
              ; "-XX:+UnlockExperimentalVMOptions" "-XX:+UseShenandoahGC" 
               ]
   }

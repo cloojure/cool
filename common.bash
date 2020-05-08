@@ -132,8 +132,8 @@ if $(isLinux) ; then #{
     java -version
   }
 
-  function zulu11() {
-    export JAVA_HOME=/opt/zulu11
+  function zulu13() {
+    export JAVA_HOME=/opt/zulu
     path_prepend ${JAVA_HOME}/bin
     java  --version
   }
