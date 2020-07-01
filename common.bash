@@ -1,31 +1,5 @@
 # echo "common.bash - enter"
 
-function nil() { # same as $(true) => 0 exit status
-  true
-}
-function identity() {
-  echo "count = $#"
-  echo "$@"  # or $* ???
-}
-function count() {
-  echo $#
-}
-function str() {
-  echo "count = $#"
-  result=""
-  for arg in $@ ; do
-    result+=$arg
-  done
-  echo "$result"
-}
-function add() {
-  echo "count = $#"
-  result=0
-  for arg in $@ ; do
-    $((result+=arg))
-  done
-  echo "$result"
-}
 function first() {
   echo $1
 }
@@ -33,19 +7,6 @@ function rest() {
   shift
   echo "$@" 
 }
-function cons() {
-  echo "count = $#"
-  echo "1 = $1"
-  echo "2 = $2"
-}
-
-# baseline path (old way)
-  # export PATH=.:${HOME}/bin:${HOME}/cool/bin:${HOME}/opt/bin
-  # export PATH=$PATH:/opt/bin
-  # export PATH=$PATH:/usr/local/bin:/usr/bin:/bin
-  # export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
-  # export PATH=$PATH:/usr/local/opt:/opt/bin
-  # export PATH=$PATH:~/.local/bin   # awscli stuff
 
 function path_prepend() {
   local path_search_dir=$1
@@ -62,7 +23,6 @@ export PATH=.
   path_prepend /usr/local/bin
   path_prepend /usr/local/opt
   path_prepend /opt/bin
-  path_prepend /opt/dart-sass
   path_prepend /opt/local/bin
   path_prepend ${HOME}/bin
   path_prepend ${HOME}/cool/bin
@@ -85,28 +45,24 @@ function isLinux() {
     false
   fi
 }
+# sample 1-line usage:
+#   isLinux  && echo "Found Linux"
+#   isMac    && echo "Found Darwin"
 
-# function xxx() {
-#   if ((0)) ; then
-#     echo "truthy"
-#   else
-#     echo "falsey"
-#   fi
-# }
 
 if $(isLinux) ; then #{
   # echo "Found Linux"
   echo "Bash is dumb!" > /dev/null  # stupid bash can't handle an empty "then" part
 
-  export PGDATA="/var/edb/postgresql"
-  export EDB_HOME="/opt/PostgreSQL/10"                        ; path_prepend ${EDB_HOME}/bin
   export JAVA_HOME="/opt/java"                                ; path_prepend ${JAVA_HOME}/bin
-  export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"      ; path_prepend ${YOURKIT_HOME}/bin
-  export DATOMIC_HOME="/opt/datomic"                          ; path_prepend ${DATOMIC_HOME}/bin
   export IDEA_HOME="/opt/idea"                                ; path_prepend ${IDEA_HOME}/bin
-  export MAVEN_HOME="/opt/apache-maven"                       ; path_prepend ${MAVEN_HOME}/bin
+# export PGDATA="/var/edb/postgresql"
+# export EDB_HOME="/opt/PostgreSQL/10"                        ; path_prepend ${EDB_HOME}/bin
+# export YOURKIT_HOME="/opt/YourKit-JavaProfiler-2019.1"      ; path_prepend ${YOURKIT_HOME}/bin
+# export DATOMIC_HOME="/opt/datomic"                          ; path_prepend ${DATOMIC_HOME}/bin
+# export MAVEN_HOME="/opt/apache-maven"                       ; path_prepend ${MAVEN_HOME}/bin
 # export PYTHON_PREFIX="${HOME}/.local/bin"                   ; path_prepend ${PYTHON_PREFIX}
-  export POSTMAN_HOME="/opt/Postman"                          ; path_prepend ${POSTMAN_HOME}
+# export POSTMAN_HOME="/opt/Postman"                          ; path_prepend ${POSTMAN_HOME}
 
   # extra cassandra stuff
   # export CQLSH_HOST=localhost  # without this cqlsh tries connecting to 172.17.42.1:9042 & crashes #todo
@@ -115,16 +71,11 @@ if $(isLinux) ; then #{
   # Maven stuff for ODL
   # export MAVEN_OPTS="-Xmx1048m"
 
-  # path_prepend /opt/phantomjs/bin
-
   # path_prepend  /opt/solr/bin $path
     # ***** do not set SOLR_HOME *****
     # SOLR_HOME controls the location on disk of the conf & data dirs for a core,
     #   NOT the install location of the Solr binaries & libs
 
-  # echo "PATH -> ${PATH}"
-
-  # ********** don't forget about symlink /opt/java -> /opt/java10 **********
 
   function graalvm() {
     export JAVA_HOME=/opt/graalvm
@@ -145,12 +96,6 @@ if $(isLinux) ; then #{
   }
   function java11() {
     export JAVA_HOME=/opt/java11
-    path_prepend "${JAVA_HOME}/bin"
-    java  --version
-  }
-
-  function java13() {
-    export JAVA_HOME=/opt/java13
     path_prepend "${JAVA_HOME}/bin"
     java  --version
   }
@@ -185,15 +130,15 @@ if $(isLinux) ; then #{
   alias python=python3
 fi #}
 
-# sample 1-line usage
-# isMac    && echo "Found Darwin"
-# isLinux  && echo "Found Linux"
-
 # Mac OSX config
 if $(isMac) ; then #{
-  # echo "Found Darwin (block)"
+  # echo "Found Darwin"
   echo "OSX is dumb!"  > /dev/null  # stupid bash can't handle an empty "then" part
   # sleep 3
+
+  path_append /usr/local/sbin
+  path_append /usr/sbin
+  path_append /sbin
 
   alias d='    ls -ldF'
   alias lal='  ls -alF'
@@ -217,13 +162,8 @@ if $(isMac) ; then #{
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  function java12() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 12)
-    path_prepend ${JAVA_HOME}/bin
-    java -version
-  }
-  function java13() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 13)
+  function java14() {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 14)
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
@@ -234,23 +174,13 @@ if $(isMac) ; then #{
     java -version
   }
 
-  java13 >& /dev/null
+  java14 >& /dev/null
 
   export GOPATH=${HOME}/go
   path_prepend ${GOPATH}/bin
 
-  unset HTTP_PROXY
-  unset http_proxy
-  unset HTTPS_PROXY
-  unset https_proxy
-  unset FTP_PROXY
-  unset ftp_proxy
-  unset NO_PROXY
-  unset no_proxy
-
-
 # export RUBY_HOME=/usr/local/Cellar/ruby/2.6.3  # Missing `bundle`, etc
-  export RUBY_HOME=~/.rbenv/versions/2.6.4       ;  path_prepend ${RUBY_HOME}/bin  # this one works
+# export RUBY_HOME=~/.rbenv/versions/2.6.4       ;  path_prepend ${RUBY_HOME}/bin  # this one works
 
 fi #}
 
@@ -280,7 +210,7 @@ alias grepi="\grep -iE --color=auto"
 
 alias radirs="find . -type d "                                  # Recursive All Dirs
 alias rdirs="radirs | grep -v '/\.' | sed -e 's/^..//' "        # Recursive Dirs
-alias ldirs="find * -maxdepth 0 -type d "                       # Local Dirs
+alias ldirs="find  * -maxdepth 0 -type d "                      # Local Dirs
 alias lfiles="find * -maxdepth 0 -type f "                      # Local Files
 alias dd='d $(ldirs) '                                          # d Dirs
 alias ddr='d $(rdirs) '                                         # d Dirs Recursive
@@ -373,9 +303,7 @@ function git-branch-root() {
     echo "    |-- $2"
   fi
 }
-function first() {
-  echo "$1"
-}
+
 function git-branch-log() {
   git log --oneline $(first $(git-branch-root))..$(git-branch-current)
 }
@@ -555,13 +483,5 @@ alias lum='cd ~/work/lumanu && . Envfile && cd ic'
 export alan_host_1_name="ec2-54-149-36-244.us-west-2.compute.amazonaws.com"
 export alan_host_1_ip="54.149.36.244"
 alias ssh-alan-host-1="ssh -i /home/alan/.ssh/alan-keypair-1.pem ubuntu@${alan_host_1_name}"
-
-# consent
-# export authentication-service.service.host='https://authentication-service.dev.janusplatform.io'
-# export DB_HOST=localhost
-# export DB_USERNAME=postgres
-# export JANUS_ENVIRONMENT=local
-# export LOCAL_DB=t
-# export USER_PREFERENCE_SERVICE_URL=https://user-preference-service.dev.janusplatform.io
 
 # echo "common.bash - exit"
