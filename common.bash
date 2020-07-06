@@ -176,12 +176,6 @@ if $(isMac) ; then #{
 
   java14 >& /dev/null
 
-  export GOPATH=${HOME}/go
-  path_prepend ${GOPATH}/bin
-
-# export RUBY_HOME=/usr/local/Cellar/ruby/2.6.3  # Missing `bundle`, etc
-# export RUBY_HOME=~/.rbenv/versions/2.6.4       ;  path_prepend ${RUBY_HOME}/bin  # this one works
-
 fi #}
 
 function shellVersion() {

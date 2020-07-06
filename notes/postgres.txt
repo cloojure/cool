@@ -66,6 +66,8 @@ psql <dbname>   - start psql, connect to <dbname> (defaults to unix username)
   CREATE SCHEMA  <schema-name>;
   CREATE SCHEMA  <schema-name> OWNER <user-name>;    - user-name aka "rolename" in docs
   DROP   SCHEMA  <schema-name>;
+  SELECT current_schema();                           - display the current schema
+  SHOW   search_path;                                - display the current search_path 
 
     set schema to 'xxx' 
       set search_path to xxx
