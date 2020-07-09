@@ -325,8 +325,35 @@ alias blk="sleep 1 ; xset dpms force off"       # set screen to black (power off
 alias dosleep="systemctl suspend"
 
 # Misc tools
-# Return a timestamp string like "20161117-111307" (from  date --iso-8601=seconds => # "2016-11-17T11:13:07-08:00")
-alias dateTimeStr=" date --iso-8601=seconds | sed -e's/^\(.\{19\}\)\(.*\)/\1/' | sed -e's/-//g' | sed -e's/://g' | sed -e's/T/-/g' "
+
+if $(isMac) ; then #{
+  function iso-date() {
+    date "+%Y-%m-%d"
+  }
+  function iso-date-short() {
+    date "+%Y%m%d"
+  }
+  function iso-time() {
+    date "+%H:%M:%S"
+  }
+  function iso-time-short() {
+    date "+%H%M%S"
+  }
+  function iso-date-time() {
+    echo "$(iso-date)t$(iso-time)"
+  }
+  function iso-date-time-nice() {
+    echo "$(iso-date) $(iso-time)"
+  }
+  function iso-date-time-str() {
+    echo "$(iso-date-short)-$(iso-time-short)"
+  }
+fi #}
+
+if $(isLinux) ; then #{
+  # Return a timestamp string like "20161117-111307" (from  date --iso-8601=seconds => # "2016-11-17T11:13:07-08:00")
+  alias dateTimeStr=" date --iso-8601=seconds | sed -e's/^\(.\{19\}\)\(.*\)/\1/' | sed -e's/-//g' | sed -e's/://g' | sed -e's/T/-/g' "
+fi #}
 
 # Alias for home Cannon scanner driver
 alias scanner=scangearmp
