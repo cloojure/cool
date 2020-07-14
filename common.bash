@@ -197,6 +197,7 @@ alias dt22=' d -t * | head -22'
 
 alias du="du -m"
 alias df="df -m"
+alias dfs="df -m | grep -v '/snap/' | grep -v '^tmpfs'"
 
 # Always use egrep
 alias grep=" \grep  -E --color=auto"  # same as deprecated 'egrep'

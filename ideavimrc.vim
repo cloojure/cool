@@ -8,3 +8,4 @@ set noerrorbells
 set hls
 set ic
 
+set ideajoin

@@ -19,10 +19,10 @@ if has('mac') " osx
 " sleep 1
   command! MM  set guifont=AndaleMono:h18  " MacBook Pro 2018 font (43" 4K monitor)
 else
-  command! Fs  set guifont=Ubuntu\ Mono\ 10     " Font small
-  command! Fm  set guifont=Ubuntu\ Mono\ 12     " Font medium
-  command! Fl  set guifont=Ubuntu\ Mono\ 14     " Font large
-  command! Fll set guifont=Ubuntu\ Mono\ 16     " Font large-large
+  command! Fs  set guifont=Liberation\ Mono\ Regular\ 10     " Font small
+  command! Fm  set guifont=Liberation\ Mono\ Regular\ 12     " Font medium
+  command! Fl  set guifont=Liberation\ Mono\ Regular\ 14     " Font large
+  command! Fll set guifont=Liberation\ Mono\ Regular\ 16     " Font large-large
   command! FF  Fll
   command! Laptop  Fll
 endif
@@ -42,7 +42,7 @@ function! ConfigStd()
   if has('mac')
     set guifont=AndaleMono:h18  " MacBook Font 
   else
-    set guifont=Ubuntu\ Mono\ 14
+    set guifont=Liberation\ Mono\ Regular\ 14
   endif
 endfunction
 call ConfigStd()
