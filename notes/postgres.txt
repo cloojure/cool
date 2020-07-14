@@ -427,3 +427,7 @@ install notes:
   alan> createdb  <user> [ --owner=<user> ]   # still need this
   # psql -c "alter role <user> superuser"  # not needed since created during install
 
+
+psql notes:
+  psql --dbname=cc  --file=my-cmds.sql
+    
