@@ -22,3 +22,8 @@ timing events
 
 setting:
   document.getElementById("demo").innerHTML = "Hello World!";
+
+cljs interop
+
+  (js/console.log "some-str")
+
