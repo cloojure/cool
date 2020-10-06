@@ -334,31 +334,14 @@ alias dosleep="systemctl suspend"
 
 # Misc tools
 
+# #todo make linux version
 if $(isMac) ; then #{
-  function iso-date() {
-    date "+%Y-%m-%d"
-  }
-  function iso-date-short() {
-    date "+%Y%m%d"
-  }
-  function iso-time() {
-    date "+%H:%M:%S"
-  }
-  function iso-time-short() {
-    date "+%H%M%S"
-  }
-  function iso-date-time() {
-    echo "$(iso-date)t$(iso-time)"
-  }
-  function iso-date-time-nice() {
-    echo "$(iso-date) $(iso-time)"
-  }
-  function iso-date-time-str() {
-    echo "$(iso-date-short)-$(iso-time-short)"
-  }
+  GDATE=gdate   # need `brew install coreutils`
 fi #}
 
 if $(isLinux) ; then #{
+  GDATE=date
+
   # Return a timestamp string like "20161117-111307" (from  date --iso-8601=seconds => # "2016-11-17T11:13:07-08:00")
   alias dateTimeStr=" date --iso-8601=seconds | sed -e's/^\(.\{19\}\)\(.*\)/\1/' | sed -e's/-//g' | sed -e's/://g' | sed -e's/T/-/g' "
 
@@ -385,6 +368,53 @@ if $(isLinux) ; then #{
   }
 
 fi #}
+
+# string/char functions
+function take-chars-6() {
+  local inputStr=$1
+  echo $inputStr | sed -e's/^\(......\).*/\1/'
+}
+
+# date/time functions
+function iso-date() {
+  $GDATE "+%Y-%m-%d"
+}
+function iso-time() {
+  $GDATE "+%H:%M:%S"
+}
+function iso-date-time() {
+  echo "$(iso-date)t$(iso-time)"
+}
+function iso-date-time-nice() {
+  echo "$(iso-date) $(iso-time)"
+}
+function epoch-seconds() {
+  $GDATE  "+%s"
+}
+function timestamp-date() {
+  $GDATE "+%Y%m%d"
+}
+function timestamp-time() {
+  $GDATE "+%H%M%S"
+}
+function timestamp-micros() {
+  take-chars-6 $($GDATE "+%N")
+}
+function timestamp-date-time() {
+  echo "$(timestamp-date)-$(timestamp-time)"
+}
+function timestamp-date-time-micros() {
+  echo "$(timestamp-date)-$(timestamp-time)-$(timestamp-micros)"
+}
+function timestamp-epoch-seconds() {
+  echo $(epoch-seconds)
+}
+function timestamp-epoch-seconds-micros() {
+  echo "$(timestamp-epoch-seconds)-$(timestamp-micros)"
+}
+
+# Return a timestamp string like "20161117-111307" (from  date --iso-8601=seconds => # "2016-11-17T11:13:07-08:00")
+alias dateTimeStr=" $GDATE --iso-8601=seconds | sed -e's/^\(.\{19\}\)\(.*\)/\1/' | sed -e's/-//g' | sed -e's/://g' | sed -e's/T/-/g' "
 
 # Alias for home Cannon scanner driver
 alias scanner=scangearmp
@@ -421,7 +451,7 @@ alias lcdoor="(lc; door)"
 
 alias rmt="rm -rf ./target"
 
-alias laca="lein ancient check :all"   # <= this works in zsh, but not bash
+#  deprecated:  alias laca="lein ancient check :all"   # <= this works in zsh, but not bash
 function lanc() {  # Lein ANCient
   echo ""
   echo ""-----------------------------------------------------------------------------
