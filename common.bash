@@ -106,7 +106,13 @@ if $(isLinux) ; then #{
     java  --version
   }
 
-  java14  >& /dev/null  # ********** default java version to use **********
+  function java15() {
+    export JAVA_HOME=/opt/java15
+    path_prepend "${JAVA_HOME}/bin"
+    java  --version
+  }
+
+  java15  >& /dev/null  # ********** default java version to use **********
 
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
@@ -127,8 +133,9 @@ if $(isLinux) ; then #{
   alias yourkit="${YOURKIT_HOME}/bin/profiler.sh &"
 
   # python abbreviations
-  alias python=python3
-fi #}
+  ### alias python=python3
+  ### alias pip=pip3
+fi #} if $(isLinux)
 
 # Mac OSX config
 if $(isMac) ; then #{
@@ -162,7 +169,7 @@ if $(isMac) ; then #{
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
-  function java14() {
+  function java15() {
     export JAVA_HOME=$(/usr/libexec/java_home -v 14)
     path_prepend ${JAVA_HOME}/bin
     java -version
@@ -174,7 +181,7 @@ if $(isMac) ; then #{
     java -version
   }
 
-  java14 >& /dev/null
+  java15 >& /dev/null
 
 fi #}
 
@@ -528,5 +535,12 @@ alias lum='cd ~/work/lumanu && . Envfile && cd ic'
 export alan_host_1_name="ec2-54-149-36-244.us-west-2.compute.amazonaws.com"
 export alan_host_1_ip="54.149.36.244"
 alias ssh-alan-host-1="ssh -i /home/alan/.ssh/alan-keypair-1.pem ubuntu@${alan_host_1_name}"
+
+#-----------------------------------------------------------------------------
+# workarounds
+if $(isLinux) ; then #{
+  alias node=nodejs
+  alias yarn=yarnpkg
+fi #}
 
 # echo "common.bash - exit"
