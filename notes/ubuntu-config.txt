@@ -1,4 +1,45 @@
 
+2020-10-05 Python pipenv problems
+
+  Prelude:  install pipenv
+      > pip3 install --user pipenv
+
+      and add `~/.local/bin` to the head of PATH
+
+  Tried solution from https://github.com/pypa/virtualenv/issues/1873
+      > sudo pip3 uninstall virtualenv
+      > sudo pip3 install virtualenv==20.0.23 
+
+  Result that worked:
+      > pipenv --python 3.8
+      Creating a virtualenv for this project…
+      Pipfile: /home/alan/expr/pydemo-10.05.a/Pipfile
+      Using /usr/bin/python3.8 (3.8.2) to create virtualenv…
+      ⠸ Creating virtual environment...created virtual environment CPython3.8.2.final.0-64 in 235ms
+        creator CPython3Posix(dest=/home/alan/.local/share/virtualenvs/pydemo-10.05.a-MQUKFB85, clear=False, global=False)
+        seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/alan/.local/share/virtualenv/seed-app-data/v1.0.1)
+        activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
+
+      ✔ Successfully created virtual environment! 
+      Virtualenv location: /home/alan/.local/share/virtualenvs/pydemo-10.05.a-MQUKFB85
+      Creating a Pipfile for this project…
+
+
+  Original error message:
+      > pipenv --python 3.8
+      Creating a virtualenv for this project…
+      Pipfile: /home/alan/expr/pydemo-10.05.a/Pipfile
+      Using /usr/bin/python3.8 (3.8.2) to create virtualenv…
+      ⠙ Creating virtual environment...ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'
+
+      ✘ Failed creating virtual environment 
+
+      [pipenv.exceptions.VirtualenvCreationException]: 
+      Failed to create virtual environment.
+
+
+
+-----------------------------------------------------------------------------
 Create LiveCD on a USB drive using either 
   1. linux live usb creator:    linuxliveusb.com   *** best choice ***
   2. dd (from linux)

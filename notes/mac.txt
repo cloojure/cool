@@ -1,8 +1,6 @@
 
-xcode-select --install      # apple dev tools
-
 software to load:
-  brew      <== do this first!!!
+  brew      <== do this first!!!  (brew.sh)
 
 install:
   Chrome
@@ -13,9 +11,9 @@ install:
 brew install:
   bash      (newest version)
   dos2unix
-  git
+  git  - brew install git
   h2
-  iterm2 (shows up at "iterm" replacing default "iterm" from apple)
+  iterm2 - iterm2.com (named "iterm" in Applications folder)
   macvim
   pgadmin3
   postgresql
@@ -26,7 +24,6 @@ brew install:
   zsh
 
 web download & install:
-  chrome
   squirrel (sql client)
   hipchat
   skype
@@ -43,3 +40,7 @@ git clone:
 Apple Menue (top left of screen)
   -> About This Mac
     -> Software Update
+
+Optional(?)
+  xcode-select --install      # apple dev tools
+

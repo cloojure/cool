@@ -12,6 +12,7 @@
 .DS_Store
 .cpcache
 .idea
+.ipynb_checkpoints
 .lein-*
 .lein-deps-sum
 .lein-plugins
