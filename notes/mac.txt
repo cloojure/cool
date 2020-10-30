@@ -1,41 +1,40 @@
 
 software to load:
-  brew      <== do this first!!!  (brew.sh)
+  homebrew      <== do this first!!!  (brew.sh)
 
 install:
   Chrome
-  IntelliJ IDEA
-  Slack
   HomeBrew (aka "brew")
 
-brew install:
+brew install:   (see brew --help, brew search XXX, brew install XXX)
   bash      (newest version)
-  dos2unix
+  dos2unix - brew install dos2unix
   git  - brew install git
-  h2
   iterm2 - iterm2.com (named "iterm" in Applications folder)
-  macvim
+  macvim  - brew install macvim 
+  openjdk - brew install openjdk
+    brew install java11
+  rlwrap - brew install rlwrap
+  tree - brew install tree
+  zsh - if not already installed (i.e. older OSX)
+  libreoffice
+    brew install  homebrew/cask/libreoffice
   pgadmin3
   postgresql
-  rlwrap
-  tcsh
-  tree
-  vim
-  zsh
 
 web download & install:
   squirrel (sql client)
-  hipchat
-  skype
   java
+    oracle.com/java
   IntelliJ Idea (JetBrains.com)
-  libreoffice (or brew?)
+  slack
+  docker
+  dropbox
 
 git clone:
   cool.git
     cd ~/cool  <- install dir
-    ./install.zsh
-
+    ./install.zsh --force
 
 Apple Menue (top left of screen)
   -> About This Mac
@@ -43,4 +42,5 @@ Apple Menue (top left of screen)
 
 Optional(?)
   xcode-select --install      # apple dev tools
+  h2
 
