@@ -521,7 +521,7 @@ alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wif
         # maybe try this too:  sudo service network-manager restart
 alias pingg="ping -c5 google.com"
 alias ping4="ping -c4"
-alias gopen="gnome-open"
+alias xo="xdg-open"
 
 # what your computer thinks its ip address is
 function iplocal() {

@@ -37,4 +37,5 @@ out*.txt
 package-lock.json
 pom.xml
 pom.xml.asc
+profiles.clj
 tags
