@@ -166,24 +166,23 @@ if $(isMac) ; then #{
     java -version
   }
 
-  function java8() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-    path_prepend ${JAVA_HOME}/bin
-    java -version
-  }
-  function java11() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+  # function java8() {
+  #   export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+  #   path_prepend ${JAVA_HOME}/bin
+  #   java -version
+  # }
+  # function java11() {
+  #   export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+  #   path_prepend ${JAVA_HOME}/bin
+  #   java -version
+  # }
+  function openjdk11() {
+    export JAVA_HOME='/usr/local/opt/openjdk@11'
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
   function java15() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 14)
-    path_prepend ${JAVA_HOME}/bin
-    java -version
-  }
-
-  function graalvm() {
-    export JAVA_HOME=/opt/graalvm/Contents/Home
+    export JAVA_HOME=$(/usr/libexec/java_home -v 15)
     path_prepend ${JAVA_HOME}/bin
     java -version
   }
