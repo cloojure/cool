@@ -216,6 +216,25 @@ format a usb drive
       sudo mkfs -t vfat /dev/sdb1
     sudo eject /dev/sdb1
 
+--------------------------------------------------------------------------------
+2020-12-20 Copy of /etc/fstab:
+
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <device>                            <mount point>      <type>  <options>       <dump>  <pass>
+# / was on /dev/sda7 during installation
+UUID=2d0a0388-09fc-4ab5-9984-50f8849029e7 /               ext4    errors=remount-ro 0       1
+# /boot was on /dev/sda5 during installation
+UUID=5374d130-c149-47db-bb57-0f810ea7ec5e /boot           ext4    defaults          0       2
+# swap was on /dev/sda6 during installation
+UUID=ad4cfeb5-10a8-4c6d-8119-f8a0a60b053d none            swap    sw                0       0
+# 2nd SSD mounted on `/data`
+UUID=d84feabf-8bf7-43bc-8320-3a57a75e8b75 /data           ext4    defaults          0       2
+
 
 --------------------------------------------------------------------------------
 sudo systemctl list-unit-files --type=target
