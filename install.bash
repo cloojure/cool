@@ -37,7 +37,7 @@ fi
 coolDir=$(pwd)
 for ff in    .tmux.conf .ctags .vim .vimrc .gvimrc .ideavimrc \
              .cshrc .bashrc .bash_profile .common.bash .zshrc .zshenv \
-             .psqlrc .gitconfig .gitignore 
+             .psqlrc .gitconfig .gitignore  .zprint.edn
 do
   if ${forceFlg} ; then
     rm -f ~/${ff}
