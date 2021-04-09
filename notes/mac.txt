@@ -21,6 +21,8 @@ brew install:   (see brew --help, brew search XXX, brew install XXX)
     brew install  homebrew/cask/libreoffice
   pgadmin3
   postgresql
+  zprint:  
+    brew install  --cask zprint
 
 web download & install:
   squirrel (sql client)
