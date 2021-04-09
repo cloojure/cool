@@ -110,6 +110,11 @@ Install basic software:
     openvpn vpnc kvpnc network-manager-vpnc racoon \
     curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager \
 
+Manual software:
+  babashka  -> /opt/bin
+  zprint    -> /opt/bin (#todo experiment!)
+  java      -> /opt + config common.bash 
+
 old: cryptkeeper kuser sbackup 
 
 ===================
