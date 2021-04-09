@@ -332,6 +332,7 @@ alias diffw="diff --ignore-all-space --ignore-blank-lines"
 alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
 
+alias zpru="java -jar ~/cool/bin/zprintm-1.1.1  -w **/*.clj "
 
 isMac    && alias pk="pkill -9 -i"
 isLinux  && alias pk="pkill -9"
