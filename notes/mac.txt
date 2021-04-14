@@ -12,6 +12,7 @@ brew install:   (see brew --help, brew search XXX, brew install XXX)
   git  - brew install git
   iterm2 - iterm2.com (named "iterm" in Applications folder)
   macvim  - brew install macvim 
+  ctags - exuberant ctags
   openjdk - brew install openjdk
     brew install java11
   rlwrap - brew install rlwrap
