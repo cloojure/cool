@@ -8,6 +8,8 @@ install:
 
 brew install:   (see brew --help, brew search XXX, brew install XXX)
   bash      (newest version)
+  babashka  -> ~/opt
+  zprint    -> ~/opt/zprint-filter-1.1.1 (jar file)
   dos2unix - brew install dos2unix
   git  - brew install git
   iterm2 - iterm2.com (named "iterm" in Applications folder)
