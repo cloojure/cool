@@ -2,6 +2,20 @@
 todo:
   clojure cheatsheet: filter/filterv, map/mapv always paired
 
+-----------------------------------------------------------------------------
+2021-5-31 On namespaces (keyword & symbol)
+
+  It is a simple multi-part (segmented) name, just like a java package name. The only
+  difference is that java uses a dot `.` to separate ALL name segments. Clojure uses 
+  a slash `/` for the last separator and a dot `.` for everything else. That's all!
+
+  Don't let this confuse you re:
+
+    :person
+    :person/name                ; a part of the 'person'
+    :person.name/first          ; a part of the [person name]
+    :person.name/last           ; a part of the [person name]
+
 ----------------------------------------------------------------------------------------
 power is nice, but what I need most is confidence
 

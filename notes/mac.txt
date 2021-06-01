@@ -8,13 +8,16 @@ install:
 
 brew install:   (see brew --help, brew search XXX, brew install XXX)
   bash      (newest version)
-  babashka  -> ~/opt
+  coreutils - adds gnu version of ls with a "g" prefix (eg 'ls' => 'gls')
+                    see https://www.gnu.org/software/coreutils/manual/coreutils.html 
+  babashka  -  brew install borkdude/brew/babashka
   zprint    -> ~/opt/zprint-filter-1.1.1 (jar file)
   dos2unix - brew install dos2unix
   git  - brew install git
   iterm2 - iterm2.com (named "iterm" in Applications folder)
   macvim  - brew install macvim 
   ctags - exuberant ctags
+  wget - brew install wget
   openjdk - brew install openjdk
     brew install java11
   rlwrap - brew install rlwrap
@@ -34,6 +37,7 @@ web download & install:
   IntelliJ Idea (JetBrains.com)
   slack
   docker
+    & docker-machine
   dropbox
 
 git clone:
