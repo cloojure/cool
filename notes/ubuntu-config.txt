@@ -96,7 +96,7 @@ Install basic software:
   sudo apt install -y  \
     git gitk zsh tcsh fish tmux curl samba  \
     vim \
-    gcc ruby golang autoconf \
+    gcc ruby golang autoconf nodejs \
     python python3 pylint \
     build-essential  libssl-dev \
     maven octave libreoffice gimp \
