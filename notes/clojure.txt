@@ -1,6 +1,17 @@
 ----------------------------------------------------------------------------------------
 todo:
+  tupelo.lazy - refs to original clojure.core lazy fns
+    tupelo.core/set-eager!
+
   clojure cheatsheet: filter/filterv, map/mapv always paired
+
+-----------------------------------------------------------------------------
+2021-6-1 Code needs to be
+ - discoverable
+ - understandable
+ - verifiable (testable)
+ - modifiable
+ - correct
 
 -----------------------------------------------------------------------------
 2021-5-31 On namespaces (keyword & symbol)
