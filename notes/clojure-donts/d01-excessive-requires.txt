@@ -1,0 +1,160 @@
+Consider coming into this `ns` declaration as a new team member
+
+    (ns acme.backend.api.ledger.handle.create
+      (:require
+        [acme.backend-utils.commons :refer :all]
+        [datomic.api :as d]
+        [acme.backend-utils.db :as db]
+        [clojure.tools.logging :as log]
+        [acme.backend.api.utils.state-machine-utils :as sm-utils]
+        [acme.backend.api.construct.account :as construct.account]
+        [acme.backend.api.rest.beneficiary-accounts :as beneficiary-accounts]
+        [acme.backend-utils.data-layer.ledger.write :as write.ledger]
+        [acme.backend.api.ledger.retrieve :as retrieve]
+        [acme.backend.api.ledger.validate :as ledger.domain.validate]
+        [acme.backend.api.utils.limit :as limit]
+        [acme.backend.api.validations.account :as validate.account]
+        [acme.backend.api.validations.credit :as validate.credit]
+        [acme.backend-utils.data-layer.ledger.write :as ledger.write]
+        [acme.backend-utils.data-layer.ledger.read :as ledger.read]
+        [acme.backend-utils.read-model.messaging :as read-model.messaging]
+        [slingshot.slingshot :refer [try+ throw+]]
+        [acme.backend.api.utils.resolve :as resolve]
+        [clojure.string :as str]
+        [acme.backend-utils.data-layer.ledger.read.entry :as ledger.entry.read]
+        [acme.backend-utils.db :as db-utils]
+        [acme.backend-utils.notifications :as notifications]
+        [acme.backend.api.notifications.notifications-queues :as nq]
+        [robert.bruce :refer [try-try-again]]
+        [acme.backend.api.ledger.problems :as ledger.problems]
+        [acme.backend.api.transaction.problems :as transaction.problems]
+        [acme.backend.api.problems.core :as generic.problems]
+        [acme.backend-utils.data-layer.common.read :as common.read]
+        [acme.backend-utils.data-layer.ledger.sync :as ledger.sync]
+        ))
+
+Problems:
+  
+- There are far too many imports (via `:require`) - 29 in total. This codebase has 
+  120K source lines of code (SLOC), with 490 "src" files (namespaces) and 524 "test" files.
+
+  Such a large number of imports indicates that those 120K SLOC are far, far too
+  intertwined. Just about every part of the code needs to know about every other
+  part of the code. This is the opposite of code isolation, independence, organization, or
+  hierarchy.
+
+    As evidence, consider some of the namespace aliases:
+
+      ledger.domain.validate
+      ledger.entry.read
+      ledger.problems
+
+    These make for really long function calls like:
+
+      (ledger.domain.validate/customer-product-enabled! ...)
+
+    ...and that is just the function name!
+
+    RECOMMENDATION: Strive, strive for only a few imports. In a hierarchy, a node should usually 
+    only have to deal with 3-5 child nodes. Library utils like string utils, etc don't count toward
+    this total. 
+
+- The imports are not alphabetized. This makes it harder & slower to find things. So much easier to
+  find things if it looks like this:
+
+    (ns acme.backend.api.ledger.handle.create
+      (:require
+        [acme.backend.api.construct.account :as construct.account]
+        [acme.backend.api.ledger.problems :as ledger.problems]
+        [acme.backend.api.ledger.retrieve :as retrieve]
+        [acme.backend.api.ledger.validate :as ledger.domain.validate]
+        [acme.backend.api.notifications.notifications-queues :as nq]
+        [acme.backend.api.problems.core :as generic.problems]
+        [acme.backend.api.rest.beneficiary-accounts :as beneficiary-accounts]
+        [acme.backend.api.transaction.problems :as transaction.problems]
+        [acme.backend.api.utils.limit :as limit]
+        [acme.backend.api.utils.resolve :as resolve]
+        [acme.backend.api.utils.state-machine-utils :as sm-utils]
+        [acme.backend.api.validations.account :as validate.account]
+        [acme.backend.api.validations.credit :as validate.credit]
+
+        [acme.backend.utils.commons :refer :all]
+        [acme.backend.utils.data-layer.common.read :as common.read]
+        [acme.backend.utils.data-layer.ledger.read :as ledger.read]
+        [acme.backend.utils.data-layer.ledger.read.entry :as ledger.entry.read]
+        [acme.backend.utils.data-layer.ledger.sync :as ledger.sync]
+        [acme.backend.utils.data-layer.ledger.write :as ledger.write]
+        [acme.backend.utils.data-layer.ledger.write :as write.ledger]
+        [acme.backend.utils.db :as db-utils]
+        [acme.backend.utils.db :as db]
+        [acme.backend.utils.notifications :as notifications]
+        [acme.backend.utils.read-model.messaging :as read-model.messaging]
+
+        [clojure.string :as str]
+        [clojure.tools.logging :as log]
+        [datomic.api :as d]
+        [robert.bruce :refer [try-try-again]]
+        [slingshot.slingshot :refer [try+ throw+]]
+        ))
+
+    Oh, look.  Two of the namespaces have been lost and re-imported so we have 4 references to them now:
+
+        [acme.backend.utils.data-layer.ledger.write :as ledger.write]
+        [acme.backend.utils.data-layer.ledger.write :as write.ledger]
+        [acme.backend.utils.db :as db-utils]
+        [acme.backend.utils.db :as db]
+
+- "Util" namespaces that really aren't.  
+
+    Consider these namespaces:
+
+        [acme.backend.utils.commons :refer :all]
+        [acme.backend.utils.data-layer.common.read :as common.read]
+        [acme.backend.utils.data-layer.ledger.read :as ledger.read]
+        [acme.backend.utils.data-layer.ledger.read.entry :as ledger.entry.read]
+        [acme.backend.utils.data-layer.ledger.sync :as ledger.sync]
+        [acme.backend.utils.data-layer.ledger.write :as ledger.write]
+        [acme.backend.utils.data-layer.ledger.write :as write.ledger]
+        [acme.backend.utils.db :as db-utils]
+        [acme.backend.utils.db :as db]
+        [acme.backend.utils.notifications :as notifications]
+        [acme.backend.utils.read-model.messaging :as read-model.messaging]
+
+      I especially like these two:
+
+        [acme.backend.utils.data-layer.ledger.read :as ledger.read]
+        [acme.backend.utils.data-layer.ledger.read.entry :as ledger.entry.read]
+
+      What is the difference? And, why does the current ns `acme.backend.api.ledger.handle.create`
+      need to use both of them?  Yet more evidence that this 120K line codebase is really just one
+      giant ball of mud, disguised as 900 "independent" pieces.
+
+
+- Conflict of style:
+
+      acme.backend.api.problems.core
+      acme.backend-utils.data-layer.common.read
+
+    The 2nd one should be consistant:
+
+      acme.backend.api.problems.core
+      acme.backend.utils.data-layer.common.read
+
+- Multiple source trees. These should all be under a single `src` directory, then in a hierarchy
+
+      src
+      api/src
+      backend_utils/src
+      datomic_schema/src
+
+- Multiple trees of test code.  Why, lord, why???  Also, why both `test` and `xxtest` duplicates?
+
+      api/test
+      backend_utils/test
+      backend_utils/test/xxtest
+      datomic_schema/test
+      env/test
+      test
+      test/xxtest
+      test_resources
+
