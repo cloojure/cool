@@ -38,6 +38,8 @@ Problems:
 - There are far too many imports (via `:require`) - 29 in total. This codebase has 
   120K source lines of code (SLOC), with 490 "src" files (namespaces) and 524 "test" files.
 
+    The 2nd file I looked at `acme.backend.api.handler` had 53 imports!
+
   Such a large number of imports indicates that those 120K SLOC are far, far too
   intertwined. Just about every part of the code needs to know about every other
   part of the code. This is the opposite of code isolation, independence, organization, or
