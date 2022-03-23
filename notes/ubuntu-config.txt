@@ -140,6 +140,26 @@ Samba File Sharing install
   right-click on dir in file browser (nautilis) & select "Local Network Share"
   finish config in gui
 
+-----------------------------------------------------------------------------
+sudo apt update             # prepare
+sudo apt upgrade -y         # prepare
+
+sudo apt install -y  samba  # install samba
+samba -V                    # verify installation & print version
+mkdir ~/samba               # create a directory to share
+
+See video to configure:  https://youtu.be/oRHSrnQueak
+  mkdir -p '~/samba'        # name flexible
+  in Nautilis file browser, right click folder & click "Local Network Share"
+    click "Share this folder"
+      "Allow others to create & delete file..."         # prob want this too
+      "Guest access..."                                 # prob want this too
+      will most likely need to accept "Add the permissions automatically"
+
+  config file:  /etc/samba/smb.conf    # edit config file
+
+-----------------------------------------------------------------------------
+
 ===================
 Add Java
   Oracle Java 8,10 => /opt    Make it look like:
