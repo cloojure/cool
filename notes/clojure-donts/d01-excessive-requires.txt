@@ -1,5 +1,6 @@
 Consider coming into this `ns` declaration as a new team member
 
+---------------------------------------------------------------------------------------------------
     (ns acme.backend.api.ledger.handle.create
       (:require
         [acme.backend-utils.commons :refer :all]
@@ -33,10 +34,48 @@ Consider coming into this `ns` declaration as a new team member
         [acme.backend-utils.data-layer.ledger.sync :as ledger.sync]
         ))
 
+---------------------------------------------------------------------------------------------------
+    (ns acme.backend.api.rest.enduser
+      (:import (java.util Date))
+      (:require [acme.backend-utils.commons :refer :all]
+                [acme.backend.api.clapid.core :refer [defendpoint]]
+                [ring.util.http-response :refer [ok bad-request! not-implemented! internal-server-error!]]
+                [clojure.spec.alpha :as s]
+                [datomic.api :refer [q] :as d]
+                [acme.backend.api.pagination :refer [pagination-fn paginate-request
+                                                        get-comparator-for-order log-use-of-legacy-pagination]]
+                [acme.backend.api.utils.resolve :as resolve]
+                [acme.backend.api.utils.domain-utils :refer [wait-entity customer-ident-to-db-ident]]
+                [acme.backend.api.validations :as validate]
+                [acme.backend.api.validations.enduser :as validate.enduser]
+                [acme.backend.api.validations.credit :as validate.credit]
+                [cheshire.core :as cheshire]
+                [acme.backend-utils.get.enduser :as get.enduser]
+                [acme.backend.api.get.credit-details :as get.credit-details]
+                [acme.backend.api.construct.person :as construct.person]
+                [acme.backend.api.construct.company :as construct.company]
+                [acme.backend.api.products.cards.api.update-enduser-details :as cards]
+                [acme.backend-utils.state-machines.event :as event]
+                [acme.backend.api.endpoint-groups :as groups]
+                [acme.backend.api.utils.limit :as limit]
+                [acme.backend-utils.db :refer [with-timeout default-db-query-timeout add-query-condition]]
+                [acme.backend.api.utils.state-machine-utils :as sm-utils]
+                [acme.backend-utils.db :refer [catch-cas]]
+                [acme.backend-utils.data-layer.product.read :as da.product]
+                [clojure.tools.logging :as log]
+                [acme.backend.api.pagination.card.datomic :as card-datomic]
+                [acme.backend-utils.aws.sns :as sns]
+                [acme.backend-utils.supplier.cards.cards :as card-utils]
+                [acme.backend-utils.config :refer [in-config]]
+                [clojure.tools.logging :as log]
+                [acme.backend-utils.platform-messaging :as platform-messaging]))
+    
 Problems:
   
-- There are far too many imports (via `:require`) - 29 in total. This codebase has 
+- There are far too many imports (via `:require`) - 30/29 in total. This codebase has 
   120K source lines of code (SLOC), with 490 "src" files (namespaces) and 524 "test" files.
+
+    The 2nd file I looked at `acme.backend.api.handler` had 53 imports!
 
   Such a large number of imports indicates that those 120K SLOC are far, far too
   intertwined. Just about every part of the code needs to know about every other
@@ -56,7 +95,7 @@ Problems:
     ...and that is just the function name!
 
     RECOMMENDATION: Strive, strive for only a few imports. In a hierarchy, a node should usually 
-    only have to deal with 3-5 child nodes. Library utils like string utils, etc don't count toward
+    only have to deal with 3-5 child nodes. Libraries like string utils, etc don't count toward
     this total. 
 
 - The imports are not alphabetized. This makes it harder & slower to find things. So much easier to
