@@ -8,19 +8,23 @@ install:
 
 brew install:   (see brew --help, brew search XXX, brew install XXX)
   bash      (newest version)
-  dos2unix - brew install dos2unix
-  git  - brew install git
-  iterm2 - iterm2.com (named "iterm" in Applications folder)
-  macvim  - brew install macvim 
-  openjdk - brew install openjdk
-    brew install java11
-  rlwrap - brew install rlwrap
-  tree - brew install tree
+  dos2unix 
+  git, gitk
+  htop
+  iterm2 
+  macvim  
+  openjdk 
+  rlwrap 
+  tree 
   zsh - if not already installed (i.e. older OSX)
   libreoffice
     brew install  homebrew/cask/libreoffice
   pgadmin3
   postgresql
+  python2, python3, python-pip, python3-pip, pylint
+  curl 
+  gcc, ruby, maven, octave, gimp
+  s3cmd, iotop, gnupg, youtube-dl, ctags
 
 web download & install:
   squirrel (sql client)

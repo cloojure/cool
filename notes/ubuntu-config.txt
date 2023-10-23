@@ -140,13 +140,6 @@ Add Java
 
       /opt/java -> java10/
       /opt/java10 -> jdk-10.0.1//
-      /opt/java7 -> jdk1.7.0_80/
-      /opt/java8 -> jdk1.8.0_161/
-      /opt/java9 -> jdk-9.0.4//
-      /opt/jdk-10.0.1/
-      /opt/jdk1.7.0_80/
-      /opt/jdk1.8.0_161/
-      /opt/jdk-9.0.4/
 
 ===================
 Install IntelliJ IDEA

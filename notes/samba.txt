@@ -1,0 +1,6 @@
+macos
+  system preferences
+    security
+      full-disk-access, enable for iTerm
+        must close & reopen all iterm windows
+        can now list files in samba share folder

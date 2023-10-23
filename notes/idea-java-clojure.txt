@@ -1,4 +1,15 @@
 
+-----------------------------------------------------------------------------
+Settings
+
+  select darkula schema
+  add vim keybindings
+  install cursive clojure plugin
+  install sort-lines plugin
+  make "next tab"/"previous tab" match Ubuntu: Crtl+PgDown/Crtl+PgUp
+  configure repl (forgot details)
+
+-----------------------------------------------------------------------------
 file -> new project
   select java
   -> Additional Libraries & Frameworks
