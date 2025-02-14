@@ -113,8 +113,13 @@ if $(isLinux) ; then #{
     java  --version
   }
 
-  java15  >& /dev/null  # ********** default java version to use **********
+  function java16() {
+    export JAVA_HOME=/opt/java16
+    path_prepend "${JAVA_HOME}/bin"
+    java  --version
+  }
 
+  java15  >& /dev/null  # ********** default java version to use **********
 
   alias gvim="\gvim  -geom '+4400+0' 2>&/dev/null"
   alias gvimw="\gvim  -geom '300x80+2200+0' "
@@ -327,6 +332,7 @@ alias diffw="diff --ignore-all-space --ignore-blank-lines"
 alias shx="chmod a+x *.sh *.bash *.csh *.zsh *.groovy *.clj"
 alias kk="kill -9"
 
+alias zpru="java  -jar ~/opt/zprint.jar  -w **/*.clj "
 
 isMac    && alias pk="pkill -9 -i"
 isLinux  && alias pk="pkill -9"
@@ -520,7 +526,7 @@ alias wifitoggle="nmcli r wifi off ; sleep 1 ; nmcli r wifi on"     # toggle wif
         # maybe try this too:  sudo service network-manager restart
 alias pingg="ping -c5 google.com"
 alias ping4="ping -c4"
-alias gopen="gnome-open"
+alias xo="xdg-open"
 
 # what your computer thinks its ip address is
 function iplocal() {

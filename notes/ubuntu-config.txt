@@ -95,22 +95,28 @@ Update all software (~30 min)
 Install basic software:
   sudo apt install -y  \
     git gitk zsh tcsh fish tmux curl samba  \
-    vim vim-gnome \
-    gcc ruby golang autoconf \
-    python python-pip python3 python3-pip pylint \
+    vim \
+    gcc ruby golang autoconf nodejs \
+    python python3 pylint \
     build-essential  libssl-dev \
     maven octave libreoffice gimp \
     supervisor s3cmd \
     lxc lxd \
-    mininet wireshark tshark traceroute \
     tree htop iotop collectl gnupg \
     lsb zip unzip dos2unix \
     alien youtube-dl rlwrap \
     okular lzop jq parallel docker.io \
-    openvpn vpnc kvpnc network-manager-vpnc racoon \
-    curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager \
+    openvpn vpnc network-manager-vpnc \
+    curl ctags gconf-editor compizconfig-settings-manager \
 
 old: cryptkeeper kuser sbackup 
+     mininet wireshark tshark traceroute \
+
+
+Manual software:
+  babashka  -> /opt/bin
+  zprint    -> /opt/bin (#todo experiment!)
+  java      -> /opt + config common.bash 
 
 ===================
 *** VBox basic version
@@ -126,7 +132,7 @@ old: cryptkeeper kuser sbackup
     lsb zip unzip dos2unix kuser \
     rlwrap \
     lzop jq parallel docker.io \
-    curl ctags gconf-editor unity-tweak-tool dconf-tools compizconfig-settings-manager 
+    curl ctags gconf-editor dconf-tools compizconfig-settings-manager 
 
 ===================
 Samba File Sharing install
@@ -134,43 +140,65 @@ Samba File Sharing install
   right-click on dir in file browser (nautilis) & select "Local Network Share"
   finish config in gui
 
+-----------------------------------------------------------------------------
+sudo apt update             # prepare
+sudo apt upgrade -y         # prepare
+
+sudo apt install -y  samba  # install samba
+samba -V                    # verify installation & print version
+mkdir ~/samba               # create a directory to share
+
+See video to configure:  https://youtu.be/oRHSrnQueak
+  mkdir -p '~/samba'        # name flexible
+  in Nautilis file browser, right click folder & click "Local Network Share"
+    click "Share this folder"
+      "Allow others to create & delete file..."         # prob want this too
+      "Guest access..."                                 # prob want this too
+      will most likely need to accept "Add the permissions automatically"
+
+  config file:  /etc/samba/smb.conf    # edit config file
+
+-----------------------------------------------------------------------------
+
 ===================
 Add Java
   Oracle Java 8,10 => /opt    Make it look like:
 
       /opt/java -> java10/
+<<<<<<< HEAD
       /opt/java10 -> jdk-10.0.1//
+=======
+      /opt/java7 -> jdk1.7.0_80/
+      /opt/jdk-11.0.1/
+      /opt/jdk1.7.0_80/
+      /opt/jdk1.8.0_161/
+>>>>>>> 000080b5d1a2988c1c0d172de65785f5ae80ca57
 
 ===================
 Install IntelliJ IDEA
   configure license via account
   add license file for offline use
   add Cursive license
+  help -> change memory settings => (5000MB)
 
       /opt/idea -> idea-IU-181.4668.68/
       /opt/idea-IU-181.4668.68/
 
+      Then start via cmdline:  > idea.sh
+
 ===================
 Add zoom.us (download & install)
-
-===================
-Others  => /opt
-
-      /opt/datomic -> datomic-pro-0.9.5359/
-      /opt/datomic-pro-0.9.5359/
-
-      /opt/postman -> Postman/
-      /opt/Postman/
-
-      /opt/vagrant/
 
 ===================
 
 *** remember DEBIAN_FRONTEND=noninteractive env var for "apt install -y" ***
 *** can also explore apt-cacher (re. Ferris 2016-11-7)
 
-"Tweaks" app - search & install
-  then look for below items and adjust 
+"gnome-tweaks" app - search & install (see https://itsfoss.com/gnome-tweak-tool/)
+  use gnome launcher to invoke
+    Top Bar         add weekday & seconds to clock
+    Windows         Focus on Hover
+    Wrokspaces      Static Workspaces (I like either 2 or 4 depending on # of displays)
 
   old
     unity-tweak-tool 
@@ -291,7 +319,6 @@ Vagrant
     vagrant halt                      ; halt (poweroff) the machine; retains virt disks
     vagrant destroy [-f]              ; destroy the machine; like it never existed [without confirmation]
 
-
 Windows install
   requires a genuine Windows 10 install disk & key (about $100 from walmart.com)
   create a new VM in VBox
@@ -319,23 +346,12 @@ Windows install
     Under menubar -> View -> Auto-resize Guest Display
       makes Windows VM display size live-adapt when resize VM window
 
-
-
 Docker - follow website instructions
   *** manual install ***
   docker:  https://docs.docker.com/linux/
     be sure after docker is installed to do the part to add your user to the "docker" group 
       avoids need to "sudo" all docker commands like: sudo docker run ...
   docker-compose:  https://docs.docker.com/compose/install/
-
-Config vagrant from website:  vagrantup.com
-  vagrant init ubuntu/xenial64      ; create the Vagrantfile
-  vagrant up                        ; start the machine
-  vagrant ssh                       ; ssh into the machine
-
-  vagrant suspend                   ; suspend (sleep) the machine; saves state
-  vagrant halt                      ; halt (poweroff) the machine; retains virt disks
-  vagrant destroy [-f]              ; destroy the machine; like it never existed [without confirmation]
 
 CENX vpnc file: ~/cool/etc--vpnc--cenx.conf  -> /etc/vpnc
 
@@ -371,7 +387,6 @@ Chrome:
 
 - Other software: go to website to install
     Dropbox
-    HipChat
     liquibase
     solr
     datomic
@@ -381,11 +396,17 @@ Chrome:
     IntelliJ IDEA
     Cursive
     skype
+    postman
 
 - IntelliJ Idea install
   Ubuntu -> System Settings -> Keyboard -> Shortcuts: disable all 4 "Switch to workspace left/right/above/below"
     conflicts with Idea "return to previous location" ctrl-alt-left
   Ubuntu -> System Settings -> Keyboard -> Shortcuts -> Windows: disable "Move Window", "Resize window"
+  KeyMap
+    ctrl-alt-r      Code -> Reformat Code
+    ctrl-shift-k    Edit -> Structural Editing -> Slurp Forwards (i.e. from right)
+    ctrl-shift-j    Edit -> Structural Editing -> Barf Forwards  (i.e. to right)
+
 
 - Go to the lower-left "F" icon (for Fedora), select Favorites->Software Management, click
   Updates->Check for New Updates.  Install any detected.
@@ -481,7 +502,7 @@ GPG/GnuPG install for "lein deploy clojars"
 
         Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O           <====================================================================
         You need a Passphrase to protect your secret key.
-        <enter passphrase twice>           <====================================================================
+        <enter passphrase twice>     (& save it!)      <====================================================================
         We need to generate a lot of random bytes. It is a good idea to perform
         some other action (type on the keyboard, move the mouse, utilize the
         disks) during the prime generation; this gives the random number
@@ -520,17 +541,6 @@ GPG/GnuPG install for "lein deploy clojars"
   *** "lein deploy clojars" only uses keys to sign jar files, so don't need to finish rest 
   ***       of lein GPG instructions (next step: "gpg --send-keys ...")
   ***       from https://github.com/technomancy/leiningen/blob/master/doc/GPG.md
-
-
-
-To Do:
-  Install software from list
-
-Favorites - Added to tab under Fedora symbol
-  Chrome, Konsole, GVim, KCalc, LibreOffice
-
-Software to install
-  cannon pixma mx922        - website + see notes file
 
 ----------------------------------------------------------------------------
 Turning Wi-Fi network devices on/off:  http://askubuntu.com/questions/168032/how-to-disable-built-in-wifi-and-use-only-usb-wifi-card
@@ -574,7 +584,6 @@ Google Cloud Platform
 
   Then:
     gsutil --version  (see 4.22 <= version)
-
 
 --------------------------------------------------------------------------------
 octave notes (old 2014):

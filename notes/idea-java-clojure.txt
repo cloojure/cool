@@ -9,6 +9,11 @@ Settings
   make "next tab"/"previous tab" match Ubuntu: Crtl+PgDown/Crtl+PgUp
   configure repl (forgot details)
 
+  KeyMap
+    ctrl-alt-r      Code -> Reformat Code
+    ctrl-shift-k    Edit -> Structural Editing -> Slurp Forwards (i.e. from right)
+    ctrl-shift-j    Edit -> Structural Editing -> Barf Forwards  (i.e. to right)
+
 -----------------------------------------------------------------------------
 file -> new project
   select java

@@ -1,0 +1,7 @@
+Good, short tutorial: https://www.youtube.com/watch?v=Von_VgswnJU
+  skip cross-account stuff for single-account dev example
+
+  create SNS topic "Sendy" -> `Sendy.fifo`
+  create SQS topic "Takey" -> `Takey.fifo`
+  ...follow rest of video...
+
