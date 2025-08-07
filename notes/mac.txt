@@ -1,44 +1,55 @@
 
-software to load:
-  homebrew      <== do this first!!!  (brew.sh)
+2025-08-06 macbook air setup
+
+allow/setup keyboard
+mac mouse disable "natural scrolling"
 
 install:
   Chrome
-  HomeBrew (aka "brew")
 
-brew install:   (see brew --help, brew search XXX, brew install XXX)
-  bash      (newest version)
-  babashka  -> ~/opt
-  zprint    -> ~/opt/zprint-filter-1.1.1 (jar file)
-  dos2unix - brew install dos2unix
-  git  - brew install git
-  gitk
-  htop
-  iterm2 - iterm2.com (named "iterm" in Applications folder)
-  macvim  - brew install macvim 
-  ctags - exuberant ctags
-  openjdk - brew install openjdk
-    brew install java11
-  rlwrap - brew install rlwrap
-  tree - brew install tree
-  libreoffice
-    brew install  homebrew/cask/libreoffice
+HomeBrew (aka "brew")
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install macvim iterm2
+brew install git
+brew install git-gui
+
+git clone
+  mkdir dotfiles-local
+  Bitbucket:
+    catalan42/alan (thomnpson2526@gmail.com) 
+  GitHub
+    io-tupelo/dotfiles
+    cloojure/cool
+    cloojure/tupelo
+
+brew install clojure/tools/clojure
+brew install python pylint virtualenv
+brew install curl gcc ruby maven octave gimp  s3cmd
+brew install borkdude/brew/babashka
+brew install bash dos2unix htop ctags rlwrap tree curl 
+brew install homebrew/cask/libreoffice
+
+Maybe?
+  brew install gnupg
+
   postgresql pgadmin3
-  python2, python3, python-pip, python3-pip, pylint, virtualenv
-  curl 
-  gcc, ruby, maven, octave, gimp
-  s3cmd, iotop, gnupg, youtube-dl, ctags
-  zprint:  # not included in ~/cool/bin
-    brew install  --cask zprint  ; ***** fails on Looking Glass mac *****
+  brew install  --cask zprint  ; ***** fails on Looking Glass mac *****
   zsh - if not already installed (i.e. older OSX)
+  youtube-dl    # no longer maintained....?
 
 web download & install:
   squirrel (sql client)
-  java
-    oracle.com/java
-  IntelliJ Idea (JetBrains.com)
+
+  sdkman
+    curl -s "https://get.sdkman.io" | bash   # then New Window
+    sdk  install  java 24.0.2-oracle
+  
+  JetBrains.com
+    IntelliJ 
+    PyCharm
   slack
-  docker
+  docker desktop
   dropbox
 
 git clone:
