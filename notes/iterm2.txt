@@ -1,0 +1,29 @@
+Settings
+  General
+    Closing
+      N: Confirm closeing multiple sessions 
+      N: Confirm "Quit iTerm2"
+      Y: Disable all confirmations on system shutdown, restart, and logout
+    Window
+      N: Adjust window when changing font size
+    Settings
+      <options for export/import all settings & data>  ************
+  Appearance
+    Tabs
+      Show tab bar even when only 1 tab
+  Profiles (Default)
+    Text
+      Font:  monaco, regular, 15
+    Window
+      New windows: 120x25
+    Terminal
+      Scrollback: 99,999
+  Keys
+    Key Bindings
+      Cycle Tabs Forward:   ^PageDown
+      Cycle Tabs Backward:  ^PageUp
+  Pointer
+    General
+      Focus:
+        Y: Focus follows mouse (applies only to iTerm2 windows)
+
