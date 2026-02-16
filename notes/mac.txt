@@ -29,6 +29,7 @@ brew install curl gcc ruby maven octave gimp  s3cmd
 brew install borkdude/brew/babashka
 brew install bash dos2unix htop ctags rlwrap tree curl 
 brew install homebrew/cask/libreoffice
+brew install npm
 
 Maybe?
   brew install gnupg
