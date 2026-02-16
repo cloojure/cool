@@ -1,3 +1,0 @@
-alt-F7      File Structure
-
-ctrl-F12    File Structure
